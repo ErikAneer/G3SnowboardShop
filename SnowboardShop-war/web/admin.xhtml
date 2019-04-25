@@ -67,7 +67,7 @@
                             <i class="material-icons">input</i>
                         </a> 
                         <ul class="right">
-                            <li> <h:outputText value="Inloggad som: #{userController.currentUser.firstName}"/></li>
+                            <li> <h:outputText value="Inloggad som: #{userController.currentUser.familyname}"/></li>
                             <li>  <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
                         </ul>
                     </div>
@@ -81,7 +81,7 @@
                         <h4>Alla registrerade kunder</h4>
                     </f:facet>
                     <h:column>
-                        <h:outputText id="customerName" value="#{user.status}: #{user.firstName} #{user.familyName}" />
+                        <h:outputText id="customerName" value="#{user.status}: #{user.firstname} #{user.familyname}" />
                     </h:column>
                 </h:dataTable>
             </h:form>

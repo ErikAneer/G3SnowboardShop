@@ -35,5 +35,26 @@ public class SnowBean implements SnowBeanLocal {
         
         int size = q.getResultList().size();
 
-        return "customer " + size;    }
+        return "customer " + size;
+    }
+
+    @Override
+    public Object login(String email, String code) {
+        Query q = em.createQuery("select o from User2 o where o.email=:email and o.code=:code");
+        q.setParameter("code", code);
+        q.setParameter("email", email);
+        User2 u = (User2)q.getSingleResult();
+        return u;
+    }
+
+    @Override
+    public void save(String firstname, String familyname, String telephone, 
+            String address, String postnr, String postaddress, 
+            String email, String code, String status) {
+        User2 newUser = new User2(firstname, familyname, telephone, 
+                address, postnr, postaddress, email, code, status);
+        persist(newUser);
+    }
+    
+    
 }

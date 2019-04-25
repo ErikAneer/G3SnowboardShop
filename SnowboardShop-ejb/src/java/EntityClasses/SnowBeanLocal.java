@@ -15,5 +15,9 @@ import javax.ejb.Local;
 public interface SnowBeanLocal {
 
     String log();
+
+    Object login(String email, String code);
+
+    void save(String firstname, String familyname, String telephone, String address, String postnr, String postaddress, String email, String code, String status);
     
 }

@@ -102,7 +102,7 @@
 
                             <br/>
                             Lösenord 
-                            <h:inputSecret id="password" value="#{userController.password}">
+                            <h:inputSecret id="password" value="#{userController.code}">
                                 <f:validateLength minimum="4" maximum="20"></f:validateLength>
                             </h:inputSecret>
                             <h:message id="passwordMessage" for="password" errorStyle="color:red" />
@@ -112,7 +112,6 @@
                                 <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
                             <br/>
-                            <h:outputText value="#{userController.status}" />
                             <h:message  id="loginErrorMessage" for="loginButton" errorStyle="color: red" />
                             <br/>
                             <br/>

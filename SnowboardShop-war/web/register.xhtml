@@ -102,49 +102,49 @@
 
                             <h:panelGrid columns="3">
                                 <h:outputLabel for="contactFirst" value="Förnamn: " />
-                                <h:inputText id="contactFirst" value="#{userController.firstName}">
+                                <h:inputText id="contactFirst" value="#{userController.firstname}">
                                     <f:validator validatorId="nameValidator"></f:validator>
                                     <f:ajax event="blur" render="contactFirstMessage" />
                                 </h:inputText>
                                 <h:message id="contactFirstMessage" for="contactFirst" errorStyle="color:red"/>
 
                                 <h:outputLabel for="contactFamilyname" value="Efternamn: " />
-                                <h:inputText id="contactFamilyName" value="#{userController.familyName}">
+                                <h:inputText id="contactFamilyName" value="#{userController.familyname}">
                                     <f:validator validatorId="nameValidator"></f:validator>
                                     <f:ajax event="blur" render="contactLastMessage" />
                                 </h:inputText>
                                 <h:message id="contactLastMessage" for="contactFamilyName" errorStyle="color:red"/>
 
                                 <h:outputLabel for="contactPhone" value="Telefonnummer: "/>
-                                <h:inputText id="contactPhone" value="#{userController.phoneNumber}">
+                                <h:inputText id="contactPhone" value="#{userController.telephone}">
                                     <f:validator validatorId="phoneNumberValidator"></f:validator>
                                     <f:ajax event="blur" render="contactPhoneMessage" />
                                 </h:inputText>
                                 <h:message id="contactPhoneMessage" for="contactPhone" errorStyle="color:red"/>
 
                                 <h:outputLabel for="contactStreetAddress" value="Gatuadress: " /> 
-                                <h:inputText id="contactStreetAddress" value="#{userController.streetAddress}">
+                                <h:inputText id="contactStreetAddress" value="#{userController.address}">
                                     <f:validator validatorId="streetAddressValidator"></f:validator>
                                     <f:ajax event="blur" render="contactphoneNumber" />
                                 </h:inputText>
                                 <h:message id="contactphoneNumber" for="contactStreetAddress" errorStyle="color:red"/>
 
                                 <h:outputLabel for="contactPostalCode" value="Postnummer: " />
-                                <h:inputText id="contactPostalCode" value="#{userController.postalCode}"> 
+                                <h:inputText id="contactPostalCode" value="#{userController.postnr}"> 
                                     <f:validator validatorId="postalcodeValidator"></f:validator>
                                     <f:ajax event="blur" render="postalcodeMessage" />
                                 </h:inputText>
                                 <h:message id="postalcodeMessage" for="contactPostalCode" errorStyle="color:red"/>
 
                                 <h:outputLabel for="contactPostalAddress" value="Postadress: " />
-                                <h:inputText id="contactPostalAddress" value="#{userController.postalAddress}">
+                                <h:inputText id="contactPostalAddress" value="#{userController.postaddress}">
                                     <f:validator validatorId="nameValidator"></f:validator>
                                     <f:ajax event="blur" render="postalAddressMessage" />
                                 </h:inputText>
                                 <h:message id="postalAddressMessage" for="contactPostalAddress" errorStyle="color:red"/>
 
                                  <h:outputLabel for="contactEmail" value="Email: " />
-                                <h:inputText id="contactEmail" value="#{userController.email}">
+                                 <h:inputText id="contactEmail" value="#{userController.email}">
                                     <f:validator validatorId="emailValidator"></f:validator>
                                     <f:ajax event="blur" render="usernameMessage" />
                                 </h:inputText>
@@ -152,7 +152,7 @@
 
 
                               <h:outputLabel for="password" value="Lösenord: " /> 
-                                <h:inputSecret id="password" value="#{userController.password}" redisplay="true">
+                              <h:inputSecret id="password" value="#{userController.code}" redisplay="true">
                                     <f:validator validatorId="passwordValidatator"></f:validator> 
                                     <f:ajax event="blur" render="passwordMessage" />
                                 </h:inputSecret>  
