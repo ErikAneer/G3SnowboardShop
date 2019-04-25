@@ -112,6 +112,7 @@
                                 <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
                             <br/>
+                            <h:outputText value="#{userController.status}" />
                             <h:message  id="loginErrorMessage" for="loginButton" errorStyle="color: red" />
                             <br/>
                             <br/>

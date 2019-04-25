@@ -1,11 +1,13 @@
 
 package pac;
 
+import EntityClasses.SnowBeanLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -18,6 +20,10 @@ import javax.faces.validator.ValidatorException;
 @Named(value = "userController")
 @SessionScoped
 public class UserController implements Serializable {
+
+    @EJB
+    private SnowBeanLocal snowBean;
+    
     
     private List<User> users = new ArrayList();
     private List<User> kunder = new ArrayList();
@@ -54,12 +60,13 @@ public class UserController implements Serializable {
         
     }
    
-    public String login() {
+    public void login() {
             String page = "Logga in";
+            status = snowBean.log();
             
             //Method needed to check if inserted email address exists among registererd users. ex.
             
-            for(User u: users){
+            /*for(User u: users){
                 if((password.matches(u.getPassword())) && email.matches(u.getEmail())){
                     currentUser = u;
                     //setUserField(u.getFirstName());
@@ -76,8 +83,8 @@ public class UserController implements Serializable {
                 FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
                 "Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.", null);
                 FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg); 
-           }
-           return page;
+           }*/
+          // return page;
     }
 
     public String logOut(){
@@ -239,7 +246,8 @@ public class UserController implements Serializable {
     public String registerNewCustomer(){
         users.add(new User(firstName, familyName, email, password, "customer"));
         kunder.add(new User(firstName, familyName, email, password, "customer"));
-        return login();
+        return "go";
+        //return login();
     }
     
     public void clearRegisterForm() {
