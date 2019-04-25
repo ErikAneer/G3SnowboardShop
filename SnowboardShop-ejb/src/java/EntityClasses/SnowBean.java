@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Julia
+ * @author Julia gu
  */
 @Stateless
 public class SnowBean implements SnowBeanLocal {
