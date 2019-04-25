@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Display Boards</title>
+        <!-- Compiled and minified CSS Julia ttt -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
+        <!-- To use Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <style>
+            li { 
+                display: inline;
+                list-style-type: none;
+            }
+
+
+        </style>
+
+        <style type="text/css">
+            .ui-datalist .ui-datalist-content {
+                border:0 none
+            }
+
+            .ui-datalist ul {
+                padding: 0px 10px 0 20px;
+                margin: 5px 0;
+            }
+
+            .value {
+                font-weight: bold;
+            }
+
+            .ui-autocomplete-itemtip {
+                -moz-box-sizing: content-box;
+                -webkit-box-sizing: content-box;
+                box-sizing: content-box;
+            }
+            #index-header {
+                background: url("resources/images/joshua-reddekopp-217223-cropped.jpg");
+                background-size: cover;
+                background-position: center;
+                min-height: 500px;
+            }
+            .product-search{
+                margin: 0;
+                position: absolute;
+                top: 65%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 28px;
+            }
+        </style>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+    <h:body>
+        <f:view>
+            <header>
+                <nav class="nav-wrapper blue">
+                    <div class="container">
+                        <a class="brand-logo"> Awesome Board Shop</a>
+                        <a href="loginPage.xhtml" class="sidenav-trigger" data-target="mobile-menu">
+                            <i class="material-icons">input</i>
+                        </a> 
+                        <ul class="right">
+                            <li> <h:outputText value="Inloggad som: #{userController.currentUser.firstName}"/></li>
+                            <li>  <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <h:form>
+                <h3>Awseome Board Shop - Adminsidan</h3>
+               
+                <h:dataTable id="customerInfo" value="#{userController.kunder}" var="user">
+                    <f:facet name="header">
+                        <h4>Alla registrerade kunder</h4>
+                    </f:facet>
+                    <h:column>
+                        <h:outputText id="customerName" value="#{user.status}: #{user.firstName} #{user.familyName}" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+

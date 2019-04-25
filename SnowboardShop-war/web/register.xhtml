@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Display Boards</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
+        <!-- To use Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+        <style>
+
+            li { 
+                display: inline;
+                list-style-type: none;
+            }
+
+
+        </style>
+
+        <style type="text/css">
+            .ui-datalist .ui-datalist-content {
+                border:0 none
+            }
+
+            .ui-datalist ul {
+                padding: 0px 10px 0 20px;
+                margin: 5px 0;
+            }
+
+            .value {
+                font-weight: bold;
+            }
+
+            .ui-autocomplete-itemtip {
+                -moz-box-sizing: content-box;
+                -webkit-box-sizing: content-box;
+                box-sizing: content-box;
+            }
+        </style>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+        <script library="script" name="script.js" />
+    </h:head>
+    <h:body>
+        <f:view>
+            <header>
+                <nav class="nav-wrapper blue">
+                    <div class="container">
+                        <a href="index.xhtml" class="brand-logo"> Awesome Board Shop</a>
+                        <a href="index.xhtml" class="sidenav-trigger" data-target="mobile-menu">
+                            <i class="material-icons">home</i>
+                        </a>
+
+                        <ul class="right hide-on-med-and-down">
+                            <li> <h:link value="Home" outcome="index" /></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div>
+                    <!--  <p:megaMenu >
+                          <p:submenu label="Produkter">
+                              <p:column>
+                                  <p:submenu label="Snowboards">
+                                      <p:menuitem value="Alla snowboards" url="#" />
+                                      <p:menuitem value="Freestyle snowboards" url="#" />
+                                      <p:menuitem value="Barn snowboards" url="#" />
+                                  </p:submenu>
+                              </p:column>
+                              <p:column>
+                                  <p:submenu label="Bindningar">
+                                      <p:menuitem value="Vuxenbindningar" url="#" />
+                                      <p:menuitem value="Barnbindningar" url="#" />
+                                  </p:submenu>
+                              </p:column>
+                              <p:column>
+                                  <p:submenu label="Boots">
+                                      <p:menuitem value="Herrboots" url="#" />
+                                      <p:menuitem value="Damboots" url="#" />
+                                      <p:menuitem value="Barnboots" url="#" />
+                                  </p:submenu>
+                              </p:column>
+                          </p:submenu>
+  
+                      </p:megaMenu> -->
+                </div>
+
+            </header>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l8 offset-l2">
+                        <h:form id="registerForm">
+                            <h2>Registrera dig som kund</h2>
+
+                            <p>
+                                Fyll i fälten nedan för att kunna registera dig som kund och handla hos oss på Awesome Board Shop
+                            </p>
+
+                            <h:panelGrid columns="3">
+                                <h:outputLabel for="contactFirst" value="Förnamn: " />
+                                <h:inputText id="contactFirst" value="#{userController.firstName}">
+                                    <f:validator validatorId="nameValidator"></f:validator>
+                                    <f:ajax event="blur" render="contactFirstMessage" />
+                                </h:inputText>
+                                <h:message id="contactFirstMessage" for="contactFirst" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactFamilyname" value="Efternamn: " />
+                                <h:inputText id="contactFamilyName" value="#{userController.familyName}">
+                                    <f:validator validatorId="nameValidator"></f:validator>
+                                    <f:ajax event="blur" render="contactLastMessage" />
+                                </h:inputText>
+                                <h:message id="contactLastMessage" for="contactFamilyName" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactPhone" value="Telefonnummer: "/>
+                                <h:inputText id="contactPhone" value="#{userController.phoneNumber}">
+                                    <f:validator validatorId="phoneNumberValidator"></f:validator>
+                                    <f:ajax event="blur" render="contactPhoneMessage" />
+                                </h:inputText>
+                                <h:message id="contactPhoneMessage" for="contactPhone" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactStreetAddress" value="Gatuadress: " /> 
+                                <h:inputText id="contactStreetAddress" value="#{userController.streetAddress}">
+                                    <f:validator validatorId="streetAddressValidator"></f:validator>
+                                    <f:ajax event="blur" render="contactphoneNumber" />
+                                </h:inputText>
+                                <h:message id="contactphoneNumber" for="contactStreetAddress" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactPostalCode" value="Postnummer: " />
+                                <h:inputText id="contactPostalCode" value="#{userController.postalCode}"> 
+                                    <f:validator validatorId="postalcodeValidator"></f:validator>
+                                    <f:ajax event="blur" render="postalcodeMessage" />
+                                </h:inputText>
+                                <h:message id="postalcodeMessage" for="contactPostalCode" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactPostalAddress" value="Postadress: " />
+                                <h:inputText id="contactPostalAddress" value="#{userController.postalAddress}">
+                                    <f:validator validatorId="nameValidator"></f:validator>
+                                    <f:ajax event="blur" render="postalAddressMessage" />
+                                </h:inputText>
+                                <h:message id="postalAddressMessage" for="contactPostalAddress" errorStyle="color:red"/>
+
+                                 <h:outputLabel for="contactEmail" value="Email: " />
+                                <h:inputText id="contactEmail" value="#{userController.email}">
+                                    <f:validator validatorId="emailValidator"></f:validator>
+                                    <f:ajax event="blur" render="usernameMessage" />
+                                </h:inputText>
+                                <h:message id="usernameMessage" for="contactEmail" errorStyle="color:red" />
+
+
+                              <h:outputLabel for="password" value="Lösenord: " /> 
+                                <h:inputSecret id="password" value="#{userController.password}" redisplay="true">
+                                    <f:validator validatorId="passwordValidatator"></f:validator> 
+                                    <f:ajax event="blur" render="passwordMessage" />
+                                </h:inputSecret>  
+                                <h:message id="passwordMessage" for="password" errorStyle="color:red" />
+
+                                <h:outputLabel for="confirmPassword" value="Upprepa lösenord: " />
+                                <h:inputSecret  id="confirmPassword" redisplay="true" value="#{userController.confirmPassword}">
+                                    <f:validator validatorId="confirmPasswordValidatator"></f:validator> 
+                                    <f:ajax event="blur" render="confirmPasswordMessage" />
+                                </h:inputSecret>
+                                <h:message id="confirmPasswordMessage" for="confirmPassword" errorStyle="color:red" />
+                            </h:panelGrid>  
+                        </h:form>
+
+                        <br/>
+                        <div>
+                            <p>
+                                <label>
+                                    <input type="checkbox" required="true"/>
+                                    <span>Jag har läst och godkänner Awesome Board Shops kundvillkor och integritetspolicy.</span>
+                                </label>
+                            </p>
+                            <br/>
+                        </div>
+                        <h:commandButton class="waves-effect waves-light btn" id="contactInsert"  value="Skicka" 
+                                         action="#{userController.registerNewCustomer()}">
+                            <f:ajax event="action" execute="@form" render="@all" />
+                        </h:commandButton>
+                        <h:commandButton class="waves-effect waves-light btn" id="contactClearForm"  value="Rensa" 
+                                         action="#{userController.clearRegisterForm()}">
+                            <f:param name="skipValidator" value="true"/> 
+                            <f:ajax event="action" execute="@form" render="@all" />
+                        </h:commandButton>
+                    </div>
+                </div>
+            </div>
+        </f:view>
+    </h:body>
+</html>
+
+
