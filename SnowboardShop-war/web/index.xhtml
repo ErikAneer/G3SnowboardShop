@@ -13,7 +13,7 @@
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <f:metadata>
-            <f:viewAction action="#{boardController.onload()}" />
+            <f:viewAction action="#{productController.onload()}" />
         </f:metadata>
         <style>
 
@@ -113,9 +113,9 @@
                 <div class="center product-search">
                     <h:form>
                         Sök produkt:
-                        <p:autoComplete value="#{boardController.inputName}"
+                        <p:autoComplete value="#{productController.inputName}"
                                         maxResults="10"
-                                        completeMethod="#{boardController.nameSuggestions}"  style=" padding-top: 20px;"/>
+                                        completeMethod="#{productController.nameSuggestions}"  style=" padding-top: 20px;"/>
                         <p:commandButton class="waves-effectt btn" value="Go!" />
                     </h:form>
                 </div>  
@@ -130,7 +130,7 @@
 
                         <!-- To dynamically display items from object List as Materialize cards - here boards-->
                         <h:form id="displayBoardForm">
-                            <ui:repeat var="board" value="#{boardController.boards}" >
+                            <ui:repeat var="product" value="#{productController.boards}" >
 
                                 <div class="col card horizontal" style="width: 300px;">
                                     <div class="card-image"> 
@@ -138,10 +138,10 @@
                                     </div>
                                     <div class="card-stacked">
                                         <div class="card-content">
-                                            <p><h5>#{board.name}</h5></p>
-                                            <p><b>#{board.brand}</b></p>
-                                            <p><b>#{board.length} cm</b></p>
-                                            <p><b>#{board.price} kr</b></p>
+                                            <p><h5>#{product.name}</h5></p>
+                                            <p><b>#{product.brand}</b></p>
+                                            <p><b>#{product.length} cm</b></p>
+                                            <p><b>#{product.price} kr</b></p>
                                         </div>
                                         <div class="card-action">
                                             <p:commandLink  value="View Details" update=":displayBoardForm:boardDetail" oncomplete="PF('boardDialog').show()" title="View Detail">
