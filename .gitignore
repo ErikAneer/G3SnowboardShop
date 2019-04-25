@@ -3,3 +3,7 @@
 /build/
 /SnowboardShop-ejb/dist/
 /SnowboardShop-war/dist/
+/nbproject/private/
+/SnowboardShop-ejb/nbproject/private/
+/SnowboardShop-war/nbproject/private/
+/dist/
