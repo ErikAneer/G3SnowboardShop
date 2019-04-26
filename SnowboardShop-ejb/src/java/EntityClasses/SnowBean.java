@@ -5,6 +5,7 @@
  */
 package EntityClasses;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -55,6 +56,23 @@ public class SnowBean implements SnowBeanLocal {
                 address, postnr, postaddress, email, code, status);
         persist(newUser);
     }
+
+    @Override
+    public List<User2> callAllUsers() {
+        Query q = em.createQuery("select o from User2 o");
+        List<User2> users = q.getResultList();
+        return users;
+    }
+
+    @Override
+    public List<User2> callAllKunders(String customer, String premium) {
+        Query q = em.createQuery("select o from User2 o where o.status=:customer or o.status=:premium");
+        q.setParameter("customer", customer);
+        q.setParameter("premium", premium);       
+        List<User2> users = q.getResultList();
+        return users;
+    }
+    
     
     
 }

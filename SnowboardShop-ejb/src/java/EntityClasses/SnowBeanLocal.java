@@ -5,6 +5,7 @@
  */
 package EntityClasses;
 
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -19,5 +20,9 @@ public interface SnowBeanLocal {
     Object login(String email, String code);
 
     void save(String firstname, String familyname, String telephone, String address, String postnr, String postaddress, String email, String code, String status);
+
+    List<User2> callAllUsers();
+
+    List<User2> callAllKunders(String customer, String premium);
     
 }

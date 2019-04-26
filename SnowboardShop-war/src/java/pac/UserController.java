@@ -6,7 +6,6 @@ import EntityClasses.User2;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -26,8 +25,8 @@ public class UserController implements Serializable {
     private SnowBeanLocal snowBean;
     
     
-    private List<User2> users = new ArrayList();
-    private List<User2> kunder = new ArrayList();
+    private List<User2> users;
+    private List<User2> kunder;
     private User2 currentUser;
     private Boolean isLoggedIn = false;
     private String userField;
@@ -76,6 +75,9 @@ public class UserController implements Serializable {
             User2 u = (User2)snowBean.login(email, code);
             currentUser = u;
             page = u.getStatus();
+            
+            users = snowBean.callAllUsers();
+            kunder = snowBean.callAllKunders("customer", "premium");
             
             //Method needed to check if inserted email address exists among registererd users. ex.
             
