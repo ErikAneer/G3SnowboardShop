@@ -67,7 +67,7 @@ public class ProductBean {
         List<Product> results = query.getResultList();
         return results;
     }
-
+    
     //Do only use if saving new objects to DB.
     public void saveProductToDB() {
         persist(new Product("snowboard", "Ride", "Warpig S", 148, "Best grom board out there!", 4590, 4590,  "/resources/images/Warpig1482019Snowboardresized.jpg"));
@@ -77,15 +77,27 @@ public class ProductBean {
         persist(new Product("snowboard", "Burton", "Air Retro 156", 156, "Best grom board out there!", 3490, 3490,  "/resources/images/SpeedDateRetro1562019Snowboardresized.jpg"));
         persist(new Product("snowboard", "Burton", "TWC Pro 156", 156, "Best grom board out there!", 499990, 499990,  "/resources/images/BurtonTWCPro.jpg"));
         
+        persist(new Product("snowboard", "Capita", "Children OTG", 149, "Best grom board out there!", 3190, 3190,  "/resources/images/ChildrenOfTheGnar149Snowboardresized.jpg"));
+        persist(new Product("snowboard", "Ride", "Compact 154", 154, "Best grom board out there!", 3890, 3890,  "/resources/images/Compact1542019Snowboard.jpg"));
+        persist(new Product("snowboard", "Burton", "Custom FV 154", 1154, "Best grom board out there!", 6290, 6290,  "/resources/images/CustomFlyingV1542019Snowboardresized.jpg"));
+        
+        persist(new Product("snowboard", "Bataleon", "Distortia 149", 149, "Best grom board out there!", 4690, 4690,  "/resources/images/BataleonDistortia1492019Snowboard.jpg"));
+        persist(new Product("snowboard", "Capita", "Jess Kimura", 150, "Best grom board out there!", 4890, 4890,  "/resources/images/CapitaJessKimuraPro1502019Snowboard.jpg"));
+        persist(new Product("snowboard", "Bataleon", "Minishred 100", 100, "Best grom board out there!", 1890, 1890,  "/resources/images/BataleonMinishred100MiniShredBdg2019Snowboardpaket.jpg"));
+        persist(new Product("snowboard", "Bataleon", "Push UP 149", 149, "Best grom board out there!", 4890, 4890,  "/resources/images/BataleonPushUp1492019Snowboard.jpg"));
+        persist(new Product("snowboard", "Ride", "Saturday 146", 146, "Best grom board out there!", 4490, 4490,  "/resources/images/RideSaturday1462019Snowboard.jpg"));
+        persist(new Product("snowboard", "Capita", "Space M Fantasy", 149, "Best grom board out there!", 3990, 3990,  "/resources/images/CapitaSpaceMetalFantasy1492019Snowboard.jpg"));
+        persist(new Product("snowboard", "Capita", "Ultrafear 151", 151, "Best grom board out there!", 5290, 5290,  "/resources/images/CapitaUltrafear1512019Snowboard.jpg"));
+        
         persist(new Product("boot", "32", "Lashed Melancon", 42, "Description", 3490, 3490, "/resources/images/32LashedMelancon2019Snowboardboots.jpg"));
         persist(new Product("boot", "32", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
         persist(new Product("boot", "32", "X BT Light", 42, "Description", 3490, 3490, "/resources/images/32XBlueTomatoLight2019Snowboardboots.jpg"));
-        persist(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        persist(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        persist(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        persist(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        persist(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        persist(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
+        persist(new Product("boot", "Burton", "Grom Boa", 29, "Description", 1290, 1290, "/resources/images/BurtonGromBoa2019Snowboardboots.jpg"));
+        persist(new Product("boot", "Burton", "Ion Boa Black", 42, "Description", 4590, 4590, "/resources/images/BurtonIonBoa2019Snowboardboots.jpg"));
+        persist(new Product("boot", "Burton", "Limelight Boa", 39, "Description", 3090, 3090, "/resources/images/BurtonLimelightBoa2019Snowboardboots.jpg"));
+        persist(new Product("boot", "Burton", "Photon Boa", 42, "Description", 3790, 3790, "/resources/images/BurtonPhotonBoa2019Snowboardboots.jpg"));
+        persist(new Product("boot", "Burton", "Ruler Speed Z", 42, "Description", 2790, 2790, "/resources/images/BurtonRulerSnowboardboots.jpg"));
+        persist(new Product("boot", "Ride", "Lasso  Black", 42, "Description", 3190, 3190, "/resources/images/RideLasso2019Snowboardboots.jpg"));
     }
     
     

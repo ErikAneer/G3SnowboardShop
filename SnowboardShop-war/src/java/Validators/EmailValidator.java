@@ -17,7 +17,7 @@ import javax.faces.validator.FacesValidator;
 
 @FacesValidator("emailValidator")
 public class EmailValidator implements Validator, Serializable {
-
+    
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
@@ -25,7 +25,7 @@ public class EmailValidator implements Validator, Serializable {
             return;
         }
         String emailStr = (String) value;
-
+        
         if (emailStr.length() > 30 || !Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher(emailStr).find()) {
             String message = "Du verkar inte ha matat in en korrekt mailadress. Försök igen!";
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
