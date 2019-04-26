@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Erik
+ * @author Erik jj
  */
 @Entity
 public class Product implements Serializable {
