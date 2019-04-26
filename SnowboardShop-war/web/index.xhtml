@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
-        <title>Display Boards</title>
+        <title>Awesome Board Shop</title>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
@@ -130,17 +130,75 @@
 
                         <!-- To dynamically display items from object List as Materialize cards - here boards-->
                         <h:form id="displayBoardForm">
-                            <ui:repeat var="product" value="#{productController.boards}" >
+                            <ui:repeat var="product" value="#{productController.boards}" size="6">
 
                                 <div class="col card horizontal" style="width: 300px;">
                                     <div class="card-image"> 
-                                        <h:graphicImage class="card-image" url="/resources/images/Snowboard2.jpg" style=" padding-top: 20px; height:280px;"/>  
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
                                     </div>
                                     <div class="card-stacked">
                                         <div class="card-content">
                                             <p><h5>#{product.name}</h5></p>
                                             <p><b>#{product.brand}</b></p>
-                                            <p><b>#{product.length} cm</b></p>
+                                            <p><b>#{product.productLength} cm</b></p>
+                                            <p><b>#{product.price} kr</b></p>
+                                        </div>
+                                        <div class="card-action">
+                                            <p:commandLink  value="View Details" update=":displayBoardForm:boardDetail" oncomplete="PF('boardDialog').show()" title="View Detail">
+                                                <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
+                                                <f:setPropertyActionListener value="#{board}" target="#{dataGridView.selectedBoard}" />
+                                            </p:commandLink>
+                                            <p:commandButton class="waves-effectt btn" value="Buy!"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+
+                            <!-- popup field to show product details - not working yet... Only shows a small popup with header.-->
+                            <p:dialog header="Board info" widgetVar="boardDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                <p:outputPanel id="boardDetail" style="text-align:center;">
+                                    <p:panelGrid  columns="2" rendered="#{not empty dataGridView.selectedBoard}" columnClasses="label,value">
+                                        <f:facet name="header">
+                                            <h:graphicImage class="card-image" url="/resources/images/Snowboard2.jpg" style=" padding-top: 20px; height:280px;"/> 
+                                        </f:facet>
+
+                                        <h:outputText value="Name:" />
+                                        <h:outputText value="#{dataGridView.selectedBoard.name}" />
+
+                                        <h:outputText value="Brand:" />
+                                        <h:outputText value="#{dataGridView.selectedCar.brand}" />
+
+                                        <h:outputText value="Price" />
+                                        <h:outputText value="$#{dataGridView.selectedCar.price}" />
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
+
+                    </div>        
+                </div>          
+            </div> 
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l10 center">  
+                        <h2>Mest populära bootsen</h2>
+                    </div>
+                    <div class="col s12 l12">
+
+                        <!-- To dynamically display items from object List as Materialize cards - here boots-->
+                        <h:form id="displayBootsForm">
+                            <ui:repeat var="product" value="#{productController.boots}" size="3">
+
+                                <div class="col card horizontal" style="width: 300px;">
+                                    <div class="card-image"> 
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
+                                    </div>
+                                    <div class="card-stacked">
+                                        <div class="card-content">
+                                            <p><h5>#{product.name}</h5></p>
+                                            <p><b>#{product.brand}</b></p>
+                                            <p><b>#{product.productLength} cm</b></p>
                                             <p><b>#{product.price} kr</b></p>
                                         </div>
                                         <div class="card-action">

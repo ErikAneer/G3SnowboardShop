@@ -1,10 +1,13 @@
 package pac;
 
+import EJB.ProductBean;
+import EntityClasses.Product;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 
 /**
  *
@@ -14,7 +17,11 @@ import java.util.List;
 @SessionScoped
 public class ProductController implements Serializable {
 
+    @EJB //injecerar en ejb
+    private ProductBean productBean;
     private List<Product> boards = new ArrayList();
+    private List<Product> boots = new ArrayList();
+    private List<Product> bindings = new ArrayList();
     private String message;
     private String nameSuggestions;
 
@@ -48,22 +55,41 @@ public class ProductController implements Serializable {
         this.nameSuggestions = nameSuggestions;
     }
 
-    private void createBoards() {
+    public ProductBean getProductBean() {
+        return productBean;
+    }
 
-        boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
-        boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom FV 156", "Burton", "Blabla", 140, 3490));
-        boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom 156", "Burton", "Blabla", 140, 3490));
-        boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "TWC Pro 156", "Burton", "Blabla", 140, 499990));
-        boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
-        boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
-        boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
-        boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
-        boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
+    public void setProductBean(ProductBean productBean) {
+        this.productBean = productBean;
+    }
 
+    public List<Product> getBoots() {
+        return boots;
+    }
+
+    public void setBoots(List<Product> boots) {
+        this.boots = boots;
+    }
+
+    public List<Product> getBindings() {
+        return bindings;
+    }
+
+    public void setBindings(List<Product> bindings) {
+        this.bindings = bindings;
+    }
+    private void addBoardsToList() {
+        boards = productBean.getAllBoards(); 
+    }
+    
+    private void addBootsToList() {
+        boots= productBean.getAllBoots();
     }
 
     public void onload() {
-        createBoards();
+        //productBean.saveProductToDB();
+         addBoardsToList();
+         addBootsToList();   
     }
 
     /**
@@ -78,8 +104,8 @@ public class ProductController implements Serializable {
         List<String> matches = new ArrayList<>();
         //using data factory for getting suggestions
         for (Product p : boards) {
-            if (p.getName().toLowerCase().startsWith(enteredValue.toLowerCase())) {
-                matches.add(p.getName());
+            if ((p.getBrand().toLowerCase() + " " + p.getName().toLowerCase()).contains(enteredValue.toLowerCase())) {
+                matches.add(p.getBrand()+ " " + p.getName());
             }
         }
         return matches;
