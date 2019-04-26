@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
         @NamedQuery(name="Product.getAll", query="select p from Product p"),
         @NamedQuery(name="Product.getByBrand", query="select p from Product p WHERE p.brand = :brand" ),
         @NamedQuery(name="Product.getByName", query="select p from Product p WHERE p.name = :name" ),
-        @NamedQuery(name="Product.getByType", query="select p from Product p WHERE p.type = :type" ),
+        @NamedQuery(name="Product.getByType", query="select p from Product p WHERE p.productType = :productType" ),
         @NamedQuery(name="Product.getByPrice", query="select p from Product p WHERE p.price >= :minPrice AND p.price <= :maxPrice" ),
         @NamedQuery(name="Product.getBySizeSpan", query="select p from Product p WHERE p.productSize >= :minSize AND p.productSize <= :maxSize" ),
         @NamedQuery(name="Product.getByLengthSpan", query="select p from Product p WHERE p.productLength >= :minLength AND p.productLength <= :maxLength" )
@@ -40,24 +40,21 @@ public class Product implements Serializable {
     
     //@Basic(fetch=LAZY)
     
-    @NotNull
+    
     private String productType; // available "snowboard, binding, boot"
 
-    @NotNull
-    @Size(max = 20, min = 5)
-    private String brand;
-    @NotNull
-    @Size(max = 20, min = 5)
+      
+    private String brand;  
     private String name;
     private double productLength;
     private String productSize;
-    @NotNull
+    
     private String description;
-    @NotNull
+    
     private double price;
-    @NotNull
+    
     private double premiumPrice;
-    @NotNull
+    
     private String imagePath;
 
     public Product(String productType, String brand, String name, double productLength, String description, double price, double premiumPrice, String imagePath) {
