@@ -1,10 +1,13 @@
 package pac;
 
+import EJB.ProductBean;
+import EntityClasses.Product;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 
 /**
  *
@@ -14,6 +17,8 @@ import java.util.List;
 @SessionScoped
 public class ProductController implements Serializable {
 
+    @EJB //injecerar en ejb
+    private ProductBean productBean;
     private List<Product> boards = new ArrayList();
     private String message;
     private String nameSuggestions;
@@ -49,7 +54,7 @@ public class ProductController implements Serializable {
     }
 
     private void createBoards() {
-
+        /*
         boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
         boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom FV 156", "Burton", "Blabla", 140, 3490));
         boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom 156", "Burton", "Blabla", 140, 3490));
@@ -59,7 +64,13 @@ public class ProductController implements Serializable {
         boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
         boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
         boards.add(new Product("Birds+Of+A+Feather+146+2019+Snowboard.jpg", "Custom Smalls", "Burton", "Blabla", 140, 3490));
-
+        */
+        //type productType, String brand, String name, double productLength, String description, double price, double premiumPrice, String imagePath
+        boards.add(new Product("snowboard", "Burton", "Custom Smalls", 140, "Best grom board out there!", 3490, 3490,  "/resources/images/Chicklet1152019Snowboardresized.jpg"));
+        boards.add(new Product("snowboard", "Burton", "Custom Smalls", 140, "Best grom board out there!", 3490, 3490,  "/resources/images/Custom+Smalls+140+2019+Snowboard.jpg"));
+        boards.add(new Product("snowboard", "Burton", "Custom Smalls", 140, "Best grom board out there!", 3490, 3490,  "/resources/images/Custom+Smalls+140+2019+Snowboard.jpg"));
+        boards.add(new Product("snowboard", "Burton", "Custom Smalls", 140, "Best grom board out there!", 3490, 3490,  "/resources/images/Custom+Smalls+140+2019+Snowboard.jpg"));
+        boards.add(new Product("snowboard", "Burton", "Custom Smalls", 140, "Best grom board out there!", 3490, 3490,  "/resources/images/Custom+Smalls+140+2019+Snowboard.jpg"));
     }
 
     public void onload() {

@@ -134,13 +134,13 @@
 
                                 <div class="col card horizontal" style="width: 300px;">
                                     <div class="card-image"> 
-                                        <h:graphicImage class="card-image" url="/resources/images/Snowboard2.jpg" style=" padding-top: 20px; height:280px;"/>  
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
                                     </div>
                                     <div class="card-stacked">
                                         <div class="card-content">
                                             <p><h5>#{product.name}</h5></p>
                                             <p><b>#{product.brand}</b></p>
-                                            <p><b>#{product.length} cm</b></p>
+                                            <p><b>#{product.productLength} cm</b></p>
                                             <p><b>#{product.price} kr</b></p>
                                         </div>
                                         <div class="card-action">

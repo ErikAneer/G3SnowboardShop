@@ -1,5 +1,6 @@
 
 package pac;
+import EntityClasses.Product;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.ManagedBean;
