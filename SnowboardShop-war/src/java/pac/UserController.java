@@ -34,7 +34,8 @@ public class UserController implements Serializable {
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
     
     private String confirmPassword;
-
+    
+    private String sameEmailmsg;
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String familyName, String email, String password, String status)
@@ -102,6 +103,8 @@ public class UserController implements Serializable {
           return page;
     }
 
+    
+    
    public String logOut(){
         currentUser = null;
         return "index";
@@ -139,10 +142,28 @@ public class UserController implements Serializable {
     }*/
     
     
+   
     public String registerNewCustomer(){
-        snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
-        return login();
+        String sidan = "register";
+        sameEmail();
+        if(sameEmailmsg.equals("ok")){
+            snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
+            sidan = login();
+            
+        }
+        return sidan;
     }
+    
+    public void sameEmail(){
+        boolean same = snowBean.isSameEmail(email);
+        if(same){
+            sameEmailmsg = "same email";
+        }
+        else{
+            sameEmailmsg = "ok";
+        }
+    }
+
     
     public void clearRegisterForm() {
         firstname = null; familyname = null; telephone=null; address=null; postnr=null; postaddress=null; email=null; code=null; confirmPassword=null;
@@ -156,6 +177,16 @@ public class UserController implements Serializable {
     public void setUsers(List<User2> users) {
         this.users = users;
     }
+
+    public String getSameEmailmsg() {
+        return sameEmailmsg;
+    }
+
+    public void setSameEmailmsg(String sameEmailmsg) {
+        this.sameEmailmsg = sameEmailmsg;
+    }
+    
+    
 
     public List<User2> getKunder() {
         return kunder;
