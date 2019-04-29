@@ -25,9 +25,9 @@ public class NameValidator implements Validator, Serializable {
         if (!continueValidation()) {
             return;
         }
-        String nameStr = (String) value;    
+        String nameStr = (String) value;     //"(?i)(^[a-öA-Ö])((?![ -]$)[a-öA-Ö])
         
-           if( ! Pattern.compile("(?i)(^[a-ö])((?![ .,'-]$)[a-ö .,'-]){1,30}$", Pattern.CASE_INSENSITIVE).matcher(nameStr).find()){ //nameStr.length() < 2 || nameStr.length() > 30 || 
+           if( ! Pattern.compile("[A-Öa-ö]+([ '-][a-öA-Ö]+)*{1,30}$", Pattern.CASE_INSENSITIVE).matcher(nameStr).find()){ //nameStr.length() < 2 || nameStr.length() > 30 || 
                 String message = "Fältet får bara innehålla bokstäver och ska vara 2 - 30 tecken.";
                 throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
            }
