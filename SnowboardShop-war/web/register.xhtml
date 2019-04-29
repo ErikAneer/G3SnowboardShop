@@ -145,7 +145,7 @@
 
                                  <h:outputLabel for="contactEmail" value="Email: " />
                                  <h:inputText id="contactEmail" value="#{userController.email}">
-                                    <f:validator validatorId="emailValidator"></f:validator>
+                                   <f:validator validatorId="emailValidator"></f:validator>
                                     <f:ajax event="blur" render="usernameMessage" />
                                 </h:inputText>
                                 <h:message id="usernameMessage" for="contactEmail" errorStyle="color:red" />
