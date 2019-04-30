@@ -65,22 +65,29 @@
 
 
         <f:view>
-            <header>
+           <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <a class="brand-logo" href="index.xhtml"> Awesome Board Shop</a>
-
+                        <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
+                       
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
                             <li> <h:link value="Logga ut" outcome="#{userController.loggedInStatus}" /></li>
                         </ul>
                     </div>
                 </nav>
+                
+                <nav class="nav blue lighten-2">
+                    <div class="container">
+                        <ul class="left ">
+                            <li> <h:link value="Snowboards" outcome="snowboards" /></li>
+                            <li> <h:link value="Boots" outcome="boots" /></li>
+                            <li> <h:link value="Bindningar" outcome="bindningar" /></li>
+                        </ul>
+                    </div>
+                </nav>
                 <div>
-
                 </div>
-
-
             </header>
             <!-- Body starts from here -->
 
