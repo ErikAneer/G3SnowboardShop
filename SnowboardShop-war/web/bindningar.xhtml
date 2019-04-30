@@ -68,48 +68,29 @@
 
 
         <f:view>
-            <header>
+          <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <a class="brand-logo"> Awesome Board Shop</a>
-                        <a href="loginPage.xhtml" class="sidenav-trigger" data-target="mobile-menu">
-                            <i class="material-icons">input</i>
-                        </a> 
-
+                        <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
+                       
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Logga in" outcome="loginPage" /></li>
-                            <li> <h:link value="Home" outcome="index" /></li>
+                            <li> <h:link value="Logga ut" outcome="#{userController.loggedInStatus}" /></li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <nav class="nav blue lighten-2">
+                    <div class="container">
+                        <ul class="left ">
+                            <li> <h:link value="Snowboards" outcome="snowboards" /></li>
+                            <li> <h:link value="Boots" outcome="boots" /></li>
+                            <li> <h:link value="Bindningar" outcome="bindningar" /></li>
                         </ul>
                     </div>
                 </nav>
                 <div>
-                    <p:megaMenu >
-                        <p:submenu label="Produkter">
-                            <p:column>
-                                <p:submenu label="Snowboards">
-                                    <p:menuitem value="Alla snowboards" url="#" />
-                                    <p:menuitem value="Freestyle snowboards" url="#" />
-                                    <p:menuitem value="Barn snowboards" url="#" />
-                                </p:submenu>
-
-                                <p:submenu label="Bindningar">
-                                    <p:menuitem value="Vuxenbindningar" url="#" />
-                                    <p:menuitem value="Barnbindningar" url="#" />
-                                </p:submenu>
-
-                                <p:submenu label="Boots">
-                                    <p:menuitem value="Herrboots" url="#" />
-                                    <p:menuitem value="Damboots" url="#" />
-                                    <p:menuitem value="Barnboots" url="#" />
-                                </p:submenu>
-                            </p:column>
-                        </p:submenu>
-
-                    </p:megaMenu>
                 </div>
-
-
             </header>
             <!-- Body starts from here -->
 
