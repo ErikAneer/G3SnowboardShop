@@ -20,20 +20,17 @@ public class SnowBean implements SnowBeanLocal {
 
     @PersistenceContext(unitName = "SnowboardShop-ejbPU")
     private EntityManager em;
-    
 
     public void persist(Object object) {
         em.persist(object);
     }
-    
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-
     @Override
     public String log() {
         Query q = em.createQuery("select o from User2 o");
-        
+
         int size = q.getResultList().size();
 
         return "customer " + size;
@@ -44,15 +41,15 @@ public class SnowBean implements SnowBeanLocal {
         Query q = em.createQuery("select o from User2 o where o.email=:email and o.code=:code");
         q.setParameter("code", code);
         q.setParameter("email", email);
-        User2 u = (User2)q.getSingleResult();
+        User2 u = (User2) q.getSingleResult();
         return u;
     }
 
     @Override
-    public void save(String firstname, String familyname, String telephone, 
-            String address, String postnr, String postaddress, 
+    public void save(String firstname, String familyname, String telephone,
+            String address, String postnr, String postaddress,
             String email, String code, String status) {
-        User2 newUser = new User2(firstname, familyname, telephone, 
+        User2 newUser = new User2(firstname, familyname, telephone,
                 address, postnr, postaddress, email, code, status);
         persist(newUser);
     }
@@ -68,26 +65,60 @@ public class SnowBean implements SnowBeanLocal {
     public List<User2> callAllKunders(String customer, String premium) {
         Query q = em.createQuery("select o from User2 o where o.status=:customer or o.status=:premium");
         q.setParameter("customer", customer);
-        q.setParameter("premium", premium);       
+        q.setParameter("premium", premium);
         List<User2> users = q.getResultList();
         return users;
     }
 
     @Override
-    public Boolean isSameEmail(String email) {
-        boolean same = false;
+    public boolean checkIfUniqueEmail(String email) {
+        Query q = em.createQuery("select o from User2 o where o.email =:email");
+        q.setParameter("email", email);
+
+        return q.getResultList().size() <= 0;
+    }
+
+    @Override
+    public void saveTestUsersToDB() {
         Query q = em.createQuery("select o from User2 o");
         List<User2> users = q.getResultList();
-        for(User2 u: users){
-            if(email.equalsIgnoreCase(u.getEmail())){
-                same = true;
-                break;
-            }
-        }
+           User2 u = new User2();
+
+            u.setFirstname("aaaa");
+            u.setFamilyname("bbbb");
+            u.setEmail("aaaa@test.nu");
+            u.setCode("aaaa11");
+            u.setStatus("customer");
+            persist(u);
         
-        return same;
+            User2 u1 = new User2();
+
+            u1.setFirstname("bbbb");
+            u1.setFamilyname("cccc");
+            u1.setEmail("bbbb@test.nu");
+            u1.setCode("bbbb11");
+            u1.setStatus("premium");
+            persist(u1);
+            User2 u2 = new User2();
+
+            u2.setFirstname("cccc");
+            u2.setFamilyname("dddd");
+            u2.setEmail("cccc@test.nu");
+            u2.setCode("cccc11");
+            u2.setStatus("admin");
+            persist(u2);
+            
+        
+           
     }
-    
-    
-    
+
+    @Override
+    public boolean checkIfUserExists(String email, String code) {
+        Query q = em.createQuery("select o from User2 o where o.email=:email and o.code=:code");
+        q.setParameter("code", code);
+        q.setParameter("email", email);
+        List<User2> u = q.getResultList();
+        return u.size() > 0;
+    }
+
 }

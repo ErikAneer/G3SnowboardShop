@@ -1,10 +1,9 @@
-/*
 
- */
 package EntityClasses;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -40,15 +38,14 @@ public class Product implements Serializable {
     
     //@Basic(fetch=LAZY)
     
-    
     private String productType; // available "snowboard, binding, boot"
-
-      
+    
     private String brand;  
     private String name;
     private double productLength;
     private String productSize;
     
+    @Column(length = 3500)
     private String description;
     
     private double price;
@@ -64,7 +61,7 @@ public class Product implements Serializable {
         this.productLength = productLength;
         this.description = description;
         this.price = price;
-        this.premiumPrice = premiumPrice;
+        this.premiumPrice = premiumPrice * 0.9;
         this.imagePath = imagePath;
     }
 
@@ -134,7 +131,7 @@ public class Product implements Serializable {
     }
 
     public void setPremiumPrice(double price) {
-        this.premiumPrice = price * 0.9 ;
+        this.premiumPrice = price;
     }
 
     public String getImagePath() {

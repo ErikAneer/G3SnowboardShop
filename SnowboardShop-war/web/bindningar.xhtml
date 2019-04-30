@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Awesome Board Shop</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
+        <!-- To use Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <f:metadata>
+            <f:viewAction action="#{productController.onload()}" />
+        </f:metadata>
+        <style>
+
+            li { 
+                display: inline;
+                list-style-type: none;
+            }
+
+
+        </style>
+
+        <style type="text/css">
+            .ui-datalist .ui-datalist-content {
+                border:0 none
+            }
+
+            .ui-datalist ul {
+                padding: 0px 10px 0 20px;
+                margin: 5px 0;
+            }
+
+            .value {
+                font-weight: bold;
+            }
+
+            .ui-autocomplete-itemtip {
+                -moz-box-sizing: content-box;
+                -webkit-box-sizing: content-box;
+                box-sizing: content-box;
+            }
+            #index-header {
+                background: url("resources/images/joshua-reddekopp-217223-cropped.jpg");
+                background-size: cover;
+                background-position: center;
+                min-height: 500px;
+            }
+            .product-search{
+                margin: 0;
+                position: absolute;
+                top: 65%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 28px;
+            }
+        </style>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+    <h:body>
+
+
+        <f:view>
+          <header>
+                <nav class="nav-wrapper blue">
+                    <div class="container">
+                        <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
+                       
+                        <ul class="right hide-on-med-and-down">
+                            <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
+                            <li> <h:link value="Logga ut" outcome="#{userController.loggedInStatus}" /></li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <nav class="nav blue lighten-2">
+                    <div class="container">
+                        <ul class="left ">
+                            <li> <h:link value="Snowboards" outcome="snowboards" /></li>
+                            <li> <h:link value="Boots" outcome="boots" /></li>
+                            <li> <h:link value="Bindningar" outcome="bindningar" /></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div>
+                </div>
+            </header>
+            <!-- Body starts from here -->
+
+            <div class="parallax-container" id='index-header'>
+                <div class="center product-search">
+                    <h:form>
+                        Sök produkt:
+                        <p:autoComplete value="#{productController.inputName}"
+                                        maxResults="10"
+                                        completeMethod="#{productController.nameSuggestions}"  style=" padding-top: 20px;"/>
+                        <p:commandButton class="waves-effectt btn" value="Go!" />
+                    </h:form>
+                </div>  
+            </div> 
+
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l10 center">  
+                        <h2>Mest populära brädorna</h2>
+                    </div>
+                    <div class="col s12 l12">
+
+                        <!-- To dynamically display items from object List as Materialize cards - here boards-->
+                        <h:form id="displayBoardForm">
+                            <ui:repeat var="product" value="#{productController.boards}" size="6">
+
+                                <div class="col card horizontal" style="width: 300px;">
+                                    <div class="card-image"> 
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
+                                    </div>
+                                    <div class="card-stacked">
+                                        <div class="card-content">
+                                            <p><h5>#{product.name}</h5></p>
+                                            <p><b>#{product.brand}</b></p>
+                                            <p><b>#{product.productLength} cm</b></p>
+                                            <p><b>#{product.price} kr</b></p>
+                                        </div>
+                                        
+                                        <div class="card-action">
+                                            <p:commandLink  value="View Details" update=":displayBoardForm:boardDetail" oncomplete="PF('boardDialog').show()" title="View Detail">
+                                                <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
+                                                <f:setPropertyActionListener value="#{board}" target="#{dataGridView.selectedBoard}" />
+                                            </p:commandLink>
+                                            <p:commandButton class="waves-effectt btn" value="Buy!"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+
+                            <!-- popup field to show product details - not working yet... Only shows a small popup with header.-->
+                            <p:dialog header="Board info" widgetVar="boardDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                <p:outputPanel id="boardDetail" style="text-align:center;">
+                                    <p:panelGrid  columns="2" rendered="#{not empty dataGridView.selectedBoard}" columnClasses="label,value">
+                                        <f:facet name="header">
+                                            <h:graphicImage class="card-image" url="/resources/images/Snowboard2.jpg" style=" padding-top: 20px; height:280px;"/> 
+                                        </f:facet>
+
+                                        <h:outputText value="Name:" />
+                                        <h:outputText value="#{dataGridView.selectedBoard.name}" />
+
+                                        <h:outputText value="Brand:" />
+                                        <h:outputText value="#{dataGridView.selectedCar.brand}" />
+
+                                        <h:outputText value="Price" />
+                                        <h:outputText value="$#{dataGridView.selectedCar.price}" />
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
+
+                    </div>        
+                </div>          
+            </div> 
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l10 center">  
+                        <h2>Mest populära bootsen</h2>
+                    </div>
+                    <div class="col s12 l12">
+
+                        <!-- To dynamically display items from object List as Materialize cards - here boots-->
+                        <h:form id="displayBootsForm">
+                            <ui:repeat var="product" value="#{productController.boots}" size="3">
+
+                                <div class="col card horizontal" style="width: 300px;">
+                                    <div class="card-image"> 
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
+                                    </div>
+                                    <div class="card-stacked">
+                                        <div class="card-content">
+                                            <p><h5>#{product.name}</h5></p>
+                                            <p><b>#{product.brand}</b></p>
+                                            <p><b>#{product.productLength} cm</b></p>
+                                            <p><b>#{product.price} kr</b></p>
+                                        </div>
+                                        <div class="card-action">
+                                            <p:commandLink  value="View Details" update=":displayBoardForm:boardDetail" oncomplete="PF('boardDialog').show()" title="View Detail">
+                                                <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
+                                                <f:setPropertyActionListener value="#{board}" target="#{dataGridView.selectedBoard}" />
+                                            </p:commandLink>
+                                            <p:commandButton class="waves-effectt btn" value="Buy!"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+
+                            <!-- popup field to show product details - not working yet... Only shows a small popup with header.-->
+                            <p:dialog header="Board info" widgetVar="boardDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                                <p:outputPanel id="boardDetail" style="text-align:center;">
+                                    <p:panelGrid  columns="2" rendered="#{not empty dataGridView.selectedBoard}" columnClasses="label,value">
+                                        <f:facet name="header">
+                                            <h:graphicImage class="card-image" url="/resources/images/Snowboard2.jpg" style=" padding-top: 20px; height:280px;"/> 
+                                        </f:facet>
+
+                                        <h:outputText value="Name:" />
+                                        <h:outputText value="#{dataGridView.selectedBoard.name}" />
+
+                                        <h:outputText value="Brand:" />
+                                        <h:outputText value="#{dataGridView.selectedCar.brand}" />
+
+                                        <h:outputText value="Price" />
+                                        <h:outputText value="$#{dataGridView.selectedCar.price}" />
+                                    </p:panelGrid>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
+
+                    </div>        
+                </div>          
+            </div> 
+        </f:view>
+        <br />
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+    </h:body>
+
+</html>

@@ -25,6 +25,10 @@ public interface SnowBeanLocal {
 
     List<User2> callAllKunders(String customer, String premium);
 
-    Boolean isSameEmail(String email);
+    boolean checkIfUniqueEmail(String email);
+
+    void saveTestUsersToDB();
+
+    boolean checkIfUserExists(String email, String code);
     
 }

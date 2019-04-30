@@ -44,49 +44,19 @@
             }
         </style>
         <script name="jquery/jquery.js" library="primefaces"></script>
-        <script library="script" name="script.js" />
     </h:head>
     <h:body>
         <f:view>
             <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <a href="index.xhtml" class="brand-logo"> Awesome Board Shop</a>
-                        <a href="index.xhtml" class="sidenav-trigger" data-target="mobile-menu">
-                            <i class="material-icons">home</i>
-                        </a>
+                        <a class="brand-logo" href="index.xhtml"> Awesome Board Shop</a>
+                       
 
-                        <ul class="right hide-on-med-and-down">
-                            <li> <h:link value="Home" outcome="index" /></li>
-                        </ul>
                     </div>
                 </nav>
                 <div>
-                    <!--  <p:megaMenu >
-                          <p:submenu label="Produkter">
-                              <p:column>
-                                  <p:submenu label="Snowboards">
-                                      <p:menuitem value="Alla snowboards" url="#" />
-                                      <p:menuitem value="Freestyle snowboards" url="#" />
-                                      <p:menuitem value="Barn snowboards" url="#" />
-                                  </p:submenu>
-                              </p:column>
-                              <p:column>
-                                  <p:submenu label="Bindningar">
-                                      <p:menuitem value="Vuxenbindningar" url="#" />
-                                      <p:menuitem value="Barnbindningar" url="#" />
-                                  </p:submenu>
-                              </p:column>
-                              <p:column>
-                                  <p:submenu label="Boots">
-                                      <p:menuitem value="Herrboots" url="#" />
-                                      <p:menuitem value="Damboots" url="#" />
-                                      <p:menuitem value="Barnboots" url="#" />
-                                  </p:submenu>
-                              </p:column>
-                          </p:submenu>
-  
-                      </p:megaMenu> -->
+                   
                 </div>
 
             </header>
@@ -145,7 +115,7 @@
 
                                  <h:outputLabel for="contactEmail" value="Email: " />
                                  <h:inputText id="contactEmail" value="#{userController.email}">
-                                    <f:validator validatorId="emailValidator"></f:validator>
+                                   <f:validator validatorId="emailValidator"></f:validator>
                                     <f:ajax event="blur" render="usernameMessage" />
                                 </h:inputText>
                                 <h:message id="usernameMessage" for="contactEmail" errorStyle="color:red" />
@@ -167,7 +137,7 @@
                                     <f:ajax event="blur" render="confirmPasswordMessage" />
                                 </h:inputSecret>
                                 <h:message id="confirmPasswordMessage" for="confirmPassword" errorStyle="color:red" />
-                            </h:panelGrid>  
+                            </h:panelGrid>
                         </h:form>
 
                         <br/>

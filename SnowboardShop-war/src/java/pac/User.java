@@ -30,6 +30,9 @@ public class User implements Serializable {
         this.password = password;
         this.status = status;
     }
+
+    public User() {
+    }
     
     
     
