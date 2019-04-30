@@ -33,6 +33,7 @@ public class UserController implements Serializable {
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
 
     private String confirmPassword;
+    private String sameEmailmsg;
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
