@@ -44,8 +44,6 @@ public class SnowBean implements SnowBeanLocal {
         User2 u = (User2) q.getSingleResult();
         return u;
     }
-    
-    
 
     @Override
     public void save(String firstname, String familyname, String telephone,
@@ -82,24 +80,45 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void saveTestUsersToDB() {
-        User2 u = new User2();
+        if (checkIfUniqueEmail("erik@test.nu")) {
+            User2 u = new User2();
 
-        u.setFirstname("Erik");
-        u.setFamilyname("Aneer");
-        u.setEmail("erik@test.nu");
-        u.setCode("123qwe");
-       persist(u);
+            u.setFirstname("Erik");
+            u.setFamilyname("Aneer");
+            u.setEmail("erik@test.nu");
+            u.setCode("123qwe");
+            u.setStatus("customer");
+            persist(u);
+        }
+        if (checkIfUniqueEmail("erka@test.nu")) {
+            User2 u1 = new User2();
+
+            u1.setFirstname("Erik");
+            u1.setFamilyname("Premium");
+            u1.setEmail("erka@test.nu");
+            u1.setCode("123qwe");
+            u1.setStatus("premium");
+            persist(u1);
+        }
+        if (checkIfUniqueEmail("erkaberka@test.nu")) {
+            User2 u2 = new User2();
+
+            u2.setFirstname("Erik");
+            u2.setFamilyname("Admin");
+            u2.setEmail("erkaberka@test.nu");
+            u2.setCode("123qwe");
+            u2.setStatus("admin");
+            persist(u2);
+        }
     }
 
     @Override
     public boolean checkIfUserExists(String email, String code) {
-         Query q = em.createQuery("select o from User2 o where o.email=:email and o.code=:code");
+        Query q = em.createQuery("select o from User2 o where o.email=:email and o.code=:code");
         q.setParameter("code", code);
         q.setParameter("email", email);
         List<User2> u = q.getResultList();
         return u.size() > 0;
     }
-    
-    
 
 }

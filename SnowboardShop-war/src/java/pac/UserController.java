@@ -1,4 +1,3 @@
-
 package pac;
 
 import EJB.UserBean;
@@ -24,67 +23,91 @@ public class UserController implements Serializable {
 
     @EJB
     private SnowBeanLocal snowBean;
-    
 
     private List<User2> users;
     private List<User2> kunder;
     private User2 currentUser;
     private Boolean isLoggedIn = false;
-    private String userField;
-    
+    private String userField, loggedInStatus;
+
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
-    
+
     private String confirmPassword;
 
-
     /**
-     * Creates a new instance of LoginBean //(String firstName, String familyName, String email, String password, String status)
+     * Creates a new instance of LoginBean //(String firstName, String
+     * familyName, String email, String password, String status)
      */
     public UserController() {
-        status = "Logga in";  
+        loggedInStatus = "Logga in";
     }
-   
-    public String login() {
-            String page = "Logga in";
-            
-            users = snowBean.callAllUsers();
-            kunder = snowBean.callAllKunders("customer", "premium");
 
-            if(!snowBean.checkIfUserExists(email, code)){
-                setEmail(null);
-                setCode(null);
-                FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                "Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.", null);
-                FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg); 
-           }
-            else{
-             User2 u = (User2)snowBean.login(email, code);
+    public String login() {
+        String page = "Logga in";
+       
+        users = snowBean.callAllUsers();
+        kunder = snowBean.callAllKunders("customer", "premium");
+
+        if (!snowBean.checkIfUserExists(email, code)) {
+            setEmail(null);
+            setCode(null);
+            FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.", null);
+            FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg);
+        } else {
+            User2 u = (User2) snowBean.login(email, code);
             page = u.getStatus();
             currentUser = u;
-                    //setUserField(u.getFirstName());
-                    setIsLoggedIn(true);
-                    page = currentUser.getStatus();
-                    setStatus("Logga ut");
-                    setEmail(null);  
-            }
-            
-            
-          return page;
-    }
-
-   public String logOut(){
-        currentUser = null;
-        return "index";
+            //setUserField(u.getFirstName());
+            setIsLoggedIn(true);
+            status = currentUser.getStatus();
+            loggedInStatus = "Logga ut";
+            page = status;
+            setEmail(null);
+        }
+        return page;
     }
     
-    public String registerNewCustomer(){
+    public String logInLogOut(){
+            if(isLoggedIn) {
+                logOut();
+                return "index";
+            }
+            else return "login";
+    
+    }
+
+    public String logOut() {
+        loggedInStatus = "Logga in";
+        currentUser = null;
+        firstname = null;
+        familyname = null;
+        telephone = null;
+        address = null;
+        postnr = null;
+        postaddress = null;
+        email = null; 
+        code = null;
+        status = null;
+        return "index";
+    }
+
+    public String registerNewCustomer() {
         snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
         return login();
     }
-    
+
     public void clearRegisterForm() {
-        firstname = null; familyname = null; telephone=null; address=null; postnr=null; postaddress=null; email=null; code=null; confirmPassword=null;
-    
+        firstname = null;
+        familyname = null;
+        telephone = null;
+        address = null;
+        postnr = null;
+        postaddress = null;
+        email = null;
+        code = null;
+        confirmPassword = null;
+
     }
 
     public List<User2> getUsers() {
@@ -206,9 +229,19 @@ public class UserController implements Serializable {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+
+    public String getLoggedInStatus() {
+        return loggedInStatus;
+    }
+
+    public void setLoggedInStatus(String loggedInStatus) {
+        this.loggedInStatus = loggedInStatus;
+    }
     
+    
+
     public void onload() {
-        
-    snowBean.saveTestUsersToDB();
+
+        snowBean.saveTestUsersToDB();
     }
 }

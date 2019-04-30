@@ -24,6 +24,8 @@ public class ProductController implements Serializable {
     private List<Product> bindings = new ArrayList();
     private String message;
     private String nameSuggestions;
+    
+    private Product  selectedProduct;
 
     /**
      * Creates a new instance of ProductController
@@ -92,6 +94,15 @@ public class ProductController implements Serializable {
          addBootsToList();   
     }
 
+    public Product getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public void setSelectedProduct(Product selectedProduct) {
+        this.selectedProduct = selectedProduct;
+    }
+
+    
     /**
      * Auto-completes product names from the Product List
      *
@@ -119,4 +130,20 @@ public class ProductController implements Serializable {
         System.out.println(inputName);
         this.inputName = inputName;
     }
+    
+    public String showSelectedProduct(Product p) {
+        
+        setSelectedProduct(p);
+        
+        return "show_details";
+    }
+    
+    public String returnToIndex() {
+        setSelectedProduct(null);
+        
+        return "return_index";
+    
+    }
+
 }
+            
