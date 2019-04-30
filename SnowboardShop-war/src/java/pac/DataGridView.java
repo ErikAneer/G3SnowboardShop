@@ -22,6 +22,7 @@ public class DataGridView implements Serializable {
     public List<Product> getBoards() {
         return boards;
     }
+    
 
     public void setBoards(List<Product> boards) {
         this.boards = boards;
