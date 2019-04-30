@@ -242,6 +242,6 @@ public class UserController implements Serializable {
 
     public void onload() {
 
-        snowBean.saveTestUsersToDB();
+        //snowBean.saveTestUsersToDB();
     }
 }

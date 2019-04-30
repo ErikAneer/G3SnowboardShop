@@ -89,7 +89,7 @@ public class ProductController implements Serializable {
     }
 
     public void onload() {
-        productBean.saveProductToDB();
+       // productBean.saveProductToDB();
          addBoardsToList();
          addBootsToList();   
     }
