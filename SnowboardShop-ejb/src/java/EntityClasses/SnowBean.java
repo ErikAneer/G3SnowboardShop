@@ -80,36 +80,36 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void saveTestUsersToDB() {
-        if (checkIfUniqueEmail("erik@test.nu")) {
-            User2 u = new User2();
+        Query q = em.createQuery("select o from User2 o");
+        List<User2> users = q.getResultList();
+           User2 u = new User2();
 
-            u.setFirstname("Erik");
-            u.setFamilyname("Aneer");
-            u.setEmail("erik@test.nu");
-            u.setCode("123qwe");
+            u.setFirstname("aaaa");
+            u.setFamilyname("bbbb");
+            u.setEmail("aaaa@test.nu");
+            u.setCode("aaaa11");
             u.setStatus("customer");
             persist(u);
-        }
-        if (checkIfUniqueEmail("erka@test.nu")) {
+        
             User2 u1 = new User2();
 
-            u1.setFirstname("Erik");
-            u1.setFamilyname("Premium");
-            u1.setEmail("erka@test.nu");
-            u1.setCode("123qwe");
+            u1.setFirstname("bbbb");
+            u1.setFamilyname("cccc");
+            u1.setEmail("bbbb@test.nu");
+            u1.setCode("bbbb11");
             u1.setStatus("premium");
             persist(u1);
-        }
-        if (checkIfUniqueEmail("erkaberka@test.nu")) {
             User2 u2 = new User2();
 
-            u2.setFirstname("Erik");
-            u2.setFamilyname("Admin");
-            u2.setEmail("erkaberka@test.nu");
-            u2.setCode("123qwe");
+            u2.setFirstname("cccc");
+            u2.setFamilyname("dddd");
+            u2.setEmail("cccc@test.nu");
+            u2.setCode("cccc11");
             u2.setStatus("admin");
             persist(u2);
-        }
+            
+        
+           
     }
 
     @Override
