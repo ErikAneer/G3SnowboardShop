@@ -19,6 +19,7 @@ public class ProductController implements Serializable {
 
     @EJB //injecerar en ejb
     private ProductBean productBean;
+    private List<Product> allProducts = new ArrayList();
     private List<Product> boards = new ArrayList();
     private List<Product> boots = new ArrayList();
     private List<Product> bindings = new ArrayList();
@@ -87,11 +88,16 @@ public class ProductController implements Serializable {
     private void addBootsToList() {
         boots= productBean.getAllBoots();
     }
+    private void addAllProductsToList() {
+        allProducts= productBean.getAllProducts();
+    }
+    
 
     public void onload() {
-        productBean.saveProductToDB();
+        //productBean.saveProductToDB(); //Fills the db with products. Use only if db is empty.
          addBoardsToList();
          addBootsToList();   
+         addAllProductsToList();
     }
 
     public Product getSelectedProduct() {
@@ -100,6 +106,14 @@ public class ProductController implements Serializable {
 
     public void setSelectedProduct(Product selectedProduct) {
         this.selectedProduct = selectedProduct;
+    }
+
+    public List<Product> getAllProducts() {
+        return allProducts;
+    }
+
+    public void setAllProducts(List<Product> allProducts) {
+        this.allProducts = allProducts;
     }
 
     
@@ -114,7 +128,7 @@ public class ProductController implements Serializable {
     public List<String> nameSuggestions(String enteredValue) {
         List<String> matches = new ArrayList<>();
         //using data factory for getting suggestions
-        for (Product p : boards) {
+        for (Product p : allProducts) {
             if ((p.getBrand().toLowerCase() + " " + p.getName().toLowerCase()).contains(enteredValue.toLowerCase())) {
                 matches.add(p.getBrand()+ " " + p.getName());
             }
@@ -138,6 +152,19 @@ public class ProductController implements Serializable {
         return "show_details";
     }
     
+    public void findMatchingProduct() {
+            allProducts.forEach(p->{
+            if((p.getBrand() + " " + p.getName()).equals(inputName)){
+                setSelectedProduct(p);
+            }
+            });
+    }
+    
+    public String showMatchingProduct(){
+            findMatchingProduct();
+            setInputName("");
+             return "show_details";
+    }      
     public String returnToIndex() {
         setSelectedProduct(null);
         

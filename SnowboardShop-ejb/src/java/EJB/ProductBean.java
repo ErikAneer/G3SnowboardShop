@@ -68,6 +68,12 @@ public class ProductBean {
         return results;
     }
     
+     public List<Product> getAllProducts() {
+        Query query = em.createNamedQuery("Product.getAll");
+        List<Product> results = query.getResultList();
+        return results;
+    }
+    
     //Do only use if saving new objects to DB.
     public void saveProductToDB() {
         persist(new Product("snowboard", "Ride", "Warpig S", 148, "Warpig är tillbaka! Den här brädan är framtagen för att ha roligt i alla förhållanden med en unik shape som är kortare, "
@@ -245,6 +251,6 @@ public class ProductBean {
    
    
    }
-    
+ 
     
 }
