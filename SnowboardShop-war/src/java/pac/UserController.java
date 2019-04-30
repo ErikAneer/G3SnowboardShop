@@ -45,7 +45,7 @@ public class UserController implements Serializable {
 
     public String login() {
         String page = "Logga in";
-       
+
         users = snowBean.callAllUsers();
         kunder = snowBean.callAllKunders("customer", "premium");
 
@@ -68,14 +68,15 @@ public class UserController implements Serializable {
         }
         return page;
     }
-    
-    public String logInLogOut(){
-            if(isLoggedIn) {
-                logOut();
-                return "index";
-            }
-            else return "login";
-    
+
+    public String logInLogOut() {
+        if (isLoggedIn) {
+            logOut();
+            return "index";
+        } else {
+            return "login";
+        }
+
     }
 
     public String logOut() {
@@ -87,15 +88,30 @@ public class UserController implements Serializable {
         address = null;
         postnr = null;
         postaddress = null;
-        email = null; 
+        email = null;
         code = null;
         status = null;
         return "index";
     }
 
+    public void sameEmail() {
+        boolean same = snowBean.isSameEmail(email);
+        if (same) {
+            sameEmailmsg = "same email";
+        } else {
+            sameEmailmsg = "ok";
+        }
+    }
+
     public String registerNewCustomer() {
-        snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
-        return login();
+        String sidan = "register";
+        sameEmail();
+        if(sameEmailmsg.equals("ok")){
+            snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
+            sidan = login();
+            
+        }
+        return sidan;
     }
 
     public void clearRegisterForm() {
@@ -126,8 +142,6 @@ public class UserController implements Serializable {
     public void setSameEmailmsg(String sameEmailmsg) {
         this.sameEmailmsg = sameEmailmsg;
     }
-    
-    
 
     public List<User2> getKunder() {
         return kunder;
@@ -248,8 +262,6 @@ public class UserController implements Serializable {
     public void setLoggedInStatus(String loggedInStatus) {
         this.loggedInStatus = loggedInStatus;
     }
-    
-    
 
     public void onload() {
 

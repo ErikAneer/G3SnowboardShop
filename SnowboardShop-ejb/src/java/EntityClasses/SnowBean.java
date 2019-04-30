@@ -121,4 +121,21 @@ public class SnowBean implements SnowBeanLocal {
         return u.size() > 0;
     }
 
+    @Override
+    public Boolean isSameEmail(String email) {
+                boolean same = false;
+        Query q = em.createQuery("select o from User2 o");
+        List<User2> users = q.getResultList();
+        for(User2 u: users){
+            if(email.equalsIgnoreCase(u.getEmail())){
+                same = true;
+                break;
+            }
+        }
+        
+        return same;
+    }
+    
+    
+
 }

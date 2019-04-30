@@ -30,5 +30,7 @@ public interface SnowBeanLocal {
     void saveTestUsersToDB();
 
     boolean checkIfUserExists(String email, String code);
+
+    Boolean isSameEmail(String email);
     
 }
