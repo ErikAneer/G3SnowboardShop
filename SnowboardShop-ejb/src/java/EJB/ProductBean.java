@@ -68,6 +68,14 @@ public class ProductBean {
         return results;
     }
     
+     public List<Product> getAllBindings() {
+        
+        Query query = em.createNamedQuery("Product.getByType");
+        query.setParameter("productType", "binding");
+        List<Product> results = query.getResultList();
+        return results;
+    }
+    
     //Do only use if saving new objects to DB.
     public void saveProductToDB() {
         persist(new Product("snowboard", "Ride", "Warpig S", 148, "Warpig är tillbaka! Den här brädan är framtagen för att ha roligt i alla förhållanden med en unik shape som är kortare, "
@@ -222,6 +230,14 @@ public class ProductBean {
         persist(new Product("boot", "Burton", "Photon Boa", 42, "Description", 3790, 3790, "/resources/images/BurtonPhotonBoa2019Snowboardboots.jpg"));
         persist(new Product("boot", "Burton", "Ruler Speed Z", 42, "Description", 2790, 2790, "/resources/images/BurtonRulerSnowboardboots.jpg"));
         persist(new Product("boot", "Ride", "Lasso  Black", 42, "Description", 3190, 3190, "/resources/images/RideLasso2019Snowboardboots.jpg"));
+        persist(new Product("binding", "Burton", "",42,"Description", 3490, 3490,"/resources/images/BurtonLexa2019Snowboardbindningar.jpg"));
+        persist(new Product("binding", "Burton", "",42,"Description", 3490, 3490,"/resources/images/BurtonMission2019Snowboardbindningar.jpg"));
+        persist(new Product("binding", "Burton", "",42,"Description", 3490, 3490,"/resources/images/DrakeFifty2019Snowboardbindningar.jpg"));
+        persist(new Product("binding", "Burton", "",42,"Description", 3490, 3490,"/resources/images/DrakeQueen2019Snowboardbindningar.jpg"));
+        
+        
+        
+
     }
     
     

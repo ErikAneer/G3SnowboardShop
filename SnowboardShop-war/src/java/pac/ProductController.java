@@ -87,11 +87,16 @@ public class ProductController implements Serializable {
     private void addBootsToList() {
         boots= productBean.getAllBoots();
     }
+    
+    private void addBindingsToList() {
+        bindings= productBean.getAllBindings();
+    }
 
     public void onload() {
         productBean.saveProductToDB();
          addBoardsToList();
-         addBootsToList();   
+         addBootsToList();  
+         addBindingsToList();
     }
 
     public Product getSelectedProduct() {
