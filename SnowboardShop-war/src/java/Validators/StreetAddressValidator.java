@@ -26,7 +26,7 @@ public class StreetAddressValidator implements Validator, Serializable {
         String nameStr = (String) value;
         nameStr = nameStr.trim();
         
-           if( ! Pattern.compile("^\\s*\\S+(?:\\s+\\S+)?{1,30}$", Pattern.CASE_INSENSITIVE).matcher(nameStr).find()){ 
+           if( ! Pattern.compile("[A-Öa-ö]+([ -][a-öA-Ö]+)+([ -][1-9]+)*{1,30}$", Pattern.CASE_INSENSITIVE).matcher(nameStr).find()){ 
                 String message = "Du har inte matat in en korrekt gatuadress.";
                 throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
            }

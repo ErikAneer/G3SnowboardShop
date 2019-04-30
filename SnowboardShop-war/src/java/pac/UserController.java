@@ -1,6 +1,6 @@
-
 package pac;
 
+import EJB.UserBean;
 import EntityClasses.SnowBeanLocal;
 import EntityClasses.User2;
 import javax.inject.Named;
@@ -23,130 +23,91 @@ public class UserController implements Serializable {
 
     @EJB
     private SnowBeanLocal snowBean;
-    
-    
+
     private List<User2> users;
     private List<User2> kunder;
     private User2 currentUser;
     private Boolean isLoggedIn = false;
-    private String userField;
-    
+    private String userField, loggedInStatus;
+
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
-    
+
     private String confirmPassword;
 
-
     /**
-     * Creates a new instance of LoginBean //(String firstName, String familyName, String email, String password, String status)
+     * Creates a new instance of LoginBean //(String firstName, String
+     * familyName, String email, String password, String status)
      */
     public UserController() {
-        status = "Logga in";
-        //users = snowBean.callArraylist();
-        /*for(Object o: userObj){
-            users.add((User2)o);
-        }*/
-        /*for(User2 k: users){
-            if((k.getStatus().equals("customer")) || k.getStatus().equals("premium")){
-                kunder.add(k);
-            }
-        }*/
-        /*if(users.size()==0){
-            users.add(new User("Erik", "Aneer", "erik@test.nu", "1234", "customer"));
-            users.add(new User("aaaa", "aaaa", "aaaa@test.nu", "1234", "customer"));
-            users.add(new User("bbbb", "bbbb", "bbbb@test.nu", "1234", "customer"));
-            users.add(new User("cccc", "cccc", "cccc@test.nu", "1234", "customer"));
-            users.add(new User("ffff", "ffff", "ffff@test.nu", "1234", "premium"));
-            users.add(new User("gggg", "gggg", "gggg@test.nu", "1234", "premium"));
-            users.add(new User("Admin 1", "dddd", "dddd@test.nu", "1234", "admin"));
-            users.add(new User("Admin 2", "eeee", "eeee@test.nu", "1234", "admin"));           
-        }
-        if(kunder.size() == 0){
-            for(User k: users){
-                if((k.getStatus().equals("customer")) || k.getStatus().equals("premium")){
-                    kunder.add(k);
-                }
-            }
-        }*/
-        
-    }
-   
-    public String login() {
-            String page = "Logga in";
-            User2 u = (User2)snowBean.login(email, code);
-            currentUser = u;
-            page = u.getStatus();
-            
-            users = snowBean.callAllUsers();
-            kunder = snowBean.callAllKunders("customer", "premium");
-            
-            //Method needed to check if inserted email address exists among registererd users. ex.
-            
-            /*for(User u: users){
-                if((password.matches(u.getPassword())) && email.matches(u.getEmail())){
-                    currentUser = u;
-                    //setUserField(u.getFirstName());
-                    setIsLoggedIn(true);
-                    page = currentUser.getStatus();
-                    setStatus("Logga ut");
-                    setEmail(null);                 
-                    break;
-                }
-            }
-            if(page.equals("Logga in")){
-                setEmail(null);
-                setPassword(null);
-                FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                "Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.", null);
-                FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg); 
-           }*/
-          return page;
+        loggedInStatus = "Logga in";
     }
 
-   public String logOut(){
+    public String login() {
+        String page = "Logga in";
+       
+        users = snowBean.callAllUsers();
+        kunder = snowBean.callAllKunders("customer", "premium");
+
+        if (!snowBean.checkIfUserExists(email, code)) {
+            setEmail(null);
+            setCode(null);
+            FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.", null);
+            FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg);
+        } else {
+            User2 u = (User2) snowBean.login(email, code);
+            page = u.getStatus();
+            currentUser = u;
+            //setUserField(u.getFirstName());
+            setIsLoggedIn(true);
+            status = currentUser.getStatus();
+            loggedInStatus = "Logga ut";
+            page = status;
+            setEmail(null);
+        }
+        return page;
+    }
+    
+    public String logInLogOut(){
+            if(isLoggedIn) {
+                logOut();
+                return "index";
+            }
+            else return "login";
+    
+    }
+
+    public String logOut() {
+        loggedInStatus = "Logga in";
         currentUser = null;
+        firstname = null;
+        familyname = null;
+        telephone = null;
+        address = null;
+        postnr = null;
+        postaddress = null;
+        email = null; 
+        code = null;
+        status = null;
         return "index";
     }
-    
 
-    
-    /*public void validateUniquePassword(FacesContext context, UIComponent component, Object value) throws ValidatorException{
-    
-        if (!continueValidation()) {
-            return;
-        }
-        System.out.println("Validate unique email method is called.");
-         String password = (String) value;
-        boolean isUnique = true;
-        for(User u : users) {
-            if (u.getPassword().equals(password)) {
-                isUnique = false;
-            }
-        }
-        
-        if (!isUnique) {
-            String message = "Den angivna mailadressen finns redan registrerad hos oss som en befintlig kund";
-            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
-
-        }
-        
-    }*/
-   /* protected boolean continueValidation() {
-        String skipValidator = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("skipValidator");
-        if (skipValidator != null && skipValidator.equalsIgnoreCase("true")) {
-            return false;
-        }
-        return true;
-    }*/
-    
-    
-    public String registerNewCustomer(){
+    public String registerNewCustomer() {
         snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
         return login();
     }
-    
+
     public void clearRegisterForm() {
-        firstname = null; familyname = null; telephone=null; address=null; postnr=null; postaddress=null; email=null; code=null; confirmPassword=null;
-    
+        firstname = null;
+        familyname = null;
+        telephone = null;
+        address = null;
+        postnr = null;
+        postaddress = null;
+        email = null;
+        code = null;
+        confirmPassword = null;
+
     }
 
     public List<User2> getUsers() {
@@ -267,5 +228,20 @@ public class UserController implements Serializable {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getLoggedInStatus() {
+        return loggedInStatus;
+    }
+
+    public void setLoggedInStatus(String loggedInStatus) {
+        this.loggedInStatus = loggedInStatus;
+    }
+    
+    
+
+    public void onload() {
+
+        snowBean.saveTestUsersToDB();
     }
 }
