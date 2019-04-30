@@ -94,11 +94,11 @@
             <div class="parallax-container" id='index-header'>
                 <div class="center product-search">
                     <h:form>
-                        Sök produkt:
+                        Sök produkt: 
                         <p:autoComplete value="#{productController.inputName}"
                                         maxResults="10"
                                         completeMethod="#{productController.nameSuggestions}"  style=" padding-top: 20px;"/>
-                        <p:commandButton class="waves-effectt btn" value="Go!" />
+                        <p:commandButton class="waves-effectt btn" value="Go!" action="#{productController.showMatchingProduct()}"/>
                     </h:form>
                 </div>  
             </div> 
