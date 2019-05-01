@@ -299,17 +299,19 @@ public class UserController implements Serializable {
     
     public String addVaror(Product p, String str){
         snowBean.addProduct(p.getName(), str, 1, p.getPrice());
+        String test1 = visaKorg(str);
         return "ok";
     }
     
     public String addVarorPremium(Product p, String str){
         snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
+        String test2 = visaKorg(str);
         return "ok";
     }
 
     public String visaKorg(String mail) {
         products = snowBean.callProducts(mail);
-        return "ok";
+        return "korg";
     }
 
     public String remove(String proname, long id, String mail) {
@@ -344,7 +346,7 @@ public class UserController implements Serializable {
             snowBean.removeBypronameidemail(productname, k.getId(), mail);
             snowBean.skickaOrder(ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
         }
-        return "ok";
+        return visaKorg(mail);
     }
     
     public List<Orderning> callOrderbymail(String mail){

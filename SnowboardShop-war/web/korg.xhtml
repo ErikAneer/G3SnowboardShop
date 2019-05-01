@@ -9,7 +9,9 @@
     <h:body>
         Korg sidan
         <h:link value="Logga ut" outcome="#{userController.logOut()}" />
-
+        <br/><br/>
+        <h:link value="Go back" outcome="#{userController.currentUser.status}" />
+        <br/><br/>
         <f:view>
             <h:form>
                 <h:commandButton value="refresh" action="#{userController.visaKorg(userController.currentUser.email)}" />
