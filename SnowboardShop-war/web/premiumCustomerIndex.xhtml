@@ -142,7 +142,8 @@
                                                 <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
                                                 <f:setPropertyActionListener value="#{board}" target="#{dataGridView.selectedBoard}" />
                                             </p:commandLink>
-                                            <p:commandButton class="waves-effectt btn" value="Buy!"/>
+                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                                             action="#{userController.addVarorPremium(product, userController.currentUser.email)}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +202,8 @@
                                                 <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
                                                 <f:setPropertyActionListener value="#{board}" target="#{dataGridView.selectedBoard}" />
                                             </p:commandLink>
-                                            <p:commandButton class="waves-effectt btn" value="Buy!"/>
+                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                                             action="#{userController.addVarorPremium(product, userController.currentUser.email)}"/>
                                         </div>
                                     </div>
                                 </div>
