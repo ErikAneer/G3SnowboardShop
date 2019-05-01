@@ -1,12 +1,18 @@
 package pac;
 
 import EJB.UserBean;
+import EntityClasses.Korg;
+import EntityClasses.Orderning;
+import EntityClasses.Product;
 import EntityClasses.SnowBeanLocal;
 import EntityClasses.User2;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -33,7 +39,10 @@ public class UserController implements Serializable {
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
 
     private String confirmPassword;
+    
     private String sameEmailmsg;
+    private List<Korg> products = new ArrayList();
+    private List<Orderning> orders = new ArrayList();
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
@@ -45,11 +54,13 @@ public class UserController implements Serializable {
 
     public String login() {
         String page = "Logga in";
-
+        User2 u = (User2)snowBean.login(email, code);
+        currentUser = u;
+        page = u.getStatus();
         users = snowBean.callAllUsers();
         kunder = snowBean.callAllKunders("customer", "premium");
 
-        if (!snowBean.checkIfUserExists(email, code)) {
+       /* if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
             setCode(null);
             FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -65,7 +76,7 @@ public class UserController implements Serializable {
             loggedInStatus = "Logga ut";
             page = status;
             setEmail(null);
-        }
+        }*/
         return page;
     }
 
@@ -81,7 +92,7 @@ public class UserController implements Serializable {
 
     public String logOut() {
         loggedInStatus = "Logga in";
-        currentUser = null;
+        //currentUser = null;
         firstname = null;
         familyname = null;
         telephone = null;
@@ -127,6 +138,24 @@ public class UserController implements Serializable {
 
     }
 
+    public List<Korg> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Korg> products) {
+        this.products = products;
+    }
+
+    public List<Orderning> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orderning> orders) {
+        this.orders = orders;
+    }
+
+    
+    
     public List<User2> getUsers() {
         return users;
     }
@@ -267,4 +296,62 @@ public class UserController implements Serializable {
 
         //snowBean.saveTestUsersToDB();
     }
+    
+    public String addVaror(Product p, String str){
+        snowBean.addProduct(p.getName(), str, 1, p.getPrice());
+        return "ok";
+    }
+    
+    public String addVarorPremium(Product p, String str){
+        snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
+        return "ok";
+    }
+
+    public String visaKorg(String mail) {
+        products = snowBean.callProducts(mail);
+        return "ok";
+    }
+
+    public String remove(String proname, long id, String mail) {
+        snowBean.removeBypronameidemail(proname, id, mail);
+        return visaKorg(mail);
+    }
+
+    public String buyAll(User2 user, List<Korg> korg) {
+        String ordernr, mail, fullname, productname;
+        int count;
+        double totalprice;
+        String fulladdress, postnraddress, telephone;
+        
+        LocalDateTime datetime = LocalDateTime.now();
+        Random ran = new Random();
+        int ran1 = ran.nextInt(9);
+        int ran2 = ran.nextInt(9);
+        int ran3 = ran.nextInt(9);
+        int ran4 = ran.nextInt(9);
+        
+        ordernr = datetime.toString() + "::" + user.getEmail() + "::" + ran1+""+ran2+""+ran3+""+ran4;
+        mail = user.getEmail();
+        fullname = user.getFirstname() + " " + user.getFamilyname();
+        fulladdress = user.getAddress();
+        postnraddress = user.getPostnr() + " " + user.getPostaddress();
+        telephone = user.getTelephone();
+        for(Korg k: korg){
+            productname = k.getProductname();
+            count = k.getCount();
+            totalprice = k.getTotalprice();
+            
+            snowBean.removeBypronameidemail(productname, k.getId(), mail);
+            snowBean.skickaOrder(ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
+        }
+        return "ok";
+    }
+    
+    public List<Orderning> callOrderbymail(String mail){
+        orders = snowBean.callOrders(mail);
+        return orders;
+    }
+
+
+    
 }
