@@ -5,6 +5,7 @@
  */
 package EntityClasses;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -135,6 +136,54 @@ public class SnowBean implements SnowBeanLocal {
         
         return same;
     }
+
+    @Override
+    public void addProduct(String productname, String email, int count, double totalprice) {
+        Korg k = new Korg(productname, email, count, totalprice);
+        em.persist(k);
+    }
+
+    @Override
+    public List<Korg> callProducts(String email) {
+        List<Korg> pros = new ArrayList();
+        Query q = em.createQuery("select o from Korg o");
+        List<Korg> products = q.getResultList();
+        for(Korg k: products){
+            if(email.equalsIgnoreCase(k.getEmail())){
+                pros.add(k);
+            }
+        }
+        
+        return pros;
+    }
+
+    @Override
+    public void removeBypronameidemail(String proname, long id, String email) {
+        Query q = em.createQuery("select o from Korg o");
+        List<Korg> products = q.getResultList();
+        for(Korg k: products){
+            if(proname.equalsIgnoreCase(k.getProductname()) && id==k.getId() && email.equalsIgnoreCase(k.getEmail())){
+                em.remove(k);
+            }
+        }
+    }
+
+    @Override
+    public void skickaOrder(String ordernr, String email, String fullname, String productname, 
+            int count, double totalprice, String fulladdress, String postnraddress, String telephone) {
+        Orderning order = new Orderning(ordernr, email, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
+        em.persist(order);
+    }
+
+    @Override
+    public List<Orderning> callOrders(String email) {
+        Query q = em.createQuery("select o from Orderning o where o.email=:email order by o.ordernr");
+        q.setParameter("email", email);
+        List<Orderning> orders = q.getResultList();
+        
+        return orders;
+    }
+    
     
     
 
