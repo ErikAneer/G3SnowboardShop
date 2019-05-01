@@ -12,8 +12,22 @@
 
         <f:view>
             <h:form>
+                <h:commandButton value="refresh" action="#{userController.visaKorg(userController.currentUser.email)}" />
+                <h:dataTable id="productInfo" value="#{userController.products}" var="msg">
+                    <f:facet name="header">
+                        <h4>Alla registrerade product</h4>
+                        <h:outputText value="#{userController.email}" />
+                    </f:facet>
+                    <h:column>
+                        <h:outputText id="productName" value="#{msg.productname} #{msg.count} #{msg.totalprice}" />
+                    </h:column>
+                    <h:column>
+                        <h:commandButton id="remove" value="Remove" 
+                                         action="#{userController.remove(msg.productname, msg.id, userController.currentUser.email)}"/>
+                    </h:column>
 
-            </h:form>
+                </h:dataTable>
+                <h:commandButton value="OK" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>            </h:form>
         </f:view>
     </h:body>
 </html>
