@@ -21,8 +21,8 @@
        <navigation-rule>
        <navigation-case>
         <from-view-id>/customerIndex.xhtml</from-view-id>
-                  <from-outcome>Logga ut</from-outcome>
-            <to-view-id>/logout.xhtml</to-view-id>
+                  <from-outcome>korg</from-outcome>
+            <to-view-id>/korg.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
