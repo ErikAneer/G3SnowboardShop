@@ -66,7 +66,7 @@
                     <div class="container">
                         <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
 
-                       <ul class="right hide-on-med-and-down">
+                        <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
                             <li> <h:link value="Varukorg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
                             <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
@@ -104,10 +104,12 @@
                                             <p><h5>#{product.name}</h5></p>
                                             <p><b>#{product.brand}</b></p>
                                             <p><b>#{product.productLength} cm</b></p>
-                                            <p><b>#{product.price} kr</b></p>
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}  kr" />
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!"/>
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
                                             <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>

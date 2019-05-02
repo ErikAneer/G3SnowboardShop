@@ -100,6 +100,7 @@ public class ProductController implements Serializable {
          addBoardsToList();
          addBootsToList();  
          addBindingsToList();
+         addAllProductsToList();
     }
 
     public Product getSelectedProduct() {
