@@ -91,13 +91,15 @@ public class ProductController implements Serializable {
     private void addAllProductsToList() {
         allProducts= productBean.getAllProducts();
     }
-    
+    private void addBindingsToList() {
+        bindings= productBean.getAllBindings();
+    }
 
     public void onload() {
-        //productBean.saveProductToDB(); //Fills the db with products. Use only if db is empty.
+        productBean.saveProductToDB(); //Fills the db with products. Use only if db is empty.
          addBoardsToList();
-         addBootsToList();   
-         addAllProductsToList();
+         addBootsToList();  
+         addBindingsToList();
     }
 
     public Product getSelectedProduct() {

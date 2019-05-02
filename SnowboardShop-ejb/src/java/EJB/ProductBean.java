@@ -67,6 +67,12 @@ public class ProductBean {
         List<Product> results = query.getResultList();
         return results;
     }
+    public List<Product> getAllBindings() {  
+        Query query = em.createNamedQuery("Product.getByType");
+        query.setParameter("productType", "binding");
+        List<Product> results = query.getResultList();
+        return results;
+    }
     
      public List<Product> getAllProducts() {
         Query query = em.createNamedQuery("Product.getAll");
@@ -228,6 +234,14 @@ public class ProductBean {
         persist(new Product("boot", "Burton", "Photon Boa", 42, "Description", 3790, 3790, "/resources/images/BurtonPhotonBoa2019Snowboardboots.jpg"));
         persist(new Product("boot", "Burton", "Ruler Speed Z", 42, "Description", 2790, 2790, "/resources/images/BurtonRulerSnowboardboots.jpg"));
         persist(new Product("boot", "Ride", "Lasso  Black", 42, "Description", 3190, 3190, "/resources/images/RideLasso2019Snowboardboots.jpg"));
+        persist(new Product("binding", "BurtonLexa", "",42,"Description", 3490, 3490,"/resources/images/BurtonLexa2019Snowboardbindningar.jpg"));
+        persist(new Product("binding", "ButronMission", "",42,"Description", 3490, 3490,"/resources/images/BurtonMission2019Snowboardbindningar.jpg"));
+        persist(new Product("binding", "DrakeFifty", "",42,"Description", 3490, 3490,"/resources/images/DrakeFifty2019Snowboardbindningar.jpg"));
+        persist(new Product("binding", "DrakeQueen", "",42,"Description", 3490, 3490,"/resources/images/DrakeQueen2019Snowboardbindningar.jpg"));
+        
+        
+        
+
     }
     
     
