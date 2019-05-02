@@ -1,6 +1,5 @@
 package pac;
 
-import EJB.UserBean;
 import EntityClasses.SnowBeanLocal;
 import EntityClasses.User2;
 import javax.inject.Named;
@@ -9,9 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -28,11 +25,7 @@ public class UserController implements Serializable {
     private List<User2> kunder;
     private User2 currentUser;
     private Boolean isLoggedIn = false;
-    private String userField, loggedInStatus;
-
-    private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
-
-    private String confirmPassword;
+    private String loggedInStatus, firstname, familyname, telephone, address, postnr, postaddress, email, code, status, confirmPassword;
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
@@ -56,9 +49,7 @@ public class UserController implements Serializable {
             FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg);
         } else {
             User2 u = (User2) snowBean.login(email, code);
-            page = u.getStatus();
             currentUser = u;
-            //setUserField(u.getFirstName());
             setIsLoggedIn(true);
             status = currentUser.getStatus();
             loggedInStatus = "Logga ut";
@@ -68,13 +59,13 @@ public class UserController implements Serializable {
         return page;
     }
     
+    //This method is not used. Remove?
     public String logInLogOut(){
             if(isLoggedIn) {
                 logOut();
                 return "index";
             }
-            else return "login";
-    
+            else return "login"; 
     }
 
     public String logOut() {
@@ -107,7 +98,6 @@ public class UserController implements Serializable {
         email = null;
         code = null;
         confirmPassword = null;
-
     }
 
     public List<User2> getUsers() {
@@ -141,15 +131,7 @@ public class UserController implements Serializable {
     public void setIsLoggedIn(Boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
     }
-
-    public String getUserField() {
-        return userField;
-    }
-
-    public void setUserField(String userField) {
-        this.userField = userField;
-    }
-
+    
     public String getFirstname() {
         return firstname;
     }
@@ -237,11 +219,9 @@ public class UserController implements Serializable {
     public void setLoggedInStatus(String loggedInStatus) {
         this.loggedInStatus = loggedInStatus;
     }
-    
-    
 
+    //This method is only used for testing. Remove when db with data exists.
     public void onload() {
-
         snowBean.saveTestUsersToDB();
     }
 }
