@@ -96,7 +96,7 @@ public class ProductController implements Serializable {
     }
 
     public void onload() {
-        productBean.saveProductToDB(); //Fills the db with products. Use only if db is empty.
+       // productBean.saveProductToDB();
          addBoardsToList();
          addBootsToList();  
          addBindingsToList();

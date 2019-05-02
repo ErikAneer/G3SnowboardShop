@@ -30,5 +30,21 @@ public interface SnowBeanLocal {
     void saveTestUsersToDB();
 
     boolean checkIfUserExists(String email, String code);
+
+    Boolean isSameEmail(String email);
+
+    void addProduct(String productname, String email, int count, double totalprice);
+
+    List<Korg> callProducts(String email);
+
+    void removeBypronameidemail(String proname, long id, String email);
+
+    void skickaOrder(String ordernr, String email, String fullname, String productname, int count, double totalprice, String fulladdress, String postnraddress, String telephone);
+
+    List<Orderning> callOrders(String email);
+
+    Double sumPrice(String email);
+
+    void changeStatus(Object user);
     
 }

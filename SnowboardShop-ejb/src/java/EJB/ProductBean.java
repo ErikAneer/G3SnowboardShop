@@ -1,6 +1,4 @@
-/*
 
- */
 package EJB;
 
 import EntityClasses.Product;

@@ -1,6 +1,7 @@
 
 package EntityClasses;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -76,36 +77,36 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void saveTestUsersToDB() {
-        if (checkIfUniqueEmail("erik@test.nu")) {
-            User2 u = new User2();
+        Query q = em.createQuery("select o from User2 o");
+        List<User2> users = q.getResultList();
+           User2 u = new User2();
 
-            u.setFirstname("Erik");
-            u.setFamilyname("Aneer");
-            u.setEmail("erik@test.nu");
-            u.setCode("123qwe");
+            u.setFirstname("aaaa");
+            u.setFamilyname("bbbb");
+            u.setEmail("aaaa@test.nu");
+            u.setCode("aaaa11");
             u.setStatus("customer");
             persist(u);
-        }
-        if (checkIfUniqueEmail("erka@test.nu")) {
+        
             User2 u1 = new User2();
 
-            u1.setFirstname("Erik");
-            u1.setFamilyname("Premium");
-            u1.setEmail("erka@test.nu");
-            u1.setCode("123qwe");
+            u1.setFirstname("bbbb");
+            u1.setFamilyname("cccc");
+            u1.setEmail("bbbb@test.nu");
+            u1.setCode("bbbb11");
             u1.setStatus("premium");
             persist(u1);
-        }
-        if (checkIfUniqueEmail("erkaberka@test.nu")) {
             User2 u2 = new User2();
 
-            u2.setFirstname("Erik");
-            u2.setFamilyname("Admin");
-            u2.setEmail("erkaberka@test.nu");
-            u2.setCode("123qwe");
+            u2.setFirstname("cccc");
+            u2.setFamilyname("dddd");
+            u2.setEmail("cccc@test.nu");
+            u2.setCode("cccc11");
             u2.setStatus("admin");
             persist(u2);
-        }
+            
+        
+           
     }
 
     @Override
@@ -116,5 +117,85 @@ public class SnowBean implements SnowBeanLocal {
         List<User2> u = q.getResultList();
         return u.size() > 0;
     }
+
+    @Override
+    public Boolean isSameEmail(String email) {
+                boolean same = false;
+        Query q = em.createQuery("select o from User2 o");
+        List<User2> users = q.getResultList();
+        for(User2 u: users){
+            if(email.equalsIgnoreCase(u.getEmail())){
+                same = true;
+                break;
+            }
+        }
+        
+        return same;
+    }
+
+    @Override
+    public void addProduct(String productname, String email, int count, double totalprice) {
+        Korg k = new Korg(productname, email, count, totalprice);
+        em.persist(k);
+    }
+
+    @Override
+    public List<Korg> callProducts(String email) {
+        List<Korg> pros = new ArrayList();
+        Query q = em.createQuery("select o from Korg o");
+        List<Korg> products = q.getResultList();
+        for(Korg k: products){
+            if(email.equalsIgnoreCase(k.getEmail())){
+                pros.add(k);
+            }
+        }
+        
+        return pros;
+    }
+
+    @Override
+    public void removeBypronameidemail(String proname, long id, String email) {
+        Query q = em.createQuery("select o from Korg o");
+        List<Korg> products = q.getResultList();
+        for(Korg k: products){
+            if(proname.equalsIgnoreCase(k.getProductname()) && id==k.getId() && email.equalsIgnoreCase(k.getEmail())){
+                em.remove(k);
+            }
+        }
+    }
+
+    @Override
+    public void skickaOrder(String ordernr, String email, String fullname, String productname, 
+            int count, double totalprice, String fulladdress, String postnraddress, String telephone) {
+        Orderning order = new Orderning(ordernr, email, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
+        em.persist(order);
+    }
+
+    @Override
+    public List<Orderning> callOrders(String email) {
+        Query q = em.createQuery("select o from Orderning o where o.email=:email order by o.ordernr");
+        q.setParameter("email", email);
+        List<Orderning> orders = q.getResultList();
+        
+        return orders;
+    }
+
+    @Override
+    public Double sumPrice(String email) {
+        Query q = em.createQuery("select sum(o.totalprice) from Orderning o where o.email=:email");
+        q.setParameter("email", email);
+        double total = (double)q.getSingleResult();
+        return total;
+    }
+
+    @Override
+    public void changeStatus(Object user) {
+        User2 u = (User2)user;
+        u.setStatus("premium");
+        em.merge(u);
+    }
+    
+    
+    
 
 }

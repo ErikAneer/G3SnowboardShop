@@ -1,11 +1,18 @@
 package pac;
 
+import EJB.UserBean;
+import EntityClasses.Korg;
+import EntityClasses.Orderning;
+import EntityClasses.Product;
 import EntityClasses.SnowBeanLocal;
 import EntityClasses.User2;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -25,7 +32,16 @@ public class UserController implements Serializable {
     private List<User2> kunder;
     private User2 currentUser;
     private Boolean isLoggedIn = false;
-    private String loggedInStatus, firstname, familyname, telephone, address, postnr, postaddress, email, code, status, confirmPassword;
+    private String userField, loggedInStatus;
+
+    private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
+
+    private String confirmPassword;
+    
+    private String sameEmailmsg;
+    private List<Korg> products = new ArrayList();
+    private List<Orderning> orders = new ArrayList();
+    private double summary;
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
@@ -37,11 +53,15 @@ public class UserController implements Serializable {
 
     public String login() {
         String page = "Logga in";
-       
+        User2 u = (User2)snowBean.login(email, code);
+        currentUser = u;
+        page = u.getStatus();
         users = snowBean.callAllUsers();
         kunder = snowBean.callAllKunders("customer", "premium");
+        
+        //callSumprice(email);
 
-        if (!snowBean.checkIfUserExists(email, code)) {
+       /* if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
             setCode(null);
             FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -55,7 +75,7 @@ public class UserController implements Serializable {
             loggedInStatus = "Logga ut";
             page = status;
             setEmail(null);
-        }
+        }*/
         return page;
     }
     
@@ -70,22 +90,37 @@ public class UserController implements Serializable {
 
     public String logOut() {
         loggedInStatus = "Logga in";
-        currentUser = null;
+        //currentUser = null;
         firstname = null;
         familyname = null;
         telephone = null;
         address = null;
         postnr = null;
         postaddress = null;
-        email = null; 
+        email = null;
         code = null;
         status = null;
         return "index";
     }
 
+    public void sameEmail() {
+        boolean same = snowBean.isSameEmail(email);
+        if (same) {
+            sameEmailmsg = "same email";
+        } else {
+            sameEmailmsg = "ok";
+        }
+    }
+
     public String registerNewCustomer() {
-        snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
-        return login();
+        String sidan = "register";
+        sameEmail();
+        if(sameEmailmsg.equals("ok")){
+            snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
+            sidan = login();
+            
+        }
+        return sidan;
     }
 
     public void clearRegisterForm() {
@@ -100,12 +135,38 @@ public class UserController implements Serializable {
         confirmPassword = null;
     }
 
+    public List<Korg> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Korg> products) {
+        this.products = products;
+    }
+
+    public List<Orderning> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orderning> orders) {
+        this.orders = orders;
+    }
+
+    
+    
     public List<User2> getUsers() {
         return users;
     }
 
     public void setUsers(List<User2> users) {
         this.users = users;
+    }
+
+    public String getSameEmailmsg() {
+        return sameEmailmsg;
+    }
+
+    public void setSameEmailmsg(String sameEmailmsg) {
+        this.sameEmailmsg = sameEmailmsg;
     }
 
     public List<User2> getKunder() {
@@ -220,8 +281,85 @@ public class UserController implements Serializable {
         this.loggedInStatus = loggedInStatus;
     }
 
-    //This method is only used for testing. Remove when db with data exists.
-    public void onload() {
-        snowBean.saveTestUsersToDB();
+    public double getSummary() {
+        return summary;
     }
+
+    public void setSummary(double summary) {
+        this.summary = summary;
+    }
+
+    
+    public void onload() {
+
+        //snowBean.saveTestUsersToDB();
+    }
+    
+    public String addVaror(Product p, String str){
+        snowBean.addProduct(p.getName(), str, 1, p.getPrice());
+        String test1 = visaKorg(str);
+        return "ok";
+    }
+    
+    public String addVarorPremium(Product p, String str){
+        snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
+        String test2 = visaKorg(str);
+        return "ok";
+    }
+
+    public String visaKorg(String mail) {
+        products = snowBean.callProducts(mail);
+        return "korg";
+    }
+
+    public String remove(String proname, long id, String mail) {
+        snowBean.removeBypronameidemail(proname, id, mail);
+        return visaKorg(mail);
+    }
+
+    public String buyAll(User2 user, List<Korg> korg) {
+        String ordernr, mail, fullname, productname;
+        int count;
+        double totalprice;
+        String fulladdress, postnraddress, telephone;
+        
+        LocalDateTime datetime = LocalDateTime.now();
+        Random ran = new Random();
+        int ran1 = ran.nextInt(9);
+        int ran2 = ran.nextInt(9);
+        int ran3 = ran.nextInt(9);
+        int ran4 = ran.nextInt(9);
+        
+        ordernr = datetime.toString() + "::" + user.getEmail() + "::" + ran1+""+ran2+""+ran3+""+ran4;
+        mail = user.getEmail();
+        fullname = user.getFirstname() + " " + user.getFamilyname();
+        fulladdress = user.getAddress();
+        postnraddress = user.getPostnr() + " " + user.getPostaddress();
+        telephone = user.getTelephone();
+        for(Korg k: korg){
+            productname = k.getProductname();
+            count = k.getCount();
+            totalprice = k.getTotalprice();
+            
+            snowBean.removeBypronameidemail(productname, k.getId(), mail);
+            snowBean.skickaOrder(ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
+        }
+        double test3 = callSumprice(mail);
+        if(test3 >= 500000 && (currentUser.getStatus()).equals("customer")){
+            snowBean.changeStatus(currentUser);
+        }
+        
+        return visaKorg(mail);
+    }
+    
+    public List<Orderning> callOrderbymail(String mail){
+        orders = snowBean.callOrders(mail);
+        return orders;
+    }
+
+    public double callSumprice(String mail){
+        summary = snowBean.sumPrice(mail);
+        return summary;
+    }
+    
 }

@@ -8,7 +8,7 @@
       >
     <h:head>
         <title>Awesome Board Shop</title>
-        <!-- Compiled and minified CSS -->
+        <!-- Compiled and minified CSS jj -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -72,7 +72,8 @@
                        
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Logga ut" outcome="#{userController.loggedInStatus}" /></li>
+                            <li> <h:link value="korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
                         </ul>
                     </div>
                 </nav>
@@ -126,7 +127,8 @@
                                             <p><b>#{product.price} kr</b></p>
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!"/>
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
                                             <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
@@ -163,7 +165,8 @@
                                             <p><b>#{product.price} kr</b></p>
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!"/>
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
                                             <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>

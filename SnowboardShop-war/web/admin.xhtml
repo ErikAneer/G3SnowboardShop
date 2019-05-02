@@ -79,6 +79,18 @@
                     <h:column>
                         <h:outputText id="customerName" value="#{user.status}: #{user.firstname} #{user.familyname}" />
                     </h:column>
+                    <h:column>
+                        <h:commandButton value="ok" action="#{userController.callOrderbymail(user.email)}"/>
+                    </h:column>
+                </h:dataTable>
+                <h:dataTable id="orderInfo" value="#{userController.orders}" var="order">
+                    <f:facet name="header">
+                        <h4>Alla orders by email</h4>
+                    </f:facet>
+                    <h:column>
+                        <h:outputText id="orderName" value="#{order.ordernr}: #{order.productname} #{order.count} #{order.totalprice}" />
+                    </h:column>
+
                 </h:dataTable>
             </h:form>
         </f:view>

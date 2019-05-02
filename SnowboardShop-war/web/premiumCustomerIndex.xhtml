@@ -72,7 +72,8 @@
                        
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="Premiumkund: #{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value=" #{userController.loggedInStatus}" outcome="#{userController.loggedInStatus}" /></li>
+                            <li> <h:link value="korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
                         </ul>
                     </div>
                 </nav>
@@ -141,7 +142,8 @@
                                                 <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
                                                 <f:setPropertyActionListener value="#{board}" target="#{dataGridView.selectedBoard}" />
                                             </p:commandLink>
-                                            <p:commandButton class="waves-effectt btn" value="Buy!"/>
+                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                                             action="#{userController.addVarorPremium(product, userController.currentUser.email)}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -200,7 +202,8 @@
                                                 <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
                                                 <f:setPropertyActionListener value="#{board}" target="#{dataGridView.selectedBoard}" />
                                             </p:commandLink>
-                                            <p:commandButton class="waves-effectt btn" value="Buy!"/>
+                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                                             action="#{userController.addVarorPremium(product, userController.currentUser.email)}"/>
                                         </div>
                                     </div>
                                 </div>

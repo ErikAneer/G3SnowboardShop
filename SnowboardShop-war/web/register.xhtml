@@ -119,7 +119,10 @@
                                     <f:ajax event="blur" render="usernameMessage" />
                                 </h:inputText>
                                 <h:message id="usernameMessage" for="contactEmail" errorStyle="color:red" />
-
+                                
+                                 <h:outputLabel for="contactEmail" value="Check email" />
+                                 <h:commandButton action="#{userController.sameEmail()}" value="test email" />
+                                 <h:outputText value="#{userController.sameEmailmsg}" style="color: red" />
 
                               <h:outputLabel for="password" value="Lösenord: " /> 
                               <h:inputSecret id="password" value="#{userController.code}" redisplay="true">

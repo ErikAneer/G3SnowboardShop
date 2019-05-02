@@ -21,8 +21,8 @@
        <navigation-rule>
        <navigation-case>
         <from-view-id>/customerIndex.xhtml</from-view-id>
-                  <from-outcome>Logga ut</from-outcome>
-            <to-view-id>/logout.xhtml</to-view-id>
+                  <from-outcome>korg</from-outcome>
+            <to-view-id>/korg.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -82,4 +82,18 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/korg.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>customer</from-outcome>
+            <to-view-id>/customerIndex.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/korg.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>premium</from-outcome>
+            <to-view-id>/premiumCustomerIndex.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>    
 </faces-config>
