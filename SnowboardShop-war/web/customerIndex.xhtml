@@ -72,7 +72,7 @@
                        
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="Varukorg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
                             <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
                         </ul>
                     </div>
@@ -113,7 +113,7 @@
 
                         <!-- To dynamically display items from object List as Materialize cards - here boards-->
                         <h:form id="displayBoardForm">
-                            <ui:repeat var="product" value="#{productController.boards}" size="6" >
+                            <ui:repeat var="product" value="#{productController.boards}" size="8" >
 
                                 <div class="col card horizontal" style="width: 310px;">
                                     <div class="card-image"> 
