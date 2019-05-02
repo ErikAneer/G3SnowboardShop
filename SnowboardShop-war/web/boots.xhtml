@@ -66,9 +66,10 @@
                     <div class="container">
                         <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
 
-                        <ul class="right hide-on-med-and-down">
+                       <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Logga ut" outcome="#{userController.loggedInStatus}" /></li>
+                            <li> <h:link value="Varukorg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
                         </ul>
                     </div>
                 </nav>
