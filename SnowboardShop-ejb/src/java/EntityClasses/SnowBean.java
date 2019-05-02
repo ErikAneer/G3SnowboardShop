@@ -183,6 +183,21 @@ public class SnowBean implements SnowBeanLocal {
         
         return orders;
     }
+
+    @Override
+    public Double sumPrice(String email) {
+        Query q = em.createQuery("select sum(o.totalprice) from Orderning o where o.email=:email");
+        q.setParameter("email", email);
+        double total = (double)q.getSingleResult();
+        return total;
+    }
+
+    @Override
+    public void changeStatus(Object user) {
+        User2 u = (User2)user;
+        u.setStatus("premium");
+        em.merge(u);
+    }
     
     
     

@@ -43,6 +43,7 @@ public class UserController implements Serializable {
     private String sameEmailmsg;
     private List<Korg> products = new ArrayList();
     private List<Orderning> orders = new ArrayList();
+    private double summary;
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
@@ -59,6 +60,8 @@ public class UserController implements Serializable {
         page = u.getStatus();
         users = snowBean.callAllUsers();
         kunder = snowBean.callAllKunders("customer", "premium");
+        
+        callSumprice(email);
 
        /* if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
@@ -292,6 +295,15 @@ public class UserController implements Serializable {
         this.loggedInStatus = loggedInStatus;
     }
 
+    public double getSummary() {
+        return summary;
+    }
+
+    public void setSummary(double summary) {
+        this.summary = summary;
+    }
+
+    
     public void onload() {
 
         //snowBean.saveTestUsersToDB();
@@ -346,6 +358,11 @@ public class UserController implements Serializable {
             snowBean.removeBypronameidemail(productname, k.getId(), mail);
             snowBean.skickaOrder(ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
         }
+        double test3 = callSumprice(mail);
+        if(test3 >= 500000 && (currentUser.getStatus()).equals("customer")){
+            snowBean.changeStatus(currentUser);
+        }
+        
         return visaKorg(mail);
     }
     
@@ -354,6 +371,9 @@ public class UserController implements Serializable {
         return orders;
     }
 
-
+    public double callSumprice(String mail){
+        summary = snowBean.sumPrice(mail);
+        return summary;
+    }
     
 }
