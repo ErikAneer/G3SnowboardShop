@@ -61,7 +61,7 @@ public class UserController implements Serializable {
         users = snowBean.callAllUsers();
         kunder = snowBean.callAllKunders("customer", "premium");
         
-        callSumprice(email);
+        //callSumprice(email);
 
        /* if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
