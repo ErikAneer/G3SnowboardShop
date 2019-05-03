@@ -31,6 +31,7 @@ public class UserController implements Serializable {
     private List<User2> users;
     private List<User2> kunder;
     private User2 currentUser;
+    private User2 customer;
     private Boolean isLoggedIn = false;
     private String loggedInStatus;
 
@@ -184,6 +185,15 @@ public class UserController implements Serializable {
     public Boolean getIsLoggedIn() {
         return isLoggedIn;
     }
+
+    public User2 getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(User2 customer) {
+        this.customer = customer;
+    }
+    
 
     public void setIsLoggedIn(Boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
@@ -357,5 +367,19 @@ public class UserController implements Serializable {
         summary = snowBean.sumPrice(mail);
         return summary;
     }
+    
+     public String returnToIndex() {
+        setCustomer(null);
+        
+        return "return_to_admin";
+    
+    }
+     
+         public String showCustomerOrders(User2 u){
+             setCustomer(u);
+             callOrderbymail(u.getEmail());
+             
+             return "show_customer_details";
+    }  
     
 }
