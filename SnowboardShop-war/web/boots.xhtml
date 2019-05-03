@@ -68,7 +68,7 @@
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Varukorg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="Korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
                             <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
                         </ul>
                     </div>
@@ -108,9 +108,9 @@
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
                                 </div>

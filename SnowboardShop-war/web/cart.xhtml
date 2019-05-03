@@ -13,6 +13,8 @@
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 
+        
+        
         <style>
 
             li { 
@@ -70,7 +72,7 @@
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Varukorg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="Korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
                             <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
                         </ul>
                     </div>
@@ -101,35 +103,35 @@
                              
                              <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
                                 <f:facet name="header">
-                                    <h4>Varor i varukorgen</h4>
+                                    <h4>Products in cart</h4>
                                     <h:outputText value="#{userController.email}" />
                                 </f:facet>
                                 <h:column>
-                                    <f:facet name="header" >Produkt</f:facet>
+                                    <f:facet name="header" >Product</f:facet>
                                     <h:outputText value="#{product.productname}" />
                                 </h:column>
                                   <h:column>
-                                    <f:facet name="header" >Antal</f:facet>
+                                    <f:facet name="header" >Amount</f:facet>
                                     <h:outputText value="#{product.count}" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header" >Pris</f:facet>
+                                    <f:facet name="header" >Price</f:facet>
                                     <h:outputText value="#{product.totalprice}" />
                                 </h:column>
                                  <h:column>
-                                    <h:commandButton class="waves-effectt btn" id="remove" value="Ta bort" 
+                                    <h:commandButton class="waves-effectt btn" id="remove" value="Remove" 
                                                      action="#{userController.remove(product.productname, product.id, userController.currentUser.email)}"/>
                                 </h:column>
                             </h:dataTable>
-                            <h:commandButton class="waves-effectt btn" value="Slutför Köp" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
+                            <h:commandButton class="waves-effectt btn" value="Buy" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
                              
                              <br/><br/>
                         </h:form>
                         
                         <h:form rendered="#{empty userController.products}">
-                        <h4>Din varukorg är tom</h4>
+                        <h4>Your cart is empty</h4>
                         </h:form>
-                        <h:link class="waves-effectt btn" value="Stäng varukorg" outcome="#{userController.currentUser.status}" />
+                        <h:link class="waves-effectt btn" value="Close cart" outcome="#{userController.currentUser.status}" />
                     </div>
                 </div>
             </div>
