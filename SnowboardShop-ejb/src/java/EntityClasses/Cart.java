@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author Julia
  */
 @Entity
-public class Korg implements Serializable {
+public class Cart implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -27,7 +27,7 @@ public class Korg implements Serializable {
     private int count;
     private double totalprice;
 
-    public Korg(String productname, String email, int count, double totalprice) {
+    public Cart(String productname, String email, int count, double totalprice) {
         this.productname = productname;
         this.email = email;
         this.count = count;
@@ -35,7 +35,7 @@ public class Korg implements Serializable {
     }
 
     
-    public Korg() {
+    public Cart() {
     }
 
     
@@ -91,10 +91,10 @@ public class Korg implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Korg)) {
+        if (!(object instanceof Cart)) {
             return false;
         }
-        Korg other = (Korg) object;
+        Cart other = (Cart) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

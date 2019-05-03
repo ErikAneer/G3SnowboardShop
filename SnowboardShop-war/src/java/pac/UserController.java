@@ -1,7 +1,7 @@
 package pac;
 
 import EJB.UserBean;
-import EntityClasses.Korg;
+import EntityClasses.Cart;
 import EntityClasses.Orderning;
 import EntityClasses.Product;
 import EntityClasses.SnowBeanLocal;
@@ -31,15 +31,16 @@ public class UserController implements Serializable {
     private List<User2> users;
     private List<User2> kunder;
     private User2 currentUser;
+    private User2 customer;
     private Boolean isLoggedIn = false;
-    private String userField, loggedInStatus;
+    private String loggedInStatus;
 
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
 
     private String confirmPassword;
     
     private String sameEmailmsg;
-    private List<Korg> products = new ArrayList();
+    private List<Cart> products = new ArrayList();
     private List<Orderning> orders = new ArrayList();
     private double summary;
 
@@ -53,15 +54,11 @@ public class UserController implements Serializable {
 
     public String login() {
         String page = "Logga in";
-        User2 u = (User2)snowBean.login(email, code);
-        currentUser = u;
-        page = u.getStatus();
+       
         users = snowBean.callAllUsers();
         kunder = snowBean.callAllKunders("customer", "premium");
-        
-        //callSumprice(email);
 
-       /* if (!snowBean.checkIfUserExists(email, code)) {
+        if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
             setCode(null);
             FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -69,13 +66,15 @@ public class UserController implements Serializable {
             FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg);
         } else {
             User2 u = (User2) snowBean.login(email, code);
+            page = u.getStatus();
             currentUser = u;
+            //setUserField(u.getFirstName());
             setIsLoggedIn(true);
             status = currentUser.getStatus();
             loggedInStatus = "Logga ut";
             page = status;
             setEmail(null);
-        }*/
+        }
         return page;
     }
     
@@ -100,7 +99,7 @@ public class UserController implements Serializable {
         email = null;
         code = null;
         status = null;
-        return "index";
+        return "Logga ut";
     }
 
     public void sameEmail() {
@@ -135,11 +134,11 @@ public class UserController implements Serializable {
         confirmPassword = null;
     }
 
-    public List<Korg> getProducts() {
+    public List<Cart> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Korg> products) {
+    public void setProducts(List<Cart> products) {
         this.products = products;
     }
 
@@ -151,8 +150,6 @@ public class UserController implements Serializable {
         this.orders = orders;
     }
 
-    
-    
     public List<User2> getUsers() {
         return users;
     }
@@ -188,6 +185,15 @@ public class UserController implements Serializable {
     public Boolean getIsLoggedIn() {
         return isLoggedIn;
     }
+
+    public User2 getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(User2 customer) {
+        this.customer = customer;
+    }
+    
 
     public void setIsLoggedIn(Boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
@@ -309,7 +315,7 @@ public class UserController implements Serializable {
 
     public String visaKorg(String mail) {
         products = snowBean.callProducts(mail);
-        return "korg";
+        return "cart";
     }
 
     public String remove(String proname, long id, String mail) {
@@ -317,7 +323,7 @@ public class UserController implements Serializable {
         return visaKorg(mail);
     }
 
-    public String buyAll(User2 user, List<Korg> korg) {
+    public String buyAll(User2 user, List<Cart> korg) {
         String ordernr, mail, fullname, productname;
         int count;
         double totalprice;
@@ -336,7 +342,7 @@ public class UserController implements Serializable {
         fulladdress = user.getAddress();
         postnraddress = user.getPostnr() + " " + user.getPostaddress();
         telephone = user.getTelephone();
-        for(Korg k: korg){
+        for(Cart k: korg){
             productname = k.getProductname();
             count = k.getCount();
             totalprice = k.getTotalprice();
@@ -361,5 +367,19 @@ public class UserController implements Serializable {
         summary = snowBean.sumPrice(mail);
         return summary;
     }
+    
+     public String returnToIndex() {
+        setCustomer(null);
+        
+        return "return_to_admin";
+    
+    }
+     
+         public String showCustomerOrders(User2 u){
+             setCustomer(u);
+             callOrderbymail(u.getEmail());
+             
+             return "show_customer_details";
+    }  
     
 }

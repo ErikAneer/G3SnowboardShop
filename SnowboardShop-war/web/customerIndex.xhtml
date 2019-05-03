@@ -13,7 +13,7 @@
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <f:metadata>
-            <!--<f:viewAction action="#{productController.onload()}" /> -->
+
         </f:metadata>
         <style>
 
@@ -69,15 +69,15 @@
                 <nav class="nav-wrapper blue">
                     <div class="container">
                         <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
-                       
+
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="Korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
                             <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
                         </ul>
                     </div>
                 </nav>
-                
+
                 <nav class="nav blue lighten-2">
                     <div class="container">
                         <ul class="left ">
@@ -95,7 +95,7 @@
             <div class="parallax-container" id='index-header'>
                 <div class="center product-search">
                     <h:form>
-                        Sök produkt: 
+                        Search product: 
                         <p:autoComplete value="#{productController.inputName}"
                                         maxResults="10"
                                         completeMethod="#{productController.nameSuggestions}"  style=" padding-top: 20px;"/>
@@ -107,45 +107,46 @@
             <div class="container">
                 <div class="row">
                     <div class="col s12 l10 center">  
-                        <h2>Mest populära brädorna</h2>
+                        <h2>Most popular snowboards</h2>
                     </div>
                     <div class="col s12 l12">
 
                         <!-- To dynamically display items from object List as Materialize cards - here boards-->
-                        <h:form id="displayBoardForm">
-                            <ui:repeat var="product" value="#{productController.boards}" size="6" >
+                        <h:form id="displayBoardForm" >
+                            <ui:repeat var="product" value="#{productController.boards}" size="8"  >
 
-                                <div class="col card horizontal" style="width: 310px;">
+                                <div class="col card horizontal" style="width: 313px;">
                                     <div class="card-image"> 
                                         <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
                                     </div>
                                     <div class="card-stacked">
                                         <div class="card-content">
                                             <p><h5>#{product.name}</h5></p>
-                                            <p><b>#{product.brand}</b></p>
-                                            <p><b>#{product.productLength} cm</b></p>
-                                            <p><b>#{product.price} kr</b></p>
+                                            <p>#{product.brand}</p>
+                                            <p>#{product.productLength} cm</p>
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}" ><f:convertNumber pattern="#0.00"/></h:outputText> 
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#####0" /> </h:outputText> 
+                                            <h:outputText value=" kr" />
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
                                 </div>
                             </ui:repeat>
                         </h:form>
-
                     </div>        
                 </div>          
             </div> 
-            
 
-            
+
+
             <div class="container">
                 <div class="row">
                     <div class="col s12 l10 center">  
-                        <h2>Mest populära bootsen</h2>
+                        <h2>Most popular boots</h2>
                     </div>
                     <div class="col s12 l12">
 
@@ -162,17 +163,59 @@
                                             <p><h5>#{product.name}</h5></p>
                                             <p><b>#{product.brand}</b></p>
                                             <p><b>#{product.productLength} cm</b></p>
-                                            <p><b>#{product.price} kr</b></p>
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}  kr" />
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
                                 </div>
                             </ui:repeat>
                         </h:form>
+                    </div>        
+                </div>          
+            </div> 
+            
+                        <div class="container">
+                <div class="row">
+                    <div class="col s12 l10 center">  
+                        <h2>Most popular bindings</h2>
+                        <p></p> <!-- antalet bindningar #{productController.bindings.size()} -->
+                    </div>
+                    <div class="col s12 l12">
+
+                        <!-- To dynamically display items from object List as Materialize cards - here boards-->
+                        <h:form id="displayBindingForm">
+                            <ui:repeat var="product" value="#{productController.bindings}" size="4">
+
+                                <div class="col card horizontal" style="width: 300px;">
+                                    <div class="card-image"> 
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
+                                    </div>
+                                    <div class="card-stacked">
+                                        <div class="card-content">
+                                            <p><h5>#{product.name}</h5></p>
+                                            <p><b>#{product.brand}</b></p>
+                                            <p><b>#{product.productLength} cm</b></p>
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}  kr" />
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
+                                        </div>
+                                        <div class="card-action">
+                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
+                    
+                            </ui:repeat>
+
+                        </h:form>
+
                     </div>        
                 </div>          
             </div> 
