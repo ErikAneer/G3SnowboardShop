@@ -95,23 +95,12 @@
             </header>
             <!-- Body starts from here -->
 
-            <div class="parallax-container" id='index-header'>
-                <div class="center product-search">
-                    <h:form>
-                        Sök produkt:
-                        <p:autoComplete value="#{productController.inputName}"
-                                        maxResults="10"
-                                        completeMethod="#{productController.nameSuggestions}"  style=" padding-top: 20px;"/>
-                        <p:commandButton class="waves-effectt btn" value="Go!" />
-                    </h:form>
-                </div>  
-            </div> 
 
             <div class="container">
                 <div class="row">
                     <div class="col s12 l10 center">  
-                        <h2>Following bindings in stock</h2>
-                        <p>antalet bindningar #{productController.bindings.size()}</p>
+                        <h2></h2>
+                        <p></p> <!-- antalet bindningar #{productController.bindings.size()} -->
                     </div>
                     <div class="col s12 l12">
 
@@ -131,8 +120,9 @@
                                             <p><b>#{product.price} kr</b></p>
                                         </div>
                                         <div class="card-action">
-                                            
-                                            <p:commandButton class="waves-effectt btn" value="Buy!"/>
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +133,6 @@
                     </div>        
                 </div>          
             </div> 
-            
             <div class="container">
                 <div class="row">
                     <div class="col s12 l10 center">  

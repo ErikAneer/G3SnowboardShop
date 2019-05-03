@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <f:metadata>
+            <!--<f:viewAction action="#{productController.onload()}" /> -->
+        </f:metadata>
         <style>
 
             li { 
@@ -78,7 +81,6 @@
             }
         </style>
         <script name="jquery/jquery.js" library="primefaces"></script>
-
     </h:head>
     <h:body>
 
@@ -89,7 +91,7 @@
                     <div class="container">
                         <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
 
-                       <ul class="right hide-on-med-and-down">
+                        <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
                             <li> <h:link value="Varukorg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
                             <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
@@ -173,7 +175,8 @@
                                             <p><b>#{product.price} kr</b></p>
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!"/>
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
                                             <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
