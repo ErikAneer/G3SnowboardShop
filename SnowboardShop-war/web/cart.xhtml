@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -9,16 +8,20 @@
       >
     <h:head>
         <title>Awesome Board Shop</title>
-        <!-- Compiled and minified CSS -->
+        <!-- Compiled and minified CSS jj -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+        
+        
         <style>
 
             li { 
                 display: inline;
                 list-style-type: none;
             }
+
 
         </style>
 
@@ -42,6 +45,7 @@
                 box-sizing: content-box;
             }
             #index-header {
+                background: url("resources/images/joshua-reddekopp-217223-cropped.jpg");
                 background-size: cover;
                 background-position: center;
                 min-height: 500px;
@@ -86,46 +90,49 @@
                 <div>
                 </div>
             </header>
+
             <!-- Body starts from here -->
             <div class="container">
                 <div class="row">
-                    <div class="col s12 l10 center">  
-                    </div>
                     <div class="col s12 l12">
 
-                        <!-- To dynamically display items from object List as Materialize cards - here boards-->
-                        <h:form id="displayBindingForm">
-                            <ui:repeat var="product" value="#{productController.bindings}" size="4">
-
-                                <div class="col card horizontal" style="width: 300px;">
-                                    <div class="card-image"> 
-                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
-                                    </div>
-                                    <div class="card-stacked">
-                                        <div class="card-content">
-                                            <p><h5>#{product.name}</h5></p>
-                                            <p><b>#{product.brand}</b></p>
-                                            <p><b>#{product.productLength} cm</b></p>
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}  kr" />
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
-                                        </div>
-                                        <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
-                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
-                                        </div>
-                                    </div>
-                                        
-                                </div>
-                    
-                            </ui:repeat>
-
+                        <h:form rendered="#{not empty userController.products}">
+      
+                             <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
+                                <f:facet name="header">
+                                    <h4>Products in cart</h4>
+                                    <h:outputText value="#{userController.email}" />
+                                </f:facet>
+                                <h:column>
+                                    <f:facet name="header" >Product</f:facet>
+                                    <h:outputText value="#{product.productname}" />
+                                </h:column>
+                                  <h:column>
+                                    <f:facet name="header" >Amount</f:facet>
+                                    <h:outputText value="#{product.count}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Price</f:facet>
+                                    <h:outputText value="#{product.totalprice}" />
+                                </h:column>
+                                 <h:column>
+                                    <h:commandButton class="waves-effectt btn" id="remove" value="Remove" 
+                                                     action="#{userController.remove(product.productname, product.id, userController.currentUser.email)}"/>
+                                </h:column>
+                            </h:dataTable>
+                            <h:commandButton class="waves-effectt btn" value="Buy" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
+                             
+                             <br/><br/>
                         </h:form>
-
-                    </div>        
-                </div>          
-            </div> 
+                        
+                        <h:form rendered="#{empty userController.products}">
+                        <h4>Your cart is empty</h4>
+                        </h:form>
+                        <h:link class="waves-effectt btn" value="Close cart" outcome="#{userController.currentUser.status}" />
+                    </div>
+                </div>
+            </div>
         </f:view>
     </h:body>
-
 </html>
+

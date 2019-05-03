@@ -35,7 +35,7 @@ public interface SnowBeanLocal {
 
     void addProduct(String productname, String email, int count, double totalprice);
 
-    List<Korg> callProducts(String email);
+    List<Cart> callProducts(String email);
 
     void removeBypronameidemail(String proname, long id, String email);
 

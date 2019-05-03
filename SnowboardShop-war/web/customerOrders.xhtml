@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
-        <title>Display Boards</title>
+        <title>Awesome Board Shop</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -74,37 +74,40 @@
                 <div class="row">
                     <div class="col s12 l12">
                         <h:form>
-                            <h3>Awseome Board Shop - Adminsidan</h3>
+                            <h3>Kundinformation</h3>
+                       
+                            <p><b>Kundnamn: </b><h:outputText value=" #{userController.customer.firstname} #{userController. customer.familyname}" /> </p>
+                                  <p><b>Kundstatus: </b> <h:outputText value=" #{userController.customer.status}" /></p>
+                                   <p><b>Antal köp: </b> <h:outputText value=" XXX" /></p>
+                                    <p><b>Total köpesumma: </b><h:outputText value=" XXX" /></p>
 
-                            <h:dataTable id="customerInfo" value="#{userController.kunder}" var="user">
+                            
+                                                <h:dataTable id="orderInfo" value="#{userController.orders}" var="order">
                                 <f:facet name="header">
-                                    <h4>Alla registrerade kunder:</h4>
+                                    <h4>Ordrar:</h4>
                                 </f:facet>
                                    
                                  <h:column>
-                                    <f:facet name="header" >Kundnamn</f:facet>
-                                    <h:outputText value="#{user.firstname} #{user.familyname}" />
+                                    <f:facet name="header" >Order nr.</f:facet>
+                                    <h:outputText value="#{order.ordernr}" />
                                 </h:column>
                                 
                                 <h:column>
-                                    <f:facet name="header" >Kundstatus</f:facet>
-                                    <h:outputText value="#{user.status}" />
+                                    <f:facet name="header" >Produkt</f:facet>
+                                    <h:outputText value="#{order.productname}" />
                                 </h:column>
                                 
                                 <h:column>
-                                    <f:facet name="header" >Antal köp</f:facet>
-                                    <h:outputText value="XXX" />
+                                    <f:facet name="header" >Antal</f:facet>
+                                    <h:outputText value="#{order.count}" />
                                 </h:column>
                                 
                                 <h:column>
-                                    <f:facet name="header" >Total köpesumma</f:facet>
-                                    <h:outputText value="XXX" />
+                                    <f:facet name="header" >Totalpris</f:facet>
+                                    <h:outputText value="#{order.totalprice}" />
                                 </h:column>
-                                
-                                <h:column>
-                                    <h:commandButton class="waves-effectt btn" value="Se alla ordrar för kund" action="#{userController.showCustomerOrders(user)}"/>
-                                </h:column>
-                            </h:dataTable>                          
+                            </h:dataTable>
+                                <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{userController.returnToIndex()}"/>
                         </h:form>
                     </div>
                 </div>
@@ -112,4 +115,5 @@
         </f:view>
     </h:body>
 </html>
+
 

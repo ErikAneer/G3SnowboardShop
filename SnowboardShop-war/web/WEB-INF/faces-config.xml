@@ -10,10 +10,45 @@
             <to-view-id>/logout.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+     <navigation-rule>
+       <navigation-case>
+        <from-view-id>/snowboards.xhtml</from-view-id>
+                  <from-outcome>Logga ut</from-outcome>
+            <to-view-id>/logout.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+     <navigation-rule>
+       <navigation-case>
+        <from-view-id>/boots.xhtml</from-view-id>
+                  <from-outcome>Logga ut</from-outcome>
+            <to-view-id>/logout.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+     <navigation-rule>
+       <navigation-case>
+        <from-view-id>/bindningar.xhtml</from-view-id>
+                  <from-outcome>Logga ut</from-outcome>
+            <to-view-id>/logout.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+     <navigation-rule>
+       <navigation-case>
+        <from-view-id>/productView.xhtml</from-view-id>
+                  <from-outcome>Logga ut</from-outcome>
+            <to-view-id>/logout.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+     <navigation-rule>
+       <navigation-case>
+        <from-view-id>/cart.xhtml</from-view-id>
+                  <from-outcome>Logga ut</from-outcome>
+            <to-view-id>/logout.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
     <navigation-rule>
         <from-view-id>/logout.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>index</from-outcome>
+            <from-outcome>Logga ut</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
@@ -46,7 +81,7 @@
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>premium</from-outcome>
-            <to-view-id>/premiumCustomerIndex.xhtml</to-view-id>
+            <to-view-id>/customerIndex.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
@@ -83,17 +118,35 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/korg.xhtml</from-view-id>
+        <from-view-id>/cart.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>customer</from-outcome>
             <to-view-id>/customerIndex.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/korg.xhtml</from-view-id>
+        <from-view-id>/cart.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>premium</from-outcome>
             <to-view-id>/premiumCustomerIndex.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>    
+    
+     <navigation-rule>
+        <from-view-id>/admin.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>show_customer_details</from-outcome>
+            <to-view-id>/customerOrders.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/customerOrders.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>return_to_admin</from-outcome>
+            <to-view-id>/admin.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    
 </faces-config>
