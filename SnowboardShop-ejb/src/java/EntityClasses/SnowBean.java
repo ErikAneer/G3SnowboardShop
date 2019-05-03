@@ -135,16 +135,16 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void addProduct(String productname, String email, int count, double totalprice) {
-        Korg k = new Korg(productname, email, count, totalprice);
+        Cart k = new Cart(productname, email, count, totalprice);
         em.persist(k);
     }
 
     @Override
-    public List<Korg> callProducts(String email) {
-        List<Korg> pros = new ArrayList();
-        Query q = em.createQuery("select o from Korg o");
-        List<Korg> products = q.getResultList();
-        for(Korg k: products){
+    public List<Cart> callProducts(String email) {
+        List<Cart> pros = new ArrayList();
+        Query q = em.createQuery("select o from Cart o");
+        List<Cart> products = q.getResultList();
+        for(Cart k: products){
             if(email.equalsIgnoreCase(k.getEmail())){
                 pros.add(k);
             }
@@ -155,9 +155,9 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void removeBypronameidemail(String proname, long id, String email) {
-        Query q = em.createQuery("select o from Korg o");
-        List<Korg> products = q.getResultList();
-        for(Korg k: products){
+        Query q = em.createQuery("select o from Cart o");
+        List<Cart> products = q.getResultList();
+        for(Cart k: products){
             if(proname.equalsIgnoreCase(k.getProductname()) && id==k.getId() && email.equalsIgnoreCase(k.getEmail())){
                 em.remove(k);
             }

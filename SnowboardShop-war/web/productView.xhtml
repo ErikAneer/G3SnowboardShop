@@ -65,18 +65,19 @@
 
 
         <f:view>
-           <header>
+            <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
                         <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
-                       
+
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Logga ut" outcome="#{userController.loggedInStatus}" /></li>
+                            <li> <h:link value="Varukorg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
                         </ul>
                     </div>
                 </nav>
-                
+
                 <nav class="nav blue lighten-2">
                     <div class="container">
                         <ul class="left ">
@@ -106,17 +107,16 @@
                                 <div class="card-stacked">
                                     <div class="card-content">
                                         <p><h5>#{productController.selectedProduct.name}</h5></p>
-                                        <p><b>#{productController.selectedProduct.brand}</b></p>
-                                        <p><b>#{productController.selectedProduct.productLength} cm</b></p>
+                                        <p>#{productController.selectedProduct.brand}</p>
+                                        <p>#{productController.selectedProduct.productLength} cm</p>
+                                        <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}  kr" />
+                                        <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
                                         <p>#{productController.selectedProduct.description}</p>
-                                        <p><b>#{productController.selectedProduct.price} kr</b></p>
+                                        
                                     </div>
-                                   <div class="card-action">
-                                        <!--<p:commandLink  value="View Details" update=":displayBoardForm:boardDetail" oncomplete="PF('boardDialog').show()" title="View Detail">
-                                            <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
-                                            <f:setPropertyActionListener value="#{board}" target="#{productController.selectedProduct}" />
-                                        </p:commandLink> -->
-                                        <p:commandButton class="waves-effectt btn" value="Köp!" action="#{userController.addVaror(product, userController.currentUser.email)}"/>
+                                    <div class="card-action">
+                                        <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                                         action="#{userController.addVaror(product, userController.currentUser.email)}"/>
                                         <p:commandButton class="waves-effectt btn" value="Tillbaka" action="#{productController.returnToIndex()}"/>
                                     </div> 
                                 </div>
@@ -127,7 +127,6 @@
             </div> 
         </f:view>
     </h:body>
-
 </html>
 
 

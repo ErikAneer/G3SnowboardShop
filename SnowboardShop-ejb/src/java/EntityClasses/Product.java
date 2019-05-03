@@ -118,7 +118,16 @@ public class Product implements Serializable {
         this.description = description;
     }
 
+    /*
+    public double getCustomerPrice(User2 u) {
+        
+        if(u.getStatus().equals("premium")) { return price * 0.9;}
+        
+        return price;
+    }
+*/
     public double getPrice() {
+        
         return price;
     }
 
