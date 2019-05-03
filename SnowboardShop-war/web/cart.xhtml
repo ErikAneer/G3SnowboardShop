@@ -97,10 +97,7 @@
                     <div class="col s12 l12">
 
                         <h:form rendered="#{not empty userController.products}">
-                            <h:commandButton class="waves-effectt btn" value="refresh" action="#{userController.visaKorg(userController.currentUser.email)}" />
-
-                            
-                             
+      
                              <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
                                 <f:facet name="header">
                                     <h4>Products in cart</h4>
