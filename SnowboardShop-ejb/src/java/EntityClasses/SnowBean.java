@@ -185,9 +185,15 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public Double sumPrice(String email) {
-        Query q = em.createQuery("select sum(o.totalprice) from Orderning o where o.email=:email");
-        q.setParameter("email", email);
-        double total = (double)q.getSingleResult();
+        double total = 0;
+        Query q1 = em.createQuery("select o from Orderning o where o.email=:email");
+        q1.setParameter("email", email);
+        List<Orderning> orders = q1.getResultList();
+        if(!orders.isEmpty()){
+            Query q = em.createQuery("select sum(o.totalprice) from Orderning o where o.email=:email");
+            q.setParameter("email", email);
+            total = (double)q.getSingleResult();
+        }
         return total;
     }
 
@@ -207,11 +213,9 @@ public class SnowBean implements SnowBeanLocal {
         for(Orderning od: orders){
             String str1 = od.getOrdernr();
             String str2 = str1.substring(2, 4)+str1.substring(5, 7)+str1.substring(8, 10)+
-                    str1.substring(11, 13)+str1.substring(14, 16)+str1.substring(17, 19) + str1.substring(20, 23);
-            int index1 = str1.indexOf("::");
-            int index2 = str1.indexOf("::", index1+1);
-            String str3 = str2+str1.substring(index2+2, index2+6);
-            test.add(str3);
+                    str1.substring(11, 13)+str1.substring(14, 16)+str1.substring(17, 19) + str1.substring(20, 23)+
+                    str1.substring(24, 28);
+            test.add(str2);
         }
         List<String> orderNrs = new ArrayList();
         for(String ss: test){
@@ -233,6 +237,31 @@ public class SnowBean implements SnowBeanLocal {
         }       
         return details;
     }
-    
+
+    @Override
+    public void changeNewOrdernr(String oldnr, String newnr) {
+        Query q = em.createQuery("select o from Orderning o where o.ordernr=:ordernr");
+        q.setParameter("ordernr", oldnr);
+        List<Orderning> orders = q.getResultList();
+        for(Orderning oo: orders){
+            oo.setOrdernr(newnr);
+            em.merge(oo);
+        }   
+    }
+
+    @Override
+    public Integer callAntalcount(String email) {
+        int total = 0;
+        Query q1 = em.createQuery("select o from Orderning o where o.email=:email");
+        q1.setParameter("email", email);
+        List<Orderning> orders = q1.getResultList();
+        if(!orders.isEmpty()){
+            Query q = em.createQuery("select sum(o.count) from Orderning o where o.email=:email");
+            q.setParameter("email", email);
+            total = Integer.parseInt((q.getSingleResult()).toString());    
+        }
+        return total;
+    }
    
+    
 }

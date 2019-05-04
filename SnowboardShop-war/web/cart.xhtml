@@ -128,7 +128,10 @@
                         <h:form rendered="#{empty userController.products}">
                         <h4>Your cart is empty</h4>
                         </h:form>
-                        <h:link class="waves-effectt btn" value="Close cart" outcome="#{userController.currentUser.status}" />
+                        <h:outputText value="Order nummer: #{userController.ordernummer}" />
+                        <br/><br/>
+                        <h:link class="waves-effectt btn" value="Close cart" 
+                                outcome="#{userController.cartToLogin(userController.currentUser.status)}" />
                     </div>
                 </div>
             </div>

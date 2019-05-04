@@ -46,6 +46,7 @@ public class UserController implements Serializable {
 
     private List<String> ordernrs = new ArrayList();
     private List<Orderning> detailorders = new ArrayList();
+    private String ordernummer;
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
@@ -60,6 +61,8 @@ public class UserController implements Serializable {
 
         users = snowBean.callAllUsers();
         kunder = snowBean.callAllKunders("customer", "premium");
+        
+        summary = snowBean.sumPrice(email);
 
         if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
@@ -80,7 +83,12 @@ public class UserController implements Serializable {
         }
         return page;
     }
-
+    
+    public String cartToLogin(String statustest){
+        setOrdernummer(null);
+        return statustest;
+    }
+    
     //This method is not used. Remove?
     public String logInLogOut() {
         if (isLoggedIn) {
@@ -314,6 +322,15 @@ public class UserController implements Serializable {
         this.detailorders = detailorders;
     }
 
+    public String getOrdernummer() {
+        return ordernummer;
+    }
+
+    public void setOrdernummer(String ordernummer) {
+        this.ordernummer = ordernummer;
+    }
+
+    
     public void onload() {
 
         //snowBean.saveTestUsersToDB();
@@ -344,7 +361,7 @@ public class UserController implements Serializable {
     public String buyAll(User2 user, List<Cart> korg) {
         String ordernr, mail, fullname, productname;
         int count;
-        double totalprice;
+        double totalprice, summaprice=0;
         String fulladdress, postnraddress, telephone;
 
         LocalDateTime datetime = LocalDateTime.now();
@@ -354,7 +371,9 @@ public class UserController implements Serializable {
         int ran3 = ran.nextInt(9);
         int ran4 = ran.nextInt(9);
 
-        ordernr = datetime.toString() + "::" + user.getEmail() + "::" + ran1 + "" + ran2 + "" + ran3 + "" + ran4;
+        ordernr = datetime.toString() + "-" + ran1 + "" + ran2 + "" + ran3 + "" + ran4 + "::" + user.getEmail() + "::";
+        ordernummer = ordernr.substring(2, 4)+ordernr.substring(5, 7)+ordernr.substring(8, 10)+ordernr.substring(11, 13)+
+                ordernr.substring(14, 16)+ordernr.substring(17, 19) + ordernr.substring(20, 23)+ordernr.substring(24, 28);
         mail = user.getEmail();
         fullname = user.getFirstname() + " " + user.getFamilyname();
         fulladdress = user.getAddress();
@@ -364,10 +383,12 @@ public class UserController implements Serializable {
             productname = k.getProductname();
             count = k.getCount();
             totalprice = k.getTotalprice();
-
+            summaprice += totalprice;
             snowBean.removeBypronameidemail(productname, k.getId(), mail);
             snowBean.skickaOrder(ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
         }
+        String newordernr = ordernr + summaprice;
+        snowBean.changeNewOrdernr(ordernr, newordernr);
         double test3 = callSumprice(mail);
         if (test3 >= 500000 && (currentUser.getStatus()).equals("customer")) {
             snowBean.changeStatus(currentUser);
@@ -388,7 +409,7 @@ public class UserController implements Serializable {
 
     public String returnToIndex() {
         setCustomer(null);
-
+        setDetailorders(null);         
         return "return_to_admin";
 
     }
@@ -409,8 +430,13 @@ public class UserController implements Serializable {
     public void showOrderDetails(String ordernr, String mail){
         String teststr = "20"+ordernr.substring(0,2)+"-"+ordernr.substring(2, 4)
                 +"-"+ordernr.substring(4, 6)+"T"+ordernr.substring(6, 8)+":"+ordernr.substring(8, 10)
-                +":"+ordernr.substring(10, 12)+"."+ordernr.substring(12, 15)+"::"+mail+"::"+ordernr.substring(15);
+                +":"+ordernr.substring(10, 12)+"."+ordernr.substring(12, 15)+"-"+ordernr.substring(15)+"::"+mail;
         detailorders = snowBean.callOrderDetails(teststr);
+    }
+    
+    public int callCount(String mail){
+        int count = snowBean.callAntalcount(mail);
+        return count;
     }
 
 }

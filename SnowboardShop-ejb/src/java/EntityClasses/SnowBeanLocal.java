@@ -50,5 +50,9 @@ public interface SnowBeanLocal {
     List<String> callOrderNrs(String email);
 
     List<Orderning> callOrderDetails(String ordermail);
+
+    void changeNewOrdernr(String oldnr, String newnr);
+
+    Integer callAntalcount(String email);
     
 }

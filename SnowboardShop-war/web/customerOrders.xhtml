@@ -78,8 +78,8 @@
                        
                             <p><b>Kundnamn: </b><h:outputText value=" #{userController.customer.firstname} #{userController. customer.familyname}" /> </p>
                                   <p><b>Kundstatus: </b> <h:outputText value=" #{userController.customer.status}" /></p>
-                                   <p><b>Antal köp: </b> <h:outputText value=" XXX" /></p>
-                                    <p><b>Total köpesumma: </b><h:outputText value=" XXX" /></p>
+                                   <p><b>Antal köp: </b> <h:outputText value="#{userController.callCount(userController.customer.email)}" /></p>
+                                    <p><b>Total köpesumma: </b><h:outputText value="#{userController.callSumprice(userController.customer.email)}" /></p>
 
                             
                                     <h:dataTable id="orderInfo" value="#{userController.ordernrs}" var="order">
