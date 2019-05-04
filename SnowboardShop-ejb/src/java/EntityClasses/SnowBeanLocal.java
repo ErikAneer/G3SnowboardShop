@@ -46,5 +46,9 @@ public interface SnowBeanLocal {
     Double sumPrice(String email);
 
     void changeStatus(Object user);
+
+    List<String> callOrderNrs(String email);
+
+    List<Orderning> callOrderDetails(String ordermail);
     
 }

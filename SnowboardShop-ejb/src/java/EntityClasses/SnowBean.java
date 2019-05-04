@@ -2,7 +2,10 @@
 package EntityClasses;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -194,8 +197,42 @@ public class SnowBean implements SnowBeanLocal {
         u.setStatus("premium");
         em.merge(u);
     }
-    
-    
-    
 
+    @Override
+    public List<String> callOrderNrs(String email) {
+        Query q = em.createQuery("select o from Orderning o where o.email=:email order by o.ordernr");
+        q.setParameter("email", email);
+        List<Orderning> orders = q.getResultList();
+        Set<String> test = new HashSet();
+        for(Orderning od: orders){
+            String str1 = od.getOrdernr();
+            String str2 = str1.substring(2, 4)+str1.substring(5, 7)+str1.substring(8, 10)+
+                    str1.substring(11, 13)+str1.substring(14, 16)+str1.substring(17, 19) + str1.substring(20, 23);
+            int index1 = str1.indexOf("::");
+            int index2 = str1.indexOf("::", index1+1);
+            String str3 = str2+str1.substring(index2+2, index2+6);
+            test.add(str3);
+        }
+        List<String> orderNrs = new ArrayList();
+        for(String ss: test){
+            orderNrs.add(ss);
+        }
+        Collections.sort(orderNrs);
+        return orderNrs;
+    }
+
+    @Override
+    public List<Orderning> callOrderDetails(String ordermail) {
+        Query q = em.createQuery("select o from Orderning o");
+        List<Orderning> orders = q.getResultList();
+        List<Orderning> details = new ArrayList();
+        for(Orderning odr: orders){
+            if((odr.getOrdernr()).startsWith(ordermail)){
+                details.add(odr);
+            }
+        }       
+        return details;
+    }
+    
+   
 }

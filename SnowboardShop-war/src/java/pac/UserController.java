@@ -38,11 +38,14 @@ public class UserController implements Serializable {
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
 
     private String confirmPassword;
-    
+
     private String sameEmailmsg;
     private List<Cart> products = new ArrayList();
     private List<Orderning> orders = new ArrayList();
     private double summary;
+
+    private List<String> ordernrs = new ArrayList();
+    private List<Orderning> detailorders = new ArrayList();
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
@@ -54,7 +57,7 @@ public class UserController implements Serializable {
 
     public String login() {
         String page = "Logga in";
-       
+
         users = snowBean.callAllUsers();
         kunder = snowBean.callAllKunders("customer", "premium");
 
@@ -77,14 +80,15 @@ public class UserController implements Serializable {
         }
         return page;
     }
-    
+
     //This method is not used. Remove?
-    public String logInLogOut(){
-            if(isLoggedIn) {
-                logOut();
-                return "index";
-            }
-            else return "login"; 
+    public String logInLogOut() {
+        if (isLoggedIn) {
+            logOut();
+            return "index";
+        } else {
+            return "login";
+        }
     }
 
     public String logOut() {
@@ -114,10 +118,10 @@ public class UserController implements Serializable {
     public String registerNewCustomer() {
         String sidan = "register";
         sameEmail();
-        if(sameEmailmsg.equals("ok")){
+        if (sameEmailmsg.equals("ok")) {
             snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
             sidan = login();
-            
+
         }
         return sidan;
     }
@@ -193,12 +197,11 @@ public class UserController implements Serializable {
     public void setCustomer(User2 customer) {
         this.customer = customer;
     }
-    
 
     public void setIsLoggedIn(Boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
     }
-    
+
     public String getFirstname() {
         return firstname;
     }
@@ -295,19 +298,34 @@ public class UserController implements Serializable {
         this.summary = summary;
     }
 
-    
+    public List<String> getOrdernrs() {
+        return ordernrs;
+    }
+
+    public void setOrdernrs(List<String> ordernrs) {
+        this.ordernrs = ordernrs;
+    }
+
+    public List<Orderning> getDetailorders() {
+        return detailorders;
+    }
+
+    public void setDetailorders(List<Orderning> detailorders) {
+        this.detailorders = detailorders;
+    }
+
     public void onload() {
 
         //snowBean.saveTestUsersToDB();
     }
-    
-    public String addVaror(Product p, String str){
+
+    public String addVaror(Product p, String str) {
         snowBean.addProduct(p.getName(), str, 1, p.getPrice());
         String test1 = visaKorg(str);
         return "ok";
     }
-    
-    public String addVarorPremium(Product p, String str){
+
+    public String addVarorPremium(Product p, String str) {
         snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
         String test2 = visaKorg(str);
         return "ok";
@@ -328,58 +346,71 @@ public class UserController implements Serializable {
         int count;
         double totalprice;
         String fulladdress, postnraddress, telephone;
-        
+
         LocalDateTime datetime = LocalDateTime.now();
         Random ran = new Random();
         int ran1 = ran.nextInt(9);
         int ran2 = ran.nextInt(9);
         int ran3 = ran.nextInt(9);
         int ran4 = ran.nextInt(9);
-        
-        ordernr = datetime.toString() + "::" + user.getEmail() + "::" + ran1+""+ran2+""+ran3+""+ran4;
+
+        ordernr = datetime.toString() + "::" + user.getEmail() + "::" + ran1 + "" + ran2 + "" + ran3 + "" + ran4;
         mail = user.getEmail();
         fullname = user.getFirstname() + " " + user.getFamilyname();
         fulladdress = user.getAddress();
         postnraddress = user.getPostnr() + " " + user.getPostaddress();
         telephone = user.getTelephone();
-        for(Cart k: korg){
+        for (Cart k : korg) {
             productname = k.getProductname();
             count = k.getCount();
             totalprice = k.getTotalprice();
-            
+
             snowBean.removeBypronameidemail(productname, k.getId(), mail);
             snowBean.skickaOrder(ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
         }
         double test3 = callSumprice(mail);
-        if(test3 >= 500000 && (currentUser.getStatus()).equals("customer")){
+        if (test3 >= 500000 && (currentUser.getStatus()).equals("customer")) {
             snowBean.changeStatus(currentUser);
         }
-        
+
         return visaKorg(mail);
     }
-    
-    public List<Orderning> callOrderbymail(String mail){
+
+    public List<Orderning> callOrderbymail(String mail) {
         orders = snowBean.callOrders(mail);
         return orders;
     }
 
-    public double callSumprice(String mail){
+    public double callSumprice(String mail) {
         summary = snowBean.sumPrice(mail);
         return summary;
     }
-    
-     public String returnToIndex() {
+
+    public String returnToIndex() {
         setCustomer(null);
-        
+
         return "return_to_admin";
-    
+
     }
-     
-         public String showCustomerOrders(User2 u){
-             setCustomer(u);
-             callOrderbymail(u.getEmail());
-             
-             return "show_customer_details";
-    }  
+
+    public String showCustomerOrders(User2 u) {
+        setCustomer(u);
+        callOrderbymail(u.getEmail());
+
+        return "show_customer_details";
+    }
     
+    public String showOrderNrs(User2 u, String mail){
+        setCustomer(u);
+        ordernrs = snowBean.callOrderNrs(mail);
+        return "show_customer_details";
+    }
+    
+    public void showOrderDetails(String ordernr, String mail){
+        String teststr = "20"+ordernr.substring(0,2)+"-"+ordernr.substring(2, 4)
+                +"-"+ordernr.substring(4, 6)+"T"+ordernr.substring(6, 8)+":"+ordernr.substring(8, 10)
+                +":"+ordernr.substring(10, 12)+"."+ordernr.substring(12, 15)+"::"+mail+"::"+ordernr.substring(15);
+        detailorders = snowBean.callOrderDetails(teststr);
+    }
+
 }

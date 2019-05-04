@@ -82,31 +82,27 @@
                                     <p><b>Total köpesumma: </b><h:outputText value=" XXX" /></p>
 
                             
-                                                <h:dataTable id="orderInfo" value="#{userController.orders}" var="order">
+                                    <h:dataTable id="orderInfo" value="#{userController.ordernrs}" var="order">
                                 <f:facet name="header">
-                                    <h4>Ordrar:</h4>
+                                    <h4>Ordrar NR:</h4>
                                 </f:facet>
                                    
                                  <h:column>
-                                    <f:facet name="header" >Order nr.</f:facet>
-                                    <h:outputText value="#{order.ordernr}" />
-                                </h:column>
-                                
-                                <h:column>
-                                    <f:facet name="header" >Produkt</f:facet>
-                                    <h:outputText value="#{order.productname}" />
-                                </h:column>
-                                
-                                <h:column>
-                                    <f:facet name="header" >Antal</f:facet>
-                                    <h:outputText value="#{order.count}" />
-                                </h:column>
-                                
-                                <h:column>
-                                    <f:facet name="header" >Totalpris</f:facet>
-                                    <h:outputText value="#{order.totalprice}" />
+                                    <h:outputText value="#{order}" />
+                                    <h:commandButton value="show details" 
+                                                     action="#{userController.showOrderDetails(order, userController.customer.email)}" />
                                 </h:column>
                             </h:dataTable>
+                            <h:dataTable id="orderDetail" value="#{userController.detailorders}" var="detailorder">
+                                <f:facet name="header">
+                                    <h4>Order Details:</h4>
+                                </f:facet>
+
+                                <h:column>
+                                    <h:outputText value="#{detailorder.ordernr} #{detailorder.count} #{detailorder.totalprice}" />
+                                </h:column>
+
+                            </h:dataTable>                                    
                                 <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{userController.returnToIndex()}"/>
                         </h:form>
                     </div>
