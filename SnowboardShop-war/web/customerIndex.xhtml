@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="card-action">
                                             <p:commandButton class="waves-effectt btn" value="Buy!" 
-                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
+                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}"/>
                                             <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>

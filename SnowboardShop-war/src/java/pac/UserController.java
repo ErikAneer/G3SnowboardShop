@@ -345,9 +345,15 @@ public class UserController implements Serializable {
         //snowBean.saveTestUsersToDB();
     }
 
-    public String addVaror(Product p, String str) {
-        snowBean.addProduct(p.getName(), str, 1, p.getPrice());
-        String test1 = visaKorg(str);
+    public String addVaror(User2 u, Product p, String str) {
+        if((u.getStatus()).equals("customer")){
+            snowBean.addProduct(p.getName(), str, 1, p.getPrice());
+            String test1 = visaKorg(str);            
+        }
+        if((u.getStatus()).equals("premium")){
+            snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
+            String test2 = visaKorg(str);           
+        }
         return "ok";
     }
 
