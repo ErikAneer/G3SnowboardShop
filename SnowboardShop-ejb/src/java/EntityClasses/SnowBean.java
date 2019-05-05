@@ -262,6 +262,22 @@ public class SnowBean implements SnowBeanLocal {
         }
         return total;
     }
+
+    @Override
+    public Double callSummaryPrice(String email) {
+        double total = 0;
+        Query q1 = em.createQuery("select o from Cart o where o.email=:email");
+        q1.setParameter("email", email);
+        List<Cart> orders = q1.getResultList();
+        if(!orders.isEmpty()){
+            Query q = em.createQuery("select sum(o.totalprice) from Cart o where o.email=:email");
+            q.setParameter("email", email);
+            total = (double)q.getSingleResult();
+        }
+        return total;
+    }
+    
+    
    
     
 }

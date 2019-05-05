@@ -47,6 +47,7 @@ public class UserController implements Serializable {
     private List<String> ordernrs = new ArrayList();
     private List<Orderning> detailorders = new ArrayList();
     private String ordernummer;
+    private double sumprice;
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
@@ -330,6 +331,14 @@ public class UserController implements Serializable {
         this.ordernummer = ordernummer;
     }
 
+    public double getSumprice() {
+        return sumprice;
+    }
+
+    public void setSumprice(double sumprice) {
+        this.sumprice = sumprice;
+    }
+
     
     public void onload() {
 
@@ -356,6 +365,11 @@ public class UserController implements Serializable {
     public String remove(String proname, long id, String mail) {
         snowBean.removeBypronameidemail(proname, id, mail);
         return visaKorg(mail);
+    }
+    
+    public double callSummaryPrice(String mail){
+        sumprice = snowBean.callSummaryPrice(mail);
+        return sumprice;
     }
 
     public String buyAll(User2 user, List<Cart> korg) {

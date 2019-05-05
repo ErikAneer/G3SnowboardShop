@@ -120,6 +120,9 @@
                                                      action="#{userController.remove(product.productname, product.id, userController.currentUser.email)}"/>
                                 </h:column>
                             </h:dataTable>
+                            <br/>
+                            <h:outputText value="Total price: #{userController.callSummaryPrice(userController.currentUser.email)}" />
+                            <br/><br/>
                             <h:commandButton class="waves-effectt btn" value="Buy" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
                              
                              <br/><br/>

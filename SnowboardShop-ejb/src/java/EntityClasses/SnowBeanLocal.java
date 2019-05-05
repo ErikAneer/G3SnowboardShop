@@ -54,5 +54,7 @@ public interface SnowBeanLocal {
     void changeNewOrdernr(String oldnr, String newnr);
 
     Integer callAntalcount(String email);
+
+    Double callSummaryPrice(String email);
     
 }
