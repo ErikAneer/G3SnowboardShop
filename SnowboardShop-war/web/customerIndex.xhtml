@@ -51,7 +51,7 @@
             <div class="parallax-container" id="index-header">
                 <div class="center product-search">
                     <h:form>
-                        Search product: 
+                        Sök produkt: 
                         <p:autoComplete class="autocomplete" value="#{productController.inputName}"
                                         maxResults="10"
                                         completeMethod="#{productController.nameSuggestions}"/>
@@ -71,7 +71,7 @@
                         <h:form id="displayBoardForm" >
                             <ui:repeat var="product" value="#{productController.boards}" size="8"  >
 
-                                <div class="col card horizontal">
+                                <div class="col card horizontal" id="horizontal">
                                     <div class="card-image"> 
                                         <h:graphicImage class="card-image" url="#{product.imagePath}"/>  
                                     </div>
@@ -85,9 +85,9 @@
                                             <h:outputText value=" kr" />
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -123,9 +123,9 @@
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +146,7 @@
                         <h:form id="displayBindingForm">
                             <ui:repeat var="product" value="#{productController.bindings}" size="4">
 
-                                <div class="col card horizontal">
+                                <div class="col card horizontal" id="horizontal">
                                     <div class="card-image"> 
                                         <h:graphicImage class="card-image" url="#{product.imagePath}"/>  
                                     </div>
@@ -159,9 +159,9 @@
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
                                         

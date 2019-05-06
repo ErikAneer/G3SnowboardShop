@@ -82,9 +82,9 @@
                         <h:form id="displayBoardForm">
                             <ui:repeat var="product" value="#{productController.boards}" >
 
-                                <div class="col card horizontal" style="width: 300px;">
+                                <div class="col card horizontal" id="horizontal">
                                     <div class="card-image"> 
-                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}"/>  
                                     </div>
                                     <div class="card-stacked">
                                         <div class="card-content">
@@ -142,9 +142,9 @@
                         <h:form id="displayBootsForm">
                             <ui:repeat var="product" value="#{productController.boots}" size="6">
 
-                                <div class="col card horizontal" style="width: 300px;">
+                                <div class="col card horizontal" id="horizontal">
                                     <div class="card-image"> 
-                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}"/>  
                                     </div>
                                     <div class="card-stacked">
                                         <div class="card-content">

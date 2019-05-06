@@ -59,7 +59,7 @@
                         <h:form id="displayBoardForm">
                             <ui:repeat var="product" value="#{productController.boards}" >
 
-                                <div class="col card horizontal">
+                                <div class="col card horizontal" id="horizontal">
                                     <div class="card-image"> 
                                         <h:graphicImage class="card-image" url="#{product.imagePath}"/>  
                                     </div>
@@ -72,9 +72,9 @@
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
                                 </div>

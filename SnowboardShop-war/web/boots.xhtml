@@ -55,9 +55,9 @@
                         <!-- To dynamically display items from object List as Materialize cards - here boots-->
                         <h:form id="displayBootsForm">
                             <ui:repeat var="product" value="#{productController.boots}" >
-                                <div class="col card horizontal" style="width: 300px;">
+                                <div class="col card horizontal" id="horizontal">
                                     <div class="card-image"> 
-                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}"/>  
                                     </div>
                                     <div class="card-stacked">
                                         <div class="card-content">
@@ -68,9 +68,9 @@
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
+                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
+                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
                                         </div>
                                     </div>
                                 </div>
