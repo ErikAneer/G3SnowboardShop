@@ -241,6 +241,29 @@ public class SnowBean implements SnowBeanLocal {
     }
 
     @Override
+    public List<String> callUser3OrderNrs(Object user) {
+        User3 u = (User3)user;
+        Query q = em.createQuery("select o from Orderning3 o where o.user3=:user order by o.ordernr");
+        q.setParameter("user", user);
+        List<Orderning3> orders = q.getResultList();
+        Set<String> test = new HashSet();
+        for(Orderning3 od: orders){
+            String str1 = od.getOrdernr();      
+            String str2 = str1.substring(2, 4)+str1.substring(5, 7)+str1.substring(8, 10)+
+                    str1.substring(11, 13)+str1.substring(14, 16)+str1.substring(17, 19) + str1.substring(20, 23)+
+                    str1.substring(24, 28);
+
+            test.add(str2);
+        }
+        List<String> orderNrs = new ArrayList();
+        for(String ss: test){
+            orderNrs.add(ss);
+        }
+        Collections.sort(orderNrs);
+        return orderNrs;
+    }
+    
+    @Override
     public List<String> callOrderNrs(String email) {
         Query q = em.createQuery("select o from Orderning3 o where o.email=:email order by o.ordernr");
         q.setParameter("email", email);
@@ -325,6 +348,7 @@ public class SnowBean implements SnowBeanLocal {
         }
         return total;
     }
+
 
 
 

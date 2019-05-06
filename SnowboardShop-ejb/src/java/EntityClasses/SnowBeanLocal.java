@@ -66,5 +66,7 @@ public interface SnowBeanLocal {
     List<Orderning3> callOrder3(String email);
 
     List<Orderning3> callOrderDetail3(String ordermail);
+
+    List<String> callUser3OrderNrs(Object user);
     
 }

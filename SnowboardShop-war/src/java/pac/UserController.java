@@ -442,9 +442,10 @@ public class UserController implements Serializable {
         return "show_customer_details";
     }
     
-    public String showOrderNrs(User3 u, String mail){
+    public String showOrderNrs(User3 u){
         setCustomer(u);
-        ordernrs = snowBean.callOrderNrs(mail);
+        ordernrs = snowBean.callUser3OrderNrs(u);
+        //ordernrs = snowBean.callOrderNrs(mail);
         return "show_customer_details";
     }
     
