@@ -80,8 +80,8 @@
                                             <p><h5>#{product.name}</h5></p>
                                             <p>#{product.brand}</p>
                                             <p>#{product.productLength} cm</p>
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}" ><f:convertNumber pattern="#0.00"/></h:outputText> 
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#####0" /> </h:outputText> 
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" />
                                         </div>
                                         <div class="card-action">
@@ -119,8 +119,9 @@
                                             <p><h5>#{product.name}</h5></p>
                                             <p><b>#{product.brand}</b></p>
                                             <p><b>#{product.productLength} cm</b></p>
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}  kr" />
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
+                                            <h:outputText value=" kr" />
                                         </div>
                                         <div class="card-action">
                                             <p:commandButton class="waves-effectt btn" value="Köp!" 
@@ -155,8 +156,9 @@
                                             <p><h5>#{product.name}</h5></p>
                                             <p><b>#{product.brand}</b></p>
                                             <p><b>#{product.productLength} cm</b></p>
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}  kr" />
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
+                                            <h:outputText value=" kr" />
                                         </div>
                                         <div class="card-action">
                                             <p:commandButton class="waves-effectt btn" value="Köp!" 
