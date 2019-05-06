@@ -69,6 +69,30 @@
         </navigation-case>
     </navigation-rule>
     
+        <navigation-rule>
+        <from-view-id>/snowboards.xhtml</from-view-id>
+        <navigation-case>  
+            <from-outcome>show_details</from-outcome>
+            <to-view-id>/productView.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+        <from-view-id>/boots.xhtml</from-view-id>
+        <navigation-case>  
+            <from-outcome>show_details</from-outcome>
+            <to-view-id>/productView.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+        <from-view-id>/bindningar.xhtml</from-view-id>
+        <navigation-case>  
+            <from-outcome>show_details</from-outcome>
+            <to-view-id>/productView.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
