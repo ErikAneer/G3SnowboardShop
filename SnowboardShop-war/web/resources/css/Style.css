@@ -3,10 +3,27 @@
                 display: inline;
                 list-style-type: none;
             }
-
-
-
-        
+            .fa-youtube {
+                background: transparent;
+                color: white;
+            }
+            .fa-instagram {
+                background: transparent;
+                color: white;
+            }
+            .fa-twitter {
+                background: transparent;
+                color: white;
+            }
+            .fa-facebook {
+                background: transparent;
+                color: white;
+            }
+            .fa-linkedin {
+                background: transparent;
+                color: white;
+            }
+            
             .ui-datalist .ui-datalist-content {
                 border:0 none
             }
@@ -48,6 +65,16 @@
 
             .autocomplete{
                 padding-top: 20px;
+            }
+            .mainfooter {
+                padding-top: 20px;
+                color: greenyellow;
+                background-color: gray;
+                
+                
+            }
+            footer{
+                width:100%;
             }
             
             
