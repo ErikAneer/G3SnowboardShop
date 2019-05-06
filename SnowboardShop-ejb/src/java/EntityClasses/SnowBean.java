@@ -29,7 +29,7 @@ public class SnowBean implements SnowBeanLocal {
     // "Insert Code > Add Business Method")
     @Override
     public String log() {
-        Query q = em.createQuery("select o from User2 o");
+        Query q = em.createQuery("select o from User3 o");
 
         int size = q.getResultList().size();
 
@@ -38,10 +38,10 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public Object login(String email, String code) {
-        Query q = em.createQuery("select o from User2 o where o.email=:email and o.code=:code");
+        Query q = em.createQuery("select o from User3 o where o.email=:email and o.code=:code");
         q.setParameter("code", code);
         q.setParameter("email", email);
-        User2 u = (User2) q.getSingleResult();
+        User3 u = (User3) q.getSingleResult();
         return u;
     }
 
@@ -49,7 +49,7 @@ public class SnowBean implements SnowBeanLocal {
     public void save(String firstname, String familyname, String telephone,
             String address, String postnr, String postaddress,
             String email, String code, String status) {
-        User2 newUser = new User2(firstname, familyname, telephone,
+        User3 newUser = new User3(firstname, familyname, telephone,
                 address, postnr, postaddress, email, code, status);
         persist(newUser);
     }
@@ -60,7 +60,14 @@ public class SnowBean implements SnowBeanLocal {
         List<User2> users = q.getResultList();
         return users;
     }
-
+    
+    @Override
+    public List<User3> callAllUser3() {
+        Query q = em.createQuery("select o from User3 o");
+        List<User3> users = q.getResultList();
+        return users;
+    }
+    
     @Override
     public List<User2> callAllKunders(String customer, String premium) {
         Query q = em.createQuery("select o from User2 o where o.status=:customer or o.status=:premium");
@@ -69,10 +76,19 @@ public class SnowBean implements SnowBeanLocal {
         List<User2> users = q.getResultList();
         return users;
     }
+    
+    @Override
+    public List<User3> callAllKunder3(String customer, String premium) {
+        Query q = em.createQuery("select o from User3 o where o.status=:customer or o.status=:premium");
+        q.setParameter("customer", customer);
+        q.setParameter("premium", premium);
+        List<User3> users = q.getResultList();
+        return users;
+    }
 
     @Override
     public boolean checkIfUniqueEmail(String email) {
-        Query q = em.createQuery("select o from User2 o where o.email =:email");
+        Query q = em.createQuery("select o from User3 o where o.email =:email");
         q.setParameter("email", email);
 
         return q.getResultList().size() <= 0;
@@ -80,9 +96,7 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void saveTestUsersToDB() {
-        Query q = em.createQuery("select o from User2 o");
-        List<User2> users = q.getResultList();
-           User2 u = new User2();
+           User3 u = new User3();
 
             u.setFirstname("aaaa");
             u.setFamilyname("bbbb");
@@ -91,7 +105,7 @@ public class SnowBean implements SnowBeanLocal {
             u.setStatus("customer");
             persist(u);
         
-            User2 u1 = new User2();
+            User3 u1 = new User3();
 
             u1.setFirstname("bbbb");
             u1.setFamilyname("cccc");
@@ -99,7 +113,7 @@ public class SnowBean implements SnowBeanLocal {
             u1.setCode("bbbb11");
             u1.setStatus("premium");
             persist(u1);
-            User2 u2 = new User2();
+            User3 u2 = new User3();
 
             u2.setFirstname("cccc");
             u2.setFamilyname("dddd");
@@ -108,25 +122,26 @@ public class SnowBean implements SnowBeanLocal {
             u2.setStatus("admin");
             persist(u2);
             
+            
         
            
     }
 
     @Override
     public boolean checkIfUserExists(String email, String code) {
-        Query q = em.createQuery("select o from User2 o where o.email=:email and o.code=:code");
+        Query q = em.createQuery("select o from User3 o where o.email=:email and o.code=:code");
         q.setParameter("code", code);
         q.setParameter("email", email);
-        List<User2> u = q.getResultList();
+        List<User3> u = q.getResultList();
         return u.size() > 0;
     }
 
     @Override
     public Boolean isSameEmail(String email) {
                 boolean same = false;
-        Query q = em.createQuery("select o from User2 o");
-        List<User2> users = q.getResultList();
-        for(User2 u: users){
+        Query q = em.createQuery("select o from User3 o");
+        List<User3> users = q.getResultList();
+        for(User3 u: users){
             if(email.equalsIgnoreCase(u.getEmail())){
                 same = true;
                 break;
@@ -175,6 +190,18 @@ public class SnowBean implements SnowBeanLocal {
     }
 
     @Override
+    public void skickaOrder3(Object user, String ordernr, String email, String fullname, String productname, 
+            int count, double totalprice, String fulladdress, String postnraddress, String telephone) {
+        User3 u3 = (User3)user;
+        Orderning3 order = new Orderning3(ordernr, email, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone, u3);
+        List<Orderning3> orders = u3.getOrders();
+        orders.add(order);
+        
+        u3.setOrders(orders);
+        persist(order);
+    }
+    
+    @Override
     public List<Orderning> callOrders(String email) {
         Query q = em.createQuery("select o from Orderning o where o.email=:email order by o.ordernr");
         q.setParameter("email", email);
@@ -182,15 +209,24 @@ public class SnowBean implements SnowBeanLocal {
         
         return orders;
     }
-
+    
+    @Override
+    public List<Orderning3> callOrder3(String email) {
+        Query q = em.createQuery("select o from Orderning3 o where o.email=:email order by o.ordernr");
+        q.setParameter("email", email);
+        List<Orderning3> orders = q.getResultList();
+        
+        return orders;
+    }
+    
     @Override
     public Double sumPrice(String email) {
         double total = 0;
-        Query q1 = em.createQuery("select o from Orderning o where o.email=:email");
+        Query q1 = em.createQuery("select o from Orderning3 o where o.email=:email");
         q1.setParameter("email", email);
-        List<Orderning> orders = q1.getResultList();
+        List<Orderning3> orders = q1.getResultList();
         if(!orders.isEmpty()){
-            Query q = em.createQuery("select sum(o.totalprice) from Orderning o where o.email=:email");
+            Query q = em.createQuery("select sum(o.totalprice) from Orderning3 o where o.email=:email");
             q.setParameter("email", email);
             total = (double)q.getSingleResult();
         }
@@ -199,18 +235,18 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void changeStatus(Object user) {
-        User2 u = (User2)user;
+        User3 u = (User3)user;
         u.setStatus("premium");
         em.merge(u);
     }
 
     @Override
     public List<String> callOrderNrs(String email) {
-        Query q = em.createQuery("select o from Orderning o where o.email=:email order by o.ordernr");
+        Query q = em.createQuery("select o from Orderning3 o where o.email=:email order by o.ordernr");
         q.setParameter("email", email);
-        List<Orderning> orders = q.getResultList();
+        List<Orderning3> orders = q.getResultList();
         Set<String> test = new HashSet();
-        for(Orderning od: orders){
+        for(Orderning3 od: orders){
             String str1 = od.getOrdernr();
             String str2 = str1.substring(2, 4)+str1.substring(5, 7)+str1.substring(8, 10)+
                     str1.substring(11, 13)+str1.substring(14, 16)+str1.substring(17, 19) + str1.substring(20, 23)+
@@ -237,13 +273,26 @@ public class SnowBean implements SnowBeanLocal {
         }       
         return details;
     }
-
+    
+    @Override
+    public List<Orderning3> callOrderDetail3(String ordermail) {
+        Query q = em.createQuery("select o from Orderning3 o");
+        List<Orderning3> orders = q.getResultList();
+        List<Orderning3> details = new ArrayList();
+        for(Orderning3 odr: orders){
+            if((odr.getOrdernr()).startsWith(ordermail)){
+                details.add(odr);
+            }
+        }       
+        return details;
+    }
+    
     @Override
     public void changeNewOrdernr(String oldnr, String newnr) {
-        Query q = em.createQuery("select o from Orderning o where o.ordernr=:ordernr");
+        Query q = em.createQuery("select o from Orderning3 o where o.ordernr=:ordernr");
         q.setParameter("ordernr", oldnr);
-        List<Orderning> orders = q.getResultList();
-        for(Orderning oo: orders){
+        List<Orderning3> orders = q.getResultList();
+        for(Orderning3 oo: orders){
             oo.setOrdernr(newnr);
             em.merge(oo);
         }   
@@ -252,11 +301,11 @@ public class SnowBean implements SnowBeanLocal {
     @Override
     public Integer callAntalcount(String email) {
         int total = 0;
-        Query q1 = em.createQuery("select o from Orderning o where o.email=:email");
+        Query q1 = em.createQuery("select o from Orderning3 o where o.email=:email");
         q1.setParameter("email", email);
-        List<Orderning> orders = q1.getResultList();
+        List<Orderning3> orders = q1.getResultList();
         if(!orders.isEmpty()){
-            Query q = em.createQuery("select sum(o.count) from Orderning o where o.email=:email");
+            Query q = em.createQuery("select sum(o.count) from Orderning3 o where o.email=:email");
             q.setParameter("email", email);
             total = Integer.parseInt((q.getSingleResult()).toString());    
         }
@@ -276,8 +325,8 @@ public class SnowBean implements SnowBeanLocal {
         }
         return total;
     }
-    
-    
-   
-    
+
+
+
+
 }
