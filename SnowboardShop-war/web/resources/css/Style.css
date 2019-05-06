@@ -3,6 +3,7 @@
                 display: inline;
                 list-style-type: none;
             }
+        
             .fa-youtube {
                 background: transparent;
                 color: white;
@@ -49,7 +50,13 @@
                 min-height: 500px;
             }
             #horizontal{
-                width: 310px;
+                width: 335px;
+                height:310px;
+                 margin: 5px;
+            }
+            
+            #card-stacked{
+                padding: 0;
             }
             .product-search{
                 margin: 0;
@@ -59,8 +66,20 @@
                 transform: translate(-50%, -50%);
                 font-size: 28px;
             }
+           
             .card-image{
-                padding-top: 20px; height:260px;
+                padding-top: 20px; height:260px; width: 110px;
+            }
+            
+             .card-content{
+                padding-bottom: 5px;
+            }
+            
+             .card-image-boots{
+                padding-top: 30px; 
+                padding-right: 20px;
+                padding-left: 5px;
+                height:220px; width: 135px;
             }
 
             .autocomplete{
@@ -75,6 +94,11 @@
             }
             footer{
                 width:100%;
+            }
+            
+            .btn {
+                margin: 5px;
+                background-color:lightseagreen;
             }
             
             

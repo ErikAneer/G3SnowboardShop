@@ -58,7 +58,6 @@
                         <!-- To dynamically display items from object List as Materialize cards - here boards-->
                         <h:form id="displayBoardForm">
                             <ui:repeat var="product" value="#{productController.boards}" >
-
                                 <div class="col card horizontal" id="horizontal">
                                     <div class="card-image"> 
                                         <h:graphicImage class="card-image" url="#{product.imagePath}"/>  
@@ -66,17 +65,18 @@
                                     <div class="card-stacked">
                                         <div class="card-content">
                                             <p><h5>#{product.name}</h5></p>
+                                            <h:outputText rendered="#{product.name.length() lt 13}" value="&lt;br/&gt;" escape="false" />
                                             <p><b>#{product.brand}</b></p>
-                                            <p><b>#{product.productLength} cm</b></p>
+                                            <h:outputText value="#{product.productLength}" ><f:convertNumber pattern="#0" /></h:outputText> cm<br/>
                                             <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
-                                            <h:outputText value=" kr" />
+                                            <h:outputText value=" kr" /> <br/>
+                                            <h:commandLink value="Läs mer" action="#{productController.showSelectedProduct(product)}"/> 
                                         </div>
-                                        <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                        <div class="card-action"> 
+                                            <h:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
-                                        </div>
+                                        </div> 
                                     </div>
                                 </div>
                             </ui:repeat>

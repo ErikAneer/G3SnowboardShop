@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        
+
         <script name="jquery/jquery.js" library="primefaces"></script>
     </h:head>
     <h:body>
@@ -56,23 +56,24 @@
                         <h:form id="displayBootsForm">
                             <ui:repeat var="product" value="#{productController.boots}" >
                                 <div class="col card horizontal" id="horizontal">
-                                    <div class="card-image"> 
-                                        <h:graphicImage class="card-image" url="#{product.imagePath}"/>  
+                                    <div class="card-image-boots"> 
+                                        <h:graphicImage class="card-image-boots" id="boots-img" url="#{product.imagePath}"/>  
                                     </div>
                                     <div class="card-stacked">
                                         <div class="card-content">
                                             <p><h5>#{product.name}</h5></p>
+                                            <h:outputText rendered="#{product.name.length() lt 10}" value="&lt;br/&gt;" escape="false" />
                                             <p><b>#{product.brand}</b></p>
-                                            <p><b>#{product.productLength} cm</b></p>
+                                            <p>Eur <h:outputText value="#{product.productLength}" ><f:convertNumber pattern="#0" /></h:outputText></p>
                                             <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
-                                            <h:outputText value=" kr" />
+                                            <h:outputText value=" kr" /><br/>
+                                            <h:commandLink value="Läs mer" action="#{productController.showSelectedProduct(product)}"/> 
                                         </div>
-                                        <div class="card-action">
+                                        <div class="card-action"> 
                                             <p:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Läs mer" action="#{productController.showSelectedProduct(product)}"/>
-                                        </div>
+                                        </div> 
                                     </div>
                                 </div>
                             </ui:repeat>
