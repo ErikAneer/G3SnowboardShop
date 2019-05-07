@@ -24,7 +24,7 @@
             <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <a class="brand-logo" href="customerIndex.xhtml"> G3 Board Shop</a>
+                        <a class="brand-logo" href="index.xhtml"> Awesome Board Shop</a>
                        
                     </div>
                 </nav>
@@ -35,13 +35,14 @@
                     <div class="col s12 l6 offset-l3">
                         <h:form id="logoutForm">
                             <h2>Logga ut</h2>
-                            <p>Är du säker på att du vill logga ut...? Eventuella produkter i varukorgen kommer inte sparas!</p>
-                            <h:commandButton id="logoutButton" class="waves-effect waves-light btn"  action="#{userController.logOut()}" value="Logga ut">
+                            <p>Är du säker på att du vill logga ut...? <br/> Eventuella produkter i varukorgen kommer inte sparas!</p>
+                            <h:commandButton id="logoutButton" class="waves-effect waves-light btn"  action="#{userController.logout()}" value="Logga ut">
                                 <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
-                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="customerIndex" value="Avbryt">
+                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{userController.navigate(userController.previousPage, 'logout.xhtml')}" value="Avbryt">
                                 <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
+                            previous page: #{userController.previousPage}
                             <br/>
                             <h:message  id="logoutErrorMessage" for="loginButton" errorStyle="color: red" />
                             <br/>

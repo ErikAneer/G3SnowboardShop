@@ -25,12 +25,12 @@
             <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <a class="brand-logo" href="customerIndex.xhtml"> G3 Board Shop</a>
+                        <h:link class="brand-logo"  value="Awesome Board Shop" outcome="#{navigationController.navigate('customerIndex.xhtml', 'customerIndex.xhtml')}" /> 
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
                             <li> <h:link value="Korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
-                            <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
+                            <li> <h:link value="#{userController.loggedInStatus}" outcome="#{navigationController.logInLogOut('customerIndex.xhtml', userController)}" /></li>
                         </ul>
                     </div>
                 </nav>
@@ -38,9 +38,9 @@
                 <nav class="nav blue lighten-2">
                     <div class="container">
                         <ul class="left ">
-                            <li> <h:link value="Snowboards" outcome="snowboards" /></li>
-                            <li> <h:link value="Boots" outcome="boots" /></li>
-                            <li> <h:link value="Bindningar" outcome="bindningar" /></li>
+                            <li> <h:link value="Snowboards" outcome="#{navigationController.navigate('snowboards.xhtml', 'customerIndex.xhtml')}"/></li>
+                            <li> <h:link value="Boots" outcome="#{navigationController.navigate('boots.xhtml', 'customerIndex.xhtml')}"/></li>
+                            <li> <h:link value="Bindningar" outcome="#{navigationController.navigate('bindningar.xhtml', 'customerIndex.xhtml')}"/></li>
                         </ul>       
                     </div>
                 </nav>
@@ -55,7 +55,7 @@
                         <p:autoComplete class="autocomplete" value="#{productController.inputName}"
                                         maxResults="10"
                                         completeMethod="#{productController.nameSuggestions}"/>
-                        <p:commandButton class="waves-effectt btn" value="Go!" action="#{productController.showMatchingProduct()}"/>
+                        <h:commandButton class="waves-effect btn" value="Sök!" action="#{productController.showMatchingProduct()}"/>
                     </h:form>
                 </div>  
             </div> 
@@ -87,7 +87,7 @@
                                             <h:commandLink value="Läs mer" action="#{productController.showSelectedProduct(product)}"/> 
                                         </div>
                                         <div class="card-action"> 
-                                            <h:commandButton class="waves-effectt btn" value="Köp!" 
+                                            <h:commandButton class="waves-effect btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
                                         </div> 
                                     </div>
@@ -127,7 +127,7 @@
                                             <h:commandLink value="Läs mer" action="#{productController.showSelectedProduct(product)}"/> 
                                         </div>
                                         <div class="card-action"> 
-                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                            <h:commandButton class="waves-effect btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
                                         </div> 
                                     </div>
@@ -164,7 +164,7 @@
                                             <h:commandLink value="Läs mer" action="#{productController.showSelectedProduct(product)}"/> 
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
+                                            <h:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(product, userController.currentUser.email)}"/>
                                         </div>
                                     </div>

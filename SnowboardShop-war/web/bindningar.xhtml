@@ -20,15 +20,15 @@
 
 
         <f:view>
-            <header>
+           <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <a class="brand-logo" href="customerIndex.xhtml"> G3 Board Shop</a>
+                        <h:link class="brand-logo"  value="Awesome Board Shop" outcome="#{userController.navigate('index.xhtml', 'bindningar.xhtml')}" /> 
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
-                            <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
+                            <li> <h:link value="Korg (#{userController.cartItems})" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="#{userController.loggedInStatus}" outcome="#{userController.logInLogOut('bindningar.xhtml')}" /></li>
                         </ul>
                     </div>
                 </nav>
@@ -36,10 +36,10 @@
                 <nav class="nav blue lighten-2">
                     <div class="container">
                         <ul class="left ">
-                            <li> <h:link value="Snowboards" outcome="snowboards" /></li>
-                            <li> <h:link value="Boots" outcome="boots" /></li>
-                            <li> <h:link value="Bindningar" outcome="bindningar" /></li>
-                        </ul>
+                            <li> <h:link value="Snowboards" outcome="#{userController.navigate('snowboards.xhtml', 'bindningar.xhtml')}"/></li>
+                            <li> <h:link value="Boots" outcome="#{userController.navigate('boots.xhtml', 'bindningar.xhtml')}"/></li>
+                            <li> <h:link value="Bindningar" outcome="#{userController.navigate('bindningar.xhtml', 'bindningar.xhtml')}"/></li>
+                        </ul>       
                     </div>
                 </nav>
                 <div>
@@ -67,11 +67,13 @@
                                             <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /><br/>
-                                            <h:commandLink value="Läs mer" action="#{productController.showSelectedProduct(product)}"/> 
+                                            <h:commandLink value="Läs mer" action="#{userController.navigateToProduct('bindningar.xhtml', productController, product)}"/>
+                                               
                                         </div>
                                         <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Köp!" 
-                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
+                                            <h:commandButton class="waves-effectt btn" value="Köp!" 
+                                                             action="#{userController.addVaror(product, userController.currentUser.email)}">
+                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div>
                                     </div>
                                 </div>
