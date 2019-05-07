@@ -6,10 +6,10 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-    
-     <f:metadata>
-            <f:viewAction action="#{userController.onload()}" />
-        </f:metadata>
+
+    <f:metadata>
+        <f:viewAction action="#{userController.onload()}" />
+    </f:metadata>
     <h:head>
         <title>G3 Board Shop</title>
         <!-- Compiled and minified CSS -->
@@ -21,37 +21,34 @@
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
         <f:view>
-            <header>
-                <nav class="nav-wrapper blue">
-                    <div class="container">
-                        <a class="brand-logo" href="index.xhtml"> Awesome Board Shop</a>
-                       
-                    </div>
-                </nav>
-    
-            </header>
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 l6 offset-l3">
-                        <h:form id="logoutForm">
+            <h:form>
+                <header>
+                    <nav class="nav-wrapper blue">
+                        <div class="container">
+                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'logout.xhtml')}" /> 
+                        </div>
+                    </nav>
+
+                </header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 l6 offset-l3">
                             <h2>Logga ut</h2>
                             <p>Är du säker på att du vill logga ut...? <br/> Eventuella produkter i varukorgen kommer inte sparas!</p>
-                            <h:commandButton id="logoutButton" class="waves-effect waves-light btn"  action="#{userController.logout()}" value="Logga ut">
+                            <h:commandButton id="logoutButton" class="waves-effect waves-light btn"  action="#{navigationController.logout()}" value="Logga ut">
                                 <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
-                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{userController.navigate(userController.previousPage, 'logout.xhtml')}" value="Avbryt">
+                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(userController.previousPage, 'logout.xhtml')}" value="Avbryt">
                                 <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
-                            previous page: #{userController.previousPage}
                             <br/>
                             <h:message  id="logoutErrorMessage" for="loginButton" errorStyle="color: red" />
                             <br/>
                             <br/>
-                        </h:form>
-                        
+                        </div>
                     </div>
                 </div>
-            </div>
+            </h:form>
         </f:view>
     </h:body>
 </html>

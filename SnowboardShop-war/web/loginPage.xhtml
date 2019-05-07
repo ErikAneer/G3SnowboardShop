@@ -6,11 +6,11 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-    
-     <f:metadata>
-            <f:viewAction action="#{userController.onload()}" />
-            <f:viewAction action="#{productController.onload()}" />
-        </f:metadata>
+
+    <f:metadata>
+        <f:viewAction action="#{userController.onload()}" />
+        <f:viewAction action="#{productController.onload()}" />
+    </f:metadata>
     <h:head>
         <title>G3 Board Shop</title>
         <!-- Compiled and minified CSS -->
@@ -22,19 +22,18 @@
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
         <f:view>
-            <header>
-                <nav class="nav-wrapper blue">
-                    <div class="container">
-                        <a class="brand-logo" href="customerIndex.xhtml"> G3 Board Shop</a>
-                       
-                    </div>
-                </nav>
-    
-            </header>
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 l6 offset-l3">
-                        <h:form id="loginForm">
+            <h:form>
+                <header>
+                    <nav class="nav-wrapper blue">
+                        <div class="container">
+                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'loginPage.xhtml')}" /> 
+                        </div>
+                    </nav>
+
+                </header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 l6 offset-l3">
                             <h2>Logga in</h2>
                             Användarnamn (email): 
                             <h:inputText id="userName" value="#{userController.email}" > 
@@ -49,27 +48,25 @@
                                 <f:validator validatorId="passwordValidatator"></f:validator>
                             </h:inputSecret>
                             <h:message id="passwordMessage" for="password" errorStyle="color:red" />
-                            
+
                             <br/>
-                            <h:commandButton id="loginButton" class="waves-effect waves-light btn"  action="#{userController.logInUser('loginPage.xhtml')}" value="Login">
+                            <h:commandButton id="loginButton" class="waves-effect waves-light btn"  action="#{navigationController.loginUser('loginPage.xhtml', userController)}" value="Login">
                                 <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
-                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{userController.navigate(userController.previousPage, 'logout.xhtml')}" value="Avbryt">
+                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(navigationController.previousPage, 'logout.xhtml')}" value="Avbryt">
                                 <f:param name="skipValidator" value="true"/> 
-                            <f:ajax event="action" execute="@form" render="@all" />
+                                <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
                             <br/>
                             <h:message  id="loginErrorMessage" for="loginButton" errorStyle="color: red" />
                             <br/>
                             <br/>
                             Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna handla hos oss. 
-                        </h:form>
-                        
-                        
-                        
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            </h:form>
         </f:view>
     </h:body>
 </html>

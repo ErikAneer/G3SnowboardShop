@@ -58,60 +58,61 @@
     </h:head>
     <h:body>
         <f:view>
-            <header>
-                <nav class="nav-wrapper blue">
-                    <div class="container">
-                        <a class="brand-logo"> G3 Board Shop</a>
-                        <ul class="right">
-                            <li> <h:outputText value="Inloggad som: #{userController.currentUser.firstname}"/></li>
-                            <li>  <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
+            <h:form>
+                <header>
+                    <nav class="nav-wrapper blue">
+                        <div class="container">
+                            <a class="brand-logo"> G3 Board Shop</a>
+                            <ul class="right">
+                                <li> <h:outputText value="Inloggad som: #{userController.currentUser.firstname}"/></li>
+                                <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('customerOrders.xhtml', userController)}" /></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </header>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 l12">
-                        <h:form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 l12">
+
                             <h3>Kundinformation</h3>
-                       
-                            <p><b>Kundnamn: </b><h:outputText value=" #{userController.customer.firstname} #{userController. customer.familyname}" /> </p>
-                                  <p><b>Kundstatus: </b> <h:outputText value=" #{userController.customer.status}" /></p>
-                                   <p><b>Antal köp: </b> <h:outputText value=" XXX" /></p>
-                                    <p><b>Total köpesumma: </b><h:outputText value=" XXX" /></p>
 
-                            
-                                                <h:dataTable id="orderInfo" value="#{userController.orders}" var="order">
+                            <p><b>Kundnamn: </b><h:outputText value=" #{userController.customer.firstname} #{userController. customer.familyname}" /> </p>
+                            <p><b>Kundstatus: </b> <h:outputText value=" #{userController.customer.status}" /></p>
+                            <p><b>Antal köp: </b> <h:outputText value=" XXX" /></p>
+                            <p><b>Total köpesumma: </b><h:outputText value=" XXX" /></p>
+
+
+                            <h:dataTable id="orderInfo" value="#{userController.orders}" var="order">
                                 <f:facet name="header">
                                     <h4>Ordrar:</h4>
                                 </f:facet>
-                                   
-                                 <h:column>
+
+                                <h:column>
                                     <f:facet name="header" >Order nr.</f:facet>
                                     <h:outputText value="#{order.ordernr}" />
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header" >Produkt</f:facet>
                                     <h:outputText value="#{order.productname}" />
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header" >Antal</f:facet>
                                     <h:outputText value="#{order.count}" />
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header" >Totalpris</f:facet>
                                     <h:outputText value="#{order.totalprice}" />
                                 </h:column>
                             </h:dataTable>
-                                <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{userController.returnToIndex()}"/>
-                        </h:form>
+                            <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate(navigationController.previousPage, 'customerOrders.xhtml')}"/>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </h:form>
         </f:view>
     </h:body>
 </html>

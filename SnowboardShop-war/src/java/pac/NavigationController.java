@@ -3,6 +3,7 @@
  */
 package pac;
 
+import EntityClasses.Product;
 import java.io.Serializable;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -14,17 +15,18 @@ import javax.enterprise.context.SessionScoped;
  */
 @Named(value = "navigationController")
 @SessionScoped
-public class NavigationController implements Serializable{
+public class NavigationController implements Serializable {
 
     private String previousPage;
     private String secondPreviousPage;
     private UserController userCon;
+
     /**
      * Creates a new instance of NavigationController
      */
     public NavigationController() {
-        previousPage="";
-        secondPreviousPage="";
+        previousPage = "";
+        secondPreviousPage = "";
     }
 
     public String getPreviousPage() {
@@ -42,38 +44,51 @@ public class NavigationController implements Serializable{
     public void setSecondPreviousPage(String secondPreviousPage) {
         this.secondPreviousPage = secondPreviousPage;
     }
-    
+
     public String navigate(String pageTo, String currentPage) {
-                secondPreviousPage = previousPage;
-                previousPage = currentPage;
-                return pageTo;
+        secondPreviousPage = previousPage;
+        previousPage = currentPage;
+        return pageTo;
     }
-    
-    public String logInLogOut(String currentPage, UserController u){
-            if(u.getIsLoggedIn()) {
-                u.logOut();
-                secondPreviousPage = "";
-                previousPage="";
-                return "logout";
-            }
-            userCon= u;
-            secondPreviousPage = previousPage;   
+
+    public String logInLogOut(String currentPage, UserController u) {
+        String page = "";
+        if (!u.getIsLoggedIn()) {
+            secondPreviousPage = previousPage;
             previousPage = currentPage;
-                return "login"; 
+            page = "login";
+        } else {
+            page = "logout";
+        }
+        return page;
     }
-    
-    public String login(String currentPage, UserController u){
-            secondPreviousPage = previousPage;   
-            previousPage = currentPage;
-            
-            u.setLoggedInStatus("Logga ut");
-            return u.login();
+
+    public String loginUser(String currentPage, UserController u) {
+        secondPreviousPage = previousPage;
+        previousPage = currentPage;
+
+        //u.setLoggedInStatus("Logga ut");
+        return u.login();
     }
-    
-    public String logout(UserController u){
+
+    public String logout(UserController u) {
+        secondPreviousPage = "";
+        previousPage = "";
         u.logOut();
-        return "index";
+        return "logout";
     }
-    
-    
+
+    public String navigateToProduct(String currentPage, ProductController pCon, Product product) {
+        secondPreviousPage = previousPage;
+        previousPage = currentPage;
+        return pCon.showSelectedProduct(product);
+    }
+
+    public String goToCart(String currentPage, UserController u) {
+        secondPreviousPage = previousPage;
+        previousPage = currentPage;
+        return u.visaKorg(u.getCurrentUser().getEmail());
+
+    }
+
 }

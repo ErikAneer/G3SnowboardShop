@@ -18,17 +18,15 @@
         <h:outputStylesheet library="css" name="Style.css"  />
         <f:view>
             <header>
-                <nav class="nav-wrapper blue">
-                    <div class="container">
-                        <a class="brand-logo" href="customerIndex.xhtml"> G3 Board Shop</a>
-                       
-
+                <h:form>
+                    <nav class="nav-wrapper blue">
+                        <div class="container">
+                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'register.xhtml')}" /> 
+                        </div>
+                    </nav>
+                    <div>               
                     </div>
-                </nav>
-                <div>
-                   
-                </div>
-
+                </h:form>
             </header>
             <div class="container">
                 <div class="row">
@@ -83,19 +81,19 @@
                                 </h:inputText>
                                 <h:message id="postalAddressMessage" for="contactPostalAddress" errorStyle="color:red"/>
 
-                                 <h:outputLabel for="contactEmail" value="Email: " />
-                                 <h:inputText id="contactEmail" value="#{userController.email}">
-                                   <f:validator validatorId="emailValidator"></f:validator>
+                                <h:outputLabel for="contactEmail" value="Email: " />
+                                <h:inputText id="contactEmail" value="#{userController.email}">
+                                    <f:validator validatorId="emailValidator"></f:validator>
                                     <f:ajax event="blur" render="usernameMessage" />
                                 </h:inputText>
                                 <h:message id="usernameMessage" for="contactEmail" errorStyle="color:red" />
-                                
-                                 <h:outputLabel for="contactEmail" value="Check email" />
-                                 <h:commandButton action="#{userController.sameEmail()}" value="test email" />
-                                 <h:outputText value="#{userController.sameEmailmsg}" style="color: red" />
 
-                              <h:outputLabel for="password" value="Lösenord: " /> 
-                              <h:inputSecret id="password" value="#{userController.code}" redisplay="true">
+                                <h:outputLabel for="contactEmail" value="Check email" />
+                                <h:commandButton action="#{userController.sameEmail()}" value="test email" />
+                                <h:outputText value="#{userController.sameEmailmsg}" style="color: red" />
+
+                                <h:outputLabel for="password" value="Lösenord: " /> 
+                                <h:inputSecret id="password" value="#{userController.code}" redisplay="true">
                                     <f:validator validatorId="passwordValidatator"></f:validator> 
                                     <f:ajax event="blur" render="passwordMessage" />
                                 </h:inputSecret>  
