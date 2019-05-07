@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
-        <title>Awesome Board Shop</title>
+        <title>G3 Board Shop</title>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
@@ -16,85 +16,22 @@
         <f:metadata>
             <!--<f:viewAction action="#{productController.onload()}" /> -->
         </f:metadata>
-        <style>
-
-            li { 
-                display: inline;
-                list-style-type: none;
-            }
-
-
-        </style>
-
-        <style type="text/css">
-            .ui-datalist .ui-datalist-content {
-                border:0 none
-            }
-
-            .ui-datalist ul {
-                padding: 0px 10px 0 20px;
-                margin: 5px 0;
-            }
-
-            .value {
-                font-weight: bold;
-            }
-
-            .ui-autocomplete-itemtip {
-                -moz-box-sizing: content-box;
-                -webkit-box-sizing: content-box;
-                box-sizing: content-box;
-            }
-            #index-header {
-
-                background-size: cover;
-                background-position: center;
-                min-height: 500px;
-            }
-            .product-search{
-                margin: 0;
-                position: absolute;
-                top: 65%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 28px;
-            }
-            .ui-datalist .ui-datalist-content {
-                border:0 none
-            }
-
-            .ui-datalist ul {
-                padding:0px 10px 0 20px;
-                margin: 5px 0;
-            }
-
-            .label, .value {
-                vertical-align: top
-            }
-
-            .output {
-                font-weight: bold
-            }
-
-            .ui-selectmanymenu {
-                width: 175px;
-            }
-        </style>
         <script name="jquery/jquery.js" library="primefaces"></script>
     </h:head>
     <h:body>
+        <h:outputStylesheet library="css" name="Style.css"  />
 
 
         <f:view>
             <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
+                        <h:link class="brand-logo"  value="Awesome Board Shop" outcome="#{userController.navigate('index.xhtml', 'snowboards.xhtml')}" /> 
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Korg" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
-                            <li> <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
+                            <li> <h:link value="Korg (#{userController.cartItems})" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:link value="#{userController.loggedInStatus}" outcome="#{userController.logInLogOut('snowboards.xhtml')}" /></li>
                         </ul>
                     </div>
                 </nav>
@@ -102,10 +39,10 @@
                 <nav class="nav blue lighten-2">
                     <div class="container">
                         <ul class="left ">
-                            <li> <h:link value="Snowboards" outcome="snowboards" /></li>
-                            <li> <h:link value="Boots" outcome="boots" /></li>
-                            <li> <h:link value="Bindningar" outcome="bindningar" /></li>
-                        </ul>
+                            <li> <h:link value="Snowboards" outcome="#{userController.navigate('snowboards.xhtml', 'snowboards.xhtml')}"/></li>
+                            <li> <h:link value="Boots" outcome="#{userController.navigate('boots.xhtml', 'snowboards.xhtml')}"/></li>
+                            <li> <h:link value="Bindningar" outcome="#{userController.navigate('bindningar.xhtml', 'snowboards.xhtml')}"/></li>
+                        </ul>       
                     </div>
                 </nav>
                 <div>
@@ -121,24 +58,26 @@
                         <!-- To dynamically display items from object List as Materialize cards - here boards-->
                         <h:form id="displayBoardForm">
                             <ui:repeat var="product" value="#{productController.boards}" >
-
-                                <div class="col card horizontal" style="width: 310px;">
+                                <div class="col card horizontal" id="horizontal">
                                     <div class="card-image"> 
-                                        <h:graphicImage class="card-image" url="#{product.imagePath}" style=" padding-top: 20px; height:280px;"/>  
+                                        <h:graphicImage class="card-image" url="#{product.imagePath}"/>  
                                     </div>
                                     <div class="card-stacked">
                                         <div class="card-content">
                                             <p><h5>#{product.name}</h5></p>
+                                            <h:outputText rendered="#{product.name.length() lt 13}" value="&lt;br/&gt;" escape="false" />
                                             <p><b>#{product.brand}</b></p>
-                                            <p><b>#{product.productLength} cm</b></p>
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}  kr" />
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
+                                            <h:outputText value="#{product.productLength}" ><f:convertNumber pattern="#0" /></h:outputText> cm<br/>
+                                            <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
+                                            <h:outputText value=" kr" /> <br/>
+                                            <h:commandLink value="Läs mer" action="#{userController.navigateToProduct('snowboards.xhtml', productController, product)}"/>
                                         </div>
-                                        <div class="card-action">
-                                            <p:commandButton class="waves-effectt btn" value="Buy!" 
-                                                             action="#{userController.addVaror(product, userController.currentUser.email)}"/>
-                                            <p:commandButton class="waves-effectt btn" value="Read more" action="#{productController.showSelectedProduct(product)}"/>
-                                        </div>
+                                        <div class="card-action"> 
+                                            <h:commandButton class="waves-effectt btn" value="Köp!" 
+                                                             action="#{userController.addVaror(product, userController.currentUser.email)}">
+                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
+                                        </div> 
                                     </div>
                                 </div>
                             </ui:repeat>

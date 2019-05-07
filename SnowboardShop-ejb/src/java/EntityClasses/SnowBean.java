@@ -59,7 +59,7 @@ public class SnowBean implements SnowBeanLocal {
     }
 
     @Override
-    public List<User2> callAllKunders(String customer, String premium) {
+    public List<User2> callAllCustomers(String customer, String premium) {
         Query q = em.createQuery("select o from User2 o where o.status=:customer or o.status=:premium");
         q.setParameter("customer", customer);
         q.setParameter("premium", premium);
@@ -165,7 +165,7 @@ public class SnowBean implements SnowBeanLocal {
     }
 
     @Override
-    public void skickaOrder(String ordernr, String email, String fullname, String productname, 
+    public void sendOrder(String ordernr, String email, String fullname, String productname, 
             int count, double totalprice, String fulladdress, String postnraddress, String telephone) {
         Orderning order = new Orderning(ordernr, email, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
         em.persist(order);

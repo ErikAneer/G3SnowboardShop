@@ -23,7 +23,7 @@ public interface SnowBeanLocal {
 
     List<User2> callAllUsers();
 
-    List<User2> callAllKunders(String customer, String premium);
+    List<User2> callAllCustomers(String customer, String premium);
 
     boolean checkIfUniqueEmail(String email);
 
@@ -39,7 +39,7 @@ public interface SnowBeanLocal {
 
     void removeBypronameidemail(String proname, long id, String email);
 
-    void skickaOrder(String ordernr, String email, String fullname, String productname, int count, double totalprice, String fulladdress, String postnraddress, String telephone);
+    void sendOrder(String ordernr, String email, String fullname, String productname, int count, double totalprice, String fulladdress, String postnraddress, String telephone);
 
     List<Orderning> callOrders(String email);
 
