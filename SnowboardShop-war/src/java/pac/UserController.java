@@ -56,7 +56,7 @@ public class UserController implements Serializable {
         String page = "Logga in";
        
         users = snowBean.callAllUsers();
-        kunder = snowBean.callAllKunders("customer", "premium");
+        kunder = snowBean.callAllCustomers("customer", "premium");
 
         if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
@@ -348,7 +348,7 @@ public class UserController implements Serializable {
             totalprice = k.getTotalprice();
             
             snowBean.removeBypronameidemail(productname, k.getId(), mail);
-            snowBean.skickaOrder(ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
+            snowBean.sendOrder(ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
         }
         double test3 = callSumprice(mail);
         if(test3 >= 500000 && (currentUser.getStatus()).equals("customer")){

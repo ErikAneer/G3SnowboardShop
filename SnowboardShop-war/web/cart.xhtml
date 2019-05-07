@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
-        <title>Awesome Board Shop</title>
+        <title>G3 Board Shop</title>
         <!-- Compiled and minified CSS jj -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
@@ -21,7 +21,7 @@
             <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <a class="brand-logo" href="customerIndex.xhtml"> Awesome Board Shop</a>
+                        <a class="brand-logo" href="customerIndex.xhtml"> G3 Board Shop</a>
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
@@ -69,11 +69,11 @@
                                     <h:outputText value="#{product.totalprice}" />
                                 </h:column>
                                  <h:column>
-                                    <h:commandButton class="waves-effectt btn" id="remove" value="Remove" 
+                                    <h:commandButton class="waves-effectt btn" id="remove" value="Ta bort" 
                                                      action="#{userController.remove(product.productname, product.id, userController.currentUser.email)}"/>
                                 </h:column>
                             </h:dataTable>
-                            <h:commandButton class="waves-effectt btn" value="Buy" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
+                            <h:commandButton class="waves-effectt btn" value="Köp" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
                              
                              <br/><br/>
                         </h:form>
@@ -81,7 +81,7 @@
                         <h:form rendered="#{empty userController.products}">
                         <h4>Your cart is empty</h4>
                         </h:form>
-                        <h:link class="waves-effectt btn" value="Close cart" outcome="#{userController.currentUser.status}" />
+                        <h:link class="waves-effectt btn" value="Stäng korg" outcome="#{userController.currentUser.status}" />
                     </div>
                 </div>
             </div>

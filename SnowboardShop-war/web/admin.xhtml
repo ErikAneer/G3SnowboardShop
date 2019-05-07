@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
-        <title>Display Boards</title>
+        <title>Visa brädorna</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -20,7 +20,7 @@
             <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <a class="brand-logo"> Awesome Board Shop</a>
+                        <a class="brand-logo"> G3 Board Shop</a>
                         <ul class="right">
                             <li> <h:outputText value="Inloggad som: #{userController.currentUser.firstname}"/></li>
                             <li>  <h:link value="Logga ut" outcome="#{userController.logOut()}" /></li>
@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col s12 l12">
                         <h:form>
-                            <h3>Awseome Board Shop - Adminsidan</h3>
+                            <h3>G3 Board Shop - Adminsidan</h3>
 
                             <h:dataTable id="customerInfo" value="#{userController.kunder}" var="user">
                                 <f:facet name="header">
