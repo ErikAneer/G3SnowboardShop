@@ -42,6 +42,7 @@ public class UserController implements Serializable {
     private String sameEmailmsg;
     private List<Cart> products = new ArrayList();
     private List<Orderning> orders = new ArrayList();
+    private int cartItems;
     private double summary;
 
     /**
@@ -50,11 +51,11 @@ public class UserController implements Serializable {
      */
     public UserController() {
         loggedInStatus = "Logga in";
+        cartItems = 0;
     }
 
     public String login() {
-        String page = "Logga in";
-       
+        String page = "";
         users = snowBean.callAllUsers();
         kunder = snowBean.callAllKunders("customer", "premium");
 
@@ -66,30 +67,19 @@ public class UserController implements Serializable {
             FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg);
         } else {
             User2 u = (User2) snowBean.login(email, code);
-            page = u.getStatus();
             currentUser = u;
-            //setUserField(u.getFirstName());
             setIsLoggedIn(true);
-            status = currentUser.getStatus();
             loggedInStatus = "Logga ut";
-            page = status;
+            page = u.getStatus();
             setEmail(null);
         }
         return page;
     }
-    
-    //This method is not used. Remove?
-    public String logInLogOut(){
-            if(isLoggedIn) {
-                logOut();
-                return "index";
-            }
-            else return "login"; 
-    }
 
-    public String logOut() {
+    public void logOut() {
         loggedInStatus = "Logga in";
-        //currentUser = null;
+        isLoggedIn=false;
+        currentUser = null;
         firstname = null;
         familyname = null;
         telephone = null;
@@ -99,7 +89,6 @@ public class UserController implements Serializable {
         email = null;
         code = null;
         status = null;
-        return "Logga ut";
     }
 
     public void sameEmail() {
@@ -295,6 +284,14 @@ public class UserController implements Serializable {
         this.summary = summary;
     }
 
+    public int getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(int cartItems) {
+        this.cartItems = cartItems;
+    }
+
     
     public void onload() {
 
@@ -304,12 +301,14 @@ public class UserController implements Serializable {
     public String addVaror(Product p, String str){
         snowBean.addProduct(p.getName(), str, 1, p.getPrice());
         String test1 = visaKorg(str);
+        cartItems++;
         return "ok";
     }
     
     public String addVarorPremium(Product p, String str){
         snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
         String test2 = visaKorg(str);
+        cartItems++;
         return "ok";
     }
 
@@ -320,6 +319,7 @@ public class UserController implements Serializable {
 
     public String remove(String proname, long id, String mail) {
         snowBean.removeBypronameidemail(proname, id, mail);
+        cartItems--;
         return visaKorg(mail);
     }
 
@@ -381,5 +381,69 @@ public class UserController implements Serializable {
              
              return "show_customer_details";
     }  
+         
+         
+         //Navcontroller functions here below
+    private String previousPage;
+    private String secondPreviousPage;
+
+
+    public String getPreviousPage() {
+        return previousPage;
+    }
+
+    public void setPreviousPage(String previousPage) {
+        this.previousPage = previousPage;
+    }
+
+    public String getSecondPreviousPage() {
+        return secondPreviousPage;
+    }
+
+    public void setSecondPreviousPage(String secondPreviousPage) {
+        this.secondPreviousPage = secondPreviousPage;
+    }
+    
+    public String navigate(String pageTo, String currentPage) {
+                secondPreviousPage = previousPage;
+                previousPage = currentPage;
+                return pageTo;
+    }
+    
+    public String logInLogOut(String currentPage){
+            String page = "";
+        
+            if(!getIsLoggedIn()) {
+                secondPreviousPage = previousPage;   
+                previousPage = currentPage;
+                page= "login"; 
+            }
+           
+            else {     
+                page= "logout";
+            }
+            return page;
+    }
+    
+    public String logInUser(String currentPage){
+            secondPreviousPage = previousPage;   
+            previousPage = currentPage;
+            return login();
+    }
+    
+    public String logout(){
+         secondPreviousPage = "";
+               previousPage="";
+        logOut();
+        return "logout";
+    }
+    
+      public String navigateToProduct(String currentPage, ProductController pCon, Product product) {
+                secondPreviousPage = previousPage;
+                previousPage = currentPage;
+                return pCon.showSelectedProduct(product);
+    }
+    
+    
     
 }

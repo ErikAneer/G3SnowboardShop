@@ -51,8 +51,12 @@
                             <h:message id="passwordMessage" for="password" errorStyle="color:red" />
                             
                             <br/>
-                            <h:commandButton id="loginButton" class="waves-effect waves-light btn"  action="#{userController.login()}" value="Login">
+                            <h:commandButton id="loginButton" class="waves-effect waves-light btn"  action="#{userController.logInUser('loginPage.xhtml')}" value="Login">
                                 <f:ajax event="action" execute="@form" render="@all" />
+                            </h:commandButton>
+                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{userController.navigate(userController.previousPage, 'logout.xhtml')}" value="Avbryt">
+                                <f:param name="skipValidator" value="true"/> 
+                            <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
                             <br/>
                             <h:message  id="loginErrorMessage" for="loginButton" errorStyle="color: red" />

@@ -23,13 +23,13 @@
                 box-sizing: content-box;
             }
             #index-header {
-                background: url("images/joshua-reddekopp-217223-cropped.jpg");
+                background: url("images/headerImage.jpg");
                 background-size: cover;
                 background-position: center;
                 min-height: 500px;
             }
             #horizontal{
-                width: 335px;
+                width: 330px;
                 height:310px;
                  margin: 5px;
             }
@@ -40,7 +40,7 @@
             .product-search{
                 margin: 0;
                 position: absolute;
-                top: 65%;
+                top:93%;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 font-size: 28px;
