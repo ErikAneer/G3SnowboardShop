@@ -18,18 +18,17 @@
     </h:head>
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
-
-
         <f:view>
+            <h:form>
            <header>
                 <nav class="nav-wrapper blue">
                     <div class="container">
-                        <h:link class="brand-logo"  value="Awesome Board Shop" outcome="#{userController.navigate('index.xhtml', 'boots.xhtml')}" /> 
+                         <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'boots.xhtml')}" /> 
 
                         <ul class="right hide-on-med-and-down">
-                            <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Korg (#{userController.cartItems})" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
-                            <li> <h:link value="#{userController.loggedInStatus}" outcome="#{userController.logInLogOut('boots.xhtml')}" /></li>
+                            <li><h:outputText value="#{userController.currentUser.firstname}" ></h:outputText></li>
+                            <li> <h:commandLink value="Korg (#{userController.cartItems})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li><h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('boots.xhtml', userController)}" /></li>
                         </ul>
                     </div>
                 </nav>
@@ -37,9 +36,9 @@
                 <nav class="nav blue lighten-2">
                     <div class="container">
                         <ul class="left ">
-                            <li> <h:link value="Snowboards" outcome="#{userController.navigate('snowboards.xhtml', 'boots.xhtml')}"/></li>
-                            <li> <h:link value="Boots" outcome="#{userController.navigate('boots.xhtml', 'boots.xhtml')}"/></li>
-                            <li> <h:link value="Bindningar" outcome="#{userController.navigate('bindningar.xhtml', 'boots.xhtml')}"/></li>
+                            <li> <h:commandLink value="Snowboards" action="#{navigationController.navigate('snowboards.xhtml', 'boots.xhtml')}"/></li>
+                            <li> <h:commandLink value="Boots" action="#{navigationController.navigate('boots.xhtml', 'boots.xhtml')}"/></li>
+                            <li> <h:commandLink value="Bindningar" action="#{navigationController.navigate('bindningar.xhtml', 'boots.xhtml')}"/></li>
                         </ul>       
                     </div>
                 </nav>
@@ -51,9 +50,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col s12 l12">
-
                         <!-- To dynamically display items from object List as Materialize cards - here boots-->
-                        <h:form id="displayBootsForm">
                             <ui:repeat var="product" value="#{productController.boots}" >
                                 <div class="col card horizontal" id="horizontal">
                                     <div class="card-image-boots"> 
@@ -68,7 +65,7 @@
                                             <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /><br/>
-                                            <h:commandLink value="Läs mer" action="#{userController.navigateToProduct('boots.xhtml', productController, product)}"/>
+                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('boots.xhtml', productController, product)}"/>
                                         </div>
                                         <div class="card-action"> 
                                             <h:commandButton class="waves-effectt btn" value="Köp!" 
@@ -78,10 +75,10 @@
                                     </div>
                                 </div>
                             </ui:repeat>
-                        </h:form>
                     </div>        
                 </div>          
             </div> 
+            </h:form>
         </f:view>
         <br />
     </h:body>

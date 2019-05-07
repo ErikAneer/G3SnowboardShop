@@ -18,70 +18,72 @@
         <h:outputStylesheet library="css" name="Style.css"  />
 
         <f:view>
-           <header>
-                <nav class="nav-wrapper blue">
-                    <div class="container">
-                        <h:link class="brand-logo"  value="Awesome Board Shop" outcome="#{userController.navigate('index.xhtml', 'cart.xhtml')}" /> 
+            <h:form>
+                <header>
+                    <nav class="nav-wrapper blue">
+                        <div class="container">
+                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'cart.xhtml')}" /> 
 
-                        <ul class="right hide-on-med-and-down">
-                            <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:link value="Korg (#{userController.cartItems})" outcome="#{userController.visaKorg(userController.currentUser.email)}" /></li>
-                            <li> <h:link value="#{userController.loggedInStatus}" outcome="#{userController.logInLogOut('cart.xhtml')}" /></li>
-                        </ul>
+                            <ul class="right hide-on-med-and-down">
+                                <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
+                                <li> <h:commandLink value="Korg (#{userController.cartItems})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                                <li><h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('cart.xhtml', userController)}" /></li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <nav class="nav blue lighten-2">
+                        <div class="container">
+                            <ul class="left ">
+                                <li> <h:commandLink value="Snowboards" action="#{navigationController.navigate('snowboards.xhtml', 'cart.xhtml')}"/></li>
+                                <li> <h:commandLink value="Boots" action="#{navigationController.navigate('boots.xhtml', 'cart.xhtml')}"/></li>
+                                <li> <h:commandLink value="Bindningar" action="#{navigationController.navigate('bindningar.xhtml', 'cart.xhtml')}"/></li>
+                            </ul>       
+                        </div>
+                    </nav>
+                    <div>
                     </div>
-                </nav>
-
-                <nav class="nav blue lighten-2">
-                    <div class="container">
-                        <ul class="left ">
-                            <li> <h:link value="Snowboards" outcome="#{userController.navigate('snowboards.xhtml', 'cart.xhtml')}"/></li>
-                            <li> <h:link value="Boots" outcome="#{userController.navigate('boots.xhtml', 'cart.xhtml')}"/></li>
-                            <li> <h:link value="Bindningar" outcome="#{userController.navigate('bindningar.xhtml', 'cart.xhtml')}"/></li>
-                        </ul>       
-                    </div>
-                </nav>
-                <div>
-                </div>
-            </header>
-
+                </header>
+            </h:form>
             <!-- Body starts from here -->
             <div class="container">
                 <div class="row">
                     <div class="col s12 l12">
 
                         <h:form rendered="#{not empty userController.products}">
-      
-                             <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
+
+                            <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
                                 <f:facet name="header">
-                                    <h4>Products in cart</h4>
+                                    <h4>Varor i varukorgen</h4>
                                     <h:outputText value="#{userController.email}" />
                                 </f:facet>
                                 <h:column>
-                                    <f:facet name="header" >Product</f:facet>
+                                    <f:facet name="header" >Produck</f:facet>
                                     <h:outputText value="#{product.productname}" />
                                 </h:column>
-                                  <h:column>
-                                    <f:facet name="header" >Amount</f:facet>
+                                <h:column>
+                                    <f:facet name="header" >Antal</f:facet>
                                     <h:outputText value="#{product.count}" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header" >Price</f:facet>
+                                    <f:facet name="header" >Pris</f:facet>
                                     <h:outputText value="#{product.totalprice}" />
                                 </h:column>
-                                 <h:column>
+                                <h:column>
                                     <h:commandButton class="waves-effectt btn" id="remove" value="Ta bort" 
                                                      action="#{userController.remove(product.productname, product.id, userController.currentUser.email)}"/>
                                 </h:column>
                             </h:dataTable>
                             <h:commandButton class="waves-effectt btn" value="Köp" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
-                             
-                             <br/><br/>
+
+                            <br/><br/>
                         </h:form>
-                        
+
                         <h:form rendered="#{empty userController.products}">
-                        <h4>Your cart is empty</h4>
+                            <h4>Du har inga varor i varukorgen</h4>
+                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
+                            förra sidan var #{navigationController.previousPage}
                         </h:form>
-                        <h:link class="waves-effectt btn" value="Close cart" outcome="#{userController.navigate(userController.previousPage, 'logout.xhtml')}" />
                     </div>
                 </div>
             </div>

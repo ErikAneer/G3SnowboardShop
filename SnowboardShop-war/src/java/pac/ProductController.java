@@ -144,14 +144,11 @@ public class ProductController implements Serializable {
     }
 
     public void setInputName(String inputName) {
-        System.out.println(inputName);
         this.inputName = inputName;
     }
     
     public String showSelectedProduct(Product p) {
-        
         setSelectedProduct(p);
-        
         return "show_details";
     }
     
