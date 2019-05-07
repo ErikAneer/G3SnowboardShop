@@ -68,7 +68,7 @@
                                             <h:outputText rendered="#{product.name.length() lt 13}" value="&lt;br/&gt;" escape="false" />
                                             <p><b>#{product.brand}</b></p>
                                             <h:outputText value="#{product.productLength}" ><f:convertNumber pattern="#0" /></h:outputText> cm<br/>
-                                            <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
+                                            <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /> <br/>
                                             <h:commandLink value="Läs mer" action="#{userController.navigateToProduct('snowboards.xhtml', productController, product)}"/>

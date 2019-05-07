@@ -65,7 +65,7 @@
                                         <p><h5>#{productController.selectedProduct.name}</h5></p>
                                         <p>#{productController.selectedProduct.brand}</p>
                                         <p>#{productController.selectedProduct.productLength} cm</p>
-                                        <h:outputText rendered="#{userController.currentUser.status eq 'customer'}"  value=" #{product.price}  kr" />
+                                      <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price} kr" ><f:convertNumber pattern="#0"/></h:outputText>  
                                         <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
                                         <p>#{productController.selectedProduct.description}</p>
                                         
