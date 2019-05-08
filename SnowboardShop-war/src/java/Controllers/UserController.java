@@ -1,4 +1,4 @@
-package pac;
+package Controllers;
 
 import EJB.UserBean;
 import EntityClasses.Cart;

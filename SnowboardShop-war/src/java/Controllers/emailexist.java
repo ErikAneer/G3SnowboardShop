@@ -1,7 +1,7 @@
 /*
  * 
  */
-package pac;
+package Controllers;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;

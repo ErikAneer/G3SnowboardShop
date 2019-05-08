@@ -1,7 +1,7 @@
 /*
 
  */
-package pac;
+package Controllers;
 
 import EntityClasses.Product;
 import java.io.Serializable;
