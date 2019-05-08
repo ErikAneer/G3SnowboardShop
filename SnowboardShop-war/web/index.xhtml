@@ -31,9 +31,9 @@
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:commandLink value="Korg (#{userController.cartItems})" action="#{navigationController.goToCart('index.xhtml', userController)}" /></li>
-                            <li><h:outputText value="    Poäng:#{userController.summary}     " /></li>
+                            <li><h:commandLink value="Korg (#{userController.cartItems})" action="#{navigationController.goToCart('index.xhtml', userController)}" ></h:commandLink></li>
                             <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('index.xhtml', userController)}" /></li>
+                            <li><h:outputText rendered="#{userController.isLoggedIn eq 'true'}" value="Intjänade poäng: #{userController.summary}     " /></li>
                         </ul>
                     </div>
                 </nav>
@@ -57,8 +57,7 @@
                 <div class="container" id="product_search">
                     <div class="row">
                         <div class="center product-search">
-                            Sök produkt: 
-                            <p:autoComplete class="autocomplete" value="#{productController.inputName}"
+                            Sök produkt:  <p:autoComplete class="autocomplete" value="#{productController.inputName}"
                                             maxResults="5" 
                                             completeMethod="#{productController.nameSuggestions}"  forceSelection="true"/>
                             <h:commandButton class="waves-effect btn" value="Sök!" action="#{productController.showMatchingProduct()}"/>
