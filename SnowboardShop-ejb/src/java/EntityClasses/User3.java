@@ -8,7 +8,9 @@ package EntityClasses;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ public class User3 implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+    @Basic(fetch=LAZY)
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
 
     @OneToMany(mappedBy="user3")

@@ -4,7 +4,7 @@ import EJB.UserBean;
 import EntityClasses.Cart;
 import EntityClasses.Orderning3;
 import EntityClasses.Product;
-import EntityClasses.SnowBeanLocal;
+import EJB.SnowBeanLocal;
 import EntityClasses.User3;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;

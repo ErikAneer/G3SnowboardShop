@@ -6,7 +6,9 @@
 package EntityClasses;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +24,8 @@ public class User2 implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @Basic(fetch=LAZY)
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
 
     public User2(String firstname, String familyname, String telephone, String address, String postnr, String postaddress, String email, String code, String status) {

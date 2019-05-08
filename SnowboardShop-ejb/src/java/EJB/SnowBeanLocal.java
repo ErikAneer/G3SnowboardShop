@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EntityClasses;
+package EJB;
 
+import EntityClasses.Cart;
+import EntityClasses.Orderning;
+import EntityClasses.Orderning3;
+import EntityClasses.User2;
+import EntityClasses.User3;
 import java.util.List;
 import javax.ejb.Local;
 
