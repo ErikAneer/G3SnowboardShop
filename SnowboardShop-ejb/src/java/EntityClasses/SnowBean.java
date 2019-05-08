@@ -241,7 +241,7 @@ public class SnowBean implements SnowBeanLocal {
     public List<String> callUser3OrderNrs(Object user) {
         User3 u = (User3)user;
         Query q = em.createQuery("select o from Orderning3 o where o.user3=:user order by o.ordernr");
-        q.setParameter("user", user);
+        q.setParameter("user", u);
         List<Orderning3> orders = q.getResultList();
         Set<String> test = new HashSet();
         for(Orderning3 od: orders){
