@@ -66,8 +66,6 @@ public class NavigationController implements Serializable {
     public String loginUser(String currentPage, UserController u) {
         secondPreviousPage = previousPage;
         previousPage = currentPage;
-
-        //u.setLoggedInStatus("Logga ut");
         return u.login();
     }
 
