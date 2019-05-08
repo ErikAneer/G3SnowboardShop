@@ -35,12 +35,13 @@
                         <div class="col s12 l6 offset-l3">
                             <h2>Logga ut</h2>
                             <p>Är du säker på att du vill logga ut...? <br/> Eventuella produkter i varukorgen kommer inte sparas!</p>
-                            <h:commandButton id="logoutButton" class="waves-effect waves-light btn"  action="#{navigationController.logout()}" value="Logga ut">
+                            <h:commandButton id="logoutButton" class="waves-effect waves-light btn"  action="#{navigationController.logout(userController)}" value="Logga ut">
                                 <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
-                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(userController.previousPage, 'logout.xhtml')}" value="Avbryt">
+                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(navigationController.previousPage, 'logout.xhtml')}" value="Avbryt">
                                 <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
+                            förra sidan #{navigationController.previousPage}
                             <br/>
                             <h:message  id="logoutErrorMessage" for="loginButton" errorStyle="color: red" />
                             <br/>

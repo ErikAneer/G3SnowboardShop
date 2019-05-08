@@ -17,57 +17,58 @@
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
         <f:view>
-            <header>
-                <nav class="nav-wrapper blue">
-                    <div class="container">
-                        <a class="brand-logo"> G3 Board Shop</a>
-                        <ul class="right">
-                            <li> <h:outputText value="Inloggad som: #{userController.currentUser.firstname}"/></li>
-                            <li>  <h:link value="Logga ut" outcome="#{userController.logout()}" /></li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
+            <h:form>
+                <header>
+                    <nav class="nav-wrapper blue">
+                        <div class="container">
+                            <a class="brand-logo"> G3 Board Shop</a>
+                            <ul class="right">
+                                <li> <h:outputText value="Inloggad som: #{userController.currentUser.firstname}"/></li>
+                                <li> <h:commandLink value="Logga ut" action="#{navigationController.logout(userController)}" /></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </header>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 l12">
-                        <h:form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 l12">
+
                             <h3>G3 Board Shop - Adminsidan</h3>
 
                             <h:dataTable id="customerInfo" value="#{userController.kunder}" var="user">
                                 <f:facet name="header">
                                     <h4>Alla registrerade kunder:</h4>
                                 </f:facet>
-                                   
-                                 <h:column>
+
+                                <h:column>
                                     <f:facet name="header" >Kundnamn</f:facet>
                                     <h:outputText value="#{user.firstname} #{user.familyname}" />
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header" >Kundstatus</f:facet>
                                     <h:outputText value="#{user.status}" />
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header" >Antal köp</f:facet>
                                     <h:outputText value="XXX" />
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header" >Total köpesumma</f:facet>
                                     <h:outputText value="XXX" />
                                 </h:column>
-                                
+
                                 <h:column>
                                     <h:commandButton class="waves-effectt btn" value="Se alla ordrar för kund" action="#{userController.showCustomerOrders(user)}"/>
                                 </h:column>
                             </h:dataTable>                          
-                        </h:form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </h:form>
         </f:view>
     </h:body>
 </html>
