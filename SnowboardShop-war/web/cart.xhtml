@@ -8,7 +8,7 @@
       >
     <h:head>
         <title>G3 Board Shop</title>
-        <!-- Compiled and minified CSS julia22 -->
+        <!-- Compiled and minified CSS julia -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
@@ -27,7 +27,7 @@
                             <ul class="right hide-on-med-and-down">
                                 <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
                                 <li> <h:commandLink value="Korg (#{userController.cartItems})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
-                                <li><h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('cart.xhtml', userController)}" /></li>
+                                <li><h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('cart.xhtml')}" /></li>
                             </ul>
                         </div>
                     </nav>
@@ -58,7 +58,7 @@
                                     <h:outputText value="#{userController.email}" />
                                 </f:facet>
                                 <h:column>
-                                    <f:facet name="header" >Produck</f:facet>
+                                    <f:facet name="header" >Produkt</f:facet>
                                     <h:outputText value="#{product.productname}" />
                                 </h:column>
                                 <h:column>
@@ -71,11 +71,11 @@
                                 </h:column>
                                 <h:column>
                                     <h:commandButton class="waves-effectt btn" id="remove" value="Ta bort" 
-                                                     action="#{userController.remove(product.productname, product.id, userController.currentUser.email)}"/>
+                                                     action="#{userController.remove(product.productname, product.id, userController.currentUser)}"/>
                                 </h:column>
                             </h:dataTable>
                             <br/>
-                            <h:outputText value="Total price: #{userController.callSummaryPrice(userController.currentUser.email)}" />
+                            <h:outputText value="Total price: #{userController.callSummaryPrice(userController.currentUser)}" />
                             <br/><br/>
                             <h:commandButton class="waves-effectt btn" value="Köp" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
 
@@ -86,7 +86,6 @@
                         <h:form rendered="#{empty userController.products}">
                             <h4>Du har inga varor i varukorgen</h4>
                             <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
-                            förra sidan var #{navigationController.previousPage}
                         </h:form>
                     </div>
                 </div>

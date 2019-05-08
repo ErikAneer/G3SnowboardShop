@@ -8,14 +8,15 @@
       >
     <h:head>
         <title>G3 Board Shop</title>
-        <!-- Compiled and minified CSS  Julia-->
+        <!-- Compiled and minified CSS  Juliagu-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
         <!-- To use Material Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/> 
         <f:metadata>
             <f:viewAction action="#{userController.onload()}" />
             <f:viewAction action="#{productController.onload()}" />
-            
+
         </f:metadata>
 
     </h:head>
@@ -23,62 +24,58 @@
         <h:outputStylesheet library="css" name="Style.css"  />
         <f:view>
             <h:form>
-            <header>
-                <nav class="nav-wrapper blue">
-                    <div class="container">
-                        <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'index.xhtml')}" /> 
+                <header>
+                    <nav class="nav-wrapper blue">
+                        <div class="container">
+                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'index.xhtml')}" /> 
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:commandLink value="Korg (#{userController.cartItems})" action="#{navigationController.goToCart('index.xhtml', userController)}" /></li>
-                            <li><h:outputText value="    Poäng:#{userController.summary}     " /></li>
-                            <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('index.xhtml', userController)}" /></li>
+                            <li><h:commandLink value="Korg (#{userController.cartItems})" action="#{navigationController.goToCart('index.xhtml')}" ></h:commandLink></li>
+                            <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('index.xhtml')}" /></li>
+                            <li><h:outputText rendered="#{userController.isLoggedIn eq 'true'}" value="Intjänade poäng: #{userController.summary}     " /></li>
                         </ul>
                     </div>
                 </nav>
 
-                <nav class="nav blue lighten-2">
-                    <div class="container">
-                        <ul class="left ">
-                            <li> <h:commandLink value="Snowboards" action="#{navigationController.navigate('snowboards.xhtml', 'index.xhtml')}"/></li>
-                            <li> <h:commandLink value="Boots" action="#{navigationController.navigate('boots.xhtml', 'index.xhtml')}"/></li>
-                            <li> <h:commandLink value="Bindningar" action="#{navigationController.navigate('bindningar.xhtml', 'index.xhtml')}"/></li>
-                        </ul>       
+                    <nav class="nav blue lighten-2">
+                        <div class="container">
+                            <ul class="left ">
+                                <li> <h:commandLink value="Snowboards" action="#{navigationController.navigate('snowboards.xhtml', 'index.xhtml')}"/></li>
+                                <li> <h:commandLink value="Boots" action="#{navigationController.navigate('boots.xhtml', 'index.xhtml')}"/></li>
+                                <li> <h:commandLink value="Bindningar" action="#{navigationController.navigate('bindningar.xhtml', 'index.xhtml')}"/></li>
+                            </ul>       
+                        </div>
+                    </nav>
+                    <div>
                     </div>
-                </nav>
-                <div>
-                </div>
-            </header>
-            <!-- Body starts from here -->
-            <div class="parallax-container" id="index-header">
-            </div> 
-            
-            <div class="container" id="product_search">
-                 <div class="row">
-                <div class="center product-search">
-                   <!-- <h:form> -->
-                        Sök produkt: 
-                        <p:autoComplete class="autocomplete" value="#{productController.inputName}"
-                                        maxResults="10"
-                                        completeMethod="#{productController.nameSuggestions}"/>
-                        <h:commandButton class="waves-effect btn" value="Sök!" action="#{productController.showMatchingProduct()}"/>
-                   <!--</h:form>-->
-                </div>  
-                     </div>  
-            </div> 
- <br/>
-  <br/>
-            <div class="container">
-                
-                <div class="row">
-                   
-                    <div class="col s12 l12 center">   
-                        <h2>Populära snowboards</h2>
-                    </div>
-                    <div class="col s12 l12">
+                </header>
+                <!-- Body starts from here -->
+                <div class="parallax-container" id="index-header">
+                </div> 
 
-                        <!-- To dynamically display items from object List as Materialize cards - here boards-->
-                       <!-- <h:form id="displayBoardForm" > -->
+                <div class="container" id="product_search">
+                    <div class="row">
+                        <div class="center product-search">
+                            Sök produkt:  <p:autoComplete class="autocomplete" value="#{productController.inputName}"
+                                            maxResults="5" 
+                                            completeMethod="#{productController.nameSuggestions}"  forceSelection="true"/>
+                            <h:commandButton class="waves-effect btn" value="Sök!" action="#{productController.showMatchingProduct()}"/>
+                        </div>  
+                    </div>  
+                </div> 
+                <br/>
+                <br/>
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col s12 l12 center">   
+                            <h2>Populära snowboards</h2>
+                        </div>
+                        <div class="col s12 l12">
+
+                            <!-- To dynamically display items from object List as Materialize cards - here boards-->
                             <ui:repeat var="product" value="#{productController.boards}" size="6"  >
 
                                 <div class="col card horizontal" id="horizontal">
@@ -94,34 +91,32 @@
                                             <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /> <br/>
-                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', productController, product)}"/> 
+                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', product)}"/> 
                                         </div>
                                         <div class="card-action"> 
-                                                <h:commandButton class="waves-effectt btn" value="Köp!" 
+                                            <h:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
                                                  <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div> 
                                     </div>
                                 </div>
                             </ui:repeat>
-                      <!--  </h:form> -->
-                    </div>        
-                </div>          
-            </div> 
+                        </div>        
+                    </div>          
+                </div> 
 
 
 
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 l12 center">   
-                        <h2>Populära boots</h2>
-                    </div>
-                    <div class="col s12 l12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 l12 center">   
+                            <h2>Populära boots</h2>
+                        </div>
+                        <div class="col s12 l12">
 
-                        <!-- To dynamically display items from object List as Materialize cards - here boots-->
-                        <h:form id="displayBootsForm">
+                            <!-- To dynamically display items from object List as Materialize cards - here boots-->
+
                             <ui:repeat var="product" value="#{productController.boots}" size="3">
-
                                 <div class="col card horizontal" id="horizontal">
                                     <div class="card-image-boots"> 
                                         <h:graphicImage class="card-image-boots" id="boots-img" url="#{product.imagePath}"/>  
@@ -135,31 +130,30 @@
                                             <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /><br/>
-                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', productController, product)}"/> 
+                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', product)}"/> 
                                         </div>
                                         <div class="card-action"> 
                                             <h:commandButton class="waves-effect btn" value="Köp!" 
-                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}"/>
+                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
+                                                <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div> 
                                     </div>
                                 </div>
                             </ui:repeat>
-                        </h:form>
-                    </div>        
-                </div>          
-            </div> 
+                        </div>        
+                    </div>          
+                </div> 
 
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 l12 center">  
-                        <h2>Populära bindningar</h2>
-                    </div>
-                    <div class="col s12 l12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 l12 center">  
+                            <h2>Populära bindningar</h2>
+                        </div>
+                        <div class="col s12 l12">
 
-                        <!-- To dynamically display items from object List as Materialize cards - here bindings-->
-                        <h:form id="displayBindingForm">
+                            <!-- To dynamically display items from object List as Materialize cards - here bindings-->
+
                             <ui:repeat var="product" value="#{productController.bindings}" size="3">
-
                                 <div class="col card horizontal" id="horizontal">
                                     <div class="card-image-boots"> 
                                         <h:graphicImage class="card-image-boots" id="boots-img" url="#{product.imagePath}"/>  
@@ -172,20 +166,47 @@
                                             <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /><br/>
-                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', productController, product)}"/> 
+                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', product)}"/> 
                                         </div>
                                         <div class="card-action">
-                                            <h:commandButton class="waves-effectt btn" value="Köp!" 
-                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}"/>
+                                            <h:commandButton class="waves-effect btn" value="Köp!" 
+                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
+                                                <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div>
                                     </div>
                                 </div>
                             </ui:repeat>
-                        </h:form>
-                    </div>        
-                </div>          
-            </div> 
-  </h:form>
+                        </div>        
+                    </div>          
+                </div> 
+            </h:form>
+            <footer class="page-footer grey darken-8">
+          <div class="container" >
+            <div class="gray">
+              <div class="col l6 s12">
+                <h5 class="white-text"></h5>
+                <p class="grey-text text-lighten-4"></p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Follow us on:</h5>
+
+                <a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook" style="font-size: 30px;padding-right:20px"></a>
+                <a href="https://twitter.com/" target="_blank" class="fa fa-twitter" style="font-size: 30px;padding-right:20px"></a>
+                <a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube" style="font-size: 30px;padding-right:20px"></a>
+                <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram" style="font-size: 30px;padding-right:20px"></a>
+                <a href="https://www.instagram.com" target="_blank" class="fa fa-linkedin" style="font-size: 30px;padding-right:20px"></a>
+                <div class="right">Alla varor som visas finns i lager och är redo för leverans.</div>
+              </div>
+
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            &copy; 2019 Erik, Julia, Jesper, Pavel, G3Snowboardshop &copy; Radonfly  (used without permission).
+            <a class="grey-text text-lighten-4 right" href="#!">Click for more links</a>
+            </div>
+          </div>
+        </footer>
         </f:view>
     </h:body>
 

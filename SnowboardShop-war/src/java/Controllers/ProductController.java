@@ -1,4 +1,4 @@
-package pac;
+package Controllers;
 
 import EJB.ProductBean;
 import EntityClasses.Product;
@@ -119,18 +119,11 @@ public class ProductController implements Serializable {
         this.allProducts = allProducts;
     }
 
-    
-    /**
-     * Auto-completes product names from the Product List
-     *
-     * @param text
-     * @return
-     */
     private String inputName;
 
     public List<String> nameSuggestions(String enteredValue) {
         List<String> matches = new ArrayList<>();
-        //using data factory for getting suggestions
+       
         for (Product p : allProducts) {
             if ((p.getBrand().toLowerCase() + " " + p.getName().toLowerCase()).contains(enteredValue.toLowerCase())) {
                 matches.add(p.getBrand()+ " " + p.getName());

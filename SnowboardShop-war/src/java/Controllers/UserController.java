@@ -1,10 +1,10 @@
-package pac;
+package Controllers;
 
 import EJB.UserBean;
 import EntityClasses.Cart;
 import EntityClasses.Orderning3;
 import EntityClasses.Product;
-import EntityClasses.SnowBeanLocal;
+import EJB.SnowBeanLocal;
 import EntityClasses.User3;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -52,8 +52,8 @@ public class UserController implements Serializable {
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
-     * familyName, String email, String password, String status)
-     */
+     * familyName, String email, String password, String status) julia
+     */ 
     public UserController() {
         loggedInStatus = "Logga in";
         cartItems = 0;
@@ -80,7 +80,25 @@ public class UserController implements Serializable {
             loggedInStatus = "Logga ut";
             page = u.getStatus();
             setEmail(null);
-        }
+            if(products.size()>0){
+                if(u.getStatus().equals("customer")){
+                    for(Cart c: products){
+                        snowBean.addProduct(c.getProductname(), u.getEmail(), 1, c.getTotalprice());
+                    }
+                    products = snowBean.callProducts(u.getEmail());
+                    cartItems = products.size();                    
+                }else if(u.getStatus().equals("premium")){
+                    for(Cart c: products){
+                        snowBean.addProduct(c.getProductname(), u.getEmail(), 1, c.getTotalprice()*0.9);
+                    }
+                    products = snowBean.callProducts(u.getEmail());
+                    cartItems = products.size();                                        
+                }else{
+                    products = new ArrayList();
+                    cartItems = 0;
+                }
+            }
+        }    
         return page;
     }
 
@@ -99,6 +117,7 @@ public class UserController implements Serializable {
         status = null;
         summary = 0;
         cartItems = 0;
+        products = new ArrayList();
     }
 
     public void sameEmail() {
@@ -339,15 +358,23 @@ public class UserController implements Serializable {
     }
 
     public String addVaror(User3 u, Product p, String str) {
-        if ((u.getStatus()).equals("customer")) {
-            snowBean.addProduct(p.getName(), str, 1, p.getPrice());
-            String test1 = visaKorg(str);
+        if (u == null) {
+            Cart c = new Cart(p.getName(), "null", 1, p.getPrice());
+            products.add(c);
             cartItems++;
-        }
-        if ((u.getStatus()).equals("premium")) {
-            snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
-            String test2 = visaKorg(str);
-            cartItems++;
+
+        } else {
+            
+            if ((u.getStatus()).equals("customer")) {
+                snowBean.addProduct(p.getName(), str, 1, p.getPrice());
+                String test1 = visaKorg(str);
+                cartItems++;
+            }
+            if ((u.getStatus()).equals("premium")) {
+                snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
+                String test2 = visaKorg(str);
+                cartItems++;
+            }
         }
         return "ok";
     }
@@ -364,18 +391,42 @@ public class UserController implements Serializable {
         return "cart";
     }
 
-    public String remove(String proname, long id, String mail) {
-        snowBean.removeBypronameidemail(proname, id, mail);
-        cartItems--;
+    public String remove(String proname, long id, User3 u) {
+        String mail = "";
+        if (u == null) {
+            for (Cart c : products) {
+                if (c.getProductname().equals(proname)) {
+                    products.remove(c);
+                    cartItems--;
+                    return "cart";
+                }
+            }
+        } else {
+            mail = u.getEmail();
+            snowBean.removeBypronameidemail(proname, id, mail);
+            cartItems--;
+        }
         return visaKorg(mail);
     }
 
-    public double callSummaryPrice(String mail) {
-        sumprice = snowBean.callSummaryPrice(mail);
+    public double callSummaryPrice(User3 user) {
+        if(user == null){
+            sumprice = 0;
+            for(Cart c: products){
+                sumprice = sumprice + c.getTotalprice();
+            }
+        }else{
+            String mail = user.getEmail();
+            sumprice = snowBean.callSummaryPrice(mail);
+        }
         return sumprice;
     }
 
     public String buyAll(User3 user, List<Cart> korg) {
+        if(user == null){
+            return "loginPage";
+        }
+        cartItems = 0;
         String ordernr, mail, fullname, productname;
         int count;
         double totalprice, summaprice = 0;

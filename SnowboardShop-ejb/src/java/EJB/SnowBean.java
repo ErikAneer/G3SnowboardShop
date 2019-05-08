@@ -1,5 +1,10 @@
-package EntityClasses;
+package EJB;
 
+import EntityClasses.Cart;
+import EntityClasses.Orderning;
+import EntityClasses.Orderning3;
+import EntityClasses.User2;
+import EntityClasses.User3;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
