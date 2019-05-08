@@ -46,5 +46,23 @@ public interface SnowBeanLocal {
     Double sumPrice(String email);
 
     void changeStatus(Object user);
+
+    List<User3> callAllUser3();
+
+    List<User3> callAllCustomer3(String customer, String premium);
+
+    void sendOrder3(Object user, String ordernr, String email, String fullname, String productname, int count, double totalprice, String fulladdress, String postnraddress, String telephone);
+
+    List<Orderning3> callOrder3(String email);
+
+    List<String> callUser3OrderNrs(Object user);
+
+    List<Orderning3> callOrderDetail3(String ordermail);
+
+    void changeNewOrdernr(String oldnr, String newnr);
+
+    Integer callAntalcount(String email);
+
+    Double callSummaryPrice(String email);
     
 }
