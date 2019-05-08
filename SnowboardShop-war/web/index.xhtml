@@ -58,8 +58,8 @@
                         <div class="center product-search">
                             Sök produkt: 
                             <p:autoComplete class="autocomplete" value="#{productController.inputName}"
-                                            maxResults="10"
-                                            completeMethod="#{productController.nameSuggestions}"/>
+                                            maxResults="5" 
+                                            completeMethod="#{productController.nameSuggestions}"  forceSelection="true"/>
                             <h:commandButton class="waves-effect btn" value="Sök!" action="#{productController.showMatchingProduct()}"/>
                         </div>  
                     </div>  

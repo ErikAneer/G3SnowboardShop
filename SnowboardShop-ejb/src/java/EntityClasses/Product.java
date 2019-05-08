@@ -36,7 +36,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    //@Basic(fetch=LAZY)
+    @Basic(fetch=LAZY)
     
     private String productType; // available "snowboard, binding, boot"
     

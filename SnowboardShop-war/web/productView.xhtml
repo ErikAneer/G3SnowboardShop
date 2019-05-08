@@ -47,38 +47,51 @@
                     <div>
                     </div>
                 </header>
-                <!-- Body starts from here -->
-
-                <!-- the container for displaying the info in the middle of the screen-->
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col s12 l12 push-1">
-                            <div class="col card horizontal" style="width: 800px;">
-                                <div class="card-image"> 
-                                    <h:graphicImage class="card-image" url="#{productController.selectedProduct.imagePath}" style=" padding-top: 20px; height:240px;"/>  
-                                </div>
-                                <div class="card-stacked">
-                                    <div class="card-content">
-                                        <p><h5>#{productController.selectedProduct.name}</h5></p>
-                                        <p>#{productController.selectedProduct.brand}</p>
-                                        <p>#{productController.selectedProduct.productLength} cm</p>
-                                        <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price} kr" ><f:convertNumber pattern="#0"/></h:outputText>  
-                                        <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}  kr" />
-                                        <p>#{productController.selectedProduct.description}</p>       
-                                    </div>
-                                    <div class="card-action">
-                                        <h:commandButton class="waves-effectt btn" value="Köp!" 
-                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
-                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
-                                        <h:commandButton class="waves-effectt btn" value="Tillbaka"  action="#{navigationController.navigate(navigationController.previousPage, 'productView.xhtml')}"/>
-                                    </div> 
-                                </div>
-                            </div>
-                        </div> 
-                    </div>          
-                </div> 
             </h:form>
+            <!-- Body starts from here -->
+
+            <!-- the container for displaying the info in the middle of the screen-->
+            <div class="container">
+                <div class="row">
+
+                    <div class="col s12 l12 push-1">
+                        <div class="col card horizontal" style="width: 800px;">
+                            <div class="card-image"> 
+                                <h:graphicImage class="card-image" url="#{productController.selectedProduct.imagePath}" style=" padding-top: 20px; height:240px;"/>  
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <p><h5>#{productController.selectedProduct.name}</h5></p>
+                                    <p>#{productController.selectedProduct.brand}</p>
+                                    <h:form rendered="#{productController.selectedProduct.productType eq 'boot'}">
+                                        <h:outputText value="Eur " /><h:outputText  value= "#{productController.selectedProduct.productLength}" > <f:convertNumber pattern="#0"/> </h:outputText>
+                                        <br/>
+                                    </h:form>
+                                    <h:form rendered="#{productController.selectedProduct.productType eq 'snowboard'}">
+                                        <h:outputText  value= "#{productController.selectedProduct.productLength}" > <f:convertNumber pattern="#0"/> </h:outputText> <h:outputText value=" cm" />
+                                        <br/>
+                                    </h:form>
+                                    <h:form>
+                                        <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/> </h:outputText>  
+                                        <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
+                                        <h:outputText value=" kr" /> <br/>
+                                        <p>#{productController.selectedProduct.description}</p>       
+                                    </h:form>     
+                                </div>
+                                <div class="card-action">
+                                    <h:form>
+                                        <h:commandButton class="waves-effectt btn" value="Köp!" 
+                                                         action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
+                                            <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
+                                        <h:commandButton class="waves-effectt btn" value="Tillbaka"  action="#{navigationController.navigate(navigationController.previousPage, 'productView.xhtml')}"/>
+                                    </h:form>
+                                </div> 
+                            </div>
+                        </div>
+                    </div> 
+                </div>          
+            </div> 
+
         </f:view>
     </h:body>
 </html>
