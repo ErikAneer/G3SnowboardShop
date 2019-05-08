@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="card-action"> 
                                             <h:commandButton class="waves-effectt btn" value="Köp!" 
-                                                             action="#{userController.addVaror(product, userController.currentUser.email)}">
+                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
                                                  <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div> 
                                     </div>
