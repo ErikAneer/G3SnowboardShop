@@ -92,6 +92,9 @@ public class NavigationController implements Serializable {
 
     public String goToCart(String currentPage) {
         refreshVisitedPages(currentPage);
+        if(userController.getCurrentUser() == null){
+            return "cart";
+        }
         return userController.visaKorg(userController.getCurrentUser().getEmail());
 
     }

@@ -71,11 +71,11 @@
                                 </h:column>
                                 <h:column>
                                     <h:commandButton class="waves-effectt btn" id="remove" value="Ta bort" 
-                                                     action="#{userController.remove(product.productname, product.id, userController.currentUser.email)}"/>
+                                                     action="#{userController.remove(product.productname, product.id, userController.currentUser)}"/>
                                 </h:column>
                             </h:dataTable>
                             <br/>
-                            <h:outputText value="Total price: #{userController.callSummaryPrice(userController.currentUser.email)}" />
+                            <h:outputText value="Total price: #{userController.callSummaryPrice(userController.currentUser)}" />
                             <br/><br/>
                             <h:commandButton class="waves-effectt btn" value="Köp" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
 
