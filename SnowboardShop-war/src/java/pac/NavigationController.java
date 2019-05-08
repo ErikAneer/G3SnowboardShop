@@ -53,11 +53,12 @@ public class NavigationController implements Serializable {
 
     public String logInLogOut(String currentPage, UserController u) {
         String page = "";
-        if (!u.getIsLoggedIn()) {
-            secondPreviousPage = previousPage;
+        secondPreviousPage = previousPage;
             previousPage = currentPage;
+        
+        if (!u.getIsLoggedIn()) {
             page = "login";
-        } else {
+        } else { 
             page = "logout";
         }
         return page;

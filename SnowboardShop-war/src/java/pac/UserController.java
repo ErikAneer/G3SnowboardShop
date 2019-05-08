@@ -377,8 +377,7 @@ public class UserController implements Serializable {
      
          public String showCustomerOrders(User2 u){
              setCustomer(u);
-             callOrderbymail(u.getEmail());
-             
+             callOrderbymail(u.getEmail()); 
              return "show_customer_details";
     }  
 }

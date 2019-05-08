@@ -58,7 +58,7 @@
                                     <h:outputText value="#{userController.email}" />
                                 </f:facet>
                                 <h:column>
-                                    <f:facet name="header" >Produck</f:facet>
+                                    <f:facet name="header" >Produkt</f:facet>
                                     <h:outputText value="#{product.productname}" />
                                 </h:column>
                                 <h:column>
@@ -82,7 +82,6 @@
                         <h:form rendered="#{empty userController.products}">
                             <h4>Du har inga varor i varukorgen</h4>
                             <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
-                            förra sidan var #{navigationController.previousPage}
                         </h:form>
                     </div>
                 </div>
