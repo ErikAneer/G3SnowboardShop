@@ -29,7 +29,7 @@
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
                             <li> <h:commandLink value="Korg (#{userController.cartItems})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
-                            <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('bindningar.xhtml', userController)}" /></li>
+                            <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('bindningar.xhtml')}" /></li>
                         </ul>
                     </div>
                 </nav>
@@ -66,7 +66,7 @@
                                            <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /><br/>
-                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('bindningar.xhtml', productController, product)}"/>   
+                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('bindningar.xhtml', product)}"/>   
                                         </div>
                                         <div class="card-action">
                                            <h:commandButton class="waves-effectt btn" value="Köp!" 

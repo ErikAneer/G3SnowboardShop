@@ -31,8 +31,8 @@
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li><h:commandLink value="Korg (#{userController.cartItems})" action="#{navigationController.goToCart('index.xhtml', userController)}" ></h:commandLink></li>
-                            <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('index.xhtml', userController)}" /></li>
+                            <li><h:commandLink value="Korg (#{userController.cartItems})" action="#{navigationController.goToCart('index.xhtml')}" ></h:commandLink></li>
+                            <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('index.xhtml')}" /></li>
                             <li><h:outputText rendered="#{userController.isLoggedIn eq 'true'}" value="Intjänade poäng: #{userController.summary}     " /></li>
                         </ul>
                     </div>
@@ -91,7 +91,7 @@
                                             <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /> <br/>
-                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', productController, product)}"/> 
+                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', product)}"/> 
                                         </div>
                                         <div class="card-action"> 
                                             <h:commandButton class="waves-effectt btn" value="Köp!" 
@@ -130,7 +130,7 @@
                                             <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /><br/>
-                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', productController, product)}"/> 
+                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', product)}"/> 
                                         </div>
                                         <div class="card-action"> 
                                             <h:commandButton class="waves-effect btn" value="Köp!" 
@@ -166,7 +166,7 @@
                                             <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
                                             <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                             <h:outputText value=" kr" /><br/>
-                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', productController, product)}"/> 
+                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('index.xhtml', product)}"/> 
                                         </div>
                                         <div class="card-action">
                                             <h:commandButton class="waves-effect btn" value="Köp!" 
