@@ -52,8 +52,8 @@ public class UserController implements Serializable {
 
     /**
      * Creates a new instance of LoginBean //(String firstName, String
-     * familyName, String email, String password, String status)
-     */
+     * familyName, String email, String password, String status) julia
+     */ 
     public UserController() {
         loggedInStatus = "Logga in";
         cartItems = 0;
