@@ -56,7 +56,8 @@
                         <div class="col s12 l12 push-1">
                             <div class="col card horizontal" style="width: 800px;">
                                 <div class="card-image"> 
-                                    <h:graphicImage class="card-image" url="#{productController.selectedProduct.imagePath}" style=" padding-top: 20px; height:450px;"/>  
+                                    <h:graphicImage rendered="#{productController.selectedProduct.productType ne 'snowboard'}" class="card-image" url="#{productController.selectedProduct.imagePath}" style=" padding-top: 20px; height:240px;"/>  
+                                    <h:graphicImage rendered="#{productController.selectedProduct.productType eq 'snowboard'}" class="card-image" url="#{productController.selectedProduct.imagePath}" style=" padding-top: 20px; height:340px;"/> 
                                 </div>
                                 <div class="card-stacked">
                                     <div class="card-content">
