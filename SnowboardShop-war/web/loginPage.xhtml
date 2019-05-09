@@ -26,7 +26,8 @@
                 <header>
                     <nav class="nav-wrapper blue">
                         <div class="container">
-                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'loginPage.xhtml')}" /> 
+                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'loginPage.xhtml')}" > 
+                                <f:param name="skipValidator" value="true"/> </h:commandLink>
                         </div>
                     </nav>
 
