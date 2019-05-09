@@ -16,6 +16,7 @@ import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -119,24 +120,20 @@ public class UserController implements Serializable {
         cartItems = 0;
         products = new ArrayList();
     }
-
-    public void sameEmail() {
-        boolean same = snowBean.isSameEmail(email);
-        if (same) {
-            sameEmailmsg = "same email";
-        } else {
-            sameEmailmsg = "ok";
-        }
-    }
-
+     
     public String registerNewCustomer() {
         String sidan = "register";
-        sameEmail();
-        if (sameEmailmsg.equals("ok")) {
-            snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
+        if (snowBean.isSameEmail(email)) {
+                FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Den angivna mailadressen finns redan registrerad! Ange en annan mailadress.", null);
+                FacesContext.getCurrentInstance().addMessage("registerForm:contactInsert", javaTextMsg);
+            System.out.println("Samma email finns");
+        }   
+        else{
+       snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
             sidan = login();
-
-        }
+            clearRegisterForm();
+        } 
         return sidan;
     }
 
