@@ -19,7 +19,7 @@ import javax.faces.context.FacesContext;
 
 /**
  *
- * @author Erik
+ * @author Erik jj
  */
 @Named(value = "userController")
 @SessionScoped
