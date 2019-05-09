@@ -26,7 +26,7 @@
 
                             <ul class="right hide-on-med-and-down">
                                 <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                                <li> <h:commandLink value="Korg (#{userController.cartItems})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                                <li> <h:commandLink value="Korg (#{userController.callItems()})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
                                 <li><h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('cart.xhtml')}" /></li>
                             </ul>
                         </div>
@@ -63,7 +63,8 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Antal</f:facet>
-                                    <h:outputText value="#{product.count}" />
+                                    <h:inputText value="#{product.count}" />
+                                    <h:commandButton value="ok" action="#{userController.totalPrice(product.count, product.id, product)}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Pris</f:facet>
@@ -76,6 +77,11 @@
                             </h:dataTable>
                             <br/>
                             <h:outputText value="Total price: #{userController.callSummaryPrice(userController.currentUser)}" />
+                            <br/><br/>
+                            <h:commandButton class="waves-effectt btn" value="spara änderningar" action="#{userController.saveChange(userController.currentUser)}"/>   
+                            <h:commandButton class="waves-effectt btn" value="rensa cart" action="#{userController.removeall(userController.currentUser)}"/>   
+
+                            <br/><br/>
                             <br/><br/>
                             <h:commandButton class="waves-effectt btn" value="Köp" action="#{userController.buyAll(userController.currentUser, userController.products)}"/>   
 

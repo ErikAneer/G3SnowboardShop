@@ -31,7 +31,7 @@
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li><h:commandLink value="Korg (#{userController.cartItems})" action="#{navigationController.goToCart('index.xhtml')}" ></h:commandLink></li>
+                            <li><h:commandLink value="Korg (#{userController.callItems()})" action="#{navigationController.goToCart('index.xhtml')}" ></h:commandLink></li>
                             <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('index.xhtml')}" /></li>
                             <li><h:outputText rendered="#{userController.isLoggedIn eq 'true'}" value="Intjänade poäng: #{userController.summary}     " /></li>
                         </ul>
