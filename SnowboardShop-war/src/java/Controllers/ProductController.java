@@ -180,21 +180,15 @@ public class ProductController implements Serializable {
         setSelectedProduct(p);
         return "show_details";
     }
-    public String showSelectedProductAutoComplete() {
-        
-        System.out.println("metod showSelectedProductAutoComplete()");
-                
+    public String showSelectedProductAutoComplete() {         
         String pageTo = "";
         setInputName("");
-        if (searchResult != null) {
-        setSelectedProduct(searchResult);
+        if (selectedProduct != null) {
         searchResult = null;
         pageTo=  "show_details";
-            System.out.println("hittat träff ");
         }
         
         else {
-            System.out.println("ska ge felmeddelande");
             FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
            "Produkten som du sökt på finns inte, försök igen", null);
            FacesContext.getCurrentInstance().addMessage("indexPageForm:searchButton", javaTextMsg);
@@ -207,7 +201,7 @@ public class ProductController implements Serializable {
     public void findMatchingProduct() {
             allProducts.forEach(p->{
             if((p.getBrand() + " " + p.getName()).equals(inputName)){
-                searchResult = p;
+                setSelectedProduct(p);
             }
             });
     }

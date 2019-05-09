@@ -362,7 +362,7 @@ public class UserController implements Serializable {
             c.setId(indexid);
             indexid++;
             products.add(c);
-            cartItems++;
+
 
         } else {
             
@@ -383,7 +383,7 @@ public class UserController implements Serializable {
     public String addVarorPremium(Product p, String str) {
         snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
         String test2 = visaKorg(str);
-        cartItems++;
+        //cartItems++;
         return "ok";
     }
 
@@ -398,7 +398,6 @@ public class UserController implements Serializable {
             for (Cart c : products) {
                 if (c.getProductname().equals(proname) && c.getId() == id) {
                     products.remove(c);
-                    cartItems--;
                     return "cart";
                 }
             }

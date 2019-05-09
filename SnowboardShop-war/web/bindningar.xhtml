@@ -28,7 +28,7 @@
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:commandLink value="Korg (#{userController.cartItems})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                            <li> <h:commandLink value="varor (#{userController.products.size()})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
                             <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('bindningar.xhtml')}" /></li>
                         </ul>
                     </div>
