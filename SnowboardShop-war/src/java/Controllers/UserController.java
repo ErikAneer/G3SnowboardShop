@@ -356,10 +356,14 @@ public class UserController implements Serializable {
 
         //snowBean.saveTestUsersToDB();
     }
-
+    
+    private long indexid = 1L;
+    
     public String addVaror(User3 u, Product p, String str) {
         if (u == null) {
             Cart c = new Cart(p.getName(), "null", 1, p.getPrice());
+            c.setId(indexid);
+            indexid++;
             products.add(c);
             cartItems++;
 
@@ -395,7 +399,7 @@ public class UserController implements Serializable {
         String mail = "";
         if (u == null) {
             for (Cart c : products) {
-                if (c.getProductname().equals(proname)) {
+                if (c.getProductname().equals(proname) && c.getId() == id) {
                     products.remove(c);
                     cartItems--;
                     return "cart";
