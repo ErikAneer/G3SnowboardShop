@@ -24,7 +24,7 @@
 
         <h:outputStylesheet library="css" name="Style.css"  />
         <f:view>
-            <h:form>
+            <h:form id="indexPageForm">
                 <header>
                     <nav class="nav-wrapper blue">
                         <div class="container">
@@ -57,13 +57,14 @@
             <div class="container">
 
                     <div class="row">
-                            <div class="input-field col s12 l8 offset-l2 center">
+                            <div class="input-field col s12 l6 offset-l2 center">
                             <i class="material-icons prefix">textsms</i>
                             <h:inputText id="autocomplete-input" class="autocomplete" value="#{productController.inputName}"/>
                             <label for="autocomplete-input">Sök produkt</label>
-                            <h:commandButton class="waves-effect btn" value="Sök!" action="#{navigationController.navigateToProductAutocomplete('index.xhtml')}">
+                            <h:commandButton id="searchButton" class="waves-effect btn" value="Sök!" action="#{navigationController.navigateToProductAutocomplete('index.xhtml')}">
                                  <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
+                            <h:message  id="autocompleteErrorMessage" for="searchButton" errorStyle="color: red" />
                         </div>
                     </div>
 
@@ -237,7 +238,8 @@
                 <ui:repeat value="#{productController.autocompleteSuggestions}" var="string">
                     "#{string}" : null,
                 </ui:repeat>
-                },
+                
+                },limit: 10,
                 });
                 });
 
