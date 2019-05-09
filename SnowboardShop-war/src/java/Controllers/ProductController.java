@@ -25,7 +25,9 @@ public class ProductController implements Serializable {
     private List<Product> bindings = new ArrayList();
     private String message;
     private String nameSuggestions;
-    
+    private List<String> autocompleteSuggestions = new ArrayList();
+    private String[] autocomplete;
+     
     private Product  selectedProduct;
 
     /**
@@ -95,12 +97,36 @@ public class ProductController implements Serializable {
         bindings= productBean.getAllBindings();
     }
 
+    public List<String> getAutocompleteSuggestions() {
+        return autocompleteSuggestions;
+    }
+
+    public void setAutocompleteSuggestions(List<String> autocompleteSuggestions) {
+        this.autocompleteSuggestions = autocompleteSuggestions;
+    }
+    
+    public void fillAutoCompleteList() {
+        allProducts.forEach(p-> autocompleteSuggestions.add(p.getBrand()+ " " + p.getName()));
+        autocomplete = autocompleteSuggestions.toArray(new String[0]);
+    }
+
+    public String[] getAutocomplete() {
+        return autocomplete;
+    }
+
+    public void setAutocomplete(String[] autocomplete) {
+        this.autocomplete = autocomplete;
+    }
+    
+    
+
     public void onload() {
          //productBean.saveProductToDB();
          addBoardsToList();
          addBootsToList();  
          addBindingsToList();
          addAllProductsToList();
+         fillAutoCompleteList();
     }
 
     public Product getSelectedProduct() {
@@ -144,6 +170,7 @@ public class ProductController implements Serializable {
         setSelectedProduct(p);
         return "show_details";
     }
+    
     
     public void findMatchingProduct() {
             allProducts.forEach(p->{
