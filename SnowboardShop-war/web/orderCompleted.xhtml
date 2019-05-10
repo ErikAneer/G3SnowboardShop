@@ -29,7 +29,7 @@
 
                             <h:dataTable id="productInfo2" value="#{userController.detailorders}" var="product">
                                 <f:facet name="header">
-                                    <h4>Din Orderbekräftelse</h4>
+                                    <h4>Din Orderbekräftelse #{userController.ordernummer}</h4>
                                     <h:outputText value="#{userController.email}" />
                                 </f:facet>
                                 <h:column>
