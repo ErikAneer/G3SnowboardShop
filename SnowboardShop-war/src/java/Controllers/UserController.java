@@ -360,15 +360,36 @@ public class UserController implements Serializable {
     private long indexid = 1L;
     
     public String addVaror(User3 u, Product p, String str) {
+                int size=0;
         if (u == null) {
-            Cart c = new Cart(p.getName(), "null", 1, p.getPrice());
-            c.setPrice(p.getPrice());  
-            c.setId(indexid);
-            indexid++;
-            products.add(c);
-            cartItems++;
-
-
+            if(products.size()<1){
+                Cart c = new Cart(p.getName(), "null", 1, p.getPrice());
+                c.setPrice(p.getPrice());  
+                c.setId(indexid);
+                indexid++;
+                products.add(c);
+            }
+            if(products.size()>0){
+                for(Cart c: products){
+                    if(c.getProductname().equals(p.getName())){
+                        int cou = c.getCount();
+                        cou++;
+                        c.setCount(cou);
+                        c.setTotalprice(c.getPrice()*cou);
+                        break;
+                    }else{
+                        size++;
+                        if(size==products.size()){
+                            Cart c1 = new Cart(p.getName(), "null", 1, p.getPrice());
+                            c1.setPrice(p.getPrice());  
+                            c1.setId(indexid);
+                            products.add(c1);
+                            indexid++;
+                            size = 0;
+                        }
+                    }    
+                }   
+            }
         } else {
             
             if ((u.getStatus()).equals("customer")) {
