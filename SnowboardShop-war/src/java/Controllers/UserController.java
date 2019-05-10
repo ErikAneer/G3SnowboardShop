@@ -364,13 +364,13 @@ public class UserController implements Serializable {
                 indexid++;
                 products.add(c);
             }
-            if(products.size()>0){
-                for(Cart c: products){
-                    if(c.getProductname().equals(p.getName())){
-                        int cou = c.getCount();
+            else{
+                for(int i=0; i<products.size(); i++){
+                    if((products.get(i).getProductname()).equals(p.getName())){
+                        int cou = products.get(i).getCount();
                         cou++;
-                        c.setCount(cou);
-                        c.setTotalprice(c.getPrice()*cou);
+                        products.get(i).setCount(cou);
+                        products.get(i).setTotalprice(products.get(i).getPrice()*cou);
                         break;
                     }else{
                         size++;
