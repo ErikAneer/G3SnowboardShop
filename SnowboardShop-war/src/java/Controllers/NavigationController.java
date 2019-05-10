@@ -57,6 +57,7 @@ public class NavigationController implements Serializable {
     }
 
     public String navigate(String pageTo, String currentPage) {
+        productController.setSelectedProduct(null);
         refreshVisitedPages(currentPage);
         return pageTo;
     }

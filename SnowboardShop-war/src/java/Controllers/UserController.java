@@ -509,4 +509,5 @@ public class UserController implements Serializable {
         int count = snowBean.callAntalcount(mail);
         return count;
     }
+  
 }
