@@ -381,6 +381,7 @@ public class UserController implements Serializable {
                             products.add(c1);
                             indexid++;
                             size = 0;
+                            break;
                         }
                     }    
                 }   
