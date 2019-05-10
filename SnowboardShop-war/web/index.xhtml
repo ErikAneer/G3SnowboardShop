@@ -61,7 +61,7 @@
                             <i class="material-icons prefix">textsms</i>
                             <h:inputText id="autocomplete-input" class="autocomplete" value="#{productController.inputName}"/>
                             <label for="autocomplete-input">Sök produkt</label>
-                            <h:commandButton id="searchButton" class="waves-effect btn" value="Sök!" action="#{navigationController.navigateToProductAutocomplete('index.xhtml')}">
+                            <h:commandButton id="searchButton" class="waves-effect btn white-text" value="Sök!" action="#{navigationController.navigateToProductAutocomplete('index.xhtml')}">
                                  <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
                             <h:message  id="autocompleteErrorMessage" for="searchButton" errorStyle="color: red" />
