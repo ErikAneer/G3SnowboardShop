@@ -112,7 +112,8 @@ public class NavigationController implements Serializable {
     public String navigateToCompleteOrder(String currentPage){
         refreshVisitedPages(currentPage);
         if(userController.getIsLoggedIn()) {
-            userController.buyAll(userController.getCurrentUser(), userController.getProducts());
+            String test1 = userController.saveChange(userController.getCurrentUser());
+            String test2 = userController.buyAll(userController.getCurrentUser(), userController.getProducts());
             return "orderCompleted";
         }
         return "login";

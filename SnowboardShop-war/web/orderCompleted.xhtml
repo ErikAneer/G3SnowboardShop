@@ -25,9 +25,9 @@
                 <div class="row">
                     <div class="col s12 l12">
                         
-                        <h:form rendered="#{not empty userController.products}">
+                        <h:form rendered="#{not empty userController.detailorders}">
 
-                            <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
+                            <h:dataTable id="productInfo2" value="#{userController.detailorders}" var="product">
                                 <f:facet name="header">
                                     <h4>Din Orderbekräftelse</h4>
                                     <h:outputText value="#{userController.email}" />

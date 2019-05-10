@@ -539,7 +539,7 @@ public class UserController implements Serializable {
         if (test3 >= 500000 && (currentUser.getStatus()).equals("customer")) {
             snowBean.changeStatus(currentUser);
         }
-
+        showOrderDetails(ordernummer, mail);  
         return visaKorg(mail);
     }
 
