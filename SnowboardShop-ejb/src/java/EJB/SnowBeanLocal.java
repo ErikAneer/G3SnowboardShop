@@ -69,5 +69,9 @@ public interface SnowBeanLocal {
     Integer callAntalcount(String email);
 
     Double callSummaryPrice(String email);
+
+    void addProduct3(String productname, String email, int count, double totalprice, double price);
+
+    void removeAllpro(String email);
     
 }
