@@ -67,7 +67,7 @@ public class NavigationController implements Serializable {
        refreshVisitedPages(currentPage);
         
         if (!userController.getIsLoggedIn()) {
-            page = "login";
+            page=  "login";
         } else { 
             page = "logout";
         }
@@ -75,8 +75,11 @@ public class NavigationController implements Serializable {
     }
 
     public String loginUser(String currentPage) {
+        String pageTo = previousPage;
         refreshVisitedPages(currentPage);
-        return userController.login();
+        userController.login();
+        System.out.println("förra sidan"+previousPage);
+        return pageTo;
     }
 
     public String logout() {
@@ -113,6 +116,16 @@ public class NavigationController implements Serializable {
             return "orderCompleted";
         }
         return "login";
+    }
+    public String navigateFromRegisterPage(String currentPage){
+        String pageTo = "";
+        refreshVisitedPages(currentPage);
+        userController.registerNewCustomer();
+        if(secondPreviousPage.equals("cart.xhtml")) {
+            return "cart.xhtml";
+        }
+        pageTo = secondPreviousPage;
+        return pageTo;
     }
 
 }

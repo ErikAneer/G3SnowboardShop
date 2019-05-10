@@ -60,7 +60,7 @@ public class UserController implements Serializable {
         cartItems = 0;
     }
 
-    public String login() {
+    public void login() { //STring
         String page = "";
         users = snowBean.callAllUser3();
         kunder = snowBean.callAllCustomer3("customer", "premium");
@@ -85,14 +85,12 @@ public class UserController implements Serializable {
                 if(u.getStatus().equals("customer")){
                     for(Cart c: products){
                         snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice(), c.getPrice());
-                       // snowBean.addProduct(c.getProductname(), u.getEmail(), 1, c.getTotalprice());
                     }
                     products = snowBean.callProducts(u.getEmail());
                     cartItems = products.size();                    
                 }else if(u.getStatus().equals("premium")){
                     for(Cart c: products){
                         snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice()*0.9, c.getPrice());
-                        //snowBean.addProduct(c.getProductname(), u.getEmail(), 1, c.getTotalprice()*0.9);
                     }
                     products = snowBean.callProducts(u.getEmail());
                     cartItems = products.size();                                        
@@ -102,7 +100,6 @@ public class UserController implements Serializable {
                 }
             }
         }    
-        return page;
     }
 
     public void logOut() {
@@ -124,7 +121,7 @@ public class UserController implements Serializable {
         ordernummer = "";
     }
      
-    public String registerNewCustomer() {
+    public void registerNewCustomer() {
         String sidan = "register";
         if (snowBean.isSameEmail(email)) {
                 FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -134,10 +131,9 @@ public class UserController implements Serializable {
         }   
         else{
        snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
-            sidan = login();
+            login();
             clearRegisterForm();
         } 
-        return sidan;
     }
 
     public void clearRegisterForm() {
@@ -372,15 +368,13 @@ public class UserController implements Serializable {
             
             if ((u.getStatus()).equals("customer")) {
                 snowBean.addProduct3(p.getName(), str, 1, p.getPrice(), p.getPrice());
-                //snowBean.addProduct(p.getName(), str, 1, p.getPrice());
                 String test1 = visaKorg(str);
                 cartItems++;
             }
             if ((u.getStatus()).equals("premium")) {
                 snowBean.addProduct3(p.getName(), str, 1, p.getPremiumPrice(), p.getPremiumPrice());
-                //snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
                 String test2 = visaKorg(str);
-                cartItems++;
+
             }
         }
         return "ok";
@@ -389,7 +383,6 @@ public class UserController implements Serializable {
     public String addVarorPremium(Product p, String str) {
         snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
         String test2 = visaKorg(str);
-        //cartItems++;
         return "ok";
     }
 

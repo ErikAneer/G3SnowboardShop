@@ -111,7 +111,7 @@
                            <br/>
 
                         <h:commandButton class="waves-effect waves-light btn" id="contactInsert"  value="Skicka" 
-                                         action="#{userController.registerNewCustomer()}">
+                                         action="#{navigationController.navigateFromRegisterPage('register.xhtml')}">
                             <f:ajax event="action" execute="@form" render="@all" />
                         </h:commandButton>
                         <h:commandButton class="waves-effect waves-light btn" id="contactClearForm"  value="Rensa" 
@@ -119,7 +119,7 @@
                             <f:param name="skipValidator" value="true"/> 
                             <f:ajax event="action" execute="@form" render="@all" />
                         </h:commandButton>
-                        <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(navigationController.previousPage, 'logout.xhtml')}" value="Avbryt">
+                        <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(navigationController.previousPage, 'register.xhtml')}" value="Avbryt">
                              <f:param name="skipValidator" value="true"/>    
                             <f:ajax event="action" execute="@form" render="@all" />
                         </h:commandButton>
