@@ -20,7 +20,7 @@ import javax.faces.validator.ValidatorException;
 
 /**
  *
- * @author Erik  jjj
+ * @author Erik  jjjj
  */
 @Named(value = "userController")
 @SessionScoped
