@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>G3 Board Shop</title>
+        <!-- Compiled and minified CSS julia -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
+        <!-- To use Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet library="css" name="Style.css"  />
+
+        <f:view>
+            <!-- Body starts from here -->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l12">
+                        
+                        <h:form rendered="#{not empty userController.products}">
+
+                            <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
+                                <f:facet name="header">
+                                    <h4>Din Orderbekräftelse</h4>
+                                    <h:outputText value="#{userController.email}" />
+                                </f:facet>
+                                <h:column>
+                                    <f:facet name="header" >Produkt</f:facet>
+                                    <h:outputText value="#{product.productname}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Namn</f:facet>
+                                    <h:outputText value="#{userController.currentUser.firstname}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Efternamn</f:facet>
+                                    <h:outputText value="#{userController.currentUser.familyname}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Antal</f:facet>
+                                    <h:outputText value="#{product.count}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Pris</f:facet>
+                                    <h:outputText value="#{product.totalprice}" />
+                                </h:column>
+                            </h:dataTable>
+                            <br/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </f:view>
+    </h:body>
+</html>
+

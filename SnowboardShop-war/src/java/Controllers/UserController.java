@@ -353,8 +353,7 @@ public class UserController implements Serializable {
     }
 
     public void onload() {
-
-        //snowBean.saveTestUsersToDB();
+        snowBean.saveTestUsersToDB();
     }
     
     private long indexid = 1L;

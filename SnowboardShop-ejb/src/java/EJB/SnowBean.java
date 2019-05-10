@@ -100,8 +100,8 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void saveTestUsersToDB() {
-        //Query q = em.createQuery("select o from User2 o");
-        // List<User2> users = q.getResultList();
+        Query q = em.createQuery("select o from User2 o");
+        List<User2> users = q.getResultList();
         User3 u = new User3();
 
         u.setFirstname("aaaa");
