@@ -29,6 +29,7 @@ public class Cart implements Serializable {
     private String productname, email;
     private int count;
     private double totalprice;
+    private double price; 
 
     public Cart(String productname, String email, int count, double totalprice) {
         this.productname = productname;
@@ -39,6 +40,23 @@ public class Cart implements Serializable {
 
     
     public Cart() {
+    }
+
+    public Cart(String productname, String email, int count, double totalprice, double price) {
+        this.productname = productname;
+        this.email = email;
+        this.count = count;
+        this.totalprice = totalprice;
+        this.price = price;
+    }
+
+    
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     
