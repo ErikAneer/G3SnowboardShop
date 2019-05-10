@@ -105,5 +105,14 @@ public class NavigationController implements Serializable {
         return userController.visaKorg(userController.getCurrentUser().getEmail());
 
     }
+    
+    public String navigateToCompleteOrder(String currentPage){
+        refreshVisitedPages(currentPage);
+        if(userController.getIsLoggedIn()) {
+            userController.buyAll(userController.getCurrentUser(), userController.getProducts());
+            return "orderCompleted";
+        }
+        return "login";
+    }
 
 }

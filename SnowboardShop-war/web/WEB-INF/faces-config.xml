@@ -283,6 +283,23 @@
     </navigation-rule>
     
     
+    <navigation-rule>
+        <from-view-id>/cart.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/loginPage.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/cart.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>orderCompleted</from-outcome>
+            <to-view-id>/orderCompleted.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    
      <navigation-rule>
         <from-view-id>/admin.xhtml</from-view-id>
         <navigation-case>
