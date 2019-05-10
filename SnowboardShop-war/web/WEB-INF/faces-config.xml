@@ -360,7 +360,7 @@
     <navigation-rule>
         <from-view-id>/customerOrders.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>return_to_admin</from-outcome>
+            <from-outcome>admin.xhtml</from-outcome>
             <to-view-id>/admin.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
