@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
-        <title>Visa brädorna</title>
+        <title>G3 Board Shop</title>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
         <!-- To use Material Icons -->
@@ -21,7 +21,8 @@
                 <h:form>
                     <nav class="nav-wrapper blue">
                         <div class="container">
-                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'register.xhtml')}" /> 
+                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'register.xhtml')}" > 
+                                <f:param name="skipValidator" value="true"/> </h:commandLink>
                         </div>
                     </nav>
                     <div>               
@@ -87,18 +88,15 @@
                                     <f:ajax event="blur" render="usernameMessage" />
                                 </h:inputText>
                                 <h:message id="usernameMessage" for="contactEmail" errorStyle="color:red" />
-
-                                <h:outputLabel for="contactEmail" value="Check email" />
-                                <h:commandButton action="#{userController.sameEmail()}" value="test email" />
-                                <h:outputText value="#{userController.sameEmailmsg}" style="color: red" />
-
+                               
+                                 
                                 <h:outputLabel for="password" value="Lösenord: " /> 
                                 <h:inputSecret id="password" value="#{userController.code}" redisplay="true">
                                     <f:validator validatorId="passwordValidatator"></f:validator> 
                                     <f:ajax event="blur" render="passwordMessage" />
                                 </h:inputSecret>  
                                 <h:message id="passwordMessage" for="password" errorStyle="color:red" />
-
+                                
                                 <h:outputLabel for="confirmPassword" value="Upprepa lösenord: " />
                                 <h:inputSecret  id="confirmPassword" redisplay="true" value="#{userController.confirmPassword}">
                                     <f:validator validatorId="confirmPasswordValidatator"></f:validator> 
@@ -106,18 +104,12 @@
                                 </h:inputSecret>
                                 <h:message id="confirmPasswordMessage" for="confirmPassword" errorStyle="color:red" />
                             </h:panelGrid>
-                        </h:form>
-
+                        
+                            
                         <br/>
-                        <div>
-                            <p>
-                                <label>
-                                    <input type="checkbox" required="true"/>
-                                    <span>Jag har läst och godkänner Awesome Board Shops kundvillkor och integritetspolicy.</span>
-                                </label>
-                            </p>
-                            <br/>
-                        </div>
+                         <h:message id="sameEmailMessage" for="contactInsert" errorStyle="color:red" />
+                           <br/>
+
                         <h:commandButton class="waves-effect waves-light btn" id="contactInsert"  value="Skicka" 
                                          action="#{userController.registerNewCustomer()}">
                             <f:ajax event="action" execute="@form" render="@all" />
@@ -131,6 +123,7 @@
                              <f:param name="skipValidator" value="true"/>    
                             <f:ajax event="action" execute="@form" render="@all" />
                         </h:commandButton>
+                       </h:form>
                     </div>
                 </div>
             </div>

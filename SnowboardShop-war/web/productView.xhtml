@@ -29,7 +29,7 @@
 
                             <ul class="right hide-on-med-and-down">
                                 <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                                <li> <h:commandLink value="Korg (#{userController.cartItems})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                                <li> <h:commandLink value="varor (#{cartController.totalNumberCartItems})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
                                 <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('productView.xhtml')}" /></li>
                             </ul>
                         </div>
@@ -73,8 +73,8 @@
                                         <br/>
                                     </h:form>
                                     <h:form>
-                                        <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/> </h:outputText>  
-                                        <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
+                                        <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{productController.selectedProduct.price}" ><f:convertNumber pattern="#0"/> </h:outputText>  
+                                        <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{productController.selectedProduct.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                         <h:outputText value=" kr" /> <br/>
                                         <p>#{productController.selectedProduct.description}</p>       
                                     </h:form>     
@@ -82,10 +82,11 @@
                                 <div class="card-action">
                                     <h:form>
                                         <h:commandButton class="waves-effectt btn" value="Köp!" 
-                                                         action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
+                                                         action="#{cartController.addItemToCart(productController.selectedProduct)}">
                                             <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         <h:commandButton class="waves-effectt btn" value="Tillbaka"  action="#{navigationController.navigate(navigationController.previousPage, 'productView.xhtml')}"/>
                                     </h:form>
+
                                 </div> 
                             </div>
                         </div>

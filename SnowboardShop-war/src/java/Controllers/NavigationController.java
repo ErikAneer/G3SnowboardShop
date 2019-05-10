@@ -89,6 +89,12 @@ public class NavigationController implements Serializable {
         refreshVisitedPages(currentPage);
         return productController.showSelectedProduct(product);
     }
+    
+     public String  navigateToProductAutocomplete(String currentPage) {
+        refreshVisitedPages(currentPage);
+        productController.findMatchingProduct();
+        return productController.showSelectedProductAutoComplete();
+    }
 
     public String goToCart(String currentPage) {
         refreshVisitedPages(currentPage);

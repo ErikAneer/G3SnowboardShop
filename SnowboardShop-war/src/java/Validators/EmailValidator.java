@@ -1,7 +1,6 @@
 package Validators;
 
 import java.io.Serializable;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -17,7 +16,7 @@ import javax.faces.validator.FacesValidator;
 
 @FacesValidator("emailValidator")
 public class EmailValidator implements Validator, Serializable {
-    
+   
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 

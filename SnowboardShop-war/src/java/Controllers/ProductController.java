@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -23,9 +25,12 @@ public class ProductController implements Serializable {
     private List<Product> boards = new ArrayList();
     private List<Product> boots = new ArrayList();
     private List<Product> bindings = new ArrayList();
+    private Product searchResult;
     private String message;
     private String nameSuggestions;
-    
+    private List<String> autocompleteSuggestions = new ArrayList();
+    private String[] autocomplete;
+     
     private Product  selectedProduct;
 
     /**
@@ -95,12 +100,43 @@ public class ProductController implements Serializable {
         bindings= productBean.getAllBindings();
     }
 
+    public List<String> getAutocompleteSuggestions() {
+        return autocompleteSuggestions;
+    }
+
+    public void setAutocompleteSuggestions(List<String> autocompleteSuggestions) {
+        this.autocompleteSuggestions = autocompleteSuggestions;
+    }
+    
+    public void fillAutoCompleteList() {
+        allProducts.forEach(p-> autocompleteSuggestions.add(p.getBrand()+ " " + p.getName()));
+        autocomplete = autocompleteSuggestions.toArray(new String[0]);
+    }
+
+    public String[] getAutocomplete() {
+        return autocomplete;
+    }
+
+    public void setAutocomplete(String[] autocomplete) {
+        this.autocomplete = autocomplete;
+    }
+
+    public Product getSearchResult() {
+        return searchResult;
+    }
+
+    public void setSearchResult(Product searchResult) {
+        this.searchResult = searchResult;
+    }
+    
+
     public void onload() {
          //productBean.saveProductToDB();
          addBoardsToList();
          addBootsToList();  
          addBindingsToList();
          addAllProductsToList();
+         fillAutoCompleteList();
     }
 
     public Product getSelectedProduct() {
@@ -144,6 +180,23 @@ public class ProductController implements Serializable {
         setSelectedProduct(p);
         return "show_details";
     }
+    public String showSelectedProductAutoComplete() {         
+        String pageTo = "";
+        setInputName("");
+        if (selectedProduct != null) {
+        searchResult = null;
+        pageTo=  "show_details";
+        }
+        
+        else {
+            FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+           "Produkten som du sökt på finns inte, försök igen", null);
+           FacesContext.getCurrentInstance().addMessage("indexPageForm:searchButton", javaTextMsg);
+        }
+        
+        return pageTo;
+    }
+    
     
     public void findMatchingProduct() {
             allProducts.forEach(p->{
@@ -155,7 +208,7 @@ public class ProductController implements Serializable {
     
     public String showMatchingProduct(){
             findMatchingProduct();
-            setInputName("");
+            
              return "show_details";
     }      
     public String returnToIndex() {
