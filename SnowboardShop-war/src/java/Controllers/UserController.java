@@ -91,7 +91,7 @@ public class UserController implements Serializable {
                     cartItems = products.size();                    
                 }else if(u.getStatus().equals("premium")){
                     for(Cart c: products){
-                        snowBean.addProduct3(c.getProductname(), u.getEmail(), 1, c.getTotalprice()*0.9, c.getPrice());
+                        snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice()*0.9, c.getPrice());
                         //snowBean.addProduct(c.getProductname(), u.getEmail(), 1, c.getTotalprice()*0.9);
                     }
                     products = snowBean.callProducts(u.getEmail());
