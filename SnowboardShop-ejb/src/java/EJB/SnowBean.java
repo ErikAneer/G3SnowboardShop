@@ -162,10 +162,32 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void addProduct3(String productname, String email, int count, double totalprice, double price) {
-        Cart k = new Cart(productname, email, count, totalprice, price);
-        em.persist(k);
+        int test = 0;
+        Query q = em.createQuery("select o from Cart o where o.email=:email");
+        q.setParameter("email", email);
+        List<Cart> products = q.getResultList();
+        if(products.size()<1){
+            Cart k = new Cart(productname, email, count, totalprice, price);
+            em.persist(k);
+        }else{
+            for(Cart p: products){
+                if(p.getProductname().equals(productname)){
+                    int t1 = p.getCount()+count;
+                    double d1 = p.getTotalprice()+totalprice;
+                    p.setCount(t1);
+                    p.setTotalprice(d1);
+                    em.merge(p);
+                }else{
+                    test++;
+                    if(test==products.size()){
+                        Cart k = new Cart(productname, email, count, totalprice, price);
+                        em.persist(k);
+                    }
+                }
+            }
+        }
     }
-
+    
     @Override
     public List<Cart> callProducts(String email) {
         List<Cart> pros = new ArrayList();
