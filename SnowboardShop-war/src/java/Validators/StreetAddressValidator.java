@@ -31,7 +31,7 @@ public class StreetAddressValidator implements Validator, Serializable {
                 throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
            }
            
-            if( nameStr.length() < 2 || nameStr.length() > 30){ 
+            if( nameStr.length() < 2 || nameStr.length() > 40){ 
                 String message = "Fältet ska vara 2 - 30 tecken.";
                 throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
            }

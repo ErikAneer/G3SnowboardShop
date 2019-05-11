@@ -60,7 +60,7 @@ public class UserController implements Serializable {
         cartItems = 0;
     }
 
-    public String login() {
+    public void login() { //STring
         String page = "";
         users = snowBean.callAllUser3();
         kunder = snowBean.callAllCustomer3("customer", "premium");
@@ -84,13 +84,13 @@ public class UserController implements Serializable {
             if(products.size()>0){
                 if(u.getStatus().equals("customer")){
                     for(Cart c: products){
-                        snowBean.addProduct(c.getProductname(), u.getEmail(), 1, c.getTotalprice());
+                        snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice(), c.getPrice());
                     }
                     products = snowBean.callProducts(u.getEmail());
                     cartItems = products.size();                    
                 }else if(u.getStatus().equals("premium")){
                     for(Cart c: products){
-                        snowBean.addProduct(c.getProductname(), u.getEmail(), 1, c.getTotalprice()*0.9);
+                        snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice()*0.9, c.getPrice());
                     }
                     products = snowBean.callProducts(u.getEmail());
                     cartItems = products.size();                                        
@@ -100,7 +100,6 @@ public class UserController implements Serializable {
                 }
             }
         }    
-        return page;
     }
 
     public void logOut() {
@@ -119,9 +118,10 @@ public class UserController implements Serializable {
         summary = 0;
         cartItems = 0;
         products = new ArrayList();
+        ordernummer = "";
     }
      
-    public String registerNewCustomer() {
+    public void registerNewCustomer() {
         String sidan = "register";
         if (snowBean.isSameEmail(email)) {
                 FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -131,10 +131,9 @@ public class UserController implements Serializable {
         }   
         else{
        snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
-            sidan = login();
+            login();
             clearRegisterForm();
         } 
-        return sidan;
     }
 
     public void clearRegisterForm() {
@@ -350,8 +349,7 @@ public class UserController implements Serializable {
     }
 
     public void onload() {
-
-        //snowBean.saveTestUsersToDB();
+       //snowBean.saveTestUsersToDB();
     }
     
     private long indexid = 1L;
@@ -359,22 +357,24 @@ public class UserController implements Serializable {
     public String addVaror(User3 u, Product p, String str) {
         if (u == null) {
             Cart c = new Cart(p.getName(), "null", 1, p.getPrice());
+            c.setPrice(p.getPrice());  
             c.setId(indexid);
             indexid++;
             products.add(c);
+            cartItems++;
 
 
         } else {
             
             if ((u.getStatus()).equals("customer")) {
-                snowBean.addProduct(p.getName(), str, 1, p.getPrice());
+                snowBean.addProduct3(p.getName(), str, 1, p.getPrice(), p.getPrice());
                 String test1 = visaKorg(str);
                 cartItems++;
             }
             if ((u.getStatus()).equals("premium")) {
-                snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
+                snowBean.addProduct3(p.getName(), str, 1, p.getPremiumPrice(), p.getPremiumPrice());
                 String test2 = visaKorg(str);
-                cartItems++;
+
             }
         }
         return "ok";
@@ -383,7 +383,6 @@ public class UserController implements Serializable {
     public String addVarorPremium(Product p, String str) {
         snowBean.addProduct(p.getName(), str, 1, p.getPremiumPrice());
         String test2 = visaKorg(str);
-        //cartItems++;
         return "ok";
     }
 
@@ -409,8 +408,56 @@ public class UserController implements Serializable {
         return visaKorg(mail);
     }
 
+    public String removeall(User3 u) {
+        String mail = "";
+        if (u == null) {
+            products = new ArrayList();
+            cartItems = 0;
+            return "cart";
+        } else {
+            mail = u.getEmail();
+            snowBean.removeAllpro(u.getEmail());
+            cartItems = 0;
+        }
+        return visaKorg(mail);
+    }
+    
+    public String totalPrice(boolean b, long id, Cart p){
+        for(Cart c: products){
+            if(c.getProductname().equals(p.getProductname()) && c.getId() == id){
+                int procount = p.getCount();
+                if(b==true){ //+
+                    procount++;
+                }
+                if(b==false){
+                    procount--;
+                }
+                c.setCount(procount);
+                c.setTotalprice(c.getPrice()*procount);
+                break;
+            }
+        }
+        return "cart";
+    }
+    
+    public String saveChange(User3 u){
+        if(u == null){
+            return "loginPage";
+        }else{
+            snowBean.removeAllpro(u.getEmail());
+            for(Cart c: products){
+                snowBean.addProduct3(c.getProductname(), c.getEmail(), c.getCount(), c.getTotalprice(), c.getPrice());
+            }
+        }
+        return visaKorg(u.getEmail());
+    }
+    
     public double callSummaryPrice(User3 user) {
-        if(user == null){
+        sumprice = 0;
+        for(Cart c: products){
+            sumprice = sumprice + c.getTotalprice();
+        }
+        /*if(user == null){
             sumprice = 0;
             for(Cart c: products){
                 sumprice = sumprice + c.getTotalprice();
@@ -418,10 +465,18 @@ public class UserController implements Serializable {
         }else{
             String mail = user.getEmail();
             sumprice = snowBean.callSummaryPrice(mail);
-        }
+        }*/
         return sumprice;
     }
 
+    public int callItems(){
+        int items = 0;
+        for(Cart c: products){
+            items += c.getCount();
+        }
+        return items;
+    }
+    
     public String buyAll(User3 user, List<Cart> korg) {
         if(user == null){
             return "loginPage";

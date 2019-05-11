@@ -32,7 +32,7 @@
 
                             <ul class="right hide-on-med-and-down">
                                 <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                                <li><h:commandLink value="varor (#{cartController.totalNumberCartItems})" action="#{navigationController.goToCart('index.xhtml')}" ></h:commandLink></li>
+                                <li><h:commandLink value="varor (#{userController.callItems()})" action="#{navigationController.goToCart('index.xhtml')}" ></h:commandLink></li>
                                 <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('index.xhtml')}" /></li>
                                 <li><h:outputText rendered="#{userController.isLoggedIn eq 'true'}" value="Intjänade poäng: #{userController.summary}     " /></li>
                             </ul>
@@ -58,10 +58,10 @@
 
                     <div class="row">
                             <div class="input-field col s12 l6 offset-l2 center">
-                            <i class="material-icons prefix">textsms</i>
+                            <i class="material-icons prefix">search</i>
                             <h:inputText id="autocomplete-input" class="autocomplete" value="#{productController.inputName}"/>
                             <label for="autocomplete-input">Sök produkt</label>
-                            <h:commandButton id="searchButton" class="waves-effect btn" value="Sök!" action="#{navigationController.navigateToProductAutocomplete('index.xhtml')}">
+                            <h:commandButton id="searchButton" class="waves-effect btn white-text" value="Sök!" action="#{navigationController.navigateToProductAutocomplete('index.xhtml')}">
                                  <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
                             <h:message  id="autocompleteErrorMessage" for="searchButton" errorStyle="color: red" />
@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="card-action"> 
                                             <h:commandButton class="waves-effectt btn" value="Köp!" 
-                                                             action="#{cartController.addItemToCart(product)}">
+                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div> 
                                     </div>
@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="card-action"> 
                                             <h:commandButton class="waves-effect btn" value="Köp!" 
-                                                             action="#{cartController.addItemToCart(product)}">
+                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div> 
                                     </div>
@@ -182,7 +182,7 @@
                                         </div>
                                         <div class="card-action">
                                             <h:commandButton class="waves-effect btn" value="Köp!" 
-                                                             action="#{cartController.addItemToCart(product)}">
+                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div>
                                     </div>

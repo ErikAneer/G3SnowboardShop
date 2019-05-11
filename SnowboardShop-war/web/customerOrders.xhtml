@@ -65,7 +65,7 @@
                             <a class="brand-logo"> G3 Board Shop</a>
                             <ul class="right">
                                 <li> <h:outputText value="Inloggad som: #{userController.currentUser.firstname}"/></li>
-                                <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('customerOrders.xhtml', userController)}" /></li>
+                                <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('customerOrders.xhtml')}" /></li>
                             </ul>
                         </div>
                     </nav>
@@ -105,7 +105,9 @@
                                 </h:column>
 
                             </h:dataTable>
-                            <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate(navigationController.previousPage, 'customerOrders.xhtml')}"/>
+                            <!--<h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate(navigationController.previousPage, 'customerOrders.xhtml')}"/> -->
+                            <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate('admin.xhtml', 'customerOrders.xhtml')}"/>
+                        
                         </div>
                     </div>
                 </div>

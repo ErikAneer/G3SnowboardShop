@@ -4,6 +4,7 @@
 package Controllers;
 
 import EntityClasses.Product;
+import EntityClasses.User3;
 import java.io.Serializable;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -59,6 +60,7 @@ public class NavigationController implements Serializable {
     public String navigate(String pageTo, String currentPage) {
         productController.setSelectedProduct(null);
         refreshVisitedPages(currentPage);
+        productController.setSelectedProduct(null);
         return pageTo;
     }
 
@@ -67,7 +69,7 @@ public class NavigationController implements Serializable {
        refreshVisitedPages(currentPage);
         
         if (!userController.getIsLoggedIn()) {
-            page = "login";
+            page=  "login";
         } else { 
             page = "logout";
         }
@@ -75,8 +77,13 @@ public class NavigationController implements Serializable {
     }
 
     public String loginUser(String currentPage) {
+        String pageTo = previousPage;
         refreshVisitedPages(currentPage);
-        return userController.login();
+        userController.login();
+        if(userController.getCurrentUser().getStatus().equals("admin")){
+            return "admin";
+        }
+        return pageTo;
     }
 
     public String logout() {
@@ -104,6 +111,31 @@ public class NavigationController implements Serializable {
         }
         return userController.visaKorg(userController.getCurrentUser().getEmail());
 
+    }
+    
+    public String navigateToCompleteOrder(String currentPage){
+        refreshVisitedPages(currentPage);
+        if(userController.getIsLoggedIn()) {
+            userController.buyAll(userController.getCurrentUser(), userController.getProducts());
+            return "orderCompleted";
+        }
+        return "login";
+    }
+    public String navigateFromRegisterPage(String currentPage){
+        String pageTo = "";
+        refreshVisitedPages(currentPage);
+        userController.registerNewCustomer();
+        if(secondPreviousPage.equals("cart.xhtml")) {
+            return "cart.xhtml";
+        }
+        pageTo = secondPreviousPage;
+        return pageTo;
+    }
+    
+    public String navigateCustomerDetails(String currentPage, User3 u) {
+        refreshVisitedPages(currentPage);
+        System.out.println("Navigate to customer details. previous page: " + previousPage);
+        return userController.showOrderNrs(u);
     }
 
 }
