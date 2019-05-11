@@ -209,16 +209,18 @@ public class SnowBean implements SnowBeanLocal {
         em.persist(order);
     }
 
+   
     @Override
     public void sendOrder3(Object user, String ordernr, String email, String fullname, String productname,
             int count, double totalprice, String fulladdress, String postnraddress, String telephone) {
         User3 u3 = (User3) user;
         Orderning3 order = new Orderning3(ordernr, email, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone, u3);
-        List<Orderning3> orders = u3.getOrders();
-        orders.add(order);
-        u3.setOrders(orders);
+        //List<Orderning3> orders = u3.getOrders();
+        //orders.add(order);
+       // u3.setOrders(orders);
         em.persist(order);
     }
+    
 
     @Override
     public List<Orderning> callOrders(String email) {

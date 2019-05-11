@@ -31,7 +31,7 @@ public class User3 implements Serializable {
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
 
     @OneToMany(mappedBy="user3")
-    private List<Orderning3> orders = new ArrayList();
+    private List<Order> orders = new ArrayList();
 
     public User3(String firstname, String familyname, String telephone, String address, String postnr, String postaddress, String email, String code, String status) {
         this.firstname = firstname;
@@ -122,11 +122,11 @@ public class User3 implements Serializable {
         this.status = status;
     }
 
-    public List<Orderning3> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Orderning3> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
     

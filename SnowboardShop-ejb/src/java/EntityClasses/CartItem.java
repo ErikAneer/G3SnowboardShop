@@ -24,6 +24,7 @@ public class CartItem implements Serializable {
     private Product item;
     
     private int itemQuantity;
+    private double unitPrice;
     private double totalPrice;
 
     public CartItem(Product item, int itemQuantity) {
@@ -50,12 +51,25 @@ public class CartItem implements Serializable {
         this.itemQuantity = itemQuantity;
     }
 
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice, User3 customer) {
+        if (customer.getStatus().equals("premium")) {
+               this.unitPrice= this.getItem().getPremiumPrice();
+            }
+            else {
+              this.unitPrice= this.getItem().getPrice();
+            }
+    }
+    
     public double getTotalPrice() {
         return totalPrice;
     }
 
     public void setTotalPrice() {
-        this.totalPrice = itemQuantity * item.getPrice();
+        this.totalPrice = itemQuantity * unitPrice;
     }
     
     

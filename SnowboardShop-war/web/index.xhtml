@@ -32,7 +32,7 @@
 
                             <ul class="right hide-on-med-and-down">
                                 <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                                <li><h:commandLink value="varor (#{userController.callItems()})" action="#{navigationController.goToCart('index.xhtml')}" ></h:commandLink></li>
+                                <li> <h:commandLink value="varor (#{cartController.totalNumberCartItems})" action="#{navigationController.goToCart('index.xhtml')}" /></li>
                                 <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('index.xhtml')}" /></li>
                                 <li><h:outputText rendered="#{userController.isLoggedIn eq 'true'}" value="Intjänade poäng: #{userController.summary}     " /></li>
                             </ul>
@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="card-action"> 
                                             <h:commandButton class="waves-effectt btn" value="Köp!" 
-                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
+                                                             action="#{cartController.addItemToCart(product)}">
                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div> 
                                     </div>
@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="card-action"> 
                                             <h:commandButton class="waves-effect btn" value="Köp!" 
-                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
+                                                             action="#{cartController.addItemToCart(product)}">
                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div> 
                                     </div>
@@ -182,7 +182,7 @@
                                         </div>
                                         <div class="card-action">
                                             <h:commandButton class="waves-effect btn" value="Köp!" 
-                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
+                                                             action="#{cartController.addItemToCart(product)}">
                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div>
                                     </div>

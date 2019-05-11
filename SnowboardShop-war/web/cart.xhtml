@@ -26,7 +26,7 @@
 
                             <ul class="right hide-on-med-and-down">
                                 <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                                <li> <h:commandLink value="varor (#{userController.callItems()})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                                <li><h:commandLink value="varor (#{cartController.totalNumberCartItems})" action="#{navigationController.goToCart('index.xhtml')}" ></h:commandLink></li>
                                 <li><h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('cart.xhtml')}" /></li>
                             </ul>
                         </div>
@@ -49,37 +49,46 @@
             <div class="container">
                 <div class="row">
                     <div class="col s12 l12">
-                        <h:form rendered="#{not empty userController.products}">
+                        <h:form rendered="#{not empty cartController.cartitems}">
 
-                            <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
+                              <h:dataTable rendered="#{not empty cartController.cartitems}" id="productInfo2" value="#{cartController.cartitems}" var="cartItem">
                                 <f:facet name="header">
-                                    <h4>Varor i varukorgen</h4>
+                                    <h4>Din varukorg</h4>
                                     <h:outputText value="#{userController.email}" />
                                 </f:facet>
                                 <h:column>
+                                    <f:facet name="header" >Märke</f:facet>
+                                    <h:outputText value="#{cartItem.item.brand}" />
+                                </h:column>
+                                <h:column>
                                     <f:facet name="header" >Produkt</f:facet>
-                                    <h:outputText value="#{product.productname}" />
+                                    <h:outputText value="#{cartItem.item.name}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Antal</f:facet>
-                                    <h:outputText value="#{product.count}" />
+                                    <h:outputText value="#{cartItem.itemQuantity}" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header" >Pris</f:facet>
-                                    <h:outputText value="#{product.totalprice}" />
+                                    <f:facet name="header" >á Pris</f:facet>
+                                    <h:outputText rendered="#{userController.currentUser.status ne 'premium'}" value="#{cartItem.item.price}" />
+                                    <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{cartItem.item.price}" />
+                                    <h:outputText value=" kr" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Totalpris</f:facet>
+                                    <h:outputText value="#{cartItem.totalPrice}" />
+                                    <h:outputText value=" kr" />
                                 </h:column>
                                 <h:column>
                                     <h:commandButton class="waves-effectt btn" id="removeItem" value="-" 
-                                                     action="#{userController.totalPrice(false, product.id, product)}"/>
+                                                     action="#{cartController.removeItemfromCart(cartItem.item)}"/>
                                 </h:column>
                                 <h:column>
                                     <h:commandButton class="waves-effectt btn" id="addItem" value="+" 
-                                                     action="#{userController.totalPrice(true,product.id, product)}"/>
+                                                     action="#{cartController.addItemToCart(cartItem.item)}"/>
                                 </h:column>
-                                <h:column>
-                                    <h:commandButton class="waves-effectt btn" id="remove" value="Ta bort" 
-                                                     action="#{userController.remove(product.productname, product.id, userController.currentUser)}"/>
-                                </h:column>
+                            
+                            <br/>
                             </h:dataTable>
                             <br/>
                             <h:outputText value="Total price: #{userController.callSummaryPrice(userController.currentUser)}" />
@@ -88,11 +97,10 @@
                             <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
                             <br/><br/>
                         </h:form>
-                        <h:outputText value="Order nummer: #{userController.ordernummer}" />
-                        <br/><br/>
-                        <h:form rendered="#{empty userController.products}">
+                      
+                        <h:form rendered="#{empty cartController.cartitems}">
                             <h4>Du har inga varor i varukorgen</h4>
-                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
+                          <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
                         </h:form>
                         
                        
@@ -102,4 +110,3 @@
         </f:view>
     </h:body>
 </html>
-

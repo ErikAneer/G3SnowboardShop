@@ -3,7 +3,9 @@
  */
 package Controllers;
 
+import EJB.OrderBean;
 import EntityClasses.CartItem;
+import EntityClasses.Order;
 import EntityClasses.Product;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -11,6 +13,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -20,8 +24,13 @@ import java.util.List;
 @SessionScoped
 public class cartController implements Serializable {
 
+    @EJB
+    private OrderBean orderBean;
+
     
     
+    @Inject 
+    UserController userController;
     
     private List<CartItem> cartitems  = new ArrayList();
     private int totalNumberCartItems;
@@ -83,6 +92,15 @@ public class cartController implements Serializable {
                   items += i.getItemQuantity();
             }   
         setTotalNumberCartItems(items);
+    }
+    
+    public Order makeOrder(){
+        Order order = null;
+        //User3, List<CartItem> String streetAddress, String postalAddress, int postalCode
+        orderBean.registerOrder(order, orderBean, userController.get, postalAddress, postalCode);
+        currentUser
+                userController.
+        return order;
     }
     
 }
