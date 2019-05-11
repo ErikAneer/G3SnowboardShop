@@ -4,6 +4,7 @@
 package Controllers;
 
 import EntityClasses.Product;
+import EntityClasses.User3;
 import java.io.Serializable;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -77,7 +78,10 @@ public class NavigationController implements Serializable {
     public String loginUser(String currentPage) {
         String pageTo = previousPage;
         refreshVisitedPages(currentPage);
-        pageTo = userController.login(); 
+        userController.login(); 
+        if(userController.getCurrentUser().getStatus().equals("admin")){
+            pageTo = "admin";
+        }
         //System.out.println("förra sidan"+previousPage);
         return pageTo;
     }
@@ -127,6 +131,12 @@ public class NavigationController implements Serializable {
         }
         pageTo = secondPreviousPage;
         return pageTo;
+    }
+    
+    public String navigateCustomerDetails(String currentPage, User3 u) {
+        refreshVisitedPages(currentPage);
+        System.out.println("Navigate to customer details. previous page: " + previousPage);
+        return userController.showOrderNrs(u);
     }
 
 }

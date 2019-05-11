@@ -28,7 +28,7 @@
 
                         <ul class="right hide-on-med-and-down">
                             <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                            <li> <h:commandLink value="varor (#{cartController.totalNumberCartItems})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                             <li><h:commandLink value="varor (#{userController.callItems()})" action="#{navigationController.goToCart('bindningar.xhtml')}" ></h:commandLink></li>
                             <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('bindningar.xhtml')}" /></li>
                         </ul>
                     </div>
@@ -69,9 +69,9 @@
                                             <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('bindningar.xhtml', product)}"/>   
                                         </div>
                                         <div class="card-action">
-                                           <h:commandButton class="waves-effectt btn" value="Köp!" 
-                                                             action="#{cartController.addItemToCart(product)}">
-                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
+                                          <h:commandButton class="waves-effectt btn" value="Köp!" 
+                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
+                                                <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div>
                                     </div>
                                 </div>

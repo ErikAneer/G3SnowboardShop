@@ -105,7 +105,9 @@
                                 </h:column>
 
                             </h:dataTable>
-                            <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate(navigationController.previousPage, 'customerOrders.xhtml')}"/>
+                            <!--<h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate(navigationController.previousPage, 'customerOrders.xhtml')}"/> -->
+                            <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate('admin.xhtml', 'customerOrders.xhtml')}"/>
+                        
                         </div>
                     </div>
                 </div>

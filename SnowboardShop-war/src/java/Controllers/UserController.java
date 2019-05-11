@@ -20,7 +20,7 @@ import javax.faces.validator.ValidatorException;
 
 /**
  *
- * @author Erik  jjjj
+ * @author Erik  jjjj kk
  */
 @Named(value = "userController")
 @SessionScoped
@@ -60,7 +60,7 @@ public class UserController implements Serializable {
         cartItems = 0;
     }
 
-    public String login() { //STring
+    public void login() { 
         String page = "";
         users = snowBean.callAllUser3();
         kunder = snowBean.callAllCustomer3("customer", "premium");
@@ -101,7 +101,7 @@ public class UserController implements Serializable {
             }
         }  
         int ttt = callItems();
-        return page;
+        //return page;
     }
 
     public void logOut() {
@@ -388,6 +388,7 @@ public class UserController implements Serializable {
                             products.add(c1);
                             indexid++;
                             size = 0;
+                            break;
                         }
                     }    
                 }   
@@ -459,6 +460,10 @@ public class UserController implements Serializable {
                 }
                 if(b==false){
                     procount--;
+                }
+                if(procount==0){
+                    remove(p.getProductname(), id, currentUser);
+                    break;
                 }
                 c.setCount(procount);
                 c.setTotalprice(c.getPrice()*procount);
