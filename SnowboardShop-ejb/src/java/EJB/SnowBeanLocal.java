@@ -73,5 +73,7 @@ public interface SnowBeanLocal {
     void addProduct3(String productname, String email, int count, double totalprice, double price);
 
     void removeAllpro(String email);
+
+    String showOrder3Sumprice(String ordermail);
     
 }

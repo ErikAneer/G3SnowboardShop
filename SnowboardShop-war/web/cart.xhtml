@@ -66,6 +66,10 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Pris</f:facet>
+                                    <h:outputText value="#{product.price}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Totalpris</f:facet>
                                     <h:outputText value="#{product.totalprice}" />
                                 </h:column>
                                 <h:column>
@@ -88,7 +92,6 @@
                             <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
                             <br/><br/>
                         </h:form>
-                        <h:outputText value="Order nummer: #{userController.ordernummer}" />
                         <br/><br/>
                         <h:form rendered="#{empty userController.products}">
                             <h4>Du har inga varor i varukorgen</h4>

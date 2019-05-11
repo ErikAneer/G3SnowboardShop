@@ -318,6 +318,21 @@ public class SnowBean implements SnowBeanLocal {
     }
 
     @Override
+    public String showOrder3Sumprice(String ordermail) {
+        Query q = em.createQuery("select o from Orderning3 o");
+        List<Orderning3> orders = q.getResultList();
+        String sumprice = "0";
+        int index = ordermail.length()+2;
+        for(Orderning3 odr: orders){
+            if((odr.getOrdernr()).startsWith(ordermail)){
+                sumprice = odr.getOrdernr().substring(index);
+                break;
+            }
+        }     
+        return sumprice;
+    }
+    
+    @Override
     public void changeNewOrdernr(String oldnr, String newnr) {
         Query q = em.createQuery("select o from Orderning3 o where o.ordernr=:ordernr");
         q.setParameter("ordernr", oldnr);
@@ -355,6 +370,8 @@ public class SnowBean implements SnowBeanLocal {
         }
         return total;  
     }
+
+
 
 
 

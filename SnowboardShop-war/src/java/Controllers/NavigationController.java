@@ -78,10 +78,8 @@ public class NavigationController implements Serializable {
     public String loginUser(String currentPage) {
         String pageTo = previousPage;
         refreshVisitedPages(currentPage);
-        userController.login();
-        if(userController.getCurrentUser().getStatus().equals("admin")){
-            return "admin";
-        }
+        pageTo = userController.login(); 
+        //System.out.println("förra sidan"+previousPage);
         return pageTo;
     }
 
