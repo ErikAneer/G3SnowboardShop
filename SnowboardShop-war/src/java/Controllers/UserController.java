@@ -60,7 +60,7 @@ public class UserController implements Serializable {
         cartItems = 0;
     }
 
-    public void login() { //STring
+    public String login() { //STring
         String page = "";
         users = snowBean.callAllUser3();
         kunder = snowBean.callAllCustomer3("customer", "premium");
@@ -99,10 +99,17 @@ public class UserController implements Serializable {
                     cartItems = 0;
                 }
             }
-        }    
+        }  
+        int ttt = callItems();
+        return page;
     }
 
     public void logOut() {
+        snowBean.removeAllpro(currentUser.getEmail());
+        for(Cart c: products){
+            snowBean.addProduct3(c.getProductname(), c.getEmail(), c.getCount(), c.getTotalprice(), c.getPrice());
+        }
+        
         loggedInStatus = "Logga in";
         isLoggedIn = false;
         currentUser = null;
@@ -581,6 +588,14 @@ public class UserController implements Serializable {
         detailorders = snowBean.callOrderDetail3(teststr);
     }
 
+    public String showOrderSumprice(String ordernr, String mail) {
+        String teststr = "20" + ordernr.substring(0, 2) + "-" + ordernr.substring(2, 4)
+                + "-" + ordernr.substring(4, 6) + "T" + ordernr.substring(6, 8) + ":" + ordernr.substring(8, 10)
+                + ":" + ordernr.substring(10, 12) + "." + ordernr.substring(12, 15) + "-" + ordernr.substring(15) + "::" + mail;
+        String sumprice = snowBean.showOrder3Sumprice(teststr);
+        return sumprice;
+    }
+    
     public int callCount(String mail) {
         int count = snowBean.callAntalcount(mail);
         return count;
