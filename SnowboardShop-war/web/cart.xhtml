@@ -26,7 +26,7 @@
 
                             <ul class="right hide-on-med-and-down">
                                 <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                                <li> <h:commandLink value="varor (#{userController.callItems()})" action="#{userController.visaKorg(userController.currentUser.email)}" /></li>
+                                <li> <h:commandLink value="varor (#{userController.callItems()})" action="#{navigationController.goToCart('cart.xhtml')}" /></li>
                                 <li><h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('cart.xhtml')}" /></li>
                             </ul>
                         </div>
@@ -54,41 +54,50 @@
                             <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
                                 <f:facet name="header">
                                     <h4>Varor i varukorgen</h4>
-                                    <h:outputText value="#{userController.email}" />
+                                   
                                 </f:facet>
+                                  <h:column>
+                                    <f:facet name="header" >Märke</f:facet>
+                                    <h:outputText value="#{product.productname}" />
+                                </h:column>
                                 <h:column>
-                                    <f:facet name="header" >Produkt</f:facet>
+                                    <f:facet name="header" >Modell</f:facet>
                                     <h:outputText value="#{product.productname}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Antal</f:facet>
-                                    <h:outputText value="#{product.count}" />
+                                    <h:outputText value="#{product.count} st" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header" >Pris</f:facet>
-                                    <h:outputText value="#{product.totalprice}" />
+                                    <f:facet name="header" >Styckpris</f:facet>
+                                    <h:outputText value="#{product.price} kr" />
                                 </h:column>
                                 <h:column>
+                                    <f:facet name="header" >Totalpris</f:facet>
+                                    <h:outputText value="#{product.totalprice} kr" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Lägg till</f:facet>
                                     <h:commandButton class="waves-effectt btn" id="removeItem" value="-" 
                                                      action="#{userController.totalPrice(false, product.id, product)}"/>
                                 </h:column>
                                 <h:column>
+                                    <f:facet name="header" >Ta bort</f:facet>
                                     <h:commandButton class="waves-effectt btn" id="addItem" value="+" 
                                                      action="#{userController.totalPrice(true,product.id, product)}"/>
                                 </h:column>
                                 <h:column>
-                                    <h:commandButton class="waves-effectt btn" id="remove" value="Ta bort" 
+                                    <h:commandButton class="waves-effectt btn" id="remove" value="Ta bort varan från korgen" 
                                                      action="#{userController.remove(product.productname, product.id, userController.currentUser)}"/>
                                 </h:column>
                             </h:dataTable>
                             <br/>
-                            <h:outputText value="Total price: #{userController.callSummaryPrice(userController.currentUser)}" />
+                            <h:outputText value="Total ordersumma: #{userController.callSummaryPrice(userController.currentUser)} kr" />
                             <br/><br/>
                             <h:commandButton class="waves-effectt btn" value="Slutför köp" action="#{navigationController.navigateToCompleteOrder('cart.xhtml')}"/>   
                             <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
                             <br/><br/>
                         </h:form>
-                        <h:outputText value="Order nummer: #{userController.ordernummer}" />
                         <br/><br/>
                         <h:form rendered="#{empty userController.products}">
                             <h4>Du har inga varor i varukorgen</h4>

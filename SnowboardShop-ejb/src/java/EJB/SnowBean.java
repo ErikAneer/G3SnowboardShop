@@ -162,10 +162,32 @@ public class SnowBean implements SnowBeanLocal {
 
     @Override
     public void addProduct3(String productname, String email, int count, double totalprice, double price) {
-        Cart k = new Cart(productname, email, count, totalprice, price);
-        em.persist(k);
+        int test = 0;
+        Query q = em.createQuery("select o from Cart o where o.email=:email");
+        q.setParameter("email", email);
+        List<Cart> products = q.getResultList();
+        if(products.size()<1){
+            Cart k = new Cart(productname, email, count, totalprice, price);
+            em.persist(k);
+        }else{
+            for(Cart p: products){
+                if(p.getProductname().equals(productname)){
+                    int t1 = p.getCount()+count;
+                    double d1 = p.getTotalprice()+totalprice;
+                    p.setCount(t1);
+                    p.setTotalprice(d1);
+                    em.merge(p);
+                }else{
+                    test++;
+                    if(test==products.size()){
+                        Cart k = new Cart(productname, email, count, totalprice, price);
+                        em.persist(k);
+                    }
+                }
+            }
+        }
     }
-
+    
     @Override
     public List<Cart> callProducts(String email) {
         List<Cart> pros = new ArrayList();
@@ -296,6 +318,21 @@ public class SnowBean implements SnowBeanLocal {
     }
 
     @Override
+    public String showOrder3Sumprice(String ordermail) {
+        Query q = em.createQuery("select o from Orderning3 o");
+        List<Orderning3> orders = q.getResultList();
+        String sumprice = "0";
+        int index = ordermail.length()+2;
+        for(Orderning3 odr: orders){
+            if((odr.getOrdernr()).startsWith(ordermail)){
+                sumprice = odr.getOrdernr().substring(index);
+                break;
+            }
+        }     
+        return sumprice;
+    }
+    
+    @Override
     public void changeNewOrdernr(String oldnr, String newnr) {
         Query q = em.createQuery("select o from Orderning3 o where o.ordernr=:ordernr");
         q.setParameter("ordernr", oldnr);
@@ -333,6 +370,8 @@ public class SnowBean implements SnowBeanLocal {
         }
         return total;  
     }
+
+
 
 
 
