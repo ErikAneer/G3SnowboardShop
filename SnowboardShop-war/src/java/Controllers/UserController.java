@@ -461,6 +461,10 @@ public class UserController implements Serializable {
                 if(b==false){
                     procount--;
                 }
+                if(procount==0){
+                    remove(p.getProductname(), id, currentUser);
+                    break;
+                }
                 c.setCount(procount);
                 c.setTotalprice(c.getPrice()*procount);
                 break;

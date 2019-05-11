@@ -73,11 +73,11 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Styckpris</f:facet>
-                                    <h:outputText value="#{product.totalprice}" />
+                                    <h:outputText value="#{product.totalprice / product.count}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Totalpris</f:facet>
-                                    <h:outputText value="#{product.totalprice*product.count} kr" />
+                                    <h:outputText value="#{product.totalprice} kr" />
                                 </h:column>
                             </h:dataTable>
                             <br/>
