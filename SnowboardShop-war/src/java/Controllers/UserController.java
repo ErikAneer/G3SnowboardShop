@@ -60,7 +60,7 @@ public class UserController implements Serializable {
         cartItems = 0;
     }
 
-    public String login() { //STring
+    public String login() { 
         String page = "";
         users = snowBean.callAllUser3();
         kunder = snowBean.callAllCustomer3("customer", "premium");
