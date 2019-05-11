@@ -66,7 +66,7 @@ public class UserController implements Serializable {
         kunder = snowBean.callAllCustomer3("customer", "premium");
         summary = snowBean.sumPrice(email);
         List<Cart> carts = snowBean.callProducts(email);
-        cartItems = carts.size();
+       // cartItems = carts.size();
 
         if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
@@ -87,20 +87,21 @@ public class UserController implements Serializable {
                         snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice(), c.getPrice());
                     }
                     products = snowBean.callProducts(u.getEmail());
-                    cartItems = products.size();                    
                 }else if(u.getStatus().equals("premium")){
                     for(Cart c: products){
                         snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice()*0.9, c.getPrice()*0.9);
                     }
                     products = snowBean.callProducts(u.getEmail());
-                    cartItems = products.size();                                        
+                    //cartItems = products.size();                                        
                 }else{
                     products = new ArrayList();
-                    cartItems = 0;
+                    //cartItems = 0;
                 }
             }
-        }  
-        int ttt = callItems();
+        } 
+        if(currentUser.getStatus().equals("customer") || currentUser.getStatus().equals("premium")){           
+            products = snowBean.callProducts(currentUser.getEmail());
+        }
         //return page;
     }
 
@@ -398,7 +399,7 @@ public class UserController implements Serializable {
             if ((u.getStatus()).equals("customer")) {
                 snowBean.addProduct3(p.getName(), str, 1, p.getPrice(), p.getPrice());
                 String test1 = visaKorg(str);
-                cartItems++;
+               // cartItems++;
             }
             if ((u.getStatus()).equals("premium")) {
                 snowBean.addProduct3(p.getName(), str, 1, p.getPremiumPrice(), p.getPremiumPrice());
@@ -432,7 +433,7 @@ public class UserController implements Serializable {
         } else {
             mail = u.getEmail();
             snowBean.removeBypronameidemail(proname, id, mail);
-            cartItems--;
+           // cartItems--;
         }
         return visaKorg(mail);
     }
@@ -441,12 +442,12 @@ public class UserController implements Serializable {
         String mail = "";
         if (u == null) {
             products = new ArrayList();
-            cartItems = 0;
+          //  cartItems = 0;
             return "cart";
         } else {
             mail = u.getEmail();
             snowBean.removeAllpro(u.getEmail());
-            cartItems = 0;
+          //  cartItems = 0;
         }
         return visaKorg(mail);
     }
