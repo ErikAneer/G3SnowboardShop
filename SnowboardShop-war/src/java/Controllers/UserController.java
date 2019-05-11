@@ -100,8 +100,9 @@ public class UserController implements Serializable {
                 }
             }
         }  
-        int ttt = callItems();
-        //return page;
+        if(currentUser.getStatus().equals("customer") || currentUser.getStatus().equals("premium")){
+            products = snowBean.callProducts(currentUser.getEmail());
+        }
     }
 
     public void logOut() {
