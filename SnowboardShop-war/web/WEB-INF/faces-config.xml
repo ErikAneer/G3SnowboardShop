@@ -6,95 +6,96 @@
   
     //Nav rules from index
     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/index.xhtml</from-view-id>
-                  <from-outcome>index.xhtml</from-outcome>
+        <navigation-case>
+            <from-view-id>/index.xhtml</from-view-id>
+            <from-outcome>index.xhtml</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/index.xhtml</from-view-id>
-                  <from-outcome>snowboards.xhtml</from-outcome>
+        <navigation-case>
+            <from-view-id>/index.xhtml</from-view-id>
+            <from-outcome>snowboards.xhtml</from-outcome>
             <to-view-id>/snowboards.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/index.xhtml</from-view-id>
-                  <from-outcome>boots.xhtml</from-outcome>
+        <navigation-case>
+            <from-view-id>/index.xhtml</from-view-id>
+            <from-outcome>boots.xhtml</from-outcome>
             <to-view-id>/boots.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/index.xhtml</from-view-id>
-                  <from-outcome>bindningar.xhtml</from-outcome>
+        <navigation-case>
+            <from-view-id>/index.xhtml</from-view-id>
+            <from-outcome>bindningar.xhtml</from-outcome>
             <to-view-id>/bindningar.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     //Log in- logoutRules in Index
-     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/index.xhtml</from-view-id>
-                  <from-outcome>logout</from-outcome>
+    <navigation-rule>
+        <navigation-case>
+            <from-view-id>/index.xhtml</from-view-id>
+            <from-outcome>logout</from-outcome>
             <to-view-id>/logout.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/index.xhtml</from-view-id>
-                  <from-outcome>login</from-outcome>
+        <navigation-case>
+            <from-view-id>/index.xhtml</from-view-id>
+            <from-outcome>login</from-outcome>
             <to-view-id>/loginPage.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
-     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/snowboards.xhtml</from-view-id>
-                  <from-outcome>Logga ut</from-outcome>
-            <to-view-id>/logout.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/boots.xhtml</from-view-id>
-                  <from-outcome>Logga ut</from-outcome>
+    <navigation-rule>
+        <navigation-case>
+            <from-view-id>/snowboards.xhtml</from-view-id>
+            <from-outcome>Logga ut</from-outcome>
             <to-view-id>/logout.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
-     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/bindningar.xhtml</from-view-id>
-                  <from-outcome>Logga ut</from-outcome>
+    <navigation-rule>
+        <navigation-case>
+            <from-view-id>/boots.xhtml</from-view-id>
+            <from-outcome>Logga ut</from-outcome>
             <to-view-id>/logout.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
-     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/productView.xhtml</from-view-id>
-                  <from-outcome>Logga ut</from-outcome>
+    <navigation-rule>
+        <navigation-case>
+            <from-view-id>/bindningar.xhtml</from-view-id>
+            <from-outcome>Logga ut</from-outcome>
+            <to-view-id>/logout.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-view-id>/productView.xhtml</from-view-id>
+            <from-outcome>Logga ut</from-outcome>
             <to-view-id>/logout.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     
-     <navigation-rule>
-       <navigation-case>
-        <from-view-id>/cart.xhtml</from-view-id>
-                  <from-outcome>Logga ut</from-outcome>
+    <navigation-rule>
+        <navigation-case>
+            <from-view-id>/cart.xhtml</from-view-id>
+            <from-outcome>Logga ut</from-outcome>
             <to-view-id>/logout.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
-            <navigation-rule>
+    <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>  
             <from-outcome>show_details</from-outcome>
@@ -102,7 +103,7 @@
         </navigation-case>
     </navigation-rule>
     
-        <navigation-rule>
+    <navigation-rule>
         <from-view-id>/snowboards.xhtml</from-view-id>
         <navigation-case>  
             <from-outcome>show_details</from-outcome>
@@ -110,7 +111,7 @@
         </navigation-case>
     </navigation-rule>
     
-        <navigation-rule>
+    <navigation-rule>
         <from-view-id>/boots.xhtml</from-view-id>
         <navigation-case>  
             <from-outcome>show_details</from-outcome>
@@ -118,7 +119,7 @@
         </navigation-case>
     </navigation-rule>
     
-        <navigation-rule>
+    <navigation-rule>
         <from-view-id>/bindningar.xhtml</from-view-id>
         <navigation-case>  
             <from-outcome>show_details</from-outcome>
@@ -135,7 +136,7 @@
         </navigation-case>
     </navigation-rule>
     
-  <navigation-rule>
+    <navigation-rule>
         <from-view-id>/loginPage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>premium</from-outcome>
@@ -144,242 +145,250 @@
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>/loginPage.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>admin</from-outcome>
-            <to-view-id>/admin.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+    <from-view-id>/loginPage.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>loginFailure</from-outcome>
+        <to-view-id>/loginPage.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    //Log out navigation from logout.xhtml
-       <navigation-rule>
-        <from-view-id>/logout.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/loginPage.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>admin</from-outcome>
+        <to-view-id>/admin.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/logout.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>snowboards.xhtml</from-outcome>
-            <to-view-id>/snowboards.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+//Log out navigation from logout.xhtml
+<navigation-rule>
+    <from-view-id>/logout.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>logout</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/logout.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>boots.xhtml</from-outcome>
-            <to-view-id>/boots.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/logout.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>snowboards.xhtml</from-outcome>
+        <to-view-id>/snowboards.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/logout.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>bindningar.xhtml</from-outcome>
-            <to-view-id>/bindningar.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/logout.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>boots.xhtml</from-outcome>
+        <to-view-id>/boots.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-   <navigation-rule>
-        <from-view-id>/logout.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>productView.xhtml</from-outcome>
-            <to-view-id>/productView.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/logout.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>bindningar.xhtml</from-outcome>
+        <to-view-id>/bindningar.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/logout.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>cart.xhtml</from-outcome>
-            <to-view-id>/cart.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/logout.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>productView.xhtml</from-outcome>
+        <to-view-id>/productView.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    //Admin Logout
+<navigation-rule>
+    <from-view-id>/logout.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>cart.xhtml</from-outcome>
+        <to-view-id>/cart.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/admin.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+//Admin Logout
     
-    <navigation-rule>
-        <from-view-id>/productView.xhtml</from-view-id>
-        <navigation-case>  
-            <from-outcome>return_index</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/admin.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>logout</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-     <navigation-rule>
-        <from-view-id>/productView.xhtml</from-view-id>
-        <navigation-case>  
-            <from-outcome>index.xhtml</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/productView.xhtml</from-view-id>
+    <navigation-case>  
+        <from-outcome>return_index</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/productView.xhtml</from-view-id>
-        <navigation-case>  
-            <from-outcome>snowboards.xhtml</from-outcome>
-            <to-view-id>/snowboards.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/productView.xhtml</from-view-id>
+    <navigation-case>  
+        <from-outcome>index.xhtml</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/productView.xhtml</from-view-id>
-        <navigation-case>  
-            <from-outcome>boots.xhtml</from-outcome>
-            <to-view-id>/boots.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/productView.xhtml</from-view-id>
+    <navigation-case>  
+        <from-outcome>snowboards.xhtml</from-outcome>
+        <to-view-id>/snowboards.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-       <navigation-rule>
-        <from-view-id>/productView.xhtml</from-view-id>
-        <navigation-case>  
-            <from-outcome>bindningar.xhtml</from-outcome>
-            <to-view-id>/bindningar.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/productView.xhtml</from-view-id>
+    <navigation-case>  
+        <from-outcome>boots.xhtml</from-outcome>
+        <to-view-id>/boots.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/register.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>customer</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/productView.xhtml</from-view-id>
+    <navigation-case>  
+        <from-outcome>bindningar.xhtml</from-outcome>
+        <to-view-id>/bindningar.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-     <navigation-rule>
-        <from-view-id>/register.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>cart.xhtml</from-outcome>
-            <to-view-id>/cart.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/register.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>customer</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/register.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>index.xhtml</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/register.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>cart.xhtml</from-outcome>
+        <to-view-id>/cart.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-      <navigation-rule>
-        <from-view-id>/register.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>bindningar.xhtml</from-outcome>
-            <to-view-id>/bindningar.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/register.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>index.xhtml</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/register.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>boots.xhtml</from-outcome>
-            <to-view-id>/boots.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/register.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>bindningar.xhtml</from-outcome>
+        <to-view-id>/bindningar.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/register.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>productView.xhtml</from-outcome>
-            <to-view-id>/productView.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/register.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>boots.xhtml</from-outcome>
+        <to-view-id>/boots.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/register.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>snowboards.xhtml</from-outcome>
-            <to-view-id>/snowboards.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/register.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>productView.xhtml</from-outcome>
+        <to-view-id>/productView.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    
-    <navigation-rule>
-        <from-view-id>/cart.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>customer</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>/cart.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>premium</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule> 
-    
-     <navigation-rule>
-        <from-view-id>/cart.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>customer</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/register.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>snowboards.xhtml</from-outcome>
+        <to-view-id>/snowboards.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
     
-    <navigation-rule>
-        <from-view-id>/cart.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>login</from-outcome>
-            <to-view-id>/loginPage.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/cart.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>customer</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/cart.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>orderCompleted</from-outcome>
-            <to-view-id>/orderCompleted.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/cart.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>premium</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule> 
+    
+<navigation-rule>
+    <from-view-id>/cart.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>customer</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
     
-     <navigation-rule>
-        <from-view-id>/admin.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>show_customer_details</from-outcome>
-            <to-view-id>/customerOrders.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/cart.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>login</from-outcome>
+        <to-view-id>/loginPage.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/customerOrders.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>admin.xhtml</from-outcome>
-            <to-view-id>/admin.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/cart.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>orderCompleted</from-outcome>
+        <to-view-id>/orderCompleted.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/orderCompleted.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>index.xhtml</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
     
-    <navigation-rule>
-        <from-view-id>/orderCompleted.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+<navigation-rule>
+    <from-view-id>/admin.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>show_customer_details</from-outcome>
+        <to-view-id>/customerOrders.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+    
+<navigation-rule>
+    <from-view-id>/customerOrders.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>admin.xhtml</from-outcome>
+        <to-view-id>/admin.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+    
+<navigation-rule>
+    <from-view-id>/orderCompleted.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>index.xhtml</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+    
+<navigation-rule>
+    <from-view-id>/orderCompleted.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>logout</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
     
     
 </faces-config>

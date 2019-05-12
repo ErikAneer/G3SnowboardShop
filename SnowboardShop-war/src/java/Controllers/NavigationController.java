@@ -7,7 +7,6 @@ import EntityClasses.Product;
 import EntityClasses.User3;
 import java.io.Serializable;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
@@ -72,17 +71,22 @@ public class NavigationController implements Serializable {
         } else { 
             page = "logout";
         }
-        return page;
+        return page;                                                                    
     }
 
     public String loginUser(String currentPage) {
-        String pageTo = previousPage;
-        refreshVisitedPages(currentPage);
-        userController.login(); 
+        String pageTo="";
+        String loginResult = userController.login(); 
         if(userController.getCurrentUser() != null && userController.getCurrentUser().getStatus().equals("admin")){
             pageTo = "admin";
         }
-        //System.out.println("förra sidan"+previousPage);
+        if (loginResult.equals("loginFailure")){
+            return "loginFailure";
+        }
+        else {
+            pageTo = previousPage;
+            refreshVisitedPages(currentPage);
+        }
         return pageTo;
     }
 

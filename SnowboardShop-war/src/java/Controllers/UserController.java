@@ -1,6 +1,5 @@
 package Controllers;
 
-import EJB.UserBean;
 import EntityClasses.Cart;
 import EntityClasses.Orderning3;
 import EntityClasses.Product;
@@ -16,7 +15,6 @@ import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -51,16 +49,12 @@ public class UserController implements Serializable {
     private String ordernummer;
     private double sumprice;
 
-    /**
-     * Creates a new instance of LoginBean //(String firstName, String
-     * familyName, String email, String password, String status) julia
-     */ 
     public UserController() {
         loggedInStatus = "Logga in";
         cartItems = 0;
     }
 
-    public void login() { 
+    public String login() { 
         System.out.println("   entered login method");
         String page = "";
         users = snowBean.callAllUser3();
@@ -76,6 +70,7 @@ public class UserController implements Serializable {
                     "Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.", null);
             FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg);
             System.out.println("Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.");
+            page= "loginFailure";
         } else {
             User3 u = (User3) snowBean.login(email, code);
             currentUser = u;
@@ -104,7 +99,7 @@ public class UserController implements Serializable {
             products = snowBean.callProducts(currentUser.getEmail());
         }
         }  
-        
+        return page;
     }
 
     public void logOut() {
