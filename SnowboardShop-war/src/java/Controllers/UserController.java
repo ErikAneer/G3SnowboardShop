@@ -61,6 +61,7 @@ public class UserController implements Serializable {
     }
 
     public void login() { 
+        System.out.println("   entered login method");
         String page = "";
         users = snowBean.callAllUser3();
         kunder = snowBean.callAllCustomer3("customer", "premium");
@@ -74,6 +75,7 @@ public class UserController implements Serializable {
             FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.", null);
             FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg);
+            System.out.println("Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.");
         } else {
             User3 u = (User3) snowBean.login(email, code);
             currentUser = u;
