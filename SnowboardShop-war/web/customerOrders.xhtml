@@ -98,7 +98,7 @@
                             <h:dataTable id="orderDetail" value="#{userController.detailorders}" var="detailorder">
                                 <f:facet name="header">
                                     <h4>Order Details:</h4>
-                 
+                                    <h:outputText value="Summary: #{userController.showOrderSumprice2(userController.detailorders)} kr" />
                                 </f:facet>
 
                                 <h:column>
@@ -121,10 +121,7 @@
                                     <f:facet name="header" >Totalpris</f:facet>
                                     <h:outputText value="#{detailorder.totalprice} kr" />
                                 </h:column>
-                                <h:column>
-                                    <f:facet name="header" >Sumpris</f:facet>
-                                    <h:outputText value="#{userController.showOrderSumprice2(detailorder.ordernr)}" />
-                                </h:column>
+
 
                             </h:dataTable>
                             <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate('admin.xhtml', 'customerOrders.xhtml')}"/>

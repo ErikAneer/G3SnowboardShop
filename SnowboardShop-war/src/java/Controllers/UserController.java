@@ -605,10 +605,18 @@ public class UserController implements Serializable {
         return sumprice;
     }
     
-    public String showOrderSumprice2(String ordernr) {
-        int index1 = ordernr.indexOf("::");
-        int index2 = ordernr.indexOf("::", index1+1);
-        String orderNum = ordernr.substring(index2+2);
+    public String showOrderSumprice2(List<Orderning3> orders) {
+        String orderNum = "";
+        int i = orders.size();
+        if(i==0){
+            return orderNum;
+        }else{
+            String ordernr = orders.get(0).getOrdernr();
+            int index1 = ordernr.indexOf("::");
+            int index2 = ordernr.indexOf("::", index1+1);
+            orderNum = ordernr.substring(index2+2);
+            
+        }
         return orderNum;
     }
     
