@@ -22,7 +22,7 @@
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
         <f:view>
-            <h:form >
+            <h:form id="loginHeader">
                 <header>
                     <nav class="nav-wrapper blue">
                         <div class="container">
@@ -33,10 +33,10 @@
 
                 </header>
             </h:form> 
-                <div class="container">
-                    <div class="row">
-                        <div class="col s12 l6 offset-l3">
-                            <h:form id="loginForm" >
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l6 offset-l3">
+                        <h:form id="loginForm" >
                             <h2>Logga in</h2>
                             Användarnamn (email): 
                             <h:inputText id="userName" value="#{userController.email}" > 
@@ -65,19 +65,17 @@
                             <br/>
                             <br/>
                              </h:form>
-                             <h:form rendered="#{navigationController.previousPage eq 'cart.xhtml'}" >
-                            För att kunna slutföra ditt köp måste du logga in. När du loggat kommer du tillbaka till varukorgen och kan slutföra köpet. <br/>
-                            Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna slutföra ditt köp hos oss. 
+                            <h:form rendered="#{navigationController.previousPage eq 'cart.xhtml'}" >
+                                För att kunna slutföra ditt köp måste du logga in. När du loggat kommer du tillbaka till varukorgen och kan slutföra köpet. <br/>
+                                Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna slutföra ditt köp hos oss. 
                             </h:form>
                             <h:form rendered="#{navigationController.previousPage ne 'cart.xhtml'}" >
-                             Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna handla hos oss. 
-                             </h:form>
-                        </div>
+                                Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna handla hos oss. 
+                            </h:form>
+                       
                     </div>
                 </div>
-           
-            
+            </div>
         </f:view>
     </h:body>
 </html>
-

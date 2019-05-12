@@ -98,14 +98,35 @@
                             <h:dataTable id="orderDetail" value="#{userController.detailorders}" var="detailorder">
                                 <f:facet name="header">
                                     <h4>Order Details:</h4>
+                 
                                 </f:facet>
 
                                 <h:column>
-                                    <h:outputText value="#{detailorder.ordernr} Product: #{detailorder.productname}, Count: #{detailorder.count}, Price: #{detailorder.totalprice}" />
+                                    <f:facet name="header" >Produkt</f:facet>
+                                    <h:outputText value="#{detailorder.productname}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Märke</f:facet>
+                                    <h:outputText value="#{detailorder.productname}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Antal</f:facet>
+                                    <h:outputText value="#{detailorder.count}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Styckpris</f:facet>
+                                    <h:outputText value="#{detailorder.totalprice / detailorder.count}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Totalpris</f:facet>
+                                    <h:outputText value="#{detailorder.totalprice} kr" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Sumpris</f:facet>
+                                    <h:outputText value="#{userController.showOrderSumprice2(detailorder.ordernr)}" />
                                 </h:column>
 
                             </h:dataTable>
-                            <!--<h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate(navigationController.previousPage, 'customerOrders.xhtml')}"/> -->
                             <h:commandButton class="waves-effectt btn" value="Gå tillbaka" action="#{navigationController.navigate('admin.xhtml', 'customerOrders.xhtml')}"/>
                         
                         </div>

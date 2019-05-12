@@ -101,9 +101,11 @@ public class UserController implements Serializable {
                     cartItems = 0;
                 }
             }
+            if(currentUser.getStatus().equals("customer") || currentUser.getStatus().equals("premium")){
+            products = snowBean.callProducts(currentUser.getEmail());
+        }
         }  
-        int ttt = callItems();
-        //return page;
+        
     }
 
     public void logOut() {
@@ -135,7 +137,7 @@ public class UserController implements Serializable {
         if (snowBean.isSameEmail(email)) {
                 FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Den angivna mailadressen finns redan registrerad! Ange en annan mailadress.", null);
-                FacesContext.getCurrentInstance().addMessage("registerForm:contactInsert", javaTextMsg);
+                FacesContext.getCurrentInstance().addMessage("registerForm:contactEmail", javaTextMsg);
             System.out.println("Samma email finns");
         }   
         else{
@@ -463,6 +465,10 @@ public class UserController implements Serializable {
                 if(b==false){
                     procount--;
                 }
+                if(procount==0){
+                    remove(p.getProductname(), id, currentUser);
+                    break;
+                }
                 c.setCount(procount);
                 c.setTotalprice(c.getPrice()*procount);
                 break;
@@ -598,6 +604,14 @@ public class UserController implements Serializable {
         String sumprice = snowBean.showOrder3Sumprice(teststr);
         return sumprice;
     }
+    
+    public String showOrderSumprice2(String ordernr) {
+        int index1 = ordernr.indexOf("::");
+        int index2 = ordernr.indexOf("::", index1+1);
+        String orderNum = ordernr.substring(index2+2);
+        return orderNum;
+    }
+    
     
     public int callCount(String mail) {
         int count = snowBean.callAntalcount(mail);

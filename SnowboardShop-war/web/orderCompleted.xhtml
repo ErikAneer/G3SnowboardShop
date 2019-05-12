@@ -73,18 +73,18 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Styckpris</f:facet>
-                                    <h:outputText value="#{product.totalprice}" />
+                                    <h:outputText value="#{product.totalprice / product.count}" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Totalpris</f:facet>
-                                    <h:outputText value="#{product.totalprice*product.count} kr" />
+                                    <h:outputText value="#{product.totalprice} kr" />
                                 </h:column>
                             </h:dataTable>
                             <br/>
                             <h:outputText value="Totalpris för order: #{userController.showOrderSumprice(userController.ordernummer, userController.currentUser.email)} kr" />
                             <br/>
                             <br/>
-                            <h:commandLink class="waves-effectt btn" value="Stäng" /><h:commandLink class="waves-effectt btn" value="Logga ut" />
+                            <h:commandLink class="waves-effectt btn" value="Stäng" action="#{navigationController.navigate('index.xhtml', 'orderCompleted.xhtml')}" /><h:commandLink class="waves-effectt btn" value="Logga ut" action="#{navigationController.logout()}" />
                         </h:form>
                     </div>
                 </div>
