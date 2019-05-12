@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>G3 Board Shop</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
+        <!-- To use Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet library="css" name="Style.css"  />
+        <f:view>
+            <header>
+                <h:form>
+                    <nav class="nav-wrapper blue">
+                        <div class="container">
+                            <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'register.xhtml')}" > 
+                                <f:param name="skipValidator" value="true"/> </h:commandLink>
+                        </div>
+                    </nav>
+                    <div>               
+                    </div>
+                </h:form>
+            </header>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l8 offset-l2">
+                        <h:form id="registerForm">
+                            <h2>Registrera dig som kund</h2>
+
+                            <p>
+                                Fyll i fälten nedan för att kunna registera dig som kund och handla hos oss på Awesome Board Shop
+                            </p>
+
+                            <h:panelGrid columns="3">
+                                <h:outputLabel for="contactFirst" value="Förnamn: " />
+                                <h:inputText id="contactFirst" value="#{userController.firstname}">
+                                    <f:validator validatorId="nameValidator"></f:validator>
+                                    <f:ajax event="blur" render="contactFirstMessage" />
+                                </h:inputText>
+                                <h:message id="contactFirstMessage" for="contactFirst" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactFamilyname" value="Efternamn: " />
+                                <h:inputText id="contactFamilyName" value="#{userController.familyname}">
+                                    <f:validator validatorId="nameValidator"></f:validator>
+                                    <f:ajax event="blur" render="contactLastMessage" />
+                                </h:inputText>
+                                <h:message id="contactLastMessage" for="contactFamilyName" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactPhone" value="Telefonnummer: "/>
+                                <h:inputText id="contactPhone" value="#{userController.telephone}">
+                                    <f:validator validatorId="phoneNumberValidator"></f:validator>
+                                    <f:ajax event="blur" render="contactPhoneMessage" />
+                                </h:inputText>
+                                <h:message id="contactPhoneMessage" for="contactPhone" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactStreetAddress" value="Gatuadress: " /> 
+                                <h:inputText id="contactStreetAddress" value="#{userController.address}">
+                                    <f:validator validatorId="streetAddressValidator"></f:validator>
+                                    <f:ajax event="blur" render="contactphoneNumber" />
+                                </h:inputText>
+                                <h:message id="contactphoneNumber" for="contactStreetAddress" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactPostalCode" value="Postnummer: " />
+                                <h:inputText id="contactPostalCode" value="#{userController.postnr}"> 
+                                    <f:validator validatorId="postalcodeValidator"></f:validator>
+                                    <f:ajax event="blur" render="postalcodeMessage" />
+                                </h:inputText>
+                                <h:message id="postalcodeMessage" for="contactPostalCode" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactPostalAddress" value="Postadress: " />
+                                <h:inputText id="contactPostalAddress" value="#{userController.postaddress}">
+                                    <f:validator validatorId="nameValidator"></f:validator>
+                                    <f:ajax event="blur" render="postalAddressMessage" />
+                                </h:inputText>
+                                <h:message id="postalAddressMessage" for="contactPostalAddress" errorStyle="color:red"/>
+
+                                <h:outputLabel for="contactEmail" value="Email: " />
+                                <h:inputText id="contactEmail" value="#{userController.email}">
+                                    <f:validator validatorId="emailValidator"></f:validator>
+                                    <f:ajax event="blur" render="usernameMessage" />
+                                </h:inputText>
+                                <h:message id="usernameMessage" for="contactEmail" errorStyle="color:red" />
+                               
+                                 
+                                <h:outputLabel for="password" value="Lösenord: " /> 
+                                <h:inputSecret id="password" value="#{userController.code}" redisplay="true">
+                                    <f:validator validatorId="passwordValidatator"></f:validator> 
+                                    <f:ajax event="blur" render="passwordMessage" />
+                                </h:inputSecret>  
+                                <h:message id="passwordMessage" for="password" errorStyle="color:red" />
+                                
+                                <h:outputLabel for="confirmPassword" value="Upprepa lösenord: " />
+                                <h:inputSecret  id="confirmPassword" redisplay="true" value="#{userController.confirmPassword}">
+                                    <f:validator validatorId="confirmPasswordValidatator"></f:validator> 
+                                    <f:ajax event="blur" render="confirmPasswordMessage" />
+                                </h:inputSecret>
+                                <h:message id="confirmPasswordMessage" for="confirmPassword" errorStyle="color:red" />
+                            </h:panelGrid>
+                        
+                            
+                        <br/>
+                         <h:message id="sameEmailMessage" for="contactEmail" errorStyle="color:red" />
+                           <br/>
+
+                        <h:commandButton class="waves-effect waves-light btn" id="contactInsert"  value="Skicka" 
+                                         action="#{navigationController.navigateFromRegisterPage('register.xhtml')}">
+                            <f:ajax event="action" execute="@form" render="@all" />
+                        </h:commandButton>
+                        <h:commandButton class="waves-effect waves-light btn" id="contactClearForm"  value="Rensa" 
+                                         action="#{userController.clearRegisterForm()}">
+                            <f:param name="skipValidator" value="true"/> 
+                            <f:ajax event="action" execute="@form" render="@all" />
+                        </h:commandButton>
+                        <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(navigationController.previousPage, 'register.xhtml')}" value="Avbryt">
+                             <f:param name="skipValidator" value="true"/>    
+                            <f:ajax event="action" execute="@form" render="@all" />
+                        </h:commandButton>
+                       </h:form>
+                    </div>
+                </div>
+            </div>
+        </f:view>
+    </h:body>
+</html>
+
+

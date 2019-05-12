@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>G3 Board Shop</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
+        <!-- To use Material Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet library="css" name="Style.css"  />
+        <f:view>
+            <h:form>
+           <header>
+                <nav class="nav-wrapper blue">
+                    <div class="container">
+                        <h:commandLink class="brand-logo"  value="G3 Board Shop" action="#{navigationController.navigate('index.xhtml', 'bindningar.xhtml')}" /> 
+
+                        <ul class="right hide-on-med-and-down">
+                            <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
+                             <li><h:commandLink value="varor (#{userController.callItems()})" action="#{navigationController.goToCart('bindningar.xhtml')}" ></h:commandLink></li>
+                            <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('bindningar.xhtml')}" /></li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <nav class="nav blue lighten-2">
+                    <div class="container">
+                        <ul class="left ">
+                            <li> <h:commandLink value="Snowboards" action="#{navigationController.navigate('snowboards.xhtml', 'bindningar.xhtml')}"/></li>
+                            <li> <h:commandLink value="Boots" action="#{navigationController.navigate('boots.xhtml', 'bindningar.xhtml')}"/></li>
+                            <li> <h:commandLink value="Bindningar" action="#{navigationController.navigate('bindningar.xhtml', 'bindningar.xhtml')}"/></li>
+                        </ul>       
+                    </div>
+                </nav>
+                <div>
+                </div>
+            </header>
+            <!-- Body starts from here -->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l10 center">  
+                    </div>
+                    <div class="col s12 l12">
+                        <!-- To dynamically display items from object List as Materialize cards - here boards-->
+                            <ui:repeat var="product" value="#{productController.bindings}" size="4">
+                                <div class="col card horizontal" id="horizontal">
+                                    <div class="card-image-boots"> 
+                                        <h:graphicImage class="card-image-boots" id="boots-img" url="#{product.imagePath}"/>  
+                                    </div>
+                                    <div class="card-stacked">
+                                        <div class="card-content">
+                                            <p><h5>#{product.name}</h5></p>
+                                            <h:outputText rendered="#{product.name.length() lt 10}" value="&lt;br/&gt;" escape="false" />
+                                            <p><b>#{product.brand}</b></p>
+                                           <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{product.price}" ><f:convertNumber pattern="#0"/></h:outputText>  
+                                            <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{product.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
+                                            <h:outputText value=" kr" /><br/>
+                                            <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('bindningar.xhtml', product)}"/>   
+                                        </div>
+                                        <div class="card-action">
+                                          <h:commandButton class="waves-effectt btn" value="Köp!" 
+                                                             action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
+                                                <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                    </div>        
+                </div>          
+            </div> 
+            </h:form>
+            <footer class="page-footer grey darken-8">
+          <div class="container" >
+            <div class="gray">
+              <div class="col l6 s12">
+                <h5 class="white-text"></h5>
+                <p class="grey-text text-lighten-4"></p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Follow us on:</h5>
+
+                <a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook" style="font-size: 30px;padding-right:20px"></a>
+                <a href="https://twitter.com/" target="_blank" class="fa fa-twitter" style="font-size: 30px;padding-right:20px"></a>
+                <a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube" style="font-size: 30px;padding-right:20px"></a>
+                <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram" style="font-size: 30px;padding-right:20px"></a>
+                <a href="https://www.instagram.com" target="_blank" class="fa fa-linkedin" style="font-size: 30px;padding-right:20px"></a>
+                <div class="right">Alla varor som visas finns i lager och är redo för leverans.</div>
+              </div>
+
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            &copy; 2019 Erik, Julia, Jesper, Pavel, G3Snowboardshop &copy; Radonfly  (used without permission).
+            <a class="grey-text text-lighten-4 right" href="#!">Click for more links</a>
+            </div>
+          </div>
+        </footer>
+        </f:view>
+    </h:body>
+
+</html>

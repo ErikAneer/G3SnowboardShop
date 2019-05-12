@@ -1,0 +1,9 @@
+/SnowboardShop-ejb/build/
+/SnowboardShop-war/build/
+/build/
+/SnowboardShop-ejb/dist/
+/SnowboardShop-war/dist/
+/nbproject/private/
+/SnowboardShop-war/nbproject/private/
+/SnowboardShop-ejb/nbproject/private/
+/dist/

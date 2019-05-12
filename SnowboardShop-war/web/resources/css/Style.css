@@ -1,0 +1,104 @@
+
+            li { 
+                display: inline;
+                list-style-type: none;
+            }
+        
+            .fa-youtube {
+                background: transparent;
+                color: white;
+            }
+            .fa-instagram {
+                background: transparent;
+                color: white;
+            }
+            .fa-twitter {
+                background: transparent;
+                color: white;
+            }
+            .fa-facebook {
+                background: transparent;
+                color: white;
+            }
+            .fa-linkedin {
+                background: transparent;
+                color: white;
+            }
+            
+            .ui-datalist .ui-datalist-content {
+                border:0 none
+            }
+
+            .ui-datalist ul {
+                padding: 0px 10px 0 20px;
+                margin: 5px 0;
+            }
+
+            .value {
+                font-weight: bold;
+            }
+
+            .ui-autocomplete-itemtip {
+                -moz-box-sizing: content-box;
+                -webkit-box-sizing: content-box;
+                box-sizing: content-box;
+            }
+            #index-header {
+                background: url("images/headerImage-1.jpg");
+                background-size: cover;
+                background-position: center;
+                min-height: 500px;
+            }
+            #horizontal{
+                width: 330px;
+                height:310px;
+                 margin: 5px;
+            }
+            
+            #card-stacked{
+                padding: 0;
+            }
+            .product-search{
+                margin: 0;
+                position: absolute;
+                top:93%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 28px;
+            }
+           
+            .card-image{
+                padding-top: 20px; height:260px; width: 110px;
+            }
+            
+             .card-content{
+                padding-bottom: 5px;
+            }
+            
+             .card-image-boots{
+                padding-top: 30px; 
+                padding-right: 20px;
+                padding-left: 5px;
+                height:220px; width: 135px;
+            }
+
+            .autocomplete{
+                padding-top: 20px;
+            }
+            .mainfooter {
+                padding-top: 20px;
+                color: greenyellow;
+                background-color: gray;
+                
+                
+            }
+            footer{
+                width:100%;
+            }
+            
+            .btn {
+                margin: 5px;
+                background-color:lightseagreen;
+            }
+            
+            

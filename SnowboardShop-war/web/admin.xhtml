@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Visa brädorna</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
+        <!-- To use Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+        <script name="jquery/jquery.js" library="primefaces"></script>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet library="css" name="Style.css"  />
+        <f:view>
+            <h:form>
+                <header>
+                    <nav class="nav-wrapper blue">
+                        <div class="container">
+                            <a class="brand-logo"> G3 Board Shop</a>
+                            <ul class="right">
+                                <li> <h:outputText value="Inloggad som: #{userController.currentUser.firstname}"/></li>
+                                <li> <h:commandLink value="Logga ut" action="#{navigationController.logout()}" /></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </header>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 l12">
+
+                            <h3>G3 Board Shop - Adminsidan</h3>
+
+                            <h:dataTable id="customerInfo" value="#{userController.kunder}" var="user">
+                                <f:facet name="header">
+                                    <h4>Alla registrerade kunder:</h4>
+                                </f:facet>
+
+                                <h:column>
+                                    <f:facet name="header" >Kundnamn</f:facet>
+                                    <h:outputText value="#{user.firstname} #{user.familyname}" />
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header" >Kundstatus</f:facet>
+                                    <h:outputText value="#{user.status}" />
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header" >Antal köp</f:facet>
+                                    <h:outputText value="#{userController.callCount(user.email)}" />
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header" >Total köpesumma</f:facet>
+                                    <h:outputText value="#{userController.callSumprice(user.email)}" />
+                                </h:column>
+
+                                <h:column>
+                                    <h:commandButton class="waves-effectt btn" value="Se alla ordrar för kund"
+                                                     action="#{navigationController.navigateCustomerDetails('admin.xhtml',user)}"/>
+                                </h:column>
+                            </h:dataTable>                          
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+
