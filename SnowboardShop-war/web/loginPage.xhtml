@@ -22,7 +22,7 @@
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
         <f:view>
-            <h:form id="loginForm">
+            <h:form id="loginHeader">
                 <header>
                     <nav class="nav-wrapper blue">
                         <div class="container">
@@ -32,12 +32,11 @@
                     </nav>
 
                 </header>
-           </h:form>
-            <h:form rendered="#{navigationController.previousPage ne 'cart.xhtml'}" >
-          
-                <div class="container">
-                    <div class="row">
-                        <div class="col s12 l6 offset-l3">
+            </h:form> 
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 l6 offset-l3">
+                        <h:form id="loginForm" >
                             <h2>Logga in</h2>
                             Användarnamn (email): 
                             <h:inputText id="userName" value="#{userController.email}" > 
@@ -65,54 +64,18 @@
                             <h:message  id="loginErrorMessage" for="loginButton" errorStyle="color: red" />
                             <br/>
                             <br/>
-                            Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna handla hos oss. 
-
-                        </div>
+                             </h:form>
+                            <h:form rendered="#{navigationController.previousPage eq 'cart.xhtml'}" >
+                                För att kunna slutföra ditt köp måste du logga in. När du loggat kommer du tillbaka till varukorgen och kan slutföra köpet. <br/>
+                                Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna slutföra ditt köp hos oss. 
+                            </h:form>
+                            <h:form rendered="#{navigationController.previousPage ne 'cart.xhtml'}" >
+                                Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna handla hos oss. 
+                            </h:form>
+                       
                     </div>
                 </div>
-            </h:form>
-            
-             <h:form rendered="#{navigationController.previousPage eq 'cart.xhtml'}" >
-          
-                <div class="container">
-                    <div class="row">
-                        <div class="col s12 l6 offset-l3">
-                            <h2>Logga in</h2>
-                            Användarnamn (email): 
-                            <h:inputText id="userName" value="#{userController.email}" > 
-                                <f:validator validatorId="emailValidator"></f:validator>
-                                <f:ajax event="blur" render="usernameMessage" />
-                            </h:inputText>
-                            <h:message id="usernameMessage" for="userName" errorStyle="color:red" />
-
-                            <br/>
-                            Lösenord 
-                            <h:inputSecret id="password" value="#{userController.code}">
-                                <f:validator validatorId="passwordValidatator"></f:validator>
-                            </h:inputSecret>
-                            <h:message id="passwordMessage" for="password" errorStyle="color:red" />
-
-                            <br/>
-                            <h:commandButton id="loginButton" class="waves-effect waves-light btn"  action="#{navigationController.loginUser('loginPage.xhtml')}" value="Login">
-                                <f:ajax event="action" execute="@form" render="@all" />
-                            </h:commandButton>
-                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(navigationController.previousPage, 'loginPage.xhtml')}" value="Avbryt">
-                                <f:param name="skipValidator" value="true"/> 
-                                <f:ajax event="action" execute="@form" render="@all" />
-                            </h:commandButton>
-                            <br/>
-                            <h:message  id="loginErrorMessage" for="loginButton" errorStyle="color: red" />
-                            <br/>
-                            <br/>
-                            För att kunna slutföra ditt köp måste du logga in. När du loggat kommer du tillbaka till varukorgen och kan slutföra köpet. <br/>
-                            Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna slutföra ditt köp hos oss. 
-
-                        </div>
-                    </div>
-                </div>
-            </h:form>
-            
+            </div>
         </f:view>
     </h:body>
 </html>
-

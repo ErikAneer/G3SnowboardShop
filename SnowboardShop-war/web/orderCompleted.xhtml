@@ -84,7 +84,7 @@
                             <h:outputText value="Totalpris för order: #{userController.showOrderSumprice(userController.ordernummer, userController.currentUser.email)} kr" />
                             <br/>
                             <br/>
-                            <h:commandLink class="waves-effectt btn" value="Stäng" /><h:commandLink class="waves-effectt btn" value="Logga ut" />
+                            <h:commandLink class="waves-effectt btn" value="Stäng" action="#{navigationController.navigate('index.xhtml', 'orderCompleted.xhtml')}" /><h:commandLink class="waves-effectt btn" value="Logga ut" action="#{navigationController.logout()}" />
                         </h:form>
                     </div>
                 </div>

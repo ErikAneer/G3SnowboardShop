@@ -53,7 +53,8 @@
 
                             <h:dataTable id="productInfo2" value="#{userController.products}" var="product">
                                 <f:facet name="header">
-                                    <h4>Varor i varukorgen !Varor sparas auto när logga ut!</h4>
+                                    <h4>Varor i varukorgen </h4>
+                                    <h:outputText rendered="#{userController.isLoggedIn eq 'true'}" style="color: red" value="!Varor sparas auto när logga ut!" />
                                    
                                 </f:facet>
                                   <h:column>
@@ -65,8 +66,18 @@
                                     <h:outputText value="#{product.productname}" />
                                 </h:column>
                                 <h:column>
+                                    <f:facet name="header" >Minus</f:facet>
+                                    <h:commandButton class="waves-effectt btn" id="removeItem" value="-" 
+                                                     action="#{userController.totalPrice(false, product.id, product)}"/>
+                                </h:column>
+                                <h:column>
                                     <f:facet name="header" >Antal</f:facet>
                                     <h:outputText value="#{product.count} st" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >Add</f:facet>
+                                    <h:commandButton class="waves-effectt btn" id="addItem" value="+" 
+                                                     action="#{userController.totalPrice(true,product.id, product)}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Styckpris</f:facet>
@@ -75,16 +86,6 @@
                                 <h:column>
                                     <f:facet name="header" >Totalpris</f:facet>
                                     <h:outputText value="#{product.totalprice} kr" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header" >Lägg till</f:facet>
-                                    <h:commandButton class="waves-effectt btn" id="removeItem" value="-" 
-                                                     action="#{userController.totalPrice(false, product.id, product)}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header" >Ta bort</f:facet>
-                                    <h:commandButton class="waves-effectt btn" id="addItem" value="+" 
-                                                     action="#{userController.totalPrice(true,product.id, product)}"/>
                                 </h:column>
                                 <h:column>
                                     <h:commandButton class="waves-effectt btn" id="remove" value="Ta bort varan från korgen" 

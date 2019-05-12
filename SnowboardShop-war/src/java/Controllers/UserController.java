@@ -61,6 +61,7 @@ public class UserController implements Serializable {
     }
 
     public void login() { 
+        System.out.println("   entered login method");
         String page = "";
         users = snowBean.callAllUser3();
         kunder = snowBean.callAllCustomer3("customer", "premium");
@@ -74,6 +75,7 @@ public class UserController implements Serializable {
             FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.", null);
             FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg);
+            System.out.println("Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.");
         } else {
             User3 u = (User3) snowBean.login(email, code);
             currentUser = u;
@@ -98,11 +100,11 @@ public class UserController implements Serializable {
                     //cartItems = 0;
                 }
             }
-        } 
-        if(currentUser.getStatus().equals("customer") || currentUser.getStatus().equals("premium")){           
+            if(currentUser.getStatus().equals("customer") || currentUser.getStatus().equals("premium")){
             products = snowBean.callProducts(currentUser.getEmail());
         }
-        //return page;
+        }  
+        
     }
 
     public void logOut() {
@@ -134,7 +136,7 @@ public class UserController implements Serializable {
         if (snowBean.isSameEmail(email)) {
                 FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Den angivna mailadressen finns redan registrerad! Ange en annan mailadress.", null);
-                FacesContext.getCurrentInstance().addMessage("registerForm:contactInsert", javaTextMsg);
+                FacesContext.getCurrentInstance().addMessage("registerForm:contactEmail", javaTextMsg);
             System.out.println("Samma email finns");
         }   
         else{
@@ -601,6 +603,22 @@ public class UserController implements Serializable {
         String sumprice = snowBean.showOrder3Sumprice(teststr);
         return sumprice;
     }
+    
+    public String showOrderSumprice2(List<Orderning3> orders) {
+        String orderNum = "";
+        int i = orders.size();
+        if(i==0){
+            return orderNum;
+        }else{
+            String ordernr = orders.get(0).getOrdernr();
+            int index1 = ordernr.indexOf("::");
+            int index2 = ordernr.indexOf("::", index1+1);
+            orderNum = ordernr.substring(index2+2);
+            
+        }
+        return orderNum;
+    }
+    
     
     public int callCount(String mail) {
         int count = snowBean.callAntalcount(mail);
