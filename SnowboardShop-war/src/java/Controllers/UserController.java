@@ -602,6 +602,14 @@ public class UserController implements Serializable {
         return sumprice;
     }
     
+    public String showOrderSumprice2(String ordernr) {
+        int index1 = ordernr.indexOf("::");
+        int index2 = ordernr.indexOf("::", index1+1);
+        String orderNum = ordernr.substring(index2+2);
+        return orderNum;
+    }
+    
+    
     public int callCount(String mail) {
         int count = snowBean.callAntalcount(mail);
         return count;
