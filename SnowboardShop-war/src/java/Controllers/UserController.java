@@ -584,6 +584,7 @@ public class UserController implements Serializable {
     }
 
     public String showOrderNrs(User3 u) {
+        detailorders = new ArrayList();
         setCustomer(u);
         ordernrs = snowBean.callUser3OrderNrs(u);
         return "show_customer_details";
@@ -633,5 +634,18 @@ public class UserController implements Serializable {
             od.setProductname(str1+"-"+str2);
         }
         return orders;
+    }
+    public String callNum(List<Orderning3> orders){
+        String ordernummer = "";
+        int i = orders.size();
+        if(i==0){
+            return ordernummer;
+        }else{
+            Orderning3 ord = orders.get(0);
+            String ordernr = ord.getOrdernr();
+            ordernummer = ordernr.substring(2, 4) + ordernr.substring(5, 7) + ordernr.substring(8, 10) + ordernr.substring(11, 13)
+                    + ordernr.substring(14, 16) + ordernr.substring(17, 19) + ordernr.substring(20, 23) + ordernr.substring(24, 28);
+        }
+        return ordernummer;
     }
 }
