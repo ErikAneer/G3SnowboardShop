@@ -624,4 +624,14 @@ public class UserController implements Serializable {
         int count = snowBean.callAntalcount(mail);
         return count;
     }
+    
+    public List<Orderning3> callBrand(List<Orderning3> orders){
+
+        for(Orderning3 od: orders){
+            String str1 = od.getProductname();
+            String str2 = snowBean.callProductBrand(str1);
+            od.setProductname(str1+"-"+str2);
+        }
+        return orders;
+    }
 }

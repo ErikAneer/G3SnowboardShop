@@ -3,6 +3,7 @@ package EJB;
 import EntityClasses.Cart;
 import EntityClasses.Orderning;
 import EntityClasses.Orderning3;
+import EntityClasses.Product;
 import EntityClasses.User2;
 import EntityClasses.User3;
 import java.util.ArrayList;
@@ -369,6 +370,18 @@ public class SnowBean implements SnowBeanLocal {
             total = (double)q.getSingleResult();           
         }
         return total;  
+    }
+
+    @Override
+    public String callProductBrand(String productname) {
+        Query q = em.createQuery("select p from Product p");
+        List<Product> products = q.getResultList();
+        for(Product p: products){
+            if(p.getName().equals(productname)){
+                return p.getBrand();
+            }
+        }
+        return "";
     }
 
 

@@ -75,5 +75,7 @@ public interface SnowBeanLocal {
     void removeAllpro(String email);
 
     String showOrder3Sumprice(String ordermail);
+
+    String callProductBrand(String productname);
     
 }

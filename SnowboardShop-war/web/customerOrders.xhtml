@@ -95,18 +95,14 @@
                                 </h:column>
 
                             </h:dataTable>
-                            <h:dataTable id="orderDetail" value="#{userController.detailorders}" var="detailorder">
+                            <h:dataTable id="orderDetail" value="#{userController.callBrand(userController.detailorders)}" var="detailorder">
                                 <f:facet name="header">
                                     <h4>Order Details:</h4>
                                     <h:outputText value="Summary: #{userController.showOrderSumprice2(userController.detailorders)} kr" />
                                 </f:facet>
 
                                 <h:column>
-                                    <f:facet name="header" >Produkt</f:facet>
-                                    <h:outputText value="#{detailorder.productname}" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header" >Märke</f:facet>
+                                    <f:facet name="header" >Produkt-Märke</f:facet>
                                     <h:outputText value="#{detailorder.productname}" />
                                 </h:column>
                                 <h:column>
