@@ -76,12 +76,21 @@ public class NavigationController implements Serializable {
     }
 
     public String loginUser(String currentPage) {
-        String pageTo = previousPage;
+        String pageTo = "";
         refreshVisitedPages(currentPage);
         userController.login(); 
         if(userController.getCurrentUser() != null && userController.getCurrentUser().getStatus().equals("admin")){
-            pageTo = "admin";
+            return "admin.xhtml";
         }
+        if(userController.getCurrentUser() != null && (userController.getCurrentUser().getStatus().equals("customer") 
+                || userController.getCurrentUser().getStatus().equals("premium"))){
+            if(secondPreviousPage.equals("cart.xhtml")){
+                return "cart.xhtml";  // fel till index sen ???
+            }else{
+                return "index.xhtml";
+            }
+        }
+        
         //System.out.println("förra sidan"+previousPage);
         return pageTo;
     }
@@ -126,11 +135,11 @@ public class NavigationController implements Serializable {
         String pageTo = "";
         refreshVisitedPages(currentPage);
         userController.registerNewCustomer();
-        if(userController.getCurrentUser() != null){
-            
-            if(userController.getCurrentUser().getStatus().equals("customer")) {
-                return "cart.xhtml";
-            }
+        if(userController.getCurrentUser() != null && secondPreviousPage.equals("cart.xhtml")){
+                return "cart.xhtml";  //fel kod sen till index ??
+        }        
+        if(userController.getCurrentUser() != null && userController.getCurrentUser().getStatus().equals("customer")) {
+                return "index.xhtml";
         }
         pageTo = previousPage;
         return pageTo;
