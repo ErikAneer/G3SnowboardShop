@@ -126,10 +126,13 @@ public class NavigationController implements Serializable {
         String pageTo = "";
         refreshVisitedPages(currentPage);
         userController.registerNewCustomer();
-        if(secondPreviousPage.equals("cart.xhtml")) {
-            return "cart.xhtml";
+        if(userController.getCurrentUser() != null){
+            
+            if(userController.getCurrentUser().getStatus().equals("customer")) {
+                return "cart.xhtml";
+            }
         }
-        pageTo = secondPreviousPage;
+        pageTo = previousPage;
         return pageTo;
     }
     

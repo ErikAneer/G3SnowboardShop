@@ -20,7 +20,7 @@ import javax.faces.validator.ValidatorException;
 
 /**
  *
- * @author Erik  jjjj kk
+ * @author Erik jjjj kk
  */
 @Named(value = "userController")
 @SessionScoped
@@ -54,20 +54,20 @@ public class UserController implements Serializable {
     /**
      * Creates a new instance of LoginBean //(String firstName, String
      * familyName, String email, String password, String status) julia
-     */ 
+     */
     public UserController() {
         loggedInStatus = "Logga in";
         cartItems = 0;
     }
 
-    public void login() { 
+    public void login() {
         System.out.println("   entered login method");
         String page = "";
         users = snowBean.callAllUser3();
         kunder = snowBean.callAllCustomer3("customer", "premium");
         summary = snowBean.sumPrice(email);
         List<Cart> carts = snowBean.callProducts(email);
-       // cartItems = carts.size();
+        // cartItems = carts.size();
 
         if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
@@ -83,36 +83,36 @@ public class UserController implements Serializable {
             loggedInStatus = "Logga ut";
             page = u.getStatus();
             setEmail(null);
-            if(products.size()>0){
-                if(u.getStatus().equals("customer")){
-                    for(Cart c: products){
+            if (products.size() > 0) {
+                if (u.getStatus().equals("customer")) {
+                    for (Cart c : products) {
                         snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice(), c.getPrice());
                     }
                     products = snowBean.callProducts(u.getEmail());
-                }else if(u.getStatus().equals("premium")){
-                    for(Cart c: products){
-                        snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice()*0.9, c.getPrice()*0.9);
+                } else if (u.getStatus().equals("premium")) {
+                    for (Cart c : products) {
+                        snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice() * 0.9, c.getPrice() * 0.9);
                     }
                     products = snowBean.callProducts(u.getEmail());
                     //cartItems = products.size();                                        
-                }else{
+                } else {
                     products = new ArrayList();
                     //cartItems = 0;
                 }
             }
-            if(currentUser.getStatus().equals("customer") || currentUser.getStatus().equals("premium")){
-            products = snowBean.callProducts(currentUser.getEmail());
+            if (currentUser.getStatus().equals("customer") || currentUser.getStatus().equals("premium")) {
+                products = snowBean.callProducts(currentUser.getEmail());
+            }
         }
-        }  
-        
+
     }
 
     public void logOut() {
         snowBean.removeAllpro(currentUser.getEmail());
-        for(Cart c: products){
+        for (Cart c : products) {
             snowBean.addProduct3(c.getProductname(), c.getEmail(), c.getCount(), c.getTotalprice(), c.getPrice());
         }
-        
+
         loggedInStatus = "Logga in";
         isLoggedIn = false;
         currentUser = null;
@@ -130,20 +130,19 @@ public class UserController implements Serializable {
         products = new ArrayList();
         ordernummer = "";
     }
-     
+
     public void registerNewCustomer() {
         String sidan = "register";
         if (snowBean.isSameEmail(email)) {
-                FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+            FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Den angivna mailadressen finns redan registrerad! Ange en annan mailadress.", null);
-                FacesContext.getCurrentInstance().addMessage("registerForm:contactEmail", javaTextMsg);
+            FacesContext.getCurrentInstance().addMessage("registerForm:contactEmail", javaTextMsg);
             System.out.println("Samma email finns");
-        }   
-        else{
-       snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
+        } else {
+            snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
             login();
             clearRegisterForm();
-        } 
+        }
     }
 
     public void clearRegisterForm() {
@@ -359,49 +358,48 @@ public class UserController implements Serializable {
     }
 
     public void onload() {
-       //snowBean.saveTestUsersToDB();
+        //snowBean.saveTestUsersToDB();
     }
-    
+
     private long indexid = 1L;
-    
+
     public String addVaror(User3 u, Product p, String str) {
-                int size=0;
+        int size = 0;
         if (u == null) {
-            if(products.size()<1){
+            if (products.size() < 1) {
                 Cart c = new Cart(p.getName(), "null", 1, p.getPrice());
-                c.setPrice(p.getPrice());  
+                c.setPrice(p.getPrice());
                 c.setId(indexid);
                 indexid++;
                 products.add(c);
-            }
-            else{
-                for(int i=0; i<products.size(); i++){
-                    if((products.get(i).getProductname()).equals(p.getName())){
+            } else {
+                for (int i = 0; i < products.size(); i++) {
+                    if ((products.get(i).getProductname()).equals(p.getName())) {
                         int cou = products.get(i).getCount();
                         cou++;
                         products.get(i).setCount(cou);
-                        products.get(i).setTotalprice(products.get(i).getPrice()*cou);
+                        products.get(i).setTotalprice(products.get(i).getPrice() * cou);
                         break;
-                    }else{
+                    } else {
                         size++;
-                        if(size==products.size()){
+                        if (size == products.size()) {
                             Cart c1 = new Cart(p.getName(), "null", 1, p.getPrice());
-                            c1.setPrice(p.getPrice());  
+                            c1.setPrice(p.getPrice());
                             c1.setId(indexid);
                             products.add(c1);
                             indexid++;
                             size = 0;
                             break;
                         }
-                    }    
-                }   
+                    }
+                }
             }
         } else {
-            
+
             if ((u.getStatus()).equals("customer")) {
                 snowBean.addProduct3(p.getName(), str, 1, p.getPrice(), p.getPrice());
                 String test1 = visaKorg(str);
-               // cartItems++;
+                // cartItems++;
             }
             if ((u.getStatus()).equals("premium")) {
                 snowBean.addProduct3(p.getName(), str, 1, p.getPremiumPrice(), p.getPremiumPrice());
@@ -435,7 +433,7 @@ public class UserController implements Serializable {
         } else {
             mail = u.getEmail();
             snowBean.removeBypronameidemail(proname, id, mail);
-           // cartItems--;
+            // cartItems--;
         }
         return visaKorg(mail);
     }
@@ -444,53 +442,53 @@ public class UserController implements Serializable {
         String mail = "";
         if (u == null) {
             products = new ArrayList();
-          //  cartItems = 0;
+            //  cartItems = 0;
             return "cart";
         } else {
             mail = u.getEmail();
             snowBean.removeAllpro(u.getEmail());
-          //  cartItems = 0;
+            //  cartItems = 0;
         }
         return visaKorg(mail);
     }
-    
-    public String totalPrice(boolean b, long id, Cart p){
-        for(Cart c: products){
-            if(c.getProductname().equals(p.getProductname()) && c.getId() == id){
+
+    public String totalPrice(boolean b, long id, Cart p) {
+        for (Cart c : products) {
+            if (c.getProductname().equals(p.getProductname()) && c.getId() == id) {
                 int procount = p.getCount();
-                if(b==true){ //+
+                if (b == true) { //+
                     procount++;
                 }
-                if(b==false){
+                if (b == false) {
                     procount--;
                 }
-                if(procount==0){
+                if (procount == 0) {
                     remove(p.getProductname(), id, currentUser);
                     break;
                 }
                 c.setCount(procount);
-                c.setTotalprice(c.getPrice()*procount);
+                c.setTotalprice(c.getPrice() * procount);
                 break;
             }
         }
         return "cart";
     }
-    
-    public String saveChange(User3 u){
-        if(u == null){
+
+    public String saveChange(User3 u) {
+        if (u == null) {
             return "loginPage";
-        }else{
+        } else {
             snowBean.removeAllpro(u.getEmail());
-            for(Cart c: products){
+            for (Cart c : products) {
                 snowBean.addProduct3(c.getProductname(), c.getEmail(), c.getCount(), c.getTotalprice(), c.getPrice());
             }
         }
         return visaKorg(u.getEmail());
     }
-    
+
     public double callSummaryPrice(User3 user) {
         sumprice = 0;
-        for(Cart c: products){
+        for (Cart c : products) {
             sumprice = sumprice + c.getTotalprice();
         }
         /*if(user == null){
@@ -505,16 +503,16 @@ public class UserController implements Serializable {
         return sumprice;
     }
 
-    public int callItems(){
+    public int callItems() {
         int items = 0;
-        for(Cart c: products){
+        for (Cart c : products) {
             items += c.getCount();
         }
         return items;
     }
-    
+
     public String buyAll(User3 user, List<Cart> korg) {
-        if(user == null){
+        if (user == null) {
             return "loginPage";
         }
         cartItems = 0;
@@ -554,7 +552,7 @@ public class UserController implements Serializable {
         if (test3 >= 500000 && (currentUser.getStatus()).equals("customer")) {
             snowBean.changeStatus(currentUser);
         }
-        showOrderDetails(ordernummer, mail);  
+        showOrderDetails(ordernummer, mail);
         return visaKorg(mail);
     }
 
@@ -604,43 +602,43 @@ public class UserController implements Serializable {
         String sumprice = snowBean.showOrder3Sumprice(teststr);
         return sumprice;
     }
-    
+
     public String showOrderSumprice2(List<Orderning3> orders) {
         String orderNum = "";
         int i = orders.size();
-        if(i==0){
+        if (i == 0) {
             return orderNum;
-        }else{
+        } else {
             String ordernr = orders.get(0).getOrdernr();
             int index1 = ordernr.indexOf("::");
-            int index2 = ordernr.indexOf("::", index1+1);
-            orderNum = ordernr.substring(index2+2);
-            
+            int index2 = ordernr.indexOf("::", index1 + 1);
+            orderNum = ordernr.substring(index2 + 2);
+
         }
         return orderNum;
     }
-    
-    
+
     public int callCount(String mail) {
         int count = snowBean.callAntalcount(mail);
         return count;
     }
-    
-    public List<Orderning3> callBrand(List<Orderning3> orders){
 
-        for(Orderning3 od: orders){
+    public List<Orderning3> callBrand(List<Orderning3> orders) {
+
+        for (Orderning3 od : orders) {
             String str1 = od.getProductname();
             String str2 = snowBean.callProductBrand(str1);
-            od.setProductname(str1+"-"+str2);
+            od.setProductname(str1 + "-" + str2);
         }
         return orders;
     }
-    public String callNum(List<Orderning3> orders){
+
+    public String callNum(List<Orderning3> orders) {
         String ordernummer = "";
         int i = orders.size();
-        if(i==0){
+        if (i == 0) {
             return ordernummer;
-        }else{
+        } else {
             Orderning3 ord = orders.get(0);
             String ordernr = ord.getOrdernr();
             ordernummer = ordernr.substring(2, 4) + ordernr.substring(5, 7) + ordernr.substring(8, 10) + ordernr.substring(11, 13)
