@@ -76,22 +76,19 @@ public class NavigationController implements Serializable {
     }
 
     public String loginUser(String currentPage) {
-        String pageTo = "";
-        refreshVisitedPages(currentPage);
-        userController.login(); 
-        if(userController.getCurrentUser() != null && userController.getCurrentUser().getStatus().equals("admin")){
-            return "admin.xhtml";
+        String pageTo="";
+        String loginResult = userController.login(); 
+       
+        if (loginResult.equals("loginFailure")){
+            return "loginFailure";
         }
-        if(userController.getCurrentUser() != null && (userController.getCurrentUser().getStatus().equals("customer") 
-                || userController.getCurrentUser().getStatus().equals("premium"))){
-            if(secondPreviousPage.equals("cart.xhtml")){
-                return "cart.xhtml";  // fel till index sen ???
-            }else{
-                return "index.xhtml";
-            }
+         if(userController.getCurrentUser() != null && userController.getCurrentUser().getStatus().equals("admin")){
+            pageTo = "admin";
         }
-        
-        //System.out.println("förra sidan"+previousPage);
+        else {
+            pageTo = previousPage;
+            refreshVisitedPages(currentPage);
+        }
         return pageTo;
     }
 
@@ -133,15 +130,16 @@ public class NavigationController implements Serializable {
     }
     public String navigateFromRegisterPage(String currentPage){
         String pageTo = "";
-        refreshVisitedPages(currentPage);
-        userController.registerNewCustomer();
-        if(userController.getCurrentUser() != null && secondPreviousPage.equals("cart.xhtml")){
-                return "cart.xhtml";  //fel kod sen till index ??
-        }        
-        if(userController.getCurrentUser() != null && userController.getCurrentUser().getStatus().equals("customer")) {
-                return "index.xhtml";
+       
+        String emailCheck = userController.registerNewCustomer();
+        
+         if (emailCheck.equals("emailExists")){
+            return "registerFailure";
         }
-        pageTo = previousPage;
+        else {
+            pageTo = previousPage;
+            refreshVisitedPages(currentPage);
+        }
         return pageTo;
     }
     

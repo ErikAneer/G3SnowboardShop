@@ -60,7 +60,7 @@ public class UserController implements Serializable {
         cartItems = 0;
     }
 
-    public void login() {
+    public String login() {
         System.out.println("   entered login method");
         String page = "";
         users = snowBean.callAllUser3();
@@ -75,7 +75,8 @@ public class UserController implements Serializable {
             FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.", null);
             FacesContext.getCurrentInstance().addMessage("loginForm:loginButton", javaTextMsg);
-            System.out.println("Sorry, ditt användarnamn och/eller lösenord stämmer inte! Försök igen.");
+            return "loginFailure";
+          
         } else {
             User3 u = (User3) snowBean.login(email, code);
             currentUser = u;
@@ -93,18 +94,16 @@ public class UserController implements Serializable {
                     for (Cart c : products) {
                         snowBean.addProduct3(c.getProductname(), u.getEmail(), c.getCount(), c.getTotalprice() * 0.9, c.getPrice() * 0.9);
                     }
-                    products = snowBean.callProducts(u.getEmail());
-                    //cartItems = products.size();                                        
+                    products = snowBean.callProducts(u.getEmail());                                   
                 } else {
                     products = new ArrayList();
-                    //cartItems = 0;
                 }
             }
             if (currentUser.getStatus().equals("customer") || currentUser.getStatus().equals("premium")) {
                 products = snowBean.callProducts(currentUser.getEmail());
             }
         }
-
+            return page;
     }
 
     public void logOut() {
@@ -131,18 +130,19 @@ public class UserController implements Serializable {
         ordernummer = "";
     }
 
-    public void registerNewCustomer() {
-        String sidan = "register";
+    public String registerNewCustomer() {
+        String page = "register";
         if (snowBean.isSameEmail(email)) {
             FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Den angivna mailadressen finns redan registrerad! Ange en annan mailadress.", null);
             FacesContext.getCurrentInstance().addMessage("registerForm:contactEmail", javaTextMsg);
-            System.out.println("Samma email finns");
+            return "emailExists";
         } else {
             snowBean.save(firstname, familyname, telephone, address, postnr, postaddress, email, code, "customer");
             login();
             clearRegisterForm();
         }
+        return page;
     }
 
     public void clearRegisterForm() {
