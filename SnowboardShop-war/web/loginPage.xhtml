@@ -4,7 +4,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
       >
 
     <f:metadata>
@@ -16,8 +15,8 @@
         <!-- Compiled and minified CSS jjj -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
         <!-- To use Material Icons -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <script name="jquery/jquery.js" library="primefaces"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/> 
     </h:head>
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
@@ -64,15 +63,15 @@
                             <h:message  id="loginErrorMessage" for="loginButton" errorStyle="color: red" />
                             <br/>
                             <br/>
-                             </h:form>
-                            <h:form rendered="#{navigationController.previousPage eq 'cart.xhtml'}" >
-                                För att kunna slutföra ditt köp måste du logga in. När du loggat kommer du tillbaka till varukorgen och kan slutföra köpet. <br/>
-                                Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna slutföra ditt köp hos oss. 
-                            </h:form>
-                            <h:form rendered="#{navigationController.previousPage ne 'cart.xhtml'}" >
-                                Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna handla hos oss. 
-                            </h:form>
-                       
+                        </h:form>
+                        <h:form rendered="#{navigationController.previousPage eq 'cart.xhtml'}" >
+                            För att kunna slutföra ditt köp måste du logga in. När du loggat kommer du tillbaka till varukorgen och kan slutföra köpet. <br/>
+                            Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna slutföra ditt köp hos oss. 
+                        </h:form>
+                        <h:form rendered="#{navigationController.previousPage ne 'cart.xhtml'}" >
+                            Inte registrerad kund ännu? <h:link value="Registrera dig" outcome="register" /> här för att kunna handla hos oss. 
+                        </h:form>
+
                     </div>
                 </div>
             </div>

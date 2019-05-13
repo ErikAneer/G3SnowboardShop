@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package EntityClasses;
 
 import java.io.Serializable;
@@ -26,15 +21,15 @@ public class Orderning3 implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Basic(fetch=LAZY)
+
+    @Basic(fetch = LAZY)
     private String ordernr, email, fullname, productname;
     private int count;
     private double totalprice;
     private String fulladdress, postnraddress, telephone;
 
     @ManyToOne
-    @JoinColumn(name="USER3_ID", referencedColumnName="ID")
+    @JoinColumn(name = "USER3_ID", referencedColumnName = "ID")
     private User3 user3;
 
     public Orderning3(String ordernr, String email, String fullname, String productname, int count, double totalprice, String fulladdress, String postnraddress, String telephone, User3 user3) {
@@ -50,11 +45,9 @@ public class Orderning3 implements Serializable {
         this.user3 = user3;
     }
 
-    
     public Orderning3() {
     }
 
-    
     public String getOrdernr() {
         return ordernr;
     }
@@ -134,8 +127,7 @@ public class Orderning3 implements Serializable {
     public void setUser3(User3 user3) {
         this.user3 = user3;
     }
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -168,5 +160,5 @@ public class Orderning3 implements Serializable {
     public String toString() {
         return "EntityClasses.Orderning3[ id=" + id + " ]";
     }
-    
+
 }

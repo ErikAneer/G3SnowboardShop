@@ -131,7 +131,7 @@ public class ProductController implements Serializable {
     
 
     public void onload() {
-         productBean.saveProductToDB();
+         //productBean.saveProductToDB();
          addBoardsToList();
          addBootsToList();  
          addBindingsToList();
@@ -211,12 +211,14 @@ public class ProductController implements Serializable {
             
              return "show_details";
     }      
+    /*
     public String returnToIndex() {
         setSelectedProduct(null);
         
         return "return_index";
     
     }
+*/
 
 }
             
