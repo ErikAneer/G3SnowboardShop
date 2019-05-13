@@ -94,15 +94,14 @@
                             <h:outputText value="Total ordersumma: #{userController.callSummaryPrice(userController.currentUser)} kr" />
                             <br/><br/>
                             <h:commandButton class="waves-effectt btn" value="Slutför köp" action="#{navigationController.navigateToCompleteOrder('cart.xhtml')}"/>   
-                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
+                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate('index.xhtml', 'cart.xhtml')}" />
                             <br/><br/>
                         </h:form>
                         <br/><br/>
                         <h:form rendered="#{empty userController.products}">
                             <h4>Du har inga varor i varukorgen</h4>
-                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
+                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate('index.xhtml', 'cart.xhtml')}" />
                         </h:form>
-                        #{productController.selectedProduct.name}
                     </div>
                 </div>
             </div>        

@@ -36,7 +36,7 @@
                         <div class="container">
                             <ul class="left ">
                                 <li> <h:commandLink value="Snowboards" action="#{navigationController.navigate('snowboards.xhtml', 'productView.xhtml')}"/></li>
-                                <li> <h:commandLink value="Boots" action="#{navigationController.navigateFromProduct('boots.xhtml', 'productView.xhtml')}"/></li>
+                                <li> <h:commandLink value="Boots" action="#{navigationController.navigate('boots.xhtml', 'productView.xhtml')}"/></li>
                                 <li> <h:commandLink value="Bindningar" action="#{navigationController.navigate('bindningar.xhtml', 'productView.xhtml')}"/></li>
                             </ul>       
                         </div>
@@ -81,9 +81,8 @@
                                         <h:commandButton class="waves-effectt btn" value="Köp!" 
                                                          action="#{userController.addVaror(userController.currentUser, productController.selectedProduct, userController.currentUser.email)}">
                                             <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>                                      
-                                        <h:commandButton class="waves-effectt btn" value="Tillbaka"  action="#{navigationController.navigateFromProduct(navigationController.previousPage, 'productView.xhtml')}"/>
+                                        <h:commandButton class="waves-effectt btn" value="Tillbaka"  action="#{navigationController.navigate(navigationController.previousPage, 'productView.xhtml')}"/>
                                     </h:form>
-                                    Selected Product: #{productController.selectedProduct.name}
                                 </div> 
                             </div>
                         </div>
