@@ -1,4 +1,3 @@
-
 package EntityClasses;
 
 import java.io.Serializable;
@@ -17,17 +16,21 @@ import javax.validation.constraints.Size;
  *
  * @author Erik j
  */
-
-
 @Entity
 @NamedQueries({
-        @NamedQuery(name="Product.getAll", query="select p from Product p"),
-        @NamedQuery(name="Product.getByBrand", query="select p from Product p WHERE p.brand = :brand" ),
-        @NamedQuery(name="Product.getByName", query="select p from Product p WHERE p.name = :name" ),
-        @NamedQuery(name="Product.getByType", query="select p from Product p WHERE p.productType = :productType" ),
-        @NamedQuery(name="Product.getByPrice", query="select p from Product p WHERE p.price >= :minPrice AND p.price <= :maxPrice" ),
-        @NamedQuery(name="Product.getBySizeSpan", query="select p from Product p WHERE p.productSize >= :minSize AND p.productSize <= :maxSize" ),
-        @NamedQuery(name="Product.getByLengthSpan", query="select p from Product p WHERE p.productLength >= :minLength AND p.productLength <= :maxLength" )
+    @NamedQuery(name = "Product.getAll", query = "select p from Product p")
+    ,
+        @NamedQuery(name = "Product.getByBrand", query = "select p from Product p WHERE p.brand = :brand")
+    ,
+        @NamedQuery(name = "Product.getByName", query = "select p from Product p WHERE p.name = :name")
+    ,
+        @NamedQuery(name = "Product.getByType", query = "select p from Product p WHERE p.productType = :productType")
+    ,
+        @NamedQuery(name = "Product.getByPrice", query = "select p from Product p WHERE p.price >= :minPrice AND p.price <= :maxPrice")
+    ,
+        @NamedQuery(name = "Product.getBySizeSpan", query = "select p from Product p WHERE p.productSize >= :minSize AND p.productSize <= :maxSize")
+    ,
+        @NamedQuery(name = "Product.getByLengthSpan", query = "select p from Product p WHERE p.productLength >= :minLength AND p.productLength <= :maxLength")
 })
 public class Product implements Serializable {
 
@@ -35,23 +38,23 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Basic(fetch=LAZY)
-    
-    private String productType; // available "snowboard, binding, boot"
-    
-    private String brand;  
+
+    @Basic(fetch = LAZY)
+
+    private String productType;
+
+    private String brand;
     private String name;
     private double productLength;
     private String productSize;
-    
+
     @Column(length = 3500)
     private String description;
-    
+
     private double price;
-    
+
     private double premiumPrice;
-    
+
     private String imagePath;
 
     public Product(String productType, String brand, String name, double productLength, String description, double price, double premiumPrice, String imagePath) {
@@ -118,16 +121,8 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    /*
-    public double getCustomerPrice(User2 u) {
-        
-        if(u.getStatus().equals("premium")) { return price * 0.9;}
-        
-        return price;
-    }
-*/
     public double getPrice() {
-        
+
         return price;
     }
 
@@ -167,7 +162,6 @@ public class Product implements Serializable {
         this.productSize = productSize;
     }
 
-      
     @Override
     public int hashCode() {
         int hash = 0;
@@ -192,5 +186,5 @@ public class Product implements Serializable {
     public String toString() {
         return "EntityClasses.Product[ id=" + id + " ]";
     }
-    
+
 }

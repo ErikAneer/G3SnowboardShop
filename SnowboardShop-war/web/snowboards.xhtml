@@ -5,7 +5,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
         <title>G3 Board Shop</title>
@@ -14,10 +13,6 @@
         <!-- To use Material Icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <f:metadata>
-            <!--<f:viewAction action="#{productController.onload()}" /> -->
-        </f:metadata>
-        <script name="jquery/jquery.js" library="primefaces"></script>
     </h:head>
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
@@ -76,7 +71,7 @@
                                             <h:commandLink value="Läs mer" action="#{navigationController.navigateToProduct('snowboards.xhtml', product)}"/>
                                         </div>
                                         <div class="card-action"> 
-                                             <h:commandButton class="waves-effectt btn" value="Köp!" 
+                                            <h:commandButton class="waves-effectt btn" value="Köp!" 
                                                              action="#{userController.addVaror(userController.currentUser, product, userController.currentUser.email)}">
                                                 <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                         </div> 
@@ -87,33 +82,32 @@
                     </div>          
                 </div> 
             </h:form>
-                        <footer class="page-footer grey darken-8">
-          <div class="container" >
-            <div class="gray">
-              <div class="col l6 s12">
-                <h5 class="white-text"></h5>
-                <p class="grey-text text-lighten-4"></p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Follow us on:</h5>
+            <footer class="page-footer grey darken-8">
+                <div class="container" >
+                    <div class="gray">
+                        <div class="col l6 s12">
+                            <h5 class="white-text"></h5>
+                            <p class="grey-text text-lighten-4"></p>
+                        </div>
+                        <div class="col l4 offset-l2 s12">
+                            <h5 class="white-text">Följ oss på:</h5>
 
-                <a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook" style="font-size: 30px;padding-right:20px"></a>
-                <a href="https://twitter.com/" target="_blank" class="fa fa-twitter" style="font-size: 30px;padding-right:20px"></a>
-                <a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube" style="font-size: 30px;padding-right:20px"></a>
-                <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram" style="font-size: 30px;padding-right:20px"></a>
-                <a href="https://www.instagram.com" target="_blank" class="fa fa-linkedin" style="font-size: 30px;padding-right:20px"></a>
-                <div class="right">Alla varor som visas finns i lager och är redo för leverans.</div>
-              </div>
-
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            &copy; 2019 Erik, Julia, Jesper, Pavel, G3Snowboardshop &copy; Radonfly  (used without permission).
-            <a class="grey-text text-lighten-4 right" href="#!">Click for more links</a>
-            </div>
-          </div>
-        </footer>
+                            <a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://twitter.com/" target="_blank" class="fa fa-twitter" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://www.instagram.com" target="_blank" class="fa fa-linkedin" style="font-size: 30px;padding-right:20px"></a>
+                            <div class="right">Alla varor som visas finns i lager och är redo för leverans.</div>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container">
+                        &copy; 2019 Erik, Julia, Jesper, Pavel, G3Snowboardshop. Produktinfo och produktbilder lånade från Blue Tomato.  
+                    </div>
+                </div>
+            </footer>
         </f:view>
     </h:body>      
 </html>

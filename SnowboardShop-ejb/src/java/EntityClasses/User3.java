@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package EntityClasses;
 
 import java.io.Serializable;
@@ -27,10 +22,10 @@ public class User3 implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Basic(fetch=LAZY)
+    @Basic(fetch = LAZY)
     private String firstname, familyname, telephone, address, postnr, postaddress, email, code, status;
 
-    @OneToMany(mappedBy="user3")
+    @OneToMany(mappedBy = "user3")
     private List<Orderning3> orders = new ArrayList();
 
     public User3(String firstname, String familyname, String telephone, String address, String postnr, String postaddress, String email, String code, String status) {
@@ -45,11 +40,9 @@ public class User3 implements Serializable {
         this.status = status;
     }
 
-    
     public User3() {
     }
 
-    
     public String getFirstname() {
         return firstname;
     }
@@ -129,8 +122,7 @@ public class User3 implements Serializable {
     public void setOrders(List<Orderning3> orders) {
         this.orders = orders;
     }
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -163,5 +155,5 @@ public class User3 implements Serializable {
     public String toString() {
         return "EntityClasses.User3[ id=" + id + " ]";
     }
-    
+
 }

@@ -1,10 +1,8 @@
 package EJB;
 
 import EntityClasses.Cart;
-import EntityClasses.Orderning;
 import EntityClasses.Orderning3;
 import EntityClasses.Product;
-import EntityClasses.User2;
 import EntityClasses.User3;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,12 +57,14 @@ public class SnowBean implements SnowBeanLocal {
         persist(newUser);
     }
 
+    /*
     @Override
     public List<User2> callAllUsers() {
         Query q = em.createQuery("select o from User2 o");
         List<User2> users = q.getResultList();
         return users;
     }
+*/
 
     @Override
     public List<User3> callAllUser3() {
@@ -73,6 +73,7 @@ public class SnowBean implements SnowBeanLocal {
         return users;
     }
 
+    /*
     @Override
     public List<User2> callAllCustomers(String customer, String premium) {
         Query q = em.createQuery("select o from User2 o where o.status=:customer or o.status=:premium");
@@ -81,7 +82,7 @@ public class SnowBean implements SnowBeanLocal {
         List<User2> users = q.getResultList();
         return users;
     }
-
+*/
     @Override
     public List<User3> callAllCustomer3(String customer, String premium) {
         Query q = em.createQuery("select o from User3 o where o.status=:customer or o.status=:premium");
@@ -102,7 +103,7 @@ public class SnowBean implements SnowBeanLocal {
     @Override
     public void saveTestUsersToDB() {
         Query q = em.createQuery("select o from User2 o");
-        List<User2> users = q.getResultList();
+        List<User3> users = q.getResultList();
         User3 u = new User3();
 
         u.setFirstname("aaaa");
@@ -224,6 +225,7 @@ public class SnowBean implements SnowBeanLocal {
             }
         }
     }
+    /*
 
     @Override
     public void sendOrder(String ordernr, String email, String fullname, String productname,
@@ -231,6 +233,7 @@ public class SnowBean implements SnowBeanLocal {
         Orderning order = new Orderning(ordernr, email, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
         em.persist(order);
     }
+*/
 
     @Override
     public void sendOrder3(Object user, String ordernr, String email, String fullname, String productname,
@@ -242,7 +245,7 @@ public class SnowBean implements SnowBeanLocal {
         u3.setOrders(orders);
         em.persist(order);
     }
-
+/*
     @Override
     public List<Orderning> callOrders(String email) {
         Query q = em.createQuery("select o from Orderning o where o.email=:email order by o.ordernr");
@@ -251,6 +254,7 @@ public class SnowBean implements SnowBeanLocal {
 
         return orders;
     }
+*/
 
     @Override
     public List<Orderning3> callOrder3(String email) {
@@ -382,6 +386,11 @@ public class SnowBean implements SnowBeanLocal {
             }
         }
         return "";
+    }
+
+    @Override
+    public void sendOrder(String ordernr, String email, String fullname, String productname, int count, double totalprice, String fulladdress, String postnraddress, String telephone) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

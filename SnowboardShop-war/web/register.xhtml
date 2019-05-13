@@ -4,15 +4,14 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
         <title>G3 Board Shop</title>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/> 
         <!-- To use Material Icons -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <script name="jquery/jquery.js" library="primefaces"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/> 
     </h:head>
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
@@ -88,15 +87,15 @@
                                     <f:ajax event="blur" render="usernameMessage" />
                                 </h:inputText>
                                 <h:message id="usernameMessage" for="contactEmail" errorStyle="color:red" />
-                               
-                                 
+
+
                                 <h:outputLabel for="password" value="Lösenord: " /> 
                                 <h:inputSecret id="password" value="#{userController.code}" redisplay="true">
                                     <f:validator validatorId="passwordValidatator"></f:validator> 
                                     <f:ajax event="blur" render="passwordMessage" />
                                 </h:inputSecret>  
                                 <h:message id="passwordMessage" for="password" errorStyle="color:red" />
-                                
+
                                 <h:outputLabel for="confirmPassword" value="Upprepa lösenord: " />
                                 <h:inputSecret  id="confirmPassword" redisplay="true" value="#{userController.confirmPassword}">
                                     <f:validator validatorId="confirmPasswordValidatator"></f:validator> 
@@ -104,29 +103,55 @@
                                 </h:inputSecret>
                                 <h:message id="confirmPasswordMessage" for="confirmPassword" errorStyle="color:red" />
                             </h:panelGrid>
-                        
-                            
-                        <br/>
-                         <!--<h:message id="sameEmailMessage" for="contactEmail" errorStyle="color:red" /> -->
-                           <br/>
 
-                        <h:commandButton class="waves-effect waves-light btn" id="contactInsert"  value="Skicka" 
-                                         action="#{navigationController.navigateFromRegisterPage('register.xhtml')}">
-                            <f:ajax event="action" execute="@form" render="@all" />
-                        </h:commandButton>
-                        <h:commandButton class="waves-effect waves-light btn" id="contactClearForm"  value="Rensa" 
-                                         action="#{userController.clearRegisterForm()}">
-                            <f:param name="skipValidator" value="true"/> 
-                            <f:ajax event="action" execute="@form" render="@all" />
-                        </h:commandButton>
-                        <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(navigationController.previousPage, 'register.xhtml')}" value="Avbryt">
-                             <f:param name="skipValidator" value="true"/>    
-                            <f:ajax event="action" execute="@form" render="@all" />
-                        </h:commandButton>
-                       </h:form>
+
+                            <br/>
+                            <!--<h:message id="sameEmailMessage" for="contactEmail" errorStyle="color:red" /> -->
+                            <br/>
+
+                            <h:commandButton class="waves-effect waves-light btn" id="contactInsert"  value="Skicka" 
+                                             action="#{navigationController.navigateFromRegisterPage('register.xhtml')}">
+                                <f:ajax event="action" execute="@form" render="@all" />
+                            </h:commandButton>
+                            <h:commandButton class="waves-effect waves-light btn" id="contactClearForm"  value="Rensa" 
+                                             action="#{userController.clearRegisterForm()}">
+                                <f:param name="skipValidator" value="true"/> 
+                                <f:ajax event="action" execute="@form" render="@all" />
+                            </h:commandButton>
+                            <h:commandButton id="logoutCancelButton" class="waves-effect waves-light btn"  action="#{navigationController.navigate(navigationController.previousPage, 'register.xhtml')}" value="Avbryt">
+                                <f:param name="skipValidator" value="true"/>    
+                                <f:ajax event="action" execute="@form" render="@all" />
+                            </h:commandButton>
+                        </h:form>
                     </div>
                 </div>
             </div>
+            <footer class="page-footer grey darken-8">
+                <div class="container" >
+                    <div class="gray">
+                        <div class="col l6 s12">
+                            <h5 class="white-text"></h5>
+                            <p class="grey-text text-lighten-4"></p>
+                        </div>
+                        <div class="col l4 offset-l2 s12">
+                            <h5 class="white-text">Följ oss på:</h5>
+
+                            <a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://twitter.com/" target="_blank" class="fa fa-twitter" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://www.instagram.com" target="_blank" class="fa fa-linkedin" style="font-size: 30px;padding-right:20px"></a>
+                            <div class="right">Alla varor som visas finns i lager och är redo för leverans.</div>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container">
+                        &copy; 2019 Erik, Julia, Jesper, Pavel, G3Snowboardshop. Produktinfo och produktbilder lånade från Blue Tomato.  
+                    </div>
+                </div>
+            </footer>
         </f:view>
     </h:body>
 </html>

@@ -3,9 +3,8 @@
  */
 package EJB;
 
-import EntityClasses.User2;
+import EntityClasses.User3;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -35,7 +34,7 @@ public class UserBean {
         boolean isUnique = true;
         Query q = em.createQuery("select o from User2 o where o.email = :email");
         q.setParameter("email", email);
-        List<User2> results = q.getResultList();
+        List<User3> results = q.getResultList();
         
         if(results.size()> 0) {
             isUnique = false;

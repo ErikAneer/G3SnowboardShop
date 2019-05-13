@@ -6,9 +6,7 @@
 package EJB;
 
 import EntityClasses.Cart;
-import EntityClasses.Orderning;
 import EntityClasses.Orderning3;
-import EntityClasses.User2;
 import EntityClasses.User3;
 import java.util.List;
 import javax.ejb.Local;
@@ -26,10 +24,11 @@ public interface SnowBeanLocal {
 
     void save(String firstname, String familyname, String telephone, String address, String postnr, String postaddress, String email, String code, String status);
 
+    /*
     List<User2> callAllUsers();
 
     List<User2> callAllCustomers(String customer, String premium);
-
+*/
     boolean checkIfUniqueEmail(String email);
 
     void saveTestUsersToDB();
@@ -46,8 +45,10 @@ public interface SnowBeanLocal {
 
     void sendOrder(String ordernr, String email, String fullname, String productname, int count, double totalprice, String fulladdress, String postnraddress, String telephone);
 
+    /*
     List<Orderning> callOrders(String email);
 
+    */
     Double sumPrice(String email);
 
     void changeStatus(Object user);

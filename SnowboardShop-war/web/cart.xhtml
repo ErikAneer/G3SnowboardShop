@@ -4,15 +4,13 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
         <title>G3 Board Shop</title>
-        <!-- Compiled and minified CSS julia 000 0pppp-->
+        <!-- Compiled and minified CSS julia 000 jjjk-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <script name="jquery/jquery.js" library="primefaces"></script>
     </h:head>
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
@@ -55,9 +53,9 @@
                                 <f:facet name="header">
                                     <h4>Varor i varukorgen </h4>
                                     <h:outputText rendered="#{userController.isLoggedIn eq 'true'}" style="color: red" value="!Varor sparas auto när logga ut!" />
-                                   
+
                                 </f:facet>
-                                  <h:column>
+                                <h:column>
                                     <f:facet name="header" >Produkt</f:facet>
                                     <h:outputText value="#{product.productname}" />
                                 </h:column>
@@ -92,19 +90,17 @@
                             <h:outputText value="Total ordersumma: #{userController.callSummaryPrice(userController.currentUser)} kr" />
                             <br/><br/>
                             <h:commandButton class="waves-effectt btn" value="Slutför köp" action="#{navigationController.navigateToCompleteOrder('cart.xhtml')}"/>   
-                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
+                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate('index.xhtml', 'cart.xhtml')}" />
                             <br/><br/>
                         </h:form>
                         <br/><br/>
                         <h:form rendered="#{empty userController.products}">
                             <h4>Du har inga varor i varukorgen</h4>
-                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate(navigationController.previousPage, 'cart.xhtml')}" />
+                            <h:commandButton class="waves-effectt btn" value="Stäng varukorg" action="#{navigationController.navigate('index.xhtml', 'cart.xhtml')}" />
                         </h:form>
-                        
-                       
                     </div>
                 </div>
-            </div>
+            </div>        
         </f:view>
     </h:body>
 </html>

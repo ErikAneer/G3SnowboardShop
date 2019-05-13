@@ -4,7 +4,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
         <title>G3 Board Shop</title>
@@ -16,7 +15,6 @@
         <f:metadata>
             <f:viewAction action="#{userController.onload()}" />
             <f:viewAction action="#{productController.onload()}" />
-
         </f:metadata>
 
     </h:head>
@@ -54,20 +52,20 @@
                 <!-- Body starts from here -->
                 <div class="parallax-container" id="index-header">
                 </div> 
-            <div class="container">
+                <div class="container">
 
                     <div class="row">
-                            <div class="input-field col s12 l6 offset-l2 center">
+                        <div class="input-field col s12 l6 offset-l2 center">
                             <i class="material-icons prefix">search</i>
                             <h:inputText id="autocomplete-input" class="autocomplete" value="#{productController.inputName}"/>
                             <label for="autocomplete-input">Sök produkt</label>
                             <h:commandButton id="searchButton" class="waves-effect btn white-text" value="Sök!" action="#{navigationController.navigateToProductAutocomplete('index.xhtml')}">
-                                 <f:ajax event="action" execute="@form" render="@all" />
+                                <f:ajax event="action" execute="@form" render="@all" />
                             </h:commandButton>
                             <h:message  id="autocompleteErrorMessage" for="searchButton" errorStyle="color: red" />
                         </div>
                     </div>
-    </div>
+                </div>
 
                 <div class="container">
                     <div class="row">
@@ -182,7 +180,7 @@
                     </div>          
                 </div> 
             </h:form>
-           
+
 
 
             <footer class="page-footer grey darken-8">
@@ -193,7 +191,7 @@
                             <p class="grey-text text-lighten-4"></p>
                         </div>
                         <div class="col l4 offset-l2 s12">
-                            <h5 class="white-text">Follow us on:</h5>
+                            <h5 class="white-text">Följ oss på:</h5>
 
                             <a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook" style="font-size: 30px;padding-right:20px"></a>
                             <a href="https://twitter.com/" target="_blank" class="fa fa-twitter" style="font-size: 30px;padding-right:20px"></a>
@@ -202,13 +200,12 @@
                             <a href="https://www.instagram.com" target="_blank" class="fa fa-linkedin" style="font-size: 30px;padding-right:20px"></a>
                             <div class="right">Alla varor som visas finns i lager och är redo för leverans.</div>
                         </div>
-
+                        <br/>
                     </div>
                 </div>
                 <div class="footer-copyright">
                     <div class="container">
-                        &copy; 2019 Erik, Julia, Jesper, Pavel, G3Snowboardshop &copy; Radonfly  (used without permission).
-                        <a class="grey-text text-lighten-4 right" href="#!">Click for more links</a>
+                        &copy; 2019 Erik, Julia, Jesper, Pavel, G3Snowboardshop. Produktinfo och produktbilder lånade från Blue Tomato.  
                     </div>
                 </div>
             </footer>
@@ -224,15 +221,12 @@
                 <ui:repeat value="#{productController.autocompleteSuggestions}" var="string">
                     "#{string}" : null,
                 </ui:repeat>
-                
+
                 },limit: 10,
                 });
                 });
 
             </h:outputScript>       
-
-
-
         </f:view>
     </h:body>
 </html>

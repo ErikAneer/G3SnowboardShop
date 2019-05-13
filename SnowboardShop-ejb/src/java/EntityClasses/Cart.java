@@ -91,8 +91,6 @@ public class Cart implements Serializable {
     public void setTotalprice(double totalprice) {
         this.totalprice = totalprice;
     }
-    
-    
 
     public Long getId() {
         return id;
