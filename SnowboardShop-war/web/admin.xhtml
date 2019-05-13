@@ -52,13 +52,13 @@
                                 </h:column>
 
                                 <h:column>
-                                    <f:facet name="header" >Antal köp</f:facet>
+                                    <f:facet name="header" >Antal köpta produkter</f:facet>
                                     <h:outputText value="#{userController.callCount(user.email)}" />
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header" >Total köpesumma</f:facet>
-                                    <h:outputText value="#{userController.callSumprice(user.email)}" />
+                                    <h:outputText value="#{userController.callSumprice(user.email)} kr" />
                                 </h:column>
 
                                 <h:column>

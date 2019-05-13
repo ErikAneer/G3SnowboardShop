@@ -79,32 +79,37 @@
 
                             <p><b>Kundnamn: </b><h:outputText value=" #{userController.customer.firstname} #{userController. customer.familyname}" /> </p>
                             <p><b>Kundstatus: </b> <h:outputText value=" #{userController.customer.status}" /></p>
-                            <p><b>Antal köp: </b> <h:outputText value="#{userController.callCount(userController.customer.email)}" /></p>
-                            <p><b>Total köpesumma: </b><h:outputText value="#{userController.callSumprice(userController.customer.email)}" /></p>
+                            <p><b>Antal köpta produkter: </b> <h:outputText value="#{userController.callCount(userController.customer.email)}" /></p>
+                            <p><b>Total köpesumma (poäng): </b><h:outputText value="#{userController.callSumprice(userController.customer.email)} kr" /></p>
 
 
                             <h:dataTable id="orderInfo" value="#{userController.ordernrs}" var="order">
                                 <f:facet name="header">
-                                    <h4>Ordrar NR:</h4>
+                                    <h4>Kundordrar</h4>
                                 </f:facet>
-
+                                
+                                 <h:column>
+                                    <f:facet name="header" >Ordernummer </f:facet>
+                                     <h:outputText value="#{order}" />
+                                </h:column>
+                                
                                 <h:column>
-                                    <h:outputText value="#{order}" />
-                                    <h:commandButton value="show details" 
-                                                     action="#{userController.showOrderDetails(order, userController.customer.email)}"/>
+                                    <h:commandButton class="waves-effectt btn" value="show details" 
+                                                     action="#{userController.showOrderDetails(order, userController.customer.email)}"> 
+                                        <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>
                                 </h:column>
 
                             </h:dataTable>
                             <h:dataTable id="orderDetail" value="#{userController.callBrand(userController.detailorders)}" var="detailorder">
                                 <f:facet name="header">
-                                    <h4>Order Details: </h4>
+                                    <h4>Orderdetaljer: </h4>
                                     <h:outputText value="nummer: #{userController.callNum(userController.detailorders)}" />
                                     <br/>
                                     <h:outputText value="Summary: #{userController.showOrderSumprice2(userController.detailorders)} kr" />
                                 </f:facet>
 
                                 <h:column>
-                                    <f:facet name="header" >Produkt-Märke</f:facet>
+                                    <f:facet name="header" >Produkt och Märke</f:facet>
                                     <h:outputText value="#{detailorder.productname}" />
                                 </h:column>
                                 <h:column>
@@ -113,7 +118,7 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Styckpris</f:facet>
-                                    <h:outputText value="#{detailorder.totalprice / detailorder.count}" />
+                                    <h:outputText value="#{detailorder.totalprice / detailorder.count} kr" />
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header" >Totalpris</f:facet>
