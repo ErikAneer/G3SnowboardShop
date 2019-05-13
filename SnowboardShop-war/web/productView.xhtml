@@ -4,18 +4,15 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
         <title>G3 Board Shop</title>
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"/>
         <!-- To use Material Icons -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <f:metadata>
-            <!--<f:viewAction action="#{productController.onload()}" /> -->
-        </f:metadata>
-        <script name="jquery/jquery.js" library="primefaces"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/> 
+
     </h:head>
     <h:body>
         <h:outputStylesheet library="css" name="Style.css"  />
@@ -29,7 +26,7 @@
 
                             <ul class="right hide-on-med-and-down">
                                 <li><h:outputText value="#{userController.currentUser.firstname}"></h:outputText></li>
-                                 <li><h:commandLink value="varor (#{userController.callItems()})" action="#{navigationController.goToCart('productView.xhtml')}" ></h:commandLink></li>
+                                <li><h:commandLink value="varor (#{userController.callItems()})" action="#{navigationController.goToCart('productView.xhtml')}" ></h:commandLink></li>
                                 <li> <h:commandLink value="#{userController.loggedInStatus}" action="#{navigationController.logInLogOut('productView.xhtml')}" /></li>
                             </ul>
                         </div>
@@ -39,7 +36,7 @@
                         <div class="container">
                             <ul class="left ">
                                 <li> <h:commandLink value="Snowboards" action="#{navigationController.navigate('snowboards.xhtml', 'productView.xhtml')}"/></li>
-                                <li> <h:commandLink value="Boots" action="#{navigationController.navigate('boots.xhtml', 'productView.xhtml')}"/></li>
+                                <li> <h:commandLink value="Boots" action="#{navigationController.navigateFromProduct('boots.xhtml', 'productView.xhtml')}"/></li>
                                 <li> <h:commandLink value="Bindningar" action="#{navigationController.navigate('bindningar.xhtml', 'productView.xhtml')}"/></li>
                             </ul>       
                         </div>
@@ -57,8 +54,8 @@
                     <div class="col s12 l12 push-1">
                         <div class="col card horizontal" style="width: 800px;">
                             <div class="card-image"> 
-                                    <h:graphicImage rendered="#{productController.selectedProduct.productType ne 'snowboard'}" class="card-image" url="#{productController.selectedProduct.imagePath}" style=" padding-top: 20px; height:220px;"/>  
-                                    <h:graphicImage rendered="#{productController.selectedProduct.productType eq 'snowboard'}" class="card-image" url="#{productController.selectedProduct.imagePath}" style=" padding-top: 20px; height:340px;"/>  
+                                <h:graphicImage rendered="#{productController.selectedProduct.productType ne 'snowboard'}" class="card-image" url="#{productController.selectedProduct.imagePath}" style=" padding-top: 20px; height:220px;"/>  
+                                <h:graphicImage rendered="#{productController.selectedProduct.productType eq 'snowboard'}" class="card-image" url="#{productController.selectedProduct.imagePath}" style=" padding-top: 20px; height:340px;"/>  
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content">
@@ -81,19 +78,44 @@
                                 </div>
                                 <div class="card-action">
                                     <h:form>
-                                          <h:commandButton class="waves-effectt btn" value="Köp!" 
-                                                             action="#{userController.addVaror(userController.currentUser, productController.selectedProduct, userController.currentUser.email)}">
-                                                <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>                                      
-                                        <h:commandButton class="waves-effectt btn" value="Tillbaka"  action="#{navigationController.navigate(navigationController.previousPage, 'productView.xhtml')}"/>
+                                        <h:commandButton class="waves-effectt btn" value="Köp!" 
+                                                         action="#{userController.addVaror(userController.currentUser, productController.selectedProduct, userController.currentUser.email)}">
+                                            <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>                                      
+                                        <h:commandButton class="waves-effectt btn" value="Tillbaka"  action="#{navigationController.navigateFromProduct(navigationController.previousPage, 'productView.xhtml')}"/>
                                     </h:form>
-
+                                    Selected Product: #{productController.selectedProduct.name}
                                 </div> 
                             </div>
                         </div>
                     </div> 
                 </div>          
             </div> 
+            <footer class="page-footer grey darken-8">
+                <div class="container" >
+                    <div class="gray">
+                        <div class="col l6 s12">
+                            <h5 class="white-text"></h5>
+                            <p class="grey-text text-lighten-4"></p>
+                        </div>
+                        <div class="col l4 offset-l2 s12">
+                            <h5 class="white-text">Följ oss på:</h5>
 
+                            <a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://twitter.com/" target="_blank" class="fa fa-twitter" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram" style="font-size: 30px;padding-right:20px"></a>
+                            <a href="https://www.instagram.com" target="_blank" class="fa fa-linkedin" style="font-size: 30px;padding-right:20px"></a>
+                            <div class="right">Alla varor som visas finns i lager och är redo för leverans.</div>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container">
+                        &copy; 2019 Erik, Julia, Jesper, Pavel, G3Snowboardshop. Produktinfo och produktbilder lånade från Blue Tomato.  
+                    </div>
+                </div>
+            </footer>
         </f:view>
     </h:body>
 </html>
