@@ -24,11 +24,6 @@ public interface SnowBeanLocal {
 
     void save(String firstname, String familyname, String telephone, String address, String postnr, String postaddress, String email, String code, String status);
 
-    /*
-    List<User2> callAllUsers();
-
-    List<User2> callAllCustomers(String customer, String premium);
-*/
     boolean checkIfUniqueEmail(String email);
 
     void saveTestUsersToDB();
@@ -45,10 +40,6 @@ public interface SnowBeanLocal {
 
     void sendOrder(String ordernr, String email, String fullname, String productname, int count, double totalprice, String fulladdress, String postnraddress, String telephone);
 
-    /*
-    List<Orderning> callOrders(String email);
-
-    */
     Double sumPrice(String email);
 
     void changeStatus(Object user);
@@ -78,5 +69,5 @@ public interface SnowBeanLocal {
     String showOrder3Sumprice(String ordermail);
 
     String callProductBrand(String productname);
-    
+
 }

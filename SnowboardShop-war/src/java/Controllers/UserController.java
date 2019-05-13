@@ -1,6 +1,5 @@
 package Controllers;
 
-import EJB.UserBean;
 import EntityClasses.Cart;
 import EntityClasses.Orderning3;
 import EntityClasses.Product;
@@ -16,7 +15,6 @@ import java.util.Random;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -67,7 +65,6 @@ public class UserController implements Serializable {
         kunder = snowBean.callAllCustomer3("customer", "premium");
         summary = snowBean.sumPrice(email);
         List<Cart> carts = snowBean.callProducts(email);
-        // cartItems = carts.size();
 
         if (!snowBean.checkIfUserExists(email, code)) {
             setEmail(null);
@@ -399,7 +396,6 @@ public class UserController implements Serializable {
             if ((u.getStatus()).equals("customer")) {
                 snowBean.addProduct3(p.getName(), str, 1, p.getPrice(), p.getPrice());
                 String test1 = visaKorg(str);
-                // cartItems++;
             }
             if ((u.getStatus()).equals("premium")) {
                 snowBean.addProduct3(p.getName(), str, 1, p.getPremiumPrice(), p.getPremiumPrice());
@@ -433,7 +429,6 @@ public class UserController implements Serializable {
         } else {
             mail = u.getEmail();
             snowBean.removeBypronameidemail(proname, id, mail);
-            // cartItems--;
         }
         return visaKorg(mail);
     }
@@ -442,12 +437,10 @@ public class UserController implements Serializable {
         String mail = "";
         if (u == null) {
             products = new ArrayList();
-            //  cartItems = 0;
             return "cart";
         } else {
             mail = u.getEmail();
             snowBean.removeAllpro(u.getEmail());
-            //  cartItems = 0;
         }
         return visaKorg(mail);
     }
@@ -491,15 +484,7 @@ public class UserController implements Serializable {
         for (Cart c : products) {
             sumprice = sumprice + c.getTotalprice();
         }
-        /*if(user == null){
-            sumprice = 0;
-            for(Cart c: products){
-                sumprice = sumprice + c.getTotalprice();
-            }
-        }else{
-            String mail = user.getEmail();
-            sumprice = snowBean.callSummaryPrice(mail);
-        }*/
+       
         return sumprice;
     }
 
@@ -544,7 +529,6 @@ public class UserController implements Serializable {
             summaprice += totalprice;
             snowBean.removeBypronameidemail(productname, k.getId(), mail);
             snowBean.sendOrder3(user, ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
-            //snowBean.sendOrder(ordernr, mail, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
         }
         String newordernr = ordernr + summaprice;
         snowBean.changeNewOrdernr(ordernr, newordernr);
@@ -558,7 +542,6 @@ public class UserController implements Serializable {
 
     public List<Orderning3> callOrderbymail(String mail) {
         orders = snowBean.callOrder3(mail);
-        //orders = snowBean.callOrders(mail);
         return orders;
     }
 

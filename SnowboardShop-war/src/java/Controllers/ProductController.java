@@ -30,8 +30,8 @@ public class ProductController implements Serializable {
     private String nameSuggestions;
     private List<String> autocompleteSuggestions = new ArrayList();
     private String[] autocomplete;
-     
-    private Product  selectedProduct;
+
+    private Product selectedProduct;
 
     /**
      * Creates a new instance of ProductController
@@ -86,18 +86,20 @@ public class ProductController implements Serializable {
     public void setBindings(List<Product> bindings) {
         this.bindings = bindings;
     }
-    private void addBoardsToList() {
-        boards = productBean.getAllBoards(); 
-    }
-    
-    private void addBootsToList() {
-        boots= productBean.getAllBoots();
-    }
+
     private void addAllProductsToList() {
-        allProducts= productBean.getAllProducts();
-    }
-    private void addBindingsToList() {
-        bindings= productBean.getAllBindings();
+        allProducts = productBean.getAllProducts();
+        allProducts.forEach(p->{
+        if(p.getProductType().equals("snowboard")){
+            boards.add(p);
+        }
+         if(p.getProductType().equals("boot")){
+            boots.add(p);
+        }
+         if(p.getProductType().equals("binding")){
+            bindings.add(p);
+        }
+        });
     }
 
     public List<String> getAutocompleteSuggestions() {
@@ -107,9 +109,9 @@ public class ProductController implements Serializable {
     public void setAutocompleteSuggestions(List<String> autocompleteSuggestions) {
         this.autocompleteSuggestions = autocompleteSuggestions;
     }
-    
+
     public void fillAutoCompleteList() {
-        allProducts.forEach(p-> autocompleteSuggestions.add(p.getBrand()+ " " + p.getName()));
+        allProducts.forEach(p -> autocompleteSuggestions.add(p.getBrand() + " " + p.getName()));
         autocomplete = autocompleteSuggestions.toArray(new String[0]);
     }
 
@@ -128,15 +130,10 @@ public class ProductController implements Serializable {
     public void setSearchResult(Product searchResult) {
         this.searchResult = searchResult;
     }
-    
 
     public void onload() {
-         //productBean.saveProductToDB();
-         addBoardsToList();
-         addBootsToList();  
-         addBindingsToList();
-         addAllProductsToList();
-         fillAutoCompleteList();
+        addAllProductsToList();
+        fillAutoCompleteList();
     }
 
     public Product getSelectedProduct() {
@@ -159,10 +156,10 @@ public class ProductController implements Serializable {
 
     public List<String> nameSuggestions(String enteredValue) {
         List<String> matches = new ArrayList<>();
-       
+
         for (Product p : allProducts) {
             if ((p.getBrand().toLowerCase() + " " + p.getName().toLowerCase()).contains(enteredValue.toLowerCase())) {
-                matches.add(p.getBrand()+ " " + p.getName());
+                matches.add(p.getBrand() + " " + p.getName());
             }
         }
         return matches;
@@ -175,50 +172,43 @@ public class ProductController implements Serializable {
     public void setInputName(String inputName) {
         this.inputName = inputName;
     }
-    
+
     public String showSelectedProduct(Product p) {
         setSelectedProduct(p);
         return "show_details";
     }
-    public String showSelectedProductAutoComplete() {         
+
+    public String showSelectedProductAutoComplete() {
         String pageTo = "";
         setInputName("");
         if (selectedProduct != null) {
-        searchResult = null;
-        pageTo=  "show_details";
-        }
-        
-        else {
+            searchResult = null;
+            pageTo = "show_details";
+        } else {
             FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-           "Produkten som du sökt på finns inte, försök igen", null);
-           FacesContext.getCurrentInstance().addMessage("indexPageForm:searchButton", javaTextMsg);
+                    "Produkten som du sökt på finns inte, försök igen", null);
+            FacesContext.getCurrentInstance().addMessage("indexPageForm:searchButton", javaTextMsg);
         }
-        
+
         return pageTo;
     }
-    
-    
+
     public void findMatchingProduct() {
-            allProducts.forEach(p->{
-            if((p.getBrand() + " " + p.getName()).equals(inputName)){
+        allProducts.forEach(p -> {
+            if ((p.getBrand() + " " + p.getName()).equals(inputName)) {
                 setSelectedProduct(p);
             }
-            });
+        });
+        if (selectedProduct == null) {
+            FacesMessage javaTextMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Produkten som du sökt på finns inte, försök igen", null);
+            FacesContext.getCurrentInstance().addMessage("indexPageForm:searchButton", javaTextMsg);
+        }
     }
-    
-    public String showMatchingProduct(){
-            findMatchingProduct();
-            
-             return "show_details";
-    }      
-    /*
-    public String returnToIndex() {
-        setSelectedProduct(null);
-        
-        return "return_index";
-    
-    }
-*/
 
+    public String showMatchingProduct() {
+        findMatchingProduct();
+
+        return "show_details";
+    }
 }
-            

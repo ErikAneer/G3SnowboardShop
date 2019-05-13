@@ -57,15 +57,6 @@ public class SnowBean implements SnowBeanLocal {
         persist(newUser);
     }
 
-    /*
-    @Override
-    public List<User2> callAllUsers() {
-        Query q = em.createQuery("select o from User2 o");
-        List<User2> users = q.getResultList();
-        return users;
-    }
-*/
-
     @Override
     public List<User3> callAllUser3() {
         Query q = em.createQuery("select o from User3 o");
@@ -73,16 +64,6 @@ public class SnowBean implements SnowBeanLocal {
         return users;
     }
 
-    /*
-    @Override
-    public List<User2> callAllCustomers(String customer, String premium) {
-        Query q = em.createQuery("select o from User2 o where o.status=:customer or o.status=:premium");
-        q.setParameter("customer", customer);
-        q.setParameter("premium", premium);
-        List<User2> users = q.getResultList();
-        return users;
-    }
-*/
     @Override
     public List<User3> callAllCustomer3(String customer, String premium) {
         Query q = em.createQuery("select o from User3 o where o.status=:customer or o.status=:premium");
@@ -225,15 +206,6 @@ public class SnowBean implements SnowBeanLocal {
             }
         }
     }
-    /*
-
-    @Override
-    public void sendOrder(String ordernr, String email, String fullname, String productname,
-            int count, double totalprice, String fulladdress, String postnraddress, String telephone) {
-        Orderning order = new Orderning(ordernr, email, fullname, productname, count, totalprice, fulladdress, postnraddress, telephone);
-        em.persist(order);
-    }
-*/
 
     @Override
     public void sendOrder3(Object user, String ordernr, String email, String fullname, String productname,
@@ -245,16 +217,6 @@ public class SnowBean implements SnowBeanLocal {
         u3.setOrders(orders);
         em.persist(order);
     }
-/*
-    @Override
-    public List<Orderning> callOrders(String email) {
-        Query q = em.createQuery("select o from Orderning o where o.email=:email order by o.ordernr");
-        q.setParameter("email", email);
-        List<Orderning> orders = q.getResultList();
-
-        return orders;
-    }
-*/
 
     @Override
     public List<Orderning3> callOrder3(String email) {

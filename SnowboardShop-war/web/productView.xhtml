@@ -46,7 +46,7 @@
                 </header>
             </h:form>
             <!-- Body starts from here -->
-
+            <br/>
             <!-- the container for displaying the info in the middle of the screen-->
             <div class="container">
                 <div class="row">
@@ -60,10 +60,11 @@
                             <div class="card-stacked">
                                 <div class="card-content">
                                     <p><h5>#{productController.selectedProduct.name}</h5></p>
-                                    <p>#{productController.selectedProduct.brand}</p>
+
+                                    <p><h6>#{productController.selectedProduct.brand}</h6></p>
                                     <h:form rendered="#{productController.selectedProduct.productType eq 'boot'}">
                                         <h:outputText value="Eur " /><h:outputText  value= "#{productController.selectedProduct.productLength}" > <f:convertNumber pattern="#0"/> </h:outputText>
-                                        <br/>
+
                                     </h:form>
                                     <h:form rendered="#{productController.selectedProduct.productType eq 'snowboard'}">
                                         <h:outputText  value= "#{productController.selectedProduct.productLength}" > <f:convertNumber pattern="#0"/> </h:outputText> <h:outputText value=" cm" />
@@ -73,6 +74,8 @@
                                         <h:outputText rendered="#{userController.currentUser.status ne 'premium'}"  value="#{productController.selectedProduct.price}" ><f:convertNumber pattern="#0"/> </h:outputText>  
                                         <h:outputText rendered="#{userController.currentUser.status eq 'premium'}" value="#{productController.selectedProduct.premiumPrice}" ><f:convertNumber pattern="#0"/></h:outputText> 
                                         <h:outputText value=" kr" /> <br/>
+                                        <br/>
+                                        <br/>
                                         <p>#{productController.selectedProduct.description}</p>       
                                     </h:form>     
                                 </div>
@@ -81,7 +84,8 @@
                                         <h:commandButton class="waves-effectt btn" value="Köp!" 
                                                          action="#{userController.addVaror(userController.currentUser, productController.selectedProduct, userController.currentUser.email)}">
                                             <f:ajax event="action" execute="@form" render="@all" /> </h:commandButton>                                      
-                                        <h:commandButton class="waves-effectt btn" value="Tillbaka"  action="#{navigationController.navigate(navigationController.previousPage, 'productView.xhtml')}"/>
+                                        <h:commandButton class="waves-effectt btn" value="Tillbaka"  action="#{navigationController.navigateFromProduct(navigationController.previousPage, 'productView.xhtml')}"/>
+                                        <br/>
                                     </h:form>
                                 </div> 
                             </div>
@@ -89,6 +93,7 @@
                     </div> 
                 </div>          
             </div> 
+            <br/>
             <footer class="page-footer grey darken-8">
                 <div class="container" >
                     <div class="gray">

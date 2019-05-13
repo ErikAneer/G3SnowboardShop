@@ -8,7 +8,6 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -44,11 +43,7 @@ public class ProductBean {
     public void persist(Object object) {
         em.persist(object);
     }
-    
-    
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+
 
     public List<Product> getAllBoards() {
         
@@ -78,7 +73,6 @@ public class ProductBean {
         return results;
     }
     
-    //Do only use if saving new objects to DB.
     public void saveProductToDB() {
         persist(new Product("snowboard", "Ride", "Warpig S", 148, "Warpig är tillbaka! Den här brädan är framtagen för att ha roligt i alla förhållanden med en unik shape som är kortare, "
                 + "bredare och avsmalnande för att ge en manövrerbar snowboard som kan varva i parken och flyta som en bräda som är dubbelt så stor. Den här brädan har inte bara en ny innovativ shape,"
@@ -187,7 +181,7 @@ public class ProductBean {
 "\n" +
 "Konstruktion\n" +
 "Poppel och paulownia träkärna förstärkt med bi-axial fiberglas. Det innebär grymma press- och popegenskaper plus snabb manövrerbarhet. Kolstycken mellan bindningarna ger en exakt kraftöverföring och lite extra kraft för ollies. Den extruderade Super Slick X basen är väldigt slitstark, snabb och kräver minimal skötsel - och den är transparent för att låta grafiken lysa!", 4890, 4890,  "/resources/images/BataleonPushUp1492019Snowboard.jpg"));
-        persist(new Product("snowboard", "Ride", "Saturday 146", 146, "Best grom board out there!", 4490, 4490,  "/resources/images/RideSaturday1462019Snowboard.jpg"));
+        persist(new Product("snowboard", "Ride", "Saturday 146", 146, "Saturday från Ride har allt för att göra en bra dag på berget ännu bättre. Twin Hybrid Rocker kombineras med en medium flex för en bräda som gör att du kan bli vild och galen i varje terräng. Formen och profilen erbjuder mycket float och mångsidighet för de branta och djupaste linjerna du kan hitta. Varje dag är lördag när du är på berget.!", 4490, 4490,  "/resources/images/RideSaturday1462019Snowboard.jpg"));
         persist(new Product("snowboard", "Capita", "Space M Fantasy", 149, "EN AV DE BÄSTA SNOWBOARDS FÖR FREESTYLE OCH PARK FÖR TJEJER - CAPITA SPACE METAL FANTASY\n" +
 "Den fyrfaldigt Transworld Good Wood prisbelönta Space Metal Fantasy anses vara en av de bästa parkbrädorna för kvinnor på marknaden. Den väldigt förlåtande rockerprofilen ger en rolig upplevelse för intermediära åkare som vill påskynda sin inlärningskurva och ta sin åkning till nästa nivå. Space Metal Fantasy är klassad som en parkbräda men är rolig att carva omkring med på pisterna, leka med i parken och den flyter även bra i puder.\n" +
 "\n" +
@@ -235,36 +229,10 @@ public class ProductBean {
         persist(new Product("boot", "Burton", "Ruler Speed Z", 42, "Snowboardbootsen Ruler från Burton är något styvare boots för åkaren som gillar lite mer tryck under fötterna och att ta ut svängarna över hela berget. Innerskon Imprint 2 formar sig lätt efter foten för ökad komfort och för högsta möjliga känsla i svängarna. Även försedda med en stötdämpande DynoGRIP-yttersula och Sleeping Bag Reflective Foil som reflekterar värmen tillbaka till fötterna.", 2790, 2790, "/resources/images/BurtonRulerSnowboardboots.jpg"));
         persist(new Product("boot", "Ride", "Lasso  Black", 42, "Ride Lasso har det effektivaste och snabbare snörningssystemet. Med Boa® stängningssystemet och Tongue Tied™ stängningssystemet kommer du vara redo att åka medan dina polare kämpar på med sina blöta snören. Den hårdare flexen gör Lasso perfekt för medelgoda åkare som letar efter en mer lyhörd all-mountain/freestyleboot. De tekniska egenskaperna och totala prestandan låter dig åka på hela berget med en lyhörd och exakt känsla och passform.", 3190, 3190, "/resources/images/RideLasso2019Snowboardboots.jpg"));
         persist(new Product("binding", "Burton", "Lexa",42,"Med legendarisk freestyleprestanda är det inte konstigt att Lexa är förstahandsvalet för en hel rad med proffsåkare från Burton (och som inte åker för Burton). Double Take spännen med Insta-Click låter dig stänga bindningarna snabbt och droppa in först. Remmarna i kombination med en stödjande Heel Hammock i bakkappan kramar din boot så att du kan köra med dina straps lite lösare. Experimentera med bakkappans Zero Forward Lean för en mer lekfull känsla samtidigt som du tar hand om din kropp med den anatomiska komforten hos Re:Flex AutoCANT FullBED dämpning. True Fit® betyder att varje element hos varje del av din setup har designats och konstruerats för att passa åktstilen hos tjejer. För när det passar bra går det bättre att åka.", 3490, 3490,"/resources/images/BurtonLexa2019Snowboardbindningar.jpg"));
-        persist(new Product("binding", "Butron", "Mission",42,"Legendariska åkare har valt Mission i över tio års tid för att den helt enkelt krossar allt motstånd när det kommer till komfortabel respons som du kan lita på. Arbetshästen i Burtons bindningskollektion, den har proffsfinesser som ergonomiska bakkappor med zero Forward Lean och utan tvekan de bästa strapsen och spännena i branschen. Förlita dig på Re:Flex® och börja ditt Mission!", 3490, 3490,"/resources/images/BurtonMission2019Snowboardbindningar.jpg"));
+        persist(new Product("binding", "Burton", "Mission",42,"Legendariska åkare har valt Mission i över tio års tid för att den helt enkelt krossar allt motstånd när det kommer till komfortabel respons som du kan lita på. Arbetshästen i Burtons bindningskollektion, den har proffsfinesser som ergonomiska bakkappor med zero Forward Lean och utan tvekan de bästa strapsen och spännena i branschen. Förlita dig på Re:Flex® och börja ditt Mission!", 3490, 3490,"/resources/images/BurtonMission2019Snowboardbindningar.jpg"));
         persist(new Product("binding", "Drake", "Fifty",42,"Drake Fifty har funnits på marknaden i över 10 år och är fortfarande den prisvärde ledaren. Otaliga åkare har förlitat sig på Drake Fifty eftersom den ständigt överträffar nykomlingar med sin komfort och lyhördhet. Natural Cant interface förbättrar din åkställning och låter dig ta dig till nya prestationsnivåer i parken och på hela berget.", 3490, 3490,"/resources/images/DrakeFifty2019Snowboardbindningar.jpg"));
         persist(new Product("binding", "Drake", "Queen",42,"Fully equipped, the Queen is the entry level binding you want with all the features you need. The top quality materials are the perfect option for just getting into snowboarding. The Queen offers superior foothold and with its forgiving flex, maintains an easy and smooth ride to allow you to improve your riding at an increased rate. MFC comfort straps complete the package of Women’s entry level binding royalty.", 3490, 3490,"/resources/images/DrakeQueen2019Snowboardbindningar.jpg"));
         
-        
-        
-
     }
-    
-    
-   public void createProductList(){
-        
-        products.add(new Product("snowboard", "Burton", "Chicklet 120", 120, "Best grom board out there!", 1890, 1890,  "/resources/images/Chicklet1152019Snowboardresized.jpg"));
-        products.add(new Product("snowboard", "Burton", "Custom Smalls", 140, "Best grom board out there!", 3490, 3490,  "/resources/images/CustomSmalls1402019Snowboardresized.jpg"));
-        products.add(new Product("snowboard", "Burton", "Process 162", 162, "Best grom board out there!", 4490, 3490,  "/resources/images/Process1622019Snowboardresized.jpg"));
-        products.add(new Product("snowboard", "Burton", "Air Retro 156", 156, "Best grom board out there!", 3490, 3490,  "/resources/images/SpeedDateRetro1562019Snowboardresized.jpg"));
-        products.add(new Product("snowboard", "Burton", "TWC Pro 156", 156, "Best grom board out there!", 499990, 499990,  "/resources/images/BurtonTWCPro.jpg"));
-        
-        products.add(new Product("boot", "32", "Lashed Melancon", 42, "Description", 3490, 3490, "/resources/images/32LashedMelancon2019Snowboardboots.jpg"));
-        products.add(new Product("boot", "32", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        products.add(new Product("boot", "32", "X BT Light", 42, "Description", 3490, 3490, "/resources/images/32XBlueTomatoLight2019Snowboardboots.jpg"));
-        products.add(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        products.add(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        products.add(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        products.add(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        products.add(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-        products.add(new Product("boot", "Burton", "Jones MTB", 42, "Description", 3490, 3490, "/resources/images/32JonesMTB2019Snowboardboots.jpg"));
-   
-   
-   }
- 
     
 }

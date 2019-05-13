@@ -41,7 +41,7 @@
                             <h:panelGrid columns="3">
                                 <h:outputLabel for="contactFirst" value="Förnamn: " />
                                 <h:inputText id="contactFirst" value="#{userController.firstname}">
-                                    <f:validator validatorId="nameValidator"></f:validator>
+                                     <f:validator validatorId="nameValidator"></f:validator>
                                     <f:ajax event="blur" render="contactFirstMessage" />
                                 </h:inputText>
                                 <h:message id="contactFirstMessage" for="contactFirst" errorStyle="color:red"/>

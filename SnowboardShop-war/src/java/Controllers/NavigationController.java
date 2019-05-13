@@ -1,13 +1,10 @@
-/*
 
- */
 package Controllers;
 
 import EntityClasses.Product;
 import EntityClasses.User3;
 import java.io.Serializable;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
@@ -28,9 +25,6 @@ public class NavigationController implements Serializable {
     private String previousPage;
     private String secondPreviousPage;
 
-    /**
-     * Creates a new instance of NavigationController
-     */
     public NavigationController() {
         previousPage = "";
         secondPreviousPage = "";
@@ -59,7 +53,6 @@ public class NavigationController implements Serializable {
 
     public String navigate(String pageTo, String currentPage) {
         refreshVisitedPages(currentPage);
-        //productController.setSelectedProduct(null);
         return pageTo;
     }
      public String navigateFromProduct(String pageTo, String currentPage) {
@@ -116,6 +109,7 @@ public class NavigationController implements Serializable {
     }
 
     public String goToCart(String currentPage) {
+        productController.setSelectedProduct(null);
         refreshVisitedPages(currentPage);
         if(userController.getCurrentUser() == null){
             return "cart";
@@ -150,7 +144,6 @@ public class NavigationController implements Serializable {
     
     public String navigateCustomerDetails(String currentPage, User3 u) {
         refreshVisitedPages(currentPage);
-        System.out.println("Navigate to customer details. previous page: " + previousPage);
         return userController.showOrderNrs(u);
     }
 
