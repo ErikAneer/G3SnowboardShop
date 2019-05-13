@@ -97,7 +97,9 @@
                             </h:dataTable>
                             <h:dataTable id="orderDetail" value="#{userController.callBrand(userController.detailorders)}" var="detailorder">
                                 <f:facet name="header">
-                                    <h4>Order Details:</h4>
+                                    <h4>Order Details: </h4>
+                                    <h:outputText value="nummer: #{userController.callNum(userController.detailorders)}" />
+                                    <br/>
                                     <h:outputText value="Summary: #{userController.showOrderSumprice2(userController.detailorders)} kr" />
                                 </f:facet>
 

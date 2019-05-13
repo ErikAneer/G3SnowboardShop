@@ -7,6 +7,7 @@ import EntityClasses.Product;
 import EntityClasses.User3;
 import java.io.Serializable;
 import javax.inject.Named;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
@@ -71,22 +72,26 @@ public class NavigationController implements Serializable {
         } else { 
             page = "logout";
         }
-        return page;                                                                    
+        return page;
     }
 
     public String loginUser(String currentPage) {
-        String pageTo="";
-        String loginResult = userController.login(); 
+        String pageTo = "";
+        refreshVisitedPages(currentPage);
+        userController.login(); 
         if(userController.getCurrentUser() != null && userController.getCurrentUser().getStatus().equals("admin")){
-            pageTo = "admin";
+            return "admin.xhtml";
         }
-        if (loginResult.equals("loginFailure")){
-            return "loginFailure";
+        if(userController.getCurrentUser() != null && (userController.getCurrentUser().getStatus().equals("customer") 
+                || userController.getCurrentUser().getStatus().equals("premium"))){
+            if(secondPreviousPage.equals("cart.xhtml")){
+                return "cart.xhtml";  // fel till index sen ???
+            }else{
+                return "index.xhtml";
+            }
         }
-        else {
-            pageTo = previousPage;
-            refreshVisitedPages(currentPage);
-        }
+        
+        //System.out.println("förra sidan"+previousPage);
         return pageTo;
     }
 
@@ -130,10 +135,13 @@ public class NavigationController implements Serializable {
         String pageTo = "";
         refreshVisitedPages(currentPage);
         userController.registerNewCustomer();
-        if(secondPreviousPage.equals("cart.xhtml")) {
-            return "cart.xhtml";
+        if(userController.getCurrentUser() != null && secondPreviousPage.equals("cart.xhtml")){
+                return "cart.xhtml";  //fel kod sen till index ??
+        }        
+        if(userController.getCurrentUser() != null && userController.getCurrentUser().getStatus().equals("customer")) {
+                return "index.xhtml";
         }
-        pageTo = secondPreviousPage;
+        pageTo = previousPage;
         return pageTo;
     }
     
